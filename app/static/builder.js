@@ -1,5 +1,8 @@
 /* The canvas builder: palette -> nodes -> wired events -> draft.
  *
+ * Rendering and layout follow docs/CANVAS_RULES.md — change the rule
+ * first, then this file. Journeys flow TOP -> BOTTOM (rule 1.1).
+ *
  * Faithful to the imitated wire format: on save the UI writes BOTH storage
  * copies — `activities[]` (runtime) and `rawJourneyData` (editor mirror
  * with canvas positions + activitiesConfiguration).
@@ -8,7 +11,36 @@ import {
   api, errText, getPalette, specFor, CATEGORY_COLORS, h, toast,
 } from "./app.js";
 
-const NODE_W = 208;
+/* rule 5.4 — spacing constants live here */
+const NODE_W = 220, NODE_H = 78;
+const TERM_W = 148, TERM_H = 36;
+const COL_GAP = 56, ROW_GAP = 104;
+const GRID = 8, TOP = 48, AXIS_X = 640;
+const ZOOM_STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3];
+
+/* rule 4.2 — category icons */
+const ICONS = {
+  "Input Source": "▶",
+  "Flow control": "⇄",
+  "Communication": "✉",
+  "Delays": "◷",
+  "Connectors": "∞",
+  "Promotion type": "✦",
+  "Conditions": "◈",
+  "Reward type": "★",
+  "Terminals": "■",
+};
+
+/* rule 3.4 — edge semantics derived from the event name */
+const FAIL_RE = /Expired|Unsatisfied|Failed|NotSent|NotIssued|Canceled|Cancelled|Lost|Forfeited|Aborted|Terminated|NotAdded|NotReceived|NotUsed|NotComplied/;
+const OK_RE = /Satisfied|Accepted|Success|Completed|Finished|Issued|Used|AddedToCampaign|PlayerAdded|WaitTimeCompleted|Sent$/;
+function edgeSemantics(eventName) {
+  if (FAIL_RE.test(eventName)) return "fail";
+  if (OK_RE.test(eventName)) return "ok";
+  return "neutral";
+}
+
+const snap = (value) => Math.round(value / GRID) * GRID;
 
 /* starter initializationData per type, so a fresh node is runnable */
 const STARTERS = {
@@ -86,6 +118,7 @@ const state = {
   nodes: new Map(),      // activityId -> node
   meta: null,            // {draftId, journeyId, status, name, brand, version}
   selection: null,
+  zoom: 1,
   els: {},               // canvas / edges / inspector / problems DOM refs
 };
 
@@ -95,6 +128,17 @@ function defaultMeta() {
 
 function editable() {
   return state.meta.status === "Draft" || state.meta.status === "Stopped";
+}
+
+function nodeSpec(node) {
+  return specFor(state.palette, node.activityName);
+}
+
+/* rule 4.3 — terminals are pills */
+function nodeSize(node) {
+  return nodeSpec(node)?.kind === "terminal"
+    ? { w: TERM_W, h: TERM_H }
+    : { w: NODE_W, h: NODE_H };
 }
 
 /* ── node model ── */
@@ -116,6 +160,12 @@ function makeNode(activityName, x, y) {
     events,
     x, y,
   };
+}
+
+function wiredEvents(node) {
+  return node.events.filter(
+    (event) => event.nextActivityId && state.nodes.has(event.nextActivityId),
+  );
 }
 
 /* ── serialization: body <-> canvas ── */
@@ -190,44 +240,83 @@ function loadBody(body, meta) {
       y: position.y,
     });
   }
+  /* rule 1.4 — only layout when there are no saved positions */
   if (![...positions.keys()].length) autoLayout();
 }
 
-/* ── auto-layout: BFS layers from the sources ── */
+/* ── auto-layout (rules 1.2–1.3): longest-path layers, barycenter order,
+ *    each layer centered on the axis ── */
 function autoLayout() {
-  const incoming = new Map([...state.nodes.keys()].map((id) => [id, 0]));
-  for (const node of state.nodes.values()) {
-    for (const event of node.events) {
-      if (event.nextActivityId && incoming.has(event.nextActivityId)) {
-        incoming.set(event.nextActivityId, incoming.get(event.nextActivityId) + 1);
-      }
-    }
-  }
-  const layer = new Map();
-  const queue = [...state.nodes.values()]
-    .filter((node) => incoming.get(node.activityId) === 0)
-    .map((node) => node.activityId);
-  queue.forEach((id) => layer.set(id, 0));
-  while (queue.length) {
-    const id = queue.shift();
-    const node = state.nodes.get(id);
+  const nodes = [...state.nodes.values()];
+  if (!nodes.length) return;
+
+  const adjacency = new Map(nodes.map((node) => [node.activityId, []]));
+  const indegree = new Map(nodes.map((node) => [node.activityId, 0]));
+  for (const node of nodes) {
     for (const event of node.events) {
       const target = event.nextActivityId;
-      if (!target || !state.nodes.has(target)) continue;
-      const next = (layer.get(id) || 0) + 1;
-      if (next > (layer.get(target) ?? -1)) {
-        layer.set(target, next);
-        queue.push(target);
+      if (target && state.nodes.has(target)) {
+        adjacency.get(node.activityId).push(target);
+        indegree.set(target, indegree.get(target) + 1);
       }
     }
   }
-  const perLayer = new Map();
-  for (const node of state.nodes.values()) {
-    const l = layer.get(node.activityId) ?? 0;
-    const index = perLayer.get(l) || 0;
-    perLayer.set(l, index + 1);
-    node.x = 50 + l * 300;
-    node.y = 60 + index * 170 + (l % 2) * 40;
+
+  const layerOf = new Map();
+  const queue = nodes
+    .filter((node) => indegree.get(node.activityId) === 0)
+    .map((node) => node.activityId);
+  queue.forEach((id) => layerOf.set(id, 0));
+  const remaining = new Map(indegree);
+  while (queue.length) {
+    const id = queue.shift();
+    for (const target of adjacency.get(id)) {
+      layerOf.set(target, Math.max(layerOf.get(target) ?? 0, layerOf.get(id) + 1));
+      remaining.set(target, remaining.get(target) - 1);
+      if (remaining.get(target) === 0) queue.push(target);
+    }
+  }
+  for (const node of nodes) {
+    if (!layerOf.has(node.activityId)) layerOf.set(node.activityId, 0);
+  }
+
+  const layers = new Map();
+  for (const node of nodes) {
+    const layer = layerOf.get(node.activityId);
+    if (!layers.has(layer)) layers.set(layer, []);
+    layers.get(layer).push(node);
+  }
+
+  const parentsOf = new Map(nodes.map((node) => [node.activityId, []]));
+  for (const node of nodes) {
+    for (const target of adjacency.get(node.activityId)) {
+      parentsOf.get(target).push(node);
+    }
+  }
+
+  let y = TOP;
+  for (const layer of [...layers.keys()].sort((a, b) => a - b)) {
+    const row = layers.get(layer);
+    if (layer > 0) {
+      const barycenter = (node) => {
+        const parents = parentsOf.get(node.activityId)
+          .filter((parent) => (layerOf.get(parent.activityId) ?? 0) < layer);
+        if (!parents.length) return Number.MAX_SAFE_INTEGER;
+        return parents.reduce((sum, parent) => sum + parent.x + nodeSize(parent).w / 2, 0) / parents.length;
+      };
+      row.sort((a, b) => barycenter(a) - barycenter(b));
+    }
+    const total = row.reduce((sum, node) => sum + nodeSize(node).w, 0)
+      + COL_GAP * (row.length - 1);
+    let x = Math.max(24, AXIS_X - total / 2);
+    const rowHeight = Math.max(...row.map((node) => nodeSize(node).h));
+    for (const node of row) {
+      const size = nodeSize(node);
+      node.x = snap(x);
+      node.y = snap(y + (rowHeight - size.h) / 2);
+      x += size.w + COL_GAP;
+    }
+    y += rowHeight + ROW_GAP;
   }
 }
 
@@ -242,27 +331,73 @@ function renderNodes() {
   const canvas = state.els.canvas;
   canvas.querySelectorAll(".node").forEach((el) => el.remove());
   for (const node of state.nodes.values()) {
-    const spec = specFor(state.palette, node.activityName);
+    const spec = nodeSpec(node);
     const color = CATEGORY_COLORS[spec?.category] || "var(--faint)";
-    const wired = node.events.filter((event) => event.nextActivityId).length;
-    const el = h("div", {
-      class: `node${state.selection === node.activityId ? " selected" : ""}`,
-      style: `left:${node.x}px; top:${node.y}px`,
-      "data-id": node.activityId,
-    },
-      h("div", { class: "node-head" },
-        h("span", { class: "dot", style: `background:${color}` }),
-        h("span", { class: "node-title" }, node.displayName)),
-      h("div", { class: "node-body" },
-        h("div", { class: "node-type" }, node.activityName),
-        h("div", { class: "node-hint" },
-          spec?.kind === "terminal" ? "terminal" : `${wired}/${node.events.length} events wired`)),
-      h("span", { class: "node-port in" }),
-      spec?.kind === "terminal" ? null : h("span", { class: "node-port out" }),
-    );
+    const icon = ICONS[spec?.category] || "●";
+    const size = nodeSize(node);
+    const selected = state.selection === node.activityId ? " selected" : "";
+
+    let el;
+    if (spec?.kind === "terminal") {
+      el = h("div", {
+        class: `node terminal${selected}`,
+        style: `left:${node.x}px; top:${node.y}px`,
+        "data-id": node.activityId,
+      },
+        h("span", { class: "chip", style: `color:${color}` }, icon),
+        h("span", { class: "node-title" },
+          node.activityName === "end_of_journey" ? "End of journey" : "End of path"),
+        h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
+      );
+    } else {
+      const wired = wiredEvents(node).length;
+      const completions = node.events.filter((event) => event.eventType !== "Boundary").length;
+      /* rule 4.4 — warn when nothing is wired */
+      const warn = wired === 0 && completions > 0;
+      el = h("div", {
+        class: `node${selected}`,
+        style: `left:${node.x}px; top:${node.y}px`,
+        "data-id": node.activityId,
+      },
+        h("div", { class: "node-head" },
+          h("span", { class: "chip", style: `color:${color}; background:color-mix(in srgb, ${color} 16%, transparent)` }, icon),
+          h("span", { class: "node-title" }, node.displayName),
+          warn ? h("span", { class: "warn-dot", title: "no outgoing transition wired" }) : null),
+        h("div", { class: "node-body" },
+          h("div", { class: "node-type" }, node.activityName),
+          h("div", { class: "node-hint" }, `${wired}/${completions} events wired`)),
+        h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
+        ...portDots(node, color),
+      );
+    }
     attachNodeBehaviour(el, node);
     canvas.append(el);
   }
+}
+
+/* rule 2.2 — bottom-edge fan-out anchors */
+function outAnchors(node) {
+  const wired = wiredEvents(node);
+  const size = nodeSize(node);
+  return wired.map((event, index) => ({
+    event,
+    x: node.x + size.w * ((index + 1) / (wired.length + 1)),
+    y: node.y + size.h,
+  }));
+}
+
+function portDots(node, color) {
+  const anchors = outAnchors(node);
+  const size = nodeSize(node);
+  if (!anchors.length) {
+    return [h("span", { class: "node-port out", style: `left:${size.w / 2 - 5}px; border-color:${color}` })];
+  }
+  return anchors.map((anchor) =>
+    h("span", {
+      class: "node-port out",
+      style: `left:${anchor.x - node.x - 5}px; border-color:${color}`,
+      title: anchor.event.eventName,
+    }));
 }
 
 function attachNodeBehaviour(el, node) {
@@ -275,11 +410,12 @@ function attachNodeBehaviour(el, node) {
     const origX = node.x, origY = node.y;
     let moved = false;
     const onMove = (move) => {
-      const dx = move.clientX - startX, dy = move.clientY - startY;
+      const dx = (move.clientX - startX) / state.zoom;
+      const dy = (move.clientY - startY) / state.zoom;
       if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
       if (!moved) return;
-      node.x = Math.max(0, origX + dx);
-      node.y = Math.max(0, origY + dy);
+      node.x = Math.max(0, snap(origX + dx));   /* rule 5.1 — grid snap */
+      node.y = Math.max(0, snap(origY + dy));
       el.style.left = `${node.x}px`;
       el.style.top = `${node.y}px`;
       el.classList.add("dragging");
@@ -289,6 +425,7 @@ function attachNodeBehaviour(el, node) {
       el.classList.remove("dragging");
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
+      if (moved) renderNodes();
     };
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
@@ -299,24 +436,77 @@ function renderEdges() {
   const svg = state.els.edges;
   svg.innerHTML = "";
   const ns = "http://www.w3.org/2000/svg";
+
+  /* rule 3.3 — arrowheads, one marker per semantic colour */
+  const defs = document.createElementNS(ns, "defs");
+  for (const kind of ["neutral", "ok", "fail"]) {
+    const marker = document.createElementNS(ns, "marker");
+    marker.setAttribute("id", `arr-${kind}`);
+    marker.setAttribute("viewBox", "0 0 10 10");
+    marker.setAttribute("refX", "8");
+    marker.setAttribute("refY", "5");
+    marker.setAttribute("markerWidth", "7");
+    marker.setAttribute("markerHeight", "7");
+    marker.setAttribute("orient", "auto-start-reverse");
+    const tip = document.createElementNS(ns, "path");
+    tip.setAttribute("d", "M0 0 L10 5 L0 10 z");
+    tip.setAttribute("class", `arrow-tip ${kind}`);
+    marker.append(tip);
+    defs.append(marker);
+  }
+  svg.append(defs);
+
   for (const node of state.nodes.values()) {
-    for (const event of node.events) {
-      const target = event.nextActivityId && state.nodes.get(event.nextActivityId);
-      if (!target) continue;
-      const x1 = node.x + NODE_W, y1 = node.y + 19;
-      const x2 = target.x, y2 = target.y + 19;
-      const bend = Math.max(40, Math.abs(x2 - x1) / 2);
+    for (const [anchorIndex, anchor] of outAnchors(node).entries()) {
+      const event = anchor.event;
+      const target = state.nodes.get(event.nextActivityId);
+      const targetSize = nodeSize(target);
+      const p0 = { x: anchor.x, y: anchor.y };
+      const p3 = { x: target.x + targetSize.w / 2, y: target.y };  /* rule 2.1 */
+      const semantics = edgeSemantics(event.eventName);
+
+      let p1, p2;
+      if (p3.y > p0.y + 20) {
+        /* rule 3.1 — vertical bezier, straight out / straight in */
+        const d = Math.min(120, Math.max(40, (p3.y - p0.y) / 2));
+        p1 = { x: p0.x, y: p0.y + d };
+        p2 = { x: p3.x, y: p3.y - d };
+      } else {
+        /* rule 3.2 — upward edge bows around the side */
+        const side = Math.min(p0.x, p3.x) - 180;
+        p1 = { x: side, y: p0.y + 80 };
+        p2 = { x: side, y: p3.y - 80 };
+      }
+
       const path = document.createElementNS(ns, "path");
-      path.setAttribute("d", `M ${x1} ${y1} C ${x1 + bend} ${y1}, ${x2 - bend} ${y2}, ${x2} ${y2}`);
-      path.setAttribute("class", `edge-path${event.eventType === "Boundary" ? " boundary" : ""}`);
+      path.setAttribute("d",
+        `M ${p0.x} ${p0.y} C ${p1.x} ${p1.y}, ${p2.x} ${p2.y}, ${p3.x} ${p3.y}`);
+      path.setAttribute("class",
+        `edge-path ${semantics}${event.eventType === "Boundary" ? " boundary" : ""}`);
+      path.setAttribute("marker-end", `url(#arr-${semantics})`);
       svg.append(path);
-      const label = document.createElementNS(ns, "text");
-      label.setAttribute("x", (x1 + x2) / 2);
-      label.setAttribute("y", (y1 + y2) / 2 - 6);
-      label.setAttribute("text-anchor", "middle");
-      label.setAttribute("class", "edge-label");
-      label.textContent = event.eventName;
-      svg.append(label);
+
+      /* rule 3.6 — label pill in the row gap below the source port,
+       * siblings staggered so they never collide */
+      const at = { x: p0.x, y: p0.y + 26 + (anchorIndex % 2) * 20 };
+      const group = document.createElementNS(ns, "g");
+      group.setAttribute("class", `edge-pill ${semantics}`);
+      const text = document.createElementNS(ns, "text");
+      text.setAttribute("x", at.x);
+      text.setAttribute("y", at.y);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.textContent = event.eventName;
+      group.append(text);
+      svg.append(group);
+      const box = text.getBBox();
+      const rect = document.createElementNS(ns, "rect");
+      rect.setAttribute("x", box.x - 7);
+      rect.setAttribute("y", box.y - 3);
+      rect.setAttribute("width", box.width + 14);
+      rect.setAttribute("height", box.height + 6);
+      rect.setAttribute("rx", 8);
+      group.insertBefore(rect, text);
     }
   }
 }
@@ -331,7 +521,7 @@ function renderInspector() {
       "Select an activity on the canvas,", h("br"), "or add one from the palette."));
     return;
   }
-  const spec = specFor(state.palette, node.activityName);
+  const spec = nodeSpec(node);
   const locked = !editable();
 
   panel.append(
@@ -368,7 +558,9 @@ function renderInspector() {
         renderNodes(); renderEdges();
       });
       panel.append(h("div", { class: "wire-row" },
-        h("span", { class: "evt", title: event.eventName }, event.eventName), select));
+        h("span", { class: `evt ${edgeSemantics(event.eventName)}`, title: event.eventName },
+          event.eventName),
+        select));
     }
   }
 
@@ -461,6 +653,7 @@ function loadSample() {
 export async function renderBuilder(view, journeyId) {
   state.palette = await getPalette();
   state.selection = null;
+  state.zoom = 1;
 
   if (journeyId) {
     const data = await api("GET", `/journey-builder/v0/journeys/${journeyId}`);
@@ -489,11 +682,30 @@ export async function renderBuilder(view, journeyId) {
   const publishBtn = h("button", { class: "btn" }, "Publish");
   const runLink = h("button", { class: "btn ghost" }, "Run view ->");
   const sampleBtn = h("button", { class: "btn ghost" }, "Load sample");
-  const layoutBtn = h("button", { class: "btn ghost", title: "Re-layout the canvas" }, "Auto-layout");
+  const layoutBtn = h("button", { class: "btn ghost", title: "Re-layout top to bottom" }, "Auto-layout");
+
+  /* rule 5.3 — zoom controls */
+  const zoomLabel = h("span", { class: "zoom-label" }, "100%");
+  const applyZoom = () => {
+    state.els.canvas.style.transform = `scale(${state.zoom})`;
+    zoomLabel.textContent = `${Math.round(state.zoom * 100)}%`;
+  };
+  const zoomStep = (direction) => {
+    const index = ZOOM_STEPS.indexOf(state.zoom);
+    const next = ZOOM_STEPS[Math.min(ZOOM_STEPS.length - 1, Math.max(0, index + direction))];
+    state.zoom = next;
+    applyZoom();
+  };
+  const zoomOut = h("button", { class: "btn ghost sm", title: "Zoom out" }, "−");
+  const zoomIn = h("button", { class: "btn ghost sm", title: "Zoom in" }, "+");
+  zoomOut.addEventListener("click", () => zoomStep(-1));
+  zoomIn.addEventListener("click", () => zoomStep(1));
+  zoomLabel.addEventListener("click", () => { state.zoom = 1; applyZoom(); });
 
   const toolbar = h("div", { class: "builder-toolbar" },
     nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()),
     h("div", { class: "spacer", style: "flex:1" }),
+    h("span", { class: "zoom-group" }, zoomOut, zoomLabel, zoomIn),
     sampleBtn, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
   );
 
@@ -507,7 +719,11 @@ export async function renderBuilder(view, journeyId) {
         h("span", { class: "wire" }, item.kind));
       button.addEventListener("click", () => {
         if (!editable()) return toast("Stop the journey to edit it", "err");
-        const node = makeNode(item.activityName, 80 + (state.nodes.size % 5) * 60, 80 + (state.nodes.size % 7) * 70);
+        const node = makeNode(
+          item.activityName,
+          snap(AXIS_X - NODE_W / 2 + ((state.nodes.size % 3) - 1) * 40),
+          snap(TOP + state.nodes.size * 48),
+        );
         state.nodes.set(node.activityId, node);
         state.selection = node.activityId;
         render();
@@ -595,4 +811,5 @@ export async function renderBuilder(view, journeyId) {
 
   refreshMeta();
   render();
+  applyZoom();
 }

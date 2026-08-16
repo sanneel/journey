@@ -42,16 +42,19 @@ A zero-dependency single-page app served from `app/static/`:
 
 - **Journeys** — list with lifecycle actions (publish / stop / duplicate /
   archive / delete) and live activation counts.
-- **Builder** — a canvas editor: palette on the left (grouped exactly like
-  the Tools panel, colour-coded by category), draggable nodes wired
-  through per-event dropdowns, SVG edges labelled with event names,
-  an inspector for `activityDisplayName` and `initializationData`
-  (each type starts with a runnable config skeleton). *Validate* runs the
-  dry-run endpoint and shows problem slugs inline; *Save* writes **both
-  storage copies** — `activities[]` and the `rawJourneyData` mirror
-  (canvas positions in `elements`, display names in
-  `activitiesConfiguration`) — exactly like the dual-storage rule demands.
-  "Load sample" drops in a runnable welcome-freespins flow.
+- **Builder** — a canvas editor governed by `docs/CANVAS_RULES.md`:
+  journeys flow **top → bottom** (sources up, terminals down), layered
+  auto-layout with barycenter crossing-reduction, bottom-edge fan-out
+  ports, arrowed Bézier edges coloured by event semantics (success
+  green / failure red / boundaries dashed) with mono label pills in the
+  row gaps, category icon chips, terminal pills, zoom 50–130%, 8px grid
+  snap. The inspector wires each Completion event through a dropdown and
+  edits `initializationData` (each type starts with a runnable config
+  skeleton). *Validate* runs the dry-run endpoint and shows problem slugs
+  inline; *Save* writes **both storage copies** — `activities[]` and the
+  `rawJourneyData` mirror (canvas positions in `elements`, display names
+  in `activitiesConfiguration`) — exactly like the dual-storage rule
+  demands. "Load sample" drops in a runnable welcome-freespins flow.
 - **Run** — the live half: enter players through any input source
   (with attribute upsert for decision splits), ingest platform events,
   fire due timers, accept offers, mark comms read/clicked, and watch each
