@@ -6,13 +6,17 @@ auth, and the background timer scheduler.
 from __future__ import annotations
 
 import contextlib
+import os
 import threading
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from .config import settings
 from .db import SessionLocal, init_db
+
+STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 
 API_PREFIX = "/api/v0/crm"
 
@@ -62,6 +66,13 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health():
         return {"status": "ok"}
+
+    # ── the builder UI ───────────────────────────────────────────────
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+    @app.get("/", include_in_schema=False)
+    def index():
+        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
     if settings.scheduler_enabled:
         stop_event = threading.Event()

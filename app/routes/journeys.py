@@ -17,6 +17,8 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from sqlalchemy import delete as sql_delete
+
 from ..catalog import palette
 from ..cloner import clone_journey_body
 from ..config import settings
@@ -24,7 +26,8 @@ from ..db import get_session
 from ..drafts import DraftError, create_draft, serialize_journey, update_draft
 from ..engine import Engine, EngineError
 from ..ids import mint_journey_id
-from ..models import Journey, ReservedJourneyId
+from ..models import ActivityIdRegistry, Journey, PromotionDisplayId, ReservedJourneyId
+from ..validation import aggregate, validate_draft
 
 router = APIRouter(prefix="/journey-builder/v0", tags=["journey-builder"])
 
@@ -57,6 +60,52 @@ def create_journey_draft(
     except DraftError as error:
         raise HTTPException(status_code=error.status_code, detail=error.body())
     return serialize_journey(session, journey)
+
+
+@router.post("/journey-drafts/validate")
+def validate_journey_draft(
+    body: dict = Body(...), session: Session = Depends(get_session)
+):
+    """Dry-run validation: same checks as create, nothing persisted.
+    The builder UI calls this on every save-preview."""
+    brand = body.get("brand") or settings.default_brand
+    # treat the body's own id as "self" so editing an existing draft does
+    # not collide with itself
+    existing = body.get("journeyId") or body.get("reservedJourneyId")
+    problems = validate_draft(session, body, brand, existing_journey_id=existing)
+    return {"valid": not problems, **(aggregate(problems) if problems else {})}
+
+
+@router.delete("/journey-drafts/{draft_id}")
+def delete_journey_draft(draft_id: int, session: Session = Depends(get_session)):
+    journey = session.get(Journey, draft_id)
+    if journey is None:
+        raise HTTPException(status_code=404, detail=f"draft {draft_id} not found")
+    if journey.status not in ("Draft", "Archived"):
+        raise HTTPException(
+            status_code=409,
+            detail=f"draft {draft_id} is {journey.status}; only Draft or Archived "
+            "journeys can be deleted",
+        )
+    # free the structural-id registry; minted display ids stay minted but
+    # become unassigned (the sequence is never reused)
+    session.execute(
+        sql_delete(ActivityIdRegistry).where(
+            ActivityIdRegistry.journey_id == journey.journey_id
+        )
+    )
+    for row in (
+        session.execute(
+            select(PromotionDisplayId).where(
+                PromotionDisplayId.journey_id == journey.journey_id
+            )
+        )
+        .scalars()
+        .all()
+    ):
+        row.journey_id = None
+    session.delete(journey)
+    return {"deleted": draft_id, "journeyId": journey.journey_id}
 
 
 @router.put("/journey-drafts/{draft_id}")

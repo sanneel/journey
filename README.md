@@ -30,9 +30,33 @@ the captured behaviour documented in `liveapi`'s
 ```bash
 pip install -r requirements.txt
 python scripts/demo.py        # end-to-end campaign, no server needed
-python server.py              # serve the API on :8000 (docs at /docs)
-pytest                        # 23 tests
+python server.py              # serve API + builder UI on :8000
+pytest                        # 29 tests
 ```
+
+Open **http://localhost:8000/** for the visual builder (API docs at `/docs`).
+
+## The builder UI
+
+A zero-dependency single-page app served from `app/static/`:
+
+- **Journeys** — list with lifecycle actions (publish / stop / duplicate /
+  archive / delete) and live activation counts.
+- **Builder** — a canvas editor: palette on the left (grouped exactly like
+  the Tools panel, colour-coded by category), draggable nodes wired
+  through per-event dropdowns, SVG edges labelled with event names,
+  an inspector for `activityDisplayName` and `initializationData`
+  (each type starts with a runnable config skeleton). *Validate* runs the
+  dry-run endpoint and shows problem slugs inline; *Save* writes **both
+  storage copies** — `activities[]` and the `rawJourneyData` mirror
+  (canvas positions in `elements`, display names in
+  `activitiesConfiguration`) — exactly like the dual-storage rule demands.
+  "Load sample" drops in a runnable welcome-freespins flow.
+- **Run** — the live half: enter players through any input source
+  (with attribute upsert for decision splits), ingest platform events,
+  fire due timers, accept offers, mark comms read/clicked, and watch each
+  activation's event timeline (Activation / Boundary / Completion
+  colour-coded) refresh in real time next to the player's reward ledger.
 
 `DATABASE_URL` (default `sqlite:///./journey.db`) and
 `JOURNEY_API_TOKEN` (default: auth off) configure persistence and auth.
@@ -69,7 +93,9 @@ pytest                        # 23 tests
 |---|---|---|
 | POST | `/journeys/identifier` | reserve a `JRN-0-*` before drafting |
 | POST | `/journey-drafts` | create a draft (201; missing `promotionDisplayId`s re-minted) |
+| POST | `/journey-drafts/validate` | dry-run validation, nothing persisted |
 | PUT | `/journey-drafts/{draft_id}` | update a draft (numeric id from create) |
+| DELETE | `/journey-drafts/{draft_id}` | delete a Draft/Archived journey (frees its activity ids) |
 | GET | `/journeys` · `/journeys/{jrn}` | list / read |
 | POST | `/journeys/{jrn}/publish` | compile + register webhooks + go live |
 | POST | `/journeys/{jrn}/stop` · `/archive` | lifecycle |
