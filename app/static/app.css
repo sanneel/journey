@@ -233,6 +233,35 @@ table.list tr.rowlink:hover td { background: var(--panel-2); }
 }
 .zoom-label:hover { color: var(--text); }
 
+/* templates menu */
+.tpl-wrap { position: relative; }
+.tpl-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  background: var(--panel-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 6px;
+  z-index: 40;
+}
+.tpl-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 11px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.tpl-item:hover { background: var(--panel-2); }
+.tpl-item > div { margin-top: 2px; line-height: 1.35; }
+
 .palette {
   background: var(--panel);
   border-right: 1px solid var(--line);

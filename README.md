@@ -31,7 +31,7 @@ the captured behaviour documented in `liveapi`'s
 pip install -r requirements.txt
 python scripts/demo.py        # end-to-end campaign, no server needed
 python server.py              # serve API + builder UI on :8000
-pytest                        # 29 tests
+pytest                        # 34 tests
 ```
 
 Open **http://localhost:8000/** for the visual builder (API docs at `/docs`).
@@ -54,7 +54,13 @@ A zero-dependency single-page app served from `app/static/`:
   inline; *Save* writes **both storage copies** — `activities[]` and the
   `rawJourneyData` mirror (canvas positions in `elements`, display names
   in `activitiesConfiguration`) — exactly like the dual-storage rule
-  demands. "Load sample" drops in a runnable welcome-freespins flow.
+  demands. The **Templates ▾** menu drops in a ready-made campaign
+  (`app/journey_templates.py`): *Promotion campaign* — offer with a
+  1-day accept window, $100 deposit gate, player-value reward tiers
+  (100/30 freespins), reward notification, next-day follow-up email,
+  with SMS reminder and expiry pop-up on the failure paths — or the
+  small *Welcome freespins* starter. Every instantiation mints fresh
+  activity ids, so saved copies never collide.
 - **Run** — the live half: enter players through any input source
   (with attribute upsert for decision splits), ingest platform events,
   fire due timers, accept offers, mark comms read/clicked, and watch each
@@ -104,6 +110,8 @@ A zero-dependency single-page app served from `app/static/`:
 | POST | `/journeys/{jrn}/stop` · `/archive` | lifecycle |
 | POST | `/journeys/{jrn}/duplicate` | server-side clone (see ID classes) |
 | GET | `/activities/catalog` | the Tools palette with event vocabulary |
+| GET | `/journey-templates` | ready-made campaign shapes |
+| GET | `/journey-templates/{key}` | instantiate a template (fresh activity ids per call) |
 
 ### Promo — `/promo/v0`
 

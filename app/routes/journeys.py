@@ -208,3 +208,22 @@ def duplicate_journey(
 @router.get("/activities/catalog")
 def activities_catalog():
     return {"palette": palette()}
+
+
+@router.get("/journey-templates")
+def list_journey_templates():
+    from ..journey_templates import list_templates
+
+    return {"items": list_templates()}
+
+
+@router.get("/journey-templates/{key}")
+def instantiate_journey_template(key: str):
+    """Returns a complete draft body with FRESH activity ids on every
+    call — load it in the builder, tweak, then save as a normal draft."""
+    from ..journey_templates import instantiate
+
+    body = instantiate(key)
+    if body is None:
+        raise HTTPException(status_code=404, detail=f"template {key} not found")
+    return {"key": key, "body": body}

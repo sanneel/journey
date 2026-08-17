@@ -617,36 +617,23 @@ function showProblems(container, detail, okMessage) {
   }
 }
 
-/* ── the sample journey (one click, runnable) ── */
-function loadSample() {
-  state.nodes = new Map();
-  const source = makeNode("external_system_source", 0, 0);
-  const promo = makeNode("promotion", 0, 0);
-  const gate = makeNode("deposit", 0, 0);
-  const spins = makeNode("freespin_bonus", 0, 0);
-  const notify = makeNode("notification_center", 0, 0);
-  const end = makeNode("end_of_journey", 0, 0);
-  const sorry = makeNode("end_of_path", 0, 0);
-  promo.displayName = "Welcome offer";
-  gate.displayName = "Deposit $100+";
-  spins.displayName = "30 freespins";
-  notify.displayName = "You won!";
-  const wire = (node, eventName, target) => {
-    node.events.find((event) => event.eventName === eventName).nextActivityId = target.activityId;
-  };
-  wire(source, "PlayerAdded", promo);
-  wire(promo, "PromotionAccepted", gate);
-  wire(promo, "PromotionExpired", sorry);
-  wire(gate, "DepositConditionSatisfied", spins);
-  wire(gate, "DepositConditionUnsatisfied", sorry);
-  wire(spins, "FreespinBonusCollectingFinished", notify);
-  wire(notify, "NotificationSent", end);
-  for (const node of [source, promo, gate, spins, notify, end, sorry]) {
-    state.nodes.set(node.activityId, node);
+/* ── templates: server-provided campaign shapes, fresh ids per call ── */
+async function loadTemplate(key, nameInput, refreshMeta) {
+  if (state.nodes.size &&
+      !confirm("Replace the current canvas with this template?")) return;
+  try {
+    const { body } = await api("GET", `/journey-builder/v0/journey-templates/${key}`);
+    const meta = state.meta;
+    loadBody(body, meta);            // no saved positions -> auto-layout
+    if (!meta.name) meta.name = body.journeyName;
+    nameInput.value = meta.name;
+    state.selection = null;
+    render();
+    refreshMeta();
+    toast(`Template loaded — ${body.activities.length} activities`, "ok");
+  } catch (error) {
+    toast(errText(error), "err");
   }
-  autoLayout();
-  if (!state.meta.name) state.meta.name = "JBCL | SAMPLE | welcome freespins";
-  render();
 }
 
 /* ── main view ── */
@@ -681,8 +668,35 @@ export async function renderBuilder(view, journeyId) {
   const saveBtn = h("button", { class: "btn primary" }, "Save draft");
   const publishBtn = h("button", { class: "btn" }, "Publish");
   const runLink = h("button", { class: "btn ghost" }, "Run view ->");
-  const sampleBtn = h("button", { class: "btn ghost" }, "Load sample");
   const layoutBtn = h("button", { class: "btn ghost", title: "Re-layout top to bottom" }, "Auto-layout");
+
+  /* templates menu */
+  const templatesBtn = h("button", { class: "btn ghost" }, "Templates ▾");
+  const templatesMenu = h("div", { class: "tpl-menu", style: "display:none" });
+  const templatesWrap = h("span", { class: "tpl-wrap" }, templatesBtn, templatesMenu);
+  let templatesLoaded = false;
+  templatesBtn.addEventListener("click", async (event) => {
+    event.stopPropagation();
+    if (!editable()) return toast("Stop the journey to edit it", "err");
+    if (!templatesLoaded) {
+      const data = await api("GET", "/journey-builder/v0/journey-templates");
+      templatesMenu.innerHTML = "";
+      for (const template of data.items) {
+        const item = h("button", { class: "tpl-item" },
+          h("strong", {}, template.name),
+          h("span", { class: "dim small" }, ` · ${template.activities} activities`),
+          h("div", { class: "dim small" }, template.description));
+        item.addEventListener("click", () => {
+          templatesMenu.style.display = "none";
+          loadTemplate(template.key, nameInput, refreshMeta);
+        });
+        templatesMenu.append(item);
+      }
+      templatesLoaded = true;
+    }
+    templatesMenu.style.display = templatesMenu.style.display === "none" ? "" : "none";
+  });
+  document.addEventListener("click", () => (templatesMenu.style.display = "none"));
 
   /* rule 5.3 — zoom controls */
   const zoomLabel = h("span", { class: "zoom-label" }, "100%");
@@ -706,7 +720,7 @@ export async function renderBuilder(view, journeyId) {
     nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()),
     h("div", { class: "spacer", style: "flex:1" }),
     h("span", { class: "zoom-group" }, zoomOut, zoomLabel, zoomIn),
-    sampleBtn, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
+    templatesWrap, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
   );
 
   const paletteEl = h("div", { class: "palette" });
@@ -751,12 +765,11 @@ export async function renderBuilder(view, journeyId) {
     holder.append(statusBadge());
     const locked = !editable();
     saveBtn.disabled = locked;
-    sampleBtn.style.display = state.nodes.size || state.meta.draftId ? "none" : "";
+    templatesBtn.disabled = locked;
     publishBtn.disabled = !(state.meta.draftId && (state.meta.status === "Draft" || state.meta.status === "Stopped"));
     runLink.style.display = state.meta.status === "Published" ? "" : "none";
   };
 
-  sampleBtn.addEventListener("click", () => { loadSample(); nameInput.value = state.meta.name; refreshMeta(); });
   layoutBtn.addEventListener("click", () => { autoLayout(); render(); });
 
   validateBtn.addEventListener("click", async () => {
