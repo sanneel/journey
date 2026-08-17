@@ -44,8 +44,9 @@ casino-felt rail, nodes as white tickets with perforated meta strips,
 terminals as torn stubs, Zilla Slab (self-hosted, OFL) as the ledger
 voice.
 
-- **Journeys** — list with lifecycle actions (publish / stop / duplicate /
-  archive / delete) and live activation counts.
+- **Journeys** — a campaign dashboard: search, status filters, live
+  player counts, completion rate, and rewards paid per journey, plus the
+  lifecycle actions (publish / stop / duplicate / archive / delete).
 - **Builder** — a canvas editor governed by `docs/CANVAS_RULES.md`:
   journeys flow **top → bottom** (sources up, terminals down), layered
   auto-layout with barycenter crossing-reduction, bottom-edge fan-out
@@ -65,11 +66,17 @@ voice.
   with SMS reminder and expiry pop-up on the failure paths — or the
   small *Welcome freespins* starter. Every instantiation mints fresh
   activity ids, so saved copies never collide.
-- **Run** — the live half: enter players through any input source
-  (with attribute upsert for decision splits), ingest platform events,
-  fire due timers, accept offers, mark comms read/clicked, and watch each
-  activation's event timeline (Activation / Boundary / Completion
-  colour-coded) refresh in real time next to the player's reward ledger.
+- **Insights** — the paid-product half: on a published journey the
+  canvas overlays live campaign numbers (`GET /runtime/v0/journeys/
+  {jrn}/stats`) — players entered and currently parked on every node,
+  traversal counts and percentages on every transition — so the funnel
+  and its drop-offs read directly off the graph.
+- **Run** — the live half: a KPI strip (entered / active / completed /
+  completion rate / rewards + spins / comms / offer accept rate), player
+  entry through any input source (with attribute upsert for decision
+  splits), platform-event ingestion, timer firing, offer accepts, comms
+  engagement, and each activation's event timeline — every event carries
+  a human-readable detail of what the node actually did.
 
 `DATABASE_URL` (default `sqlite:///./journey.db`) and
 `JOURNEY_API_TOKEN` (default: auth off) configure persistence and auth.

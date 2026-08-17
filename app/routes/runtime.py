@@ -284,6 +284,92 @@ def list_comms(player_id: str, session: Session = Depends(get_session)):
 # ── observability ────────────────────────────────────────────────────
 
 
+@router.get("/runtime/v0/journeys/{journey_id}/stats")
+def journey_stats(journey_id: str, session: Session = Depends(get_session)):
+    """The campaign view of a journey: who entered, where they are now,
+    which transitions they took, and what the rewards cost so far."""
+    _get_journey(session, journey_id)
+    activations = (
+        session.execute(
+            select(JourneyActivation).where(
+                JourneyActivation.journey_id == journey_id
+            )
+        )
+        .scalars()
+        .all()
+    )
+
+    per_activity: dict[str, dict] = {}
+
+    def bucket(activity_id: str) -> dict:
+        if activity_id not in per_activity:
+            per_activity[activity_id] = {"entered": 0, "activeHere": 0, "events": {}}
+        return per_activity[activity_id]
+
+    totals = {"entered": 0, "active": 0, "completed": 0, "terminated": 0}
+    for activation in activations:
+        totals["entered"] += 1
+        key = activation.status.lower()
+        if key in totals:
+            totals[key] += 1
+        seen: set[str] = set()
+        for event in activation.events_history or []:
+            slot = bucket(event["activityId"])
+            slot["events"][event["eventName"]] = (
+                slot["events"].get(event["eventName"], 0) + 1
+            )
+            if event["activityId"] not in seen:
+                seen.add(event["activityId"])
+                slot["entered"] += 1
+        if activation.status == "Active" and activation.current_activity_id:
+            bucket(activation.current_activity_id)["activeHere"] += 1
+    totals["completionRate"] = (
+        round(totals["completed"] / totals["entered"], 4) if totals["entered"] else None
+    )
+
+    grants = (
+        session.execute(
+            select(RewardGrant).where(RewardGrant.journey_id == journey_id)
+        )
+        .scalars()
+        .all()
+    )
+    spins_granted = sum(
+        (g.detail or {}).get("spins") or 0 for g in grants if g.reward_type == "freespin_bonus"
+    )
+    comms_count = len(
+        session.execute(
+            select(CommsMessage.id).where(CommsMessage.journey_id == journey_id)
+        ).all()
+    )
+    activation_ids = [a.id for a in activations]
+    offers = (
+        session.execute(
+            select(PromotionOffer).where(
+                PromotionOffer.activation_id.in_(activation_ids)
+            )
+        )
+        .scalars()
+        .all()
+        if activation_ids
+        else []
+    )
+    accepted = sum(1 for offer in offers if offer.status == "Accepted")
+
+    return {
+        "journeyId": journey_id,
+        "totals": totals,
+        "activities": per_activity,
+        "rewards": {"grants": len(grants), "spinsGranted": spins_granted},
+        "comms": {"sent": comms_count},
+        "offers": {
+            "presented": len(offers),
+            "accepted": accepted,
+            "acceptRate": round(accepted / len(offers), 4) if offers else None,
+        },
+    }
+
+
 @router.get("/runtime/v0/activations/{activation_id}")
 def read_activation(activation_id: int, session: Session = Depends(get_session)):
     activation = session.get(JourneyActivation, activation_id)

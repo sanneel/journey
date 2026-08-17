@@ -146,13 +146,21 @@ def update_draft(session: Session, journey: Journey, body: dict) -> Journey:
 
 
 def serialize_journey(session: Session, journey: Journey, *, with_body: bool = True) -> dict[str, Any]:
-    from .models import JourneyActivation
+    from .models import JourneyActivation, RewardGrant
 
-    activation_count = len(
-        session.execute(
-            select(JourneyActivation.id).where(
+    statuses = [
+        row[0]
+        for row in session.execute(
+            select(JourneyActivation.status).where(
                 JourneyActivation.journey_id == journey.journey_id
             )
+        ).all()
+    ]
+    entered = len(statuses)
+    completed = sum(1 for status in statuses if status == "Completed")
+    grants = len(
+        session.execute(
+            select(RewardGrant.id).where(RewardGrant.journey_id == journey.journey_id)
         ).all()
     )
     payload: dict[str, Any] = {
@@ -166,7 +174,11 @@ def serialize_journey(session: Session, journey: Journey, *, with_body: bool = T
         "createdAt": journey.created_at.isoformat() if journey.created_at else None,
         "changedAt": journey.changed_at.isoformat() if journey.changed_at else None,
         "duplicatedFromId": journey.duplicated_from_id,
-        "allJourneyActivationsCount": activation_count,
+        "allJourneyActivationsCount": entered,
+        "activeActivationsCount": sum(1 for status in statuses if status == "Active"),
+        "completedActivationsCount": completed,
+        "completionRate": round(completed / entered, 4) if entered else None,
+        "rewardGrantsCount": grants,
     }
     if with_body:
         payload["body"] = journey.body

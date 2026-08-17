@@ -266,6 +266,7 @@ const state = {
   selection: null,
   zoom: 1,
   els: {},               // canvas / edges / inspector / problems DOM refs
+  insights: { on: true, data: null, timer: null },
 };
 
 function defaultMeta() {
@@ -556,6 +557,17 @@ function renderNodes() {
         body.append(h("div", { class: "node-sub" }, summary.sub));
       }
 
+      /* insights overlay: live player counts instead of wiring status */
+      const nodeStats =
+        state.insights.on && state.insights.data?.activities?.[node.activityId];
+      const metaRight = nodeStats
+        ? h("span", {},
+            `${nodeStats.entered} in`,
+            nodeStats.activeHere
+              ? h("span", { class: "live" }, ` · ${nodeStats.activeHere} here`)
+              : null)
+        : h("span", {}, `${wired}/${completions} wired`);
+
       el = h("div", {
         class: `node${selected}`,
         style: `left:${node.x}px; top:${node.y}px`,
@@ -568,7 +580,7 @@ function renderNodes() {
         body,
         h("div", { class: "node-meta" },
           h("span", { class: "node-type" }, node.activityName),
-          h("span", {}, `${wired}/${completions} wired`)),
+          metaRight),
         h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
         ...portDots(node, color),
       );
@@ -699,7 +711,14 @@ function renderEdges() {
       text.setAttribute("y", at.y);
       text.setAttribute("text-anchor", "middle");
       text.setAttribute("dominant-baseline", "middle");
-      text.textContent = event.eventName;
+      let label = event.eventName;
+      const sourceStats =
+        state.insights.on && state.insights.data?.activities?.[node.activityId];
+      if (sourceStats?.entered) {
+        const taken = sourceStats.events?.[event.eventName] || 0;
+        label += ` · ${taken} (${Math.round((taken / sourceStats.entered) * 100)}%)`;
+      }
+      text.textContent = label;
       group.append(text);
       svg.append(group);
       const box = text.getBBox();
@@ -872,6 +891,37 @@ export async function renderBuilder(view, journeyId) {
   const publishBtn = h("button", { class: "btn" }, "Publish");
   const runLink = h("button", { class: "btn ghost" }, "Run view ->");
   const layoutBtn = h("button", { class: "btn ghost", title: "Re-layout top to bottom" }, "Auto-layout");
+  const insightsBtn = h("button", {
+    class: "btn ghost",
+    title: "Live player counts on nodes and transitions",
+  }, "Insights");
+
+  /* live campaign numbers over the canvas (published journeys only) */
+  clearInterval(state.insights.timer);
+  state.insights.data = null;
+  const pollInsights = async () => {
+    if (!document.body.contains(view) || state.meta.status !== "Published") return;
+    try {
+      state.insights.data = await api(
+        "GET", `/runtime/v0/journeys/${state.meta.journeyId}/stats`
+      );
+      if (state.insights.on) { renderNodes(); renderEdges(); }
+    } catch { /* transient */ }
+  };
+  const syncInsights = () => {
+    insightsBtn.style.display = state.meta.status === "Published" ? "" : "none";
+    insightsBtn.classList.toggle("pressed", state.insights.on);
+    clearInterval(state.insights.timer);
+    if (state.meta.status === "Published") {
+      pollInsights();
+      state.insights.timer = setInterval(pollInsights, 3000);
+    }
+  };
+  insightsBtn.addEventListener("click", () => {
+    state.insights.on = !state.insights.on;
+    insightsBtn.classList.toggle("pressed", state.insights.on);
+    renderNodes(); renderEdges();
+  });
 
   /* templates menu */
   const templatesBtn = h("button", { class: "btn ghost" }, "Templates ▾");
@@ -923,7 +973,7 @@ export async function renderBuilder(view, journeyId) {
     nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()),
     h("div", { class: "spacer", style: "flex:1" }),
     h("span", { class: "zoom-group" }, zoomOut, zoomLabel, zoomIn),
-    templatesWrap, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
+    insightsBtn, templatesWrap, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
   );
 
   const paletteEl = h("div", { class: "palette" });
@@ -973,6 +1023,7 @@ export async function renderBuilder(view, journeyId) {
     templatesBtn.disabled = locked;
     publishBtn.disabled = !(state.meta.draftId && (state.meta.status === "Draft" || state.meta.status === "Stopped"));
     runLink.style.display = state.meta.status === "Published" ? "" : "none";
+    syncInsights();
   };
 
   layoutBtn.addEventListener("click", () => { autoLayout(); render(); });

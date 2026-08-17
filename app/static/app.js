@@ -117,7 +117,9 @@ export function categoryIcon(category) {
   return span;
 }
 
-/* ── journeys list ── */
+/* ── journeys list: the campaign dashboard ── */
+const listFilter = { query: "", status: "" };
+
 async function renderJourneys(view) {
   view.innerHTML = "";
   const page = h("div", { class: "page" });
@@ -142,20 +144,73 @@ async function renderJourneys(view) {
     return;
   }
 
+  /* search + status filters */
+  const search = h("input", {
+    class: "input", placeholder: "Search by name or id…",
+    style: "width:260px", value: listFilter.query,
+  });
+  search.addEventListener("input", () => {
+    listFilter.query = search.value;
+    renderRows();
+  });
+  const filterRow = h("div", { class: "filter-row" }, search);
+  for (const status of ["", "Published", "Draft", "Stopped", "Archived"]) {
+    const chip = h("button", {
+      class: `filter-chip${listFilter.status === status ? " active" : ""}`,
+    }, status || "All");
+    chip.addEventListener("click", () => {
+      listFilter.status = status;
+      filterRow.querySelectorAll(".filter-chip").forEach((el) => el.classList.remove("active"));
+      chip.classList.add("active");
+      renderRows();
+    });
+    filterRow.append(chip);
+  }
+  page.append(filterRow);
+
+  const pct = (value) => (value == null ? "—" : `${Math.round(value * 100)}%`);
   const table = h("table", { class: "list" },
     h("thead", {}, h("tr", {},
-      h("th", {}, "Journey"), h("th", {}, "Id"), h("th", {}, "Brand"),
-      h("th", {}, "Status"), h("th", {}, "Runs"), h("th", {}, "Changed"), h("th", {}, ""))),
+      h("th", {}, "Journey"), h("th", {}, "Id"),
+      h("th", {}, "Status"), h("th", {}, "Players"), h("th", {}, "Completion"),
+      h("th", {}, "Rewards"), h("th", {}, "Changed"), h("th", {}, ""))),
   );
   const tbody = h("tbody");
-  for (const journey of data.items) {
+  table.append(tbody);
+  page.append(h("div", { class: "card", style: "padding:0" }, table));
+
+  function renderRows() {
+    tbody.innerHTML = "";
+    const query = listFilter.query.trim().toLowerCase();
+    const rows = data.items.filter((journey) =>
+      (!listFilter.status || journey.status === listFilter.status)
+      && (!query
+        || journey.journeyName.toLowerCase().includes(query)
+        || journey.journeyId.toLowerCase().includes(query)));
+    if (!rows.length) {
+      tbody.append(h("tr", {}, h("td", { colspan: "8", class: "empty" },
+        "Nothing matches — clear the search or filters.")));
+      return;
+    }
+    for (const journey of rows) buildRow(journey);
+  }
+
+  function buildRow(journey) {
     const actions = h("td", { style: "text-align:right; white-space:nowrap" });
+    const players = h("td", {},
+      String(journey.allJourneyActivationsCount),
+      journey.activeActivationsCount
+        ? h("span", { class: "live small" }, ` · ${journey.activeActivationsCount} live`)
+        : null);
     const row = h("tr", { class: "rowlink" },
-      h("td", {}, h("strong", {}, journey.journeyName || "(unnamed)")),
+      h("td", {},
+        h("strong", {}, journey.journeyName || "(unnamed)"),
+        h("div", { class: "dim small" }, journey.brand)),
       h("td", { class: "mono dim" }, journey.journeyId),
-      h("td", { class: "dim" }, journey.brand),
       h("td", {}, h("span", { class: `badge ${journey.status}` }, journey.status)),
-      h("td", { class: "dim" }, String(journey.allJourneyActivationsCount)),
+      players,
+      h("td", { class: "dim" }, pct(journey.completionRate)),
+      h("td", { class: "dim" }, String(journey.rewardGrantsCount)),
       h("td", { class: "dim small" }, fmtTime(journey.changedAt)),
       actions,
     );
@@ -194,8 +249,8 @@ async function renderJourneys(view) {
     }
     tbody.append(row);
   }
-  table.append(tbody);
-  page.append(h("div", { class: "card", style: "padding:0" }, table));
+
+  renderRows();
 }
 
 /* ── router ── */

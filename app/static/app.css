@@ -580,6 +580,55 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 .event-item .ename { font-family: var(--mono); font-size: 12px; }
 .event-item .edetail { color: var(--muted); font-size: 11.5px; margin-top: 1px; }
 .event-item .enode { color: var(--faint); font-size: 11px; }
+/* KPI strip — stat tiles: numbers wear ink, labels stay muted */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 10px;
+}
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 13px;
+  box-shadow: var(--shadow-card);
+}
+.kpi-value {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.kpi-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--faint);
+  margin-top: 1px;
+}
+.kpi-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+.live { color: var(--felt); font-weight: 600; }
+.btn.pressed { background: var(--felt-soft); border-color: var(--felt); color: var(--felt); }
+
+/* dashboard filters */
+.filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.filter-row .input { width: 260px; }
+.filter-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 550;
+  cursor: pointer;
+}
+.filter-chip:hover { color: var(--ink); }
+.filter-chip.active { background: var(--felt); border-color: var(--felt); color: #fff; }
+
 .row { display: flex; gap: 8px; align-items: center; }
 .row > * { flex: 1; }
 .row > .btn { flex: none; }

@@ -129,24 +129,49 @@ export async function renderRun(view, journeyId) {
   side.append(h("div", { class: "card" },
     h("div", { class: "row" }, ledgerPlayer, ledgerBtn), ledgerOut));
 
-  /* ── right: activations ── */
+  /* ── right: campaign numbers + activations ── */
+  const kpiStrip = h("div", { class: "kpis" });
   const activationsBox = h("div");
   main.append(
-    h("div", { class: "page-head" },
+    kpiStrip,
+    h("div", { class: "page-head", style: "margin-top:16px" },
       h("h1", {}, "Activations"),
       h("div", { class: "spacer" }),
       h("span", { class: "dim small" }, "auto-refreshing")),
     activationsBox);
 
+  const pct = (value) => (value == null ? "—" : `${Math.round(value * 100)}%`);
+  function renderKpis(stats) {
+    kpiStrip.innerHTML = "";
+    const tiles = [
+      ["Entered", stats.totals.entered],
+      ["Active now", stats.totals.active],
+      ["Completed", stats.totals.completed],
+      ["Completion", pct(stats.totals.completionRate)],
+      ["Rewards", stats.rewards.grants,
+        stats.rewards.spinsGranted ? `${stats.rewards.spinsGranted} spins` : null],
+      ["Comms sent", stats.comms.sent],
+      ["Offers accepted", pct(stats.offers.acceptRate)],
+    ];
+    for (const [label, value, sub] of tiles) {
+      kpiStrip.append(h("div", { class: "kpi" },
+        h("div", { class: "kpi-value" }, String(value)),
+        h("div", { class: "kpi-label" }, label),
+        sub ? h("div", { class: "kpi-sub" }, sub) : null));
+    }
+  }
+
   async function refresh() {
     try {
-      const [activations, timers] = await Promise.all([
+      const [activations, timers, stats] = await Promise.all([
         api("GET", `/runtime/v0/journeys/${journeyId}/activations`),
         api("GET", "/runtime/v0/timers"),
+        api("GET", `/runtime/v0/journeys/${journeyId}/stats`),
       ]);
       timersInfo.textContent = timers.items.length
         ? `${timers.items.length} pending timer(s); next due ${fmtTime(timers.items[0].dueAt)}`
         : "no pending timers";
+      renderKpis(stats);
       renderActivations(activationsBox, activations.items, activityName);
     } catch {
       /* keep the last good view on transient errors */
