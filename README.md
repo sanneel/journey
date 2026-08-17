@@ -59,7 +59,14 @@ voice.
   inline; *Save* writes **both storage copies** — `activities[]` and the
   `rawJourneyData` mirror (canvas positions in `elements`, display names
   in `activitiesConfiguration`) — exactly like the dual-storage rule
-  demands. The **Templates ▾** menu drops in a ready-made campaign
+  demands. Editing is direct: **drag from a bottom port onto another
+  activity to wire it** (an event picker opens when several events
+  qualify), click a wire to select and disconnect it, drag activities in
+  from the palette, pan the canvas, Delete/Escape/Ctrl+Z–Y with a
+  50-step undo stack, and an "unsaved changes" guard. Everyday settings
+  are **typed form fields** (amounts, duration presets, toggles) — raw
+  `initializationData` JSON is demoted to Advanced.
+  The **Templates ▾** menu drops in a ready-made campaign
   (`app/journey_templates.py`): *Promotion campaign* — offer with a
   1-day accept window, $100 deposit gate, player-value reward tiers
   (100/30 freespins), reward notification, next-day follow-up email,

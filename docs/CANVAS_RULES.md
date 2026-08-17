@@ -76,12 +76,30 @@ must respect them — change the rule first, then the code.
 ## 5. Interaction
 
 5.1 Dragging snaps to an **8px grid**.
-5.2 Clicking empty canvas clears the selection.
+5.2 **Wiring is a drag**: pull from a bottom out-port onto another node.
+    One unwired event connects immediately; otherwise an event picker
+    opens at the drop point (wired events offer to re-point). The
+    inspector's per-event dropdowns remain the precise fallback.
 5.3 Zoom: 50–130% in 10% steps via toolbar buttons; drag math is
     zoom-corrected. Reset shows 100%.
 5.4 Spacing constants live in one place (`builder.js` top):
     `NODE_W 232, NODE_H 102, TERM_W 148, TERM_H 36, COL_GAP 56,
     ROW_GAP 116, GRID 8`.
+5.5 **Selection**: click a node or an edge pill; a selected edge shows a
+    Transition panel with Disconnect. `Delete` removes the selection
+    (node or wire), `Escape` clears it. Click on empty canvas clears.
+5.6 **Undo/redo** (Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y), 50 steps: every
+    structural mutation — add, remove, wire, drag end, config change,
+    template load, auto-layout — passes through `commit()`.
+5.7 **Never lose work silently**: mutations raise an "unsaved changes"
+    chip; leaving the page with a dirty editable draft warns first.
+    Saving clears both.
+5.8 **Forms before JSON**: each activity type exposes its everyday
+    settings as typed fields (amounts, durations from a preset list,
+    toggles, selects); the raw `initializationData` stays available
+    under Advanced. An operator never needs JSON for routine edits.
+5.9 Dragging empty canvas **pans**; a plain click still deselects.
+    Palette items can be dragged onto the canvas to place them.
 
 ## 6. Colour
 

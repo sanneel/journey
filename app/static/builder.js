@@ -263,11 +263,171 @@ const state = {
   palette: null,
   nodes: new Map(),      // activityId -> node
   meta: null,            // {draftId, journeyId, status, name, brand, version}
-  selection: null,
+  selection: null,       // selected node id
+  edgeSelection: null,   // {nodeId, eventName} — a selected transition
   zoom: 1,
   els: {},               // canvas / edges / inspector / problems DOM refs
   insights: { on: true, data: null, timer: null },
+  dirty: false,
+  connect: null,         // live port-drag: {sourceId, ghost}
 };
+
+/* ── undo / redo (rule 5.6) ── */
+const history = { stack: [], index: -1, limit: 50 };
+
+function snapshotState() {
+  return JSON.stringify({
+    nodes: [...state.nodes.values()],
+    name: state.meta?.name || "",
+  });
+}
+
+function restoreSnapshot(raw) {
+  const data = JSON.parse(raw);
+  state.nodes = new Map(data.nodes.map((node) => [node.activityId, node]));
+  if (state.meta) state.meta.name = data.name;
+  if (state.selection && !state.nodes.has(state.selection)) state.selection = null;
+  state.edgeSelection = null;
+}
+
+function resetHistory() {
+  history.stack = [snapshotState()];
+  history.index = 0;
+  state.dirty = false;
+  state.els.dirtyChip?.style.setProperty("display", "none");
+}
+
+function commit() {
+  /* call after every structural mutation: it records undo state and
+   * marks the draft dirty */
+  history.stack = history.stack.slice(0, history.index + 1);
+  history.stack.push(snapshotState());
+  if (history.stack.length > history.limit) history.stack.shift();
+  history.index = history.stack.length - 1;
+  state.dirty = true;
+  state.els.dirtyChip?.style.setProperty("display", "");
+}
+
+function undo() {
+  if (history.index <= 0) return;
+  history.index -= 1;
+  restoreSnapshot(history.stack[history.index]);
+  state.dirty = true;
+  state.els.nameInput && (state.els.nameInput.value = state.meta.name);
+  render();
+}
+
+function redo() {
+  if (history.index >= history.stack.length - 1) return;
+  history.index += 1;
+  restoreSnapshot(history.stack[history.index]);
+  state.dirty = true;
+  state.els.nameInput && (state.els.nameInput.value = state.meta.name);
+  render();
+}
+
+/* ── friendly config forms (rule 5.8): dot-path field schemas ── */
+const DURATIONS = [
+  ["P0Y0M0DT0H0M0S", "Instant"],
+  ["P0Y0M0DT0H30M0S", "30 minutes"],
+  ["P0Y0M0DT1H0M0S", "1 hour"],
+  ["P0Y0M0DT6H0M0S", "6 hours"],
+  ["P0Y0M1DT0H0M0S", "1 day"],
+  ["P0Y0M3DT0H0M0S", "3 days"],
+  ["P0Y0M7DT0H0M0S", "7 days"],
+];
+
+const FORMS = {
+  external_system_source: [
+    { path: "targetSystem", label: "Target system", type: "text", hint: "Randomizer, PromoPage…" },
+  ],
+  dwh_source: [
+    { path: "dataSourceName", label: "Segment name", type: "text" },
+  ],
+  registration: [
+    { path: "promocodeSettings.refCodes", label: "Reference codes", type: "csv", hint: "comma-separated" },
+  ],
+  promotion: [
+    { path: "autoAccept", label: "Auto-accept the offer", type: "bool" },
+    { path: "timeToAccept", label: "Time to accept", type: "duration" },
+  ],
+  multipurpose_promotion: [
+    { path: "autoAccept", label: "Auto-accept the offer", type: "bool" },
+    { path: "timeToAccept", label: "Time to accept", type: "duration" },
+  ],
+  deposit: [
+    { path: "depositConditions.minDepositAmounts.0.amount", label: "Minimum deposit (minor units)", type: "number", hint: "10000 = $100" },
+    { path: "depositConditions.minDepositAmounts.0.currencyCode", label: "Currency", type: "text" },
+    { path: "depositConditions.expirationTimeout", label: "Deposit window", type: "duration" },
+  ],
+  sport_bet_condition: [
+    { path: "minBetAmount", label: "Minimum bet (minor units)", type: "number" },
+    { path: "minOdd", label: "Minimum odds", type: "number" },
+    { path: "expireInDays", label: "Window (days)", type: "number" },
+  ],
+  wait_interval: [
+    { path: "waitPeriod", label: "Wait for", type: "duration" },
+  ],
+  wait_date: [
+    { path: "waitTo", label: "Wait until (ISO timestamp)", type: "text", hint: "2026-09-01T04:00:00Z" },
+  ],
+  event_detector: [
+    { path: "properties.subscriptionOptions.0.event.eventName", label: "Platform event", type: "text", hint: "deposit.approved" },
+    { path: "properties.startingOptions.durationTime", label: "Watch window", type: "duration" },
+    { path: "properties.subscriptionOptions.0.filter.property.value", label: "Filter value (amount)", type: "text" },
+  ],
+  freespin_bonus: [
+    { path: "freespinActivity.spins", label: "Free spins", type: "number" },
+    { path: "freespinActivity.provider", label: "Provider", type: "text" },
+    { path: "freespinActivity.lobbyGameId", label: "Game id", type: "text" },
+    { path: "freespinActivity.spinsExpirationDuration", label: "Validity (ms)", type: "number", hint: "86400000 = 24h" },
+  ],
+  casino_bonus_v2: [
+    { path: "bonusPercent", label: "Match bonus %", type: "number" },
+    { path: "wageringRequirement", label: "Wagering multiplier", type: "number", hint: "25 = x25" },
+    { path: "bonusExpirationTime", label: "Expiry (ms)", type: "number", hint: "172800000 = 48h" },
+  ],
+  notification_center: [
+    { path: "contract", label: "Message type", type: "select", options: [[1, "Bell notification"], [5, "Pop-up"]] },
+  ],
+  dextra_sms: [
+    { path: "rawValues.messageText", label: "Message text", type: "textarea" },
+  ],
+  dextra_email: [
+    { path: "emailSettings.contentId", label: "Content Studio id", type: "text", hint: "CSE-0-#####" },
+  ],
+  ams_decision_split: [
+    { path: "rules.0.name", label: "Rule name", type: "text" },
+    { path: "rules.0.filter.property.name", label: "Player attribute", type: "text", hint: "playerValue" },
+    { path: "rules.0.filter.property.operator", label: "Operator", type: "select", options: [["gte", "≥"], ["gt", ">"], ["lte", "≤"], ["lt", "<"], ["eq", "="]] },
+    { path: "rules.0.filter.property.value", label: "Value", type: "text" },
+  ],
+  campaign_connector: [
+    { path: "campaignConnectorConditions.activityData.HostJourneyId", label: "Journey to link (JRN-…)", type: "text" },
+  ],
+};
+
+function getPath(root, dotted) {
+  let node = root;
+  for (const part of dotted.split(".")) {
+    if (node === null || node === undefined) return undefined;
+    node = node[part];
+  }
+  return node;
+}
+
+function setPath(root, dotted, value) {
+  const parts = dotted.split(".");
+  let node = root;
+  for (let i = 0; i < parts.length - 1; i++) {
+    const key = parts[i];
+    if (node[key] === undefined || node[key] === null) {
+      node[key] = /^\d+$/.test(parts[i + 1]) ? [] : {};
+    }
+    node = node[key];
+  }
+  node[parts[parts.length - 1]] = value;
+}
 
 function defaultMeta() {
   return { draftId: null, journeyId: null, status: "Draft", name: "", brand: "JBCL", version: 0 };
@@ -615,12 +775,30 @@ function portDots(node, color) {
     }));
 }
 
+function canvasPoint(clientX, clientY) {
+  const rect = state.els.canvas.getBoundingClientRect();
+  return {
+    x: (clientX - rect.left) / state.zoom,
+    y: (clientY - rect.top) / state.zoom,
+  };
+}
+
 function attachNodeBehaviour(el, node) {
   el.addEventListener("pointerdown", (down) => {
     if (down.button !== 0) return;
+    /* rule 5.2 — dragging an out-port starts a connection */
+    if (down.target.classList?.contains("node-port")
+        && down.target.classList.contains("out")
+        && editable()) {
+      down.preventDefault();
+      down.stopPropagation();
+      startConnectDrag(node, down);
+      return;
+    }
     down.preventDefault();
     state.selection = node.activityId;
-    renderNodes(); renderInspector();
+    state.edgeSelection = null;
+    renderNodes(); renderEdges(); renderInspector();
     const startX = down.clientX, startY = down.clientY;
     const origX = node.x, origY = node.y;
     let moved = false;
@@ -640,11 +818,87 @@ function attachNodeBehaviour(el, node) {
       el.classList.remove("dragging");
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
-      if (moved) renderNodes();
+      if (moved) { commit(); renderNodes(); }
     };
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
   });
+}
+
+/* ── drag-to-connect (rule 5.2) ── */
+function startConnectDrag(sourceNode, down) {
+  const ns = "http://www.w3.org/2000/svg";
+  const ghost = document.createElementNS(ns, "path");
+  ghost.setAttribute("class", "edge-path neutral ghost");
+  state.els.edges.append(ghost);
+  const from = canvasPoint(down.clientX, down.clientY);
+
+  const onMove = (move) => {
+    const to = canvasPoint(move.clientX, move.clientY);
+    const dip = Math.max(30, (to.y - from.y) / 2);
+    ghost.setAttribute("d",
+      `M ${from.x} ${from.y} C ${from.x} ${from.y + dip}, ${to.x} ${to.y - dip}, ${to.x} ${to.y}`);
+  };
+  const onUp = (up) => {
+    window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerup", onUp);
+    ghost.remove();
+    const hit = document.elementFromPoint(up.clientX, up.clientY)?.closest?.(".node[data-id]");
+    const targetId = hit?.dataset.id;
+    if (!targetId || targetId === sourceNode.activityId) return;
+    const candidates = sourceNode.events.filter((event) => event.eventType !== "Boundary");
+    if (!candidates.length) return toast("This activity has no outgoing events", "err");
+    const unwired = candidates.filter((event) => !event.nextActivityId);
+    if (unwired.length === 1) {
+      wireEvent(sourceNode, unwired[0], targetId);
+    } else if (!unwired.length && candidates.length === 1) {
+      wireEvent(sourceNode, candidates[0], targetId);  // re-point the only event
+    } else {
+      openEventPicker(sourceNode, targetId, up.clientX, up.clientY,
+        unwired.length ? unwired : candidates);
+    }
+  };
+  window.addEventListener("pointermove", onMove);
+  window.addEventListener("pointerup", onUp);
+}
+
+function wireEvent(sourceNode, event, targetId) {
+  event.nextActivityId = targetId;
+  commit();
+  render();
+}
+
+function openEventPicker(sourceNode, targetId, clientX, clientY, events) {
+  closeEventPicker();
+  const menu = h("div", { class: "event-picker", id: "event-picker" });
+  menu.append(h("div", { class: "event-picker-title" },
+    `Which event leads to ${state.nodes.get(targetId)?.displayName || "this node"}?`));
+  for (const event of events) {
+    const item = h("button", { class: "event-picker-item" },
+      h("span", { class: `evt ${edgeSemantics(event.eventName)}` }, event.eventName),
+      event.nextActivityId ? h("span", { class: "dim small" }, " · rewires") : null);
+    item.addEventListener("click", () => {
+      closeEventPicker();
+      wireEvent(sourceNode, event, targetId);
+    });
+    menu.append(item);
+  }
+  document.body.append(menu);
+  const rect = menu.getBoundingClientRect();
+  menu.style.left = `${Math.min(clientX, window.innerWidth - rect.width - 12)}px`;
+  menu.style.top = `${Math.min(clientY + 6, window.innerHeight - rect.height - 12)}px`;
+  setTimeout(() => {
+    document.addEventListener("pointerdown", closeEventPickerOnOutside, { once: true });
+  });
+}
+
+function closeEventPickerOnOutside(event) {
+  if (!event.target.closest?.("#event-picker")) closeEventPicker();
+  else document.addEventListener("pointerdown", closeEventPickerOnOutside, { once: true });
+}
+
+function closeEventPicker() {
+  document.getElementById("event-picker")?.remove();
 }
 
 function renderEdges() {
@@ -694,10 +948,13 @@ function renderEdges() {
         d = `M ${p0.x} ${p0.y} V ${p0.y + 16} H ${side} V ${p3.y - 20} H ${p3.x} V ${p3.y}`;
       }
 
+      const isSelected =
+        state.edgeSelection?.nodeId === node.activityId
+        && state.edgeSelection?.eventName === event.eventName;
       const path = document.createElementNS(ns, "path");
       path.setAttribute("d", d);
       path.setAttribute("class",
-        `edge-path ${semantics}${event.eventType === "Boundary" ? " boundary" : ""}`);
+        `edge-path ${semantics}${event.eventType === "Boundary" ? " boundary" : ""}${isSelected ? " selected" : ""}`);
       path.setAttribute("marker-end", `url(#arr-${semantics})`);
       svg.append(path);
 
@@ -720,6 +977,14 @@ function renderEdges() {
       }
       text.textContent = label;
       group.append(text);
+      if (isSelected) group.classList.add("selected");
+      /* rule 5.5 — clicking the pill selects the transition */
+      group.addEventListener("pointerdown", (click) => {
+        click.stopPropagation();
+        state.edgeSelection = { nodeId: node.activityId, eventName: event.eventName };
+        state.selection = null;
+        render();
+      });
       svg.append(group);
       const box = text.getBBox();
       const rect = document.createElementNS(ns, "rect");
@@ -734,17 +999,125 @@ function renderEdges() {
 }
 
 /* ── inspector ── */
+function removeSelectedNode() {
+  const node = state.selection && state.nodes.get(state.selection);
+  if (!node || !editable()) return;
+  state.nodes.delete(node.activityId);
+  for (const other of state.nodes.values()) {
+    for (const event of other.events) {
+      if (event.nextActivityId === node.activityId) event.nextActivityId = null;
+    }
+  }
+  state.selection = null;
+  commit();
+  render();
+}
+
+function disconnectSelectedEdge() {
+  const selected = state.edgeSelection;
+  if (!selected || !editable()) return;
+  const node = state.nodes.get(selected.nodeId);
+  const event = node?.events.find((entry) => entry.eventName === selected.eventName);
+  if (event) {
+    event.nextActivityId = null;
+    commit();
+  }
+  state.edgeSelection = null;
+  render();
+}
+
+function formField(node, field, locked) {
+  const current = getPath(node.init, field.path);
+  const apply = (value) => {
+    setPath(node.init, field.path, value);
+    commit();
+    renderNodes();
+  };
+  let control;
+  if (field.type === "bool") {
+    control = h("label", { class: "switch-row" });
+    const box = h("input", { type: "checkbox" });
+    box.checked = Boolean(current);
+    box.disabled = locked;
+    box.addEventListener("change", () => apply(box.checked));
+    control.append(box, h("span", {}, field.label));
+    return h("div", { class: "field" }, control,
+      field.hint ? h("div", { class: "hint" }, field.hint) : null);
+  }
+  if (field.type === "select" || field.type === "duration") {
+    const options = field.type === "duration" ? DURATIONS : field.options;
+    control = h("select", { class: "input" });
+    let matched = false;
+    for (const [value, label] of options) {
+      const option = h("option", { value: String(value) }, label);
+      if (String(current) === String(value)) { option.selected = true; matched = true; }
+      control.append(option);
+    }
+    if (current !== undefined && current !== null && current !== "" && !matched) {
+      const custom = h("option", { value: String(current) }, `custom: ${current}`);
+      custom.selected = true;
+      control.append(custom);
+    }
+    control.disabled = locked;
+    control.addEventListener("change", () => {
+      const raw = control.value;
+      apply(field.type === "select" && field.options.some(([v]) => typeof v === "number")
+        ? Number(raw) : raw);
+    });
+  } else if (field.type === "textarea") {
+    control = h("textarea", { class: "input", rows: "3" });
+    control.value = current ?? "";
+    control.disabled = locked;
+    control.addEventListener("change", () => apply(control.value));
+  } else {
+    control = h("input", { class: "input", value: current ?? "" });
+    control.disabled = locked;
+    control.addEventListener("change", () => {
+      apply(field.type === "number" ? Number(control.value) : control.value);
+    });
+  }
+  return h("label", { class: "field" },
+    h("span", {}, field.label), control,
+    field.hint ? h("div", { class: "hint" }, field.hint) : null);
+}
+
 function renderInspector() {
   const panel = state.els.inspector;
   panel.innerHTML = "";
+  const locked = !editable();
+
+  /* a selected transition gets its own panel (rule 5.5) */
+  if (state.edgeSelection) {
+    const { nodeId, eventName } = state.edgeSelection;
+    const source = state.nodes.get(nodeId);
+    const event = source?.events.find((entry) => entry.eventName === eventName);
+    const target = event?.nextActivityId && state.nodes.get(event.nextActivityId);
+    panel.append(
+      h("h2", {}, "Transition"),
+      h("div", { class: "type-line" },
+        h("span", { class: `evt mono small ${edgeSemantics(eventName)}` }, eventName)),
+      h("div", { class: "small", style: "margin-bottom:14px" },
+        `${source?.displayName || "?"} → ${target?.displayName || "?"}`),
+    );
+    if (!locked) {
+      const disconnect = h("button", { class: "btn danger sm" }, "Disconnect");
+      disconnect.addEventListener("click", disconnectSelectedEdge);
+      panel.append(disconnect,
+        h("div", { class: "hint", style: "margin-top:10px" }, "or press Delete"));
+    }
+    return;
+  }
+
   const node = state.selection && state.nodes.get(state.selection);
   if (!node) {
     panel.append(h("div", { class: "inspector-empty" },
-      "Select an activity on the canvas,", h("br"), "or add one from the palette."));
+      "Select an activity on the canvas,", h("br"),
+      "or drag one in from the palette.", h("br"), h("br"),
+      h("span", { class: "small" },
+        "Wire activities by dragging from a bottom port onto another activity.")));
     return;
   }
   const spec = nodeSpec(node);
-  const locked = !editable();
 
   panel.append(
     h("h2", {}, node.displayName),
@@ -759,7 +1132,15 @@ function renderInspector() {
     node.displayName = nameField.value;
     renderNodes();
   });
+  nameField.addEventListener("change", () => commit());
   panel.append(h("label", { class: "field" }, h("span", {}, "Display name"), nameField));
+
+  /* rule 5.8 — friendly settings first */
+  const fields = FORMS[node.activityName];
+  if (fields?.length) {
+    panel.append(h("h4", {}, "Settings"));
+    for (const field of fields) panel.append(formField(node, field, locked));
+  }
 
   /* wiring */
   const wireable = node.events.filter((event) => event.eventType !== "Boundary");
@@ -777,6 +1158,7 @@ function renderInspector() {
       select.disabled = locked;
       select.addEventListener("change", () => {
         event.nextActivityId = select.value || null;
+        commit();
         renderNodes(); renderEdges();
       });
       panel.append(h("div", { class: "wire-row" },
@@ -786,36 +1168,31 @@ function renderInspector() {
     }
   }
 
-  /* initializationData */
+  /* the raw wire format stays available, demoted to Advanced */
   if (spec?.kind !== "terminal") {
-    panel.append(h("h4", {}, "initializationData"));
-    const textarea = h("textarea", { class: "input", rows: "12" });
+    const textarea = h("textarea", { class: "input", rows: "10" });
     textarea.value = JSON.stringify(node.init, null, 2);
     textarea.disabled = locked;
     textarea.addEventListener("change", () => {
       try {
         node.init = JSON.parse(textarea.value || "{}");
         textarea.style.borderColor = "";
+        commit();
+        renderNodes();
+        renderInspector();
       } catch {
-        textarea.style.borderColor = "var(--danger)";
+        textarea.style.borderColor = "var(--wax)";
         toast("initializationData is not valid JSON", "err");
       }
     });
-    panel.append(textarea);
+    panel.append(h("details", { class: "advanced" },
+      h("summary", {}, "Advanced · initializationData"),
+      textarea));
   }
 
   if (!locked) {
     const remove = h("button", { class: "btn danger sm", style: "margin-top:14px" }, "Remove activity");
-    remove.addEventListener("click", () => {
-      state.nodes.delete(node.activityId);
-      for (const other of state.nodes.values()) {
-        for (const event of other.events) {
-          if (event.nextActivityId === node.activityId) event.nextActivityId = null;
-        }
-      }
-      state.selection = null;
-      render();
-    });
+    remove.addEventListener("click", removeSelectedNode);
     panel.append(h("div", {}, remove));
   }
 }
@@ -850,6 +1227,7 @@ async function loadTemplate(key, nameInput, refreshMeta) {
     if (!meta.name) meta.name = body.journeyName;
     nameInput.value = meta.name;
     state.selection = null;
+    commit();
     render();
     refreshMeta();
     toast(`Template loaded — ${body.activities.length} activities`, "ok");
@@ -883,6 +1261,11 @@ export async function renderBuilder(view, journeyId) {
 
   const statusBadge = () => h("span", { class: `badge ${state.meta.status}` },
     state.meta.journeyId ? `${state.meta.journeyId} · ${state.meta.status}` : "unsaved");
+  const dirtyChip = h("span", {
+    class: "dirty-chip",
+    style: state.dirty ? "" : "display:none",
+    title: "There are changes that are not saved yet",
+  }, "unsaved changes");
 
   const problems = h("div", { class: "problems", style: "position:absolute; right:336px; top:66px; width:360px; z-index:20" });
 
@@ -970,7 +1353,7 @@ export async function renderBuilder(view, journeyId) {
   zoomLabel.addEventListener("click", () => { state.zoom = 1; applyZoom(); });
 
   const toolbar = h("div", { class: "builder-toolbar" },
-    nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()),
+    nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()), dirtyChip,
     h("div", { class: "spacer", style: "flex:1" }),
     h("span", { class: "zoom-group" }, zoomOut, zoomLabel, zoomIn),
     insightsBtn, templatesWrap, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
@@ -986,16 +1369,23 @@ export async function renderBuilder(view, journeyId) {
         icon,
         item.label,
         h("span", { class: "wire" }, item.kind));
-      button.addEventListener("click", () => {
+      const addNode = (x, y) => {
         if (!editable()) return toast("Stop the journey to edit it", "err");
-        const node = makeNode(
-          item.activityName,
-          snap(AXIS_X - NODE_W / 2 + ((state.nodes.size % 3) - 1) * 40),
-          snap(TOP + state.nodes.size * 48),
-        );
+        const node = makeNode(item.activityName, snap(x), snap(y));
         state.nodes.set(node.activityId, node);
         state.selection = node.activityId;
+        state.edgeSelection = null;
+        commit();
         render();
+      };
+      button.addEventListener("click", () =>
+        addNode(AXIS_X - NODE_W / 2 + ((state.nodes.size % 3) - 1) * 40,
+                TOP + state.nodes.size * (NODE_H + 28)));
+      /* drag from the palette straight onto the canvas */
+      button.draggable = true;
+      button.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text/activity", item.activityName);
+        event.dataTransfer.effectAllowed = "copy";
       });
       paletteEl.append(button);
     }
@@ -1005,14 +1395,90 @@ export async function renderBuilder(view, journeyId) {
   edges.setAttribute("class", "edges");
   const canvas = h("div", { class: "canvas" });
   canvas.append(edges);
-  canvas.addEventListener("pointerdown", (event) => {
-    if (event.target === canvas) { state.selection = null; renderNodes(); renderInspector(); }
-  });
   const canvasWrap = h("div", { class: "canvas-wrap" }, canvas, problems);
   const inspector = h("div", { class: "inspector" });
 
+  /* empty-canvas press: deselect on click, pan on drag (rule 5.9) */
+  canvas.addEventListener("pointerdown", (down) => {
+    if (down.target !== canvas) return;
+    down.preventDefault();
+    const startX = down.clientX, startY = down.clientY;
+    const scrollLeft = canvasWrap.scrollLeft, scrollTop = canvasWrap.scrollTop;
+    let moved = false;
+    const onMove = (move) => {
+      const dx = move.clientX - startX, dy = move.clientY - startY;
+      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+      if (!moved) return;
+      canvas.classList.add("panning");
+      canvasWrap.scrollLeft = scrollLeft - dx;
+      canvasWrap.scrollTop = scrollTop - dy;
+    };
+    const onUp = () => {
+      canvas.classList.remove("panning");
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      if (!moved) {
+        state.selection = null;
+        state.edgeSelection = null;
+        renderNodes(); renderEdges(); renderInspector();
+      }
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  });
+
+  /* palette drop target */
+  canvas.addEventListener("dragover", (event) => {
+    if (event.dataTransfer.types.includes("text/activity")) event.preventDefault();
+  });
+  canvas.addEventListener("drop", (event) => {
+    const activityName = event.dataTransfer.getData("text/activity");
+    if (!activityName) return;
+    event.preventDefault();
+    if (!editable()) return toast("Stop the journey to edit it", "err");
+    const point = canvasPoint(event.clientX, event.clientY);
+    const node = makeNode(activityName,
+      snap(Math.max(0, point.x - NODE_W / 2)), snap(Math.max(0, point.y - 20)));
+    state.nodes.set(node.activityId, node);
+    state.selection = node.activityId;
+    state.edgeSelection = null;
+    commit();
+    render();
+  });
+
   view.append(h("div", { class: "builder" }, toolbar, paletteEl, canvasWrap, inspector));
-  state.els = { canvas, edges, inspector, problems };
+  state.els = { canvas, edges, inspector, problems, nameInput, dirtyChip };
+
+  /* rule 5.5 / 5.6 — keyboard: Delete, Escape, undo/redo */
+  const onKeyDown = (event) => {
+    if (!document.body.contains(view)) {
+      document.removeEventListener("keydown", onKeyDown);
+      return;
+    }
+    const tag = document.activeElement?.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z") {
+      event.preventDefault();
+      event.shiftKey ? redo() : undo();
+    } else if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "y") {
+      event.preventDefault();
+      redo();
+    } else if (event.key === "Delete" || event.key === "Backspace") {
+      event.preventDefault();
+      if (state.edgeSelection) disconnectSelectedEdge();
+      else if (state.selection) removeSelectedNode();
+    } else if (event.key === "Escape") {
+      closeEventPicker();
+      state.selection = null;
+      state.edgeSelection = null;
+      renderNodes(); renderEdges(); renderInspector();
+    }
+  };
+  document.addEventListener("keydown", onKeyDown);
+
+  /* rule 5.7 — never lose work silently */
+  window.onbeforeunload = () =>
+    state.dirty && editable() ? "There are unsaved changes." : undefined;
 
   const refreshMeta = () => {
     const holder = document.getElementById("meta-badge");
@@ -1026,7 +1492,7 @@ export async function renderBuilder(view, journeyId) {
     syncInsights();
   };
 
-  layoutBtn.addEventListener("click", () => { autoLayout(); render(); });
+  layoutBtn.addEventListener("click", () => { autoLayout(); commit(); render(); });
 
   validateBtn.addEventListener("click", async () => {
     const body = buildBody();
@@ -1053,11 +1519,12 @@ export async function renderBuilder(view, journeyId) {
       state.meta.status = saved.status;
       state.meta.version = saved.version;
       loadBody(saved.body, state.meta);
+      resetHistory();
       render();
       showProblems(problems, null);
       toast(`Saved ${saved.journeyId} (v${saved.version})`, "ok");
       refreshMeta();
-      history.replaceState(null, "", `#/builder/${saved.journeyId}`);
+      window.history.replaceState(null, "", `#/builder/${saved.journeyId}`);
     } catch (error) {
       if (error.detail?.aggregatedError) showProblems(problems, error.detail);
       else toast(errText(error), "err");
@@ -1078,6 +1545,7 @@ export async function renderBuilder(view, journeyId) {
 
   runLink.addEventListener("click", () => (location.hash = `#/run/${state.meta.journeyId}`));
 
+  resetHistory();
   refreshMeta();
   render();
   applyZoom();
