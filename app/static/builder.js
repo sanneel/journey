@@ -1362,13 +1362,18 @@ export async function renderBuilder(view, journeyId) {
   const paletteEl = h("div", { class: "palette" });
   for (const group of state.palette) {
     paletteEl.append(h("h3", {}, group.category));
+    const grid = h("div", { class: "palette-grid" });
     for (const item of group.activities) {
-      const icon = categoryIcon(group.category);
-      icon.style.color = CATEGORY_COLORS[group.category];
-      const button = h("button", { class: "palette-item", title: item.activityName },
-        icon,
-        item.label,
-        h("span", { class: "wire" }, item.kind));
+      const color = CATEGORY_COLORS[group.category];
+      const chip = h("span", {
+        class: "palette-chip",
+        style: `color:${color}; background:color-mix(in srgb, ${color} 13%, transparent)`,
+      });
+      chip.append(categoryIcon(group.category));
+      const button = h("button", {
+        class: "palette-item",
+        title: `${item.activityName} · ${item.kind}`,
+      }, chip, h("span", { class: "palette-label" }, item.label));
       const addNode = (x, y) => {
         if (!editable()) return toast("Stop the journey to edit it", "err");
         const node = makeNode(item.activityName, snap(x), snap(y));
@@ -1387,8 +1392,9 @@ export async function renderBuilder(view, journeyId) {
         event.dataTransfer.setData("text/activity", item.activityName);
         event.dataTransfer.effectAllowed = "copy";
       });
-      paletteEl.append(button);
+      grid.append(button);
     }
+    paletteEl.append(grid);
   }
 
   const edges = document.createElementNS("http://www.w3.org/2000/svg", "svg");

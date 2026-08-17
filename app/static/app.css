@@ -335,24 +335,51 @@ table.list tr.rowlink:hover td { background: var(--panel); }
   margin: 14px 6px 6px;
 }
 .palette h3:first-child { margin-top: 2px; }
+/* the palette is a tile grid: 3 per row, icon-led */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 4px;
+}
 .palette-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 8px 10px;
-  margin-bottom: 2px;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  gap: 7px;
+  padding: 11px 4px 9px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
   color: var(--ink);
   font: inherit;
-  font-size: 13.5px;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
 }
-.palette-item:hover { background: var(--card); border-color: var(--line); }
-.palette-item .wire { margin-left: auto; color: var(--faint); font-size: 10.5px; font-family: var(--mono); }
+.palette-item:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-1px);
+}
+.palette-item:active { transform: translateY(0); }
+.palette-chip {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  flex: none;
+}
+.palette-chip .icon svg { width: 22px; height: 22px; }
+.palette-label {
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--muted);
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
 
 /* ── canvas (rules in docs/CANVAS_RULES.md) ── */
 .canvas-wrap { position: relative; overflow: auto; background: var(--paper); }
