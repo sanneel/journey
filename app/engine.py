@@ -255,7 +255,13 @@ class Engine:
         self.session.add(activation)
         self.session.flush()
 
-        self._record(activation, entry_activity_id, "PlayerAdded", "Activation")
+        self._record(
+            activation,
+            entry_activity_id,
+            "PlayerAdded",
+            "Activation",
+            f"entered via {entry.get('activityName')}",
+        )
         event = _event_on(entry, "PlayerAdded")
         next_id = event.get("nextActivityId") if event else None
         if next_id is None:
@@ -326,9 +332,10 @@ class Engine:
                 raise EngineError(
                     "transition-target-not-found", f"activity {current} missing"
                 )
-            outcome, argument = self._enter_activity(activation, journey, index, activity)
+            result = self._enter_activity(activation, journey, index, activity)
+            outcome, argument, detail = (*result, None)[:3]
             if outcome == "move":
-                current = self._follow(activation, activity, argument)
+                current = self._follow(activation, activity, argument, detail)
             elif outcome == "park":
                 return
             elif outcome == "end":
@@ -336,9 +343,15 @@ class Engine:
                 return
 
     def _follow(
-        self, activation: JourneyActivation, activity: dict, event_name: str
+        self,
+        activation: JourneyActivation,
+        activity: dict,
+        event_name: str,
+        detail: str | None = None,
     ) -> str | None:
-        self._record(activation, activity["activityId"], event_name, "Completion")
+        self._record(
+            activation, activity["activityId"], event_name, "Completion", detail
+        )
         event = _event_on(activity, event_name)
         next_id = event.get("nextActivityId") if event else None
         if next_id is None:
@@ -356,16 +369,18 @@ class Engine:
         activity_id: str,
         event_name: str,
         event_type: str,
+        detail: str | None = None,
     ) -> None:
         history = list(activation.events_history or [])
-        history.append(
-            {
-                "activityId": activity_id,
-                "eventName": event_name,
-                "eventType": event_type,
-                "occurredAt": utcnow().isoformat(),
-            }
-        )
+        entry = {
+            "activityId": activity_id,
+            "eventName": event_name,
+            "eventType": event_type,
+            "occurredAt": utcnow().isoformat(),
+        }
+        if detail:
+            entry["detail"] = detail
+        history.append(entry)
         activation.events_history = history
 
     # ── activity handlers ────────────────────────────────────────────
@@ -376,7 +391,10 @@ class Engine:
         journey: Journey,
         index: dict[str, dict],
         activity: dict,
-    ) -> tuple[str, str]:
+    ) -> tuple:
+        """Returns ("move", event_name[, detail]) | ("park", kind) |
+        ("end", terminal). `detail` is the human-readable record of what
+        the node actually did."""
         name = activity.get("activityName", "")
         spec = spec_for(name)
         if spec is None:
@@ -416,12 +434,18 @@ class Engine:
         )
         self.session.add(offer)
         self.session.flush()
-        self._record(activation, activity["activityId"], "PromotionOffered", "Boundary")
+        self._record(
+            activation,
+            activity["activityId"],
+            "PromotionOffered",
+            "Boundary",
+            f"offer #{offer.id} presented to {activation.player_id}",
+        )
 
         if init.get("autoAccept"):
             offer.status = "Accepted"
             offer.resolved_at = utcnow()
-            return "move", "PromotionAccepted"
+            return "move", "PromotionAccepted", f"offer #{offer.id} auto-accepted"
 
         time_to_accept = init.get("timeToAccept")
         due = self._parse_window(time_to_accept)
@@ -446,7 +470,12 @@ class Engine:
         offer.status = "Accepted"
         offer.resolved_at = utcnow()
         self._cancel_timers(activation, offer.activity_id)
-        self._resume(activation, offer.activity_id, "PromotionAccepted")
+        self._resume(
+            activation,
+            offer.activity_id,
+            "PromotionAccepted",
+            detail=f"offer #{offer.id} accepted by player",
+        )
         return activation
 
     # comms -----------------------------------------------------------
@@ -481,7 +510,11 @@ class Engine:
         )
         self.session.add(message)
         self.session.flush()
-        return "move", spec["happy_path"]
+        return (
+            "move",
+            spec["happy_path"],
+            f"queued {message.channel} message #{message.id}",
+        )
 
     def engage_comms(self, message: CommsMessage, action: str) -> CommsMessage:
         ladder = ["Sent", "Shown", "Read", "Clicked"]
@@ -541,20 +574,30 @@ class Engine:
         )
         self.session.add(grant)
         self.session.flush()
+        if name == "freespin_bonus":
+            granted = f"granted {detail.get('spins')} free spins (grant #{grant.id})"
+        elif name == "casino_bonus_v2":
+            granted = f"granted {detail.get('bonusPercent')}% match bonus (grant #{grant.id})"
+        else:
+            granted = f"granted {name} (grant #{grant.id})"
         if spec.get("grant_boundary"):
             self._record(
-                activation, activity["activityId"], spec["grant_boundary"], "Boundary"
+                activation,
+                activity["activityId"],
+                spec["grant_boundary"],
+                "Boundary",
+                granted,
             )
 
         # follow the happy path if it is wired; otherwise the first wired
         # Completion event; otherwise the path simply ends here
         happy = spec.get("happy_path")
         if happy and _event_on(activity, happy) is not None:
-            return "move", happy
+            return "move", happy, granted
         for event in activity.get("events") or []:
             if event.get("eventType") == "Completion" and event.get("nextActivityId"):
-                return "move", event["eventName"]
-        return "move", happy or "end_of_path"
+                return "move", event["eventName"], granted
+        return "move", happy or "end_of_path", granted
 
     # splits ----------------------------------------------------------
 
@@ -570,10 +613,18 @@ class Engine:
             rules = init.get("rules") or []
             for position, rule in enumerate(rules):
                 if _matches_filter(rule.get("filter"), attributes):
-                    return "move", self._split_event(
-                        pathes_config, position, f"DecisionSplitPassedPath{position + 1:02d}"
+                    return (
+                        "move",
+                        self._split_event(
+                            pathes_config, position, f"DecisionSplitPassedPath{position + 1:02d}"
+                        ),
+                        f"rule '{rule.get('name', position + 1)}' matched",
                     )
-            return "move", "DecisionSplitPassedRemainderPath"
+            return (
+                "move",
+                "DecisionSplitPassedRemainderPath",
+                "no rule matched — remainder path",
+            )
 
         if name == "random_split":
             paths = init.get("paths") or []
@@ -581,8 +632,13 @@ class Engine:
             if not paths or sum(weights) <= 0:
                 raise EngineError("random-split-has-no-paths")
             position = random.choices(range(len(paths)), weights=weights, k=1)[0]
-            return "move", self._split_event(
-                pathes_config, position, f"RandomSplitPassedPath{position + 1}"
+            return (
+                "move",
+                self._split_event(
+                    pathes_config, position, f"RandomSplitPassedPath{position + 1}"
+                ),
+                f"rolled '{paths[position].get('pathName', position + 1)}' "
+                f"({weights[position]:g}%)",
             )
 
         # engagement splits: branch on the delivery status of an upstream
@@ -619,11 +675,15 @@ class Engine:
                     if name == "notification_center_engagement_split"
                     else f"Path{config_position + 1}"
                 )
-                return "move", self._split_event(pathes_config, config_position, default)
+                return (
+                    "move",
+                    self._split_event(pathes_config, config_position, default),
+                    f"message status was {status} — path '{path.get('pathName', config_position + 1)}'",
+                )
         # nothing matched: last wired completion event acts as the remainder
         for event in reversed(activity.get("events") or []):
             if event.get("eventType") == "Completion":
-                return "move", event["eventName"]
+                return "move", event["eventName"], f"message status was {status} (no matching path)"
         raise EngineError("engagement-split-has-no-paths")
 
     @staticmethod
@@ -650,15 +710,19 @@ class Engine:
         conditions = init.get("campaignConnectorConditions") or {}
         host_journey_id = (conditions.get("activityData") or {}).get("HostJourneyId")
         if not host_journey_id:
-            return "move", "PlayerNotAddedToCampaign"
+            return "move", "PlayerNotAddedToCampaign", "no journey linked"
         host = self.session.execute(
             select(Journey).where(Journey.journey_id == host_journey_id)
         ).scalar_one_or_none()
         if host is None or host.status != "Published":
-            return "move", "PlayerNotAddedToCampaign"
+            return (
+                "move",
+                "PlayerNotAddedToCampaign",
+                f"{host_journey_id} is not published",
+            )
         sources = entry_sources(host)
         if not sources:
-            return "move", "PlayerNotAddedToCampaign"
+            return "move", "PlayerNotAddedToCampaign", f"{host_journey_id} has no source"
         try:
             self.enter(
                 host,
@@ -666,9 +730,9 @@ class Engine:
                 activation.player_id,
                 context={"via": "campaign_connector", "fromJourney": activation.journey_id},
             )
-        except EngineError:
-            return "move", "PlayerNotAddedToCampaign"
-        return "move", "PlayerAddedToCampaign"
+        except EngineError as error:
+            return "move", "PlayerNotAddedToCampaign", f"{host_journey_id}: {error.slug}"
+        return "move", "PlayerAddedToCampaign", f"entered {host_journey_id}"
 
     # parked activities ----------------------------------------------
 
@@ -679,35 +743,59 @@ class Engine:
         now = utcnow()
 
         if name == "wait_interval":
-            self._record(activation, activity_id, "WaitTimeStarted", "Boundary")
             wait = parse_iso_duration(init.get("waitPeriod", "P0Y0M0DT0H0M0S"))
+            due_at = now + wait
+            self._record(
+                activation,
+                activity_id,
+                "WaitTimeStarted",
+                "Boundary",
+                f"waiting until {due_at.isoformat(timespec='seconds')}",
+            )
             self.session.add(
                 Timer(
                     activation_id=activation.id,
                     activity_id=activity_id,
                     kind="wait",
-                    due_at=now + wait,
+                    due_at=due_at,
                 )
             )
             return "park", "wait"
 
         if name == "wait_date":
-            self._record(activation, activity_id, "WaitTimeStarted", "Boundary")
             wait_to = init.get("waitTo")
-            due_at = parse_timestamp(wait_to) if wait_to else now
+            due_at = max(parse_timestamp(wait_to) if wait_to else now, now)
+            self._record(
+                activation,
+                activity_id,
+                "WaitTimeStarted",
+                "Boundary",
+                f"waiting until {due_at.isoformat(timespec='seconds')}",
+            )
             self.session.add(
                 Timer(
                     activation_id=activation.id,
                     activity_id=activity_id,
                     kind="wait",
-                    due_at=max(due_at, now),
+                    due_at=due_at,
                 )
             )
             return "park", "wait"
 
         if name == "deposit":
-            self._record(activation, activity_id, "DepositConditionAccepted", "Boundary")
             conditions = init.get("depositConditions") or {}
+            minimums = conditions.get("minDepositAmounts") or []
+            wanted = ", ".join(
+                f"≥{(m.get('amount') or 0) / 100:g} {m.get('currencyCode', '')}"
+                for m in minimums
+            ) or "any amount"
+            self._record(
+                activation,
+                activity_id,
+                "DepositConditionAccepted",
+                "Boundary",
+                f"waiting for deposit {wanted}",
+            )
             self.session.add(
                 ParkedSubscription(
                     activation_id=activation.id,
@@ -731,8 +819,18 @@ class Engine:
             return "park", "deposit"
 
         if name == "event_detector":
-            self._record(activation, activity_id, "DetectorStarted", "Boundary")
             properties = init.get("properties") or {}
+            watched = ", ".join(
+                (option.get("event") or {}).get("eventName", "?")
+                for option in properties.get("subscriptionOptions") or []
+            ) or "nothing"
+            self._record(
+                activation,
+                activity_id,
+                "DetectorStarted",
+                "Boundary",
+                f"watching for {watched}",
+            )
             for option in properties.get("subscriptionOptions") or []:
                 event = option.get("event") or {}
                 self.session.add(
@@ -759,7 +857,14 @@ class Engine:
             return "park", "detector"
 
         if name == "sport_bet_condition":
-            self._record(activation, activity_id, "Activated", "Boundary")
+            self._record(
+                activation,
+                activity_id,
+                "Activated",
+                "Boundary",
+                f"waiting for bet ≥{(init.get('minBetAmount') or 0) / 100:g}, "
+                f"odds ≥{init.get('minOdd') or 'any'}",
+            )
             self.session.add(
                 ParkedSubscription(
                     activation_id=activation.id,
@@ -801,7 +906,11 @@ class Engine:
     # ── resuming a parked token ──────────────────────────────────────
 
     def _resume(
-        self, activation: JourneyActivation, activity_id: str, event_name: str
+        self,
+        activation: JourneyActivation,
+        activity_id: str,
+        event_name: str,
+        detail: str | None = None,
     ) -> None:
         journey = self.session.execute(
             select(Journey).where(Journey.journey_id == activation.journey_id)
@@ -810,7 +919,7 @@ class Engine:
         activity = index.get(activity_id)
         if activity is None:
             raise EngineError("transition-target-not-found", activity_id)
-        next_id = self._follow(activation, activity, event_name)
+        next_id = self._follow(activation, activity, event_name, detail)
         if next_id is not None:
             self._run(activation, journey, index, next_id)
         self.session.flush()
@@ -911,18 +1020,27 @@ class Engine:
                 continue
             self._cancel_subscriptions(activation, subscription.activity_id)
             self._cancel_timers(activation, subscription.activity_id)
+            amount = properties.get("amount")
+            currency = properties.get("currencyCode") or properties.get("currency") or ""
             if subscription.activity_name == "deposit":
                 completion = "DepositConditionSatisfied"
+                detail = f"deposit {(amount or 0) / 100:g} {currency} qualified".strip()
             elif subscription.activity_name == "event_detector":
                 self._record(
-                    activation, subscription.activity_id, "EventReceived", "Boundary"
+                    activation,
+                    subscription.activity_id,
+                    "EventReceived",
+                    "Boundary",
+                    f"{event_name} received",
                 )
                 completion = "DetectorSuccess"
+                detail = f"{event_name} matched the filter"
             elif subscription.activity_name == "sport_bet_condition":
                 completion = "Satisfied"
+                detail = f"bet {(amount or 0) / 100:g} {currency} qualified".strip()
             else:
                 continue
-            self._resume(activation, subscription.activity_id, completion)
+            self._resume(activation, subscription.activity_id, completion, detail)
             resolved.append(
                 {
                     "activationId": activation.id,
@@ -1051,22 +1169,41 @@ class Engine:
             self._cancel_subscriptions(activation, timer.activity_id)
             self._cancel_timers(activation, timer.activity_id)
             if timer.kind == "wait":
-                self._resume(activation, timer.activity_id, "WaitTimeCompleted")
+                self._resume(
+                    activation, timer.activity_id, "WaitTimeCompleted", "wait elapsed"
+                )
             elif timer.kind == "offer_expiry":
                 offer_id = (timer.payload or {}).get("offerId")
                 offer = self.session.get(PromotionOffer, offer_id) if offer_id else None
                 if offer is not None and offer.status == "Offered":
                     offer.status = "Expired"
                     offer.resolved_at = utcnow()
-                self._resume(activation, timer.activity_id, "PromotionExpired")
+                self._resume(
+                    activation,
+                    timer.activity_id,
+                    "PromotionExpired",
+                    "accept window expired",
+                )
             elif timer.kind == "deposit_window":
-                self._resume(activation, timer.activity_id, "DepositConditionUnsatisfied")
+                self._resume(
+                    activation,
+                    timer.activity_id,
+                    "DepositConditionUnsatisfied",
+                    "deposit window expired",
+                )
             elif timer.kind == "detector_window":
                 self._record(
                     activation, timer.activity_id, "EventNotReceived", "Boundary"
                 )
-                self._resume(activation, timer.activity_id, "DetectorFailed")
+                self._resume(
+                    activation,
+                    timer.activity_id,
+                    "DetectorFailed",
+                    "window closed without a matching event",
+                )
             elif timer.kind == "bet_window":
-                self._resume(activation, timer.activity_id, "Unsatisfied")
+                self._resume(
+                    activation, timer.activity_id, "Unsatisfied", "bet window expired"
+                )
         self.session.flush()
         return fired

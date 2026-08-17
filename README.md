@@ -31,14 +31,18 @@ the captured behaviour documented in `liveapi`'s
 pip install -r requirements.txt
 python scripts/demo.py        # end-to-end campaign, no server needed
 python server.py              # serve API + builder UI on :8000
-pytest                        # 34 tests
+pytest                        # 59 tests
 ```
 
 Open **http://localhost:8000/** for the visual builder (API docs at `/docs`).
 
 ## The builder UI
 
-A zero-dependency single-page app served from `app/static/`:
+A zero-dependency single-page app served from `app/static/`, designed as
+**"the bookmaker's ledger"** (`docs/DESIGN.md`): bond paper, ink, a
+casino-felt rail, nodes as white tickets with perforated meta strips,
+terminals as torn stubs, Zilla Slab (self-hosted, OFL) as the ledger
+voice.
 
 - **Journeys** — list with lifecycle actions (publish / stop / duplicate /
   archive / delete) and live activation counts.

@@ -193,6 +193,7 @@ function renderActivations(container, items, activityName) {
           h("span", { class: `etype ${event.eventType}` }, event.eventType),
           h("span", {},
             h("div", { class: "ename" }, event.eventName),
+            event.detail ? h("div", { class: "edetail" }, event.detail) : null,
             h("div", { class: "enode" },
               `${activityName.get(event.activityId) || event.activityId} · ${fmtTime(event.occurredAt)}`))));
       }
