@@ -8,7 +8,7 @@
  * with canvas positions + activitiesConfiguration).
  */
 import {
-  api, errText, getPalette, specFor, CATEGORY_COLORS, categoryIcon, h, toast,
+  api, API, errText, getPalette, specFor, CATEGORY_COLORS, categoryIcon, h, toast,
 } from "./app.js";
 
 /* rule 5.4 — spacing constants live here */
@@ -1274,6 +1274,26 @@ export async function renderBuilder(view, journeyId) {
   const publishBtn = h("button", { class: "btn" }, "Publish");
   const runLink = h("button", { class: "btn ghost" }, "Run view ->");
   const layoutBtn = h("button", { class: "btn ghost", title: "Re-layout top to bottom" }, "Auto-layout");
+  const scriptBtn = h("button", {
+    class: "btn ghost",
+    title: "Download a paste-able browser console script that recreates this journey",
+  }, "Console script");
+  scriptBtn.addEventListener("click", async () => {
+    if (!state.meta.journeyId) return;
+    const url = `${API}/journey-builder/v0/journeys/${state.meta.journeyId}/console-script`;
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+      await navigator.clipboard.writeText(text);
+      toast("Console script copied to clipboard — downloading too", "ok");
+    } catch {
+      toast("Downloading console script", "");
+    }
+    const link = h("a", { href: url, download: `${state.meta.journeyId}_console.js` });
+    document.body.append(link);
+    link.click();
+    link.remove();
+  });
   const insightsBtn = h("button", {
     class: "btn ghost",
     title: "Live player counts on nodes and transitions",
@@ -1356,7 +1376,7 @@ export async function renderBuilder(view, journeyId) {
     nameInput, brandInput, h("span", { id: "meta-badge" }, statusBadge()), dirtyChip,
     h("div", { class: "spacer", style: "flex:1" }),
     h("span", { class: "zoom-group" }, zoomOut, zoomLabel, zoomIn),
-    insightsBtn, templatesWrap, layoutBtn, validateBtn, saveBtn, publishBtn, runLink,
+    insightsBtn, templatesWrap, layoutBtn, scriptBtn, validateBtn, saveBtn, publishBtn, runLink,
   );
 
   const paletteEl = h("div", { class: "palette" });
@@ -1495,6 +1515,7 @@ export async function renderBuilder(view, journeyId) {
     templatesBtn.disabled = locked;
     publishBtn.disabled = !(state.meta.draftId && (state.meta.status === "Draft" || state.meta.status === "Stopped"));
     runLink.style.display = state.meta.status === "Published" ? "" : "none";
+    scriptBtn.style.display = state.meta.draftId ? "" : "none";
     syncInsights();
   };
 

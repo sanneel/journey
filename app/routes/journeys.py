@@ -205,6 +205,29 @@ def duplicate_journey(
     return result
 
 
+@router.get("/journeys/{journey_id}/console-script")
+def journey_console_script(
+    journey_id: str,
+    publish: bool = True,
+    session: Session = Depends(get_session),
+):
+    """A paste-able browser console script that recreates this journey —
+    the operators' journey-cloner workflow, generated from the canvas.
+    Every download mints fresh internal ids."""
+    from fastapi.responses import Response
+
+    from ..console_script import render_console_script
+
+    journey = _get_journey(session, journey_id)
+    script = render_console_script(journey, publish=publish)
+    filename = f"{journey.journey_id}_console.js"
+    return Response(
+        script,
+        media_type="application/javascript; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
 @router.get("/activities/catalog")
 def activities_catalog():
     return {"palette": palette()}
