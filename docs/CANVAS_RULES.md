@@ -57,8 +57,9 @@ must respect them — change the rule first, then the code.
 4.1 A node is a 220px card: colour-coded **icon chip** + display name in
     the header; wire `activityName` + wiring status in the body.
 4.2 The chip colour and icon come from the palette **category** (the
-    single source of truth in `app.js`): Source ▶, Flow ⇄, Comms ✉,
-    Delays ◷, Connectors ∞, Promotion ✦, Conditions ◈, Rewards ★.
+    single source of truth in `app.js`). Icons are **drawn SVGs** in one
+    family — 16px grid, 1.5px rounded stroke, `currentColor` — never
+    unicode glyphs or emoji.
 4.3 **Terminals are pills**, not cards — `end_of_path` / `end_of_journey`
     carry no config and render as compact 148px capsules.
 4.4 A non-terminal node with **zero wired completions** shows an amber

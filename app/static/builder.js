@@ -8,7 +8,7 @@
  * with canvas positions + activitiesConfiguration).
  */
 import {
-  api, errText, getPalette, specFor, CATEGORY_COLORS, h, toast,
+  api, errText, getPalette, specFor, CATEGORY_COLORS, categoryIcon, h, toast,
 } from "./app.js";
 
 /* rule 5.4 — spacing constants live here */
@@ -17,19 +17,6 @@ const TERM_W = 148, TERM_H = 36;
 const COL_GAP = 56, ROW_GAP = 104;
 const GRID = 8, TOP = 48, AXIS_X = 640;
 const ZOOM_STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3];
-
-/* rule 4.2 — category icons */
-const ICONS = {
-  "Input Source": "▶",
-  "Flow control": "⇄",
-  "Communication": "✉",
-  "Delays": "◷",
-  "Connectors": "∞",
-  "Promotion type": "✦",
-  "Conditions": "◈",
-  "Reward type": "★",
-  "Terminals": "■",
-};
 
 /* rule 3.4 — edge semantics derived from the event name */
 const FAIL_RE = /Expired|Unsatisfied|Failed|NotSent|NotIssued|Canceled|Cancelled|Lost|Forfeited|Aborted|Terminated|NotAdded|NotReceived|NotUsed|NotComplied/;
@@ -330,21 +317,28 @@ function render() {
 function renderNodes() {
   const canvas = state.els.canvas;
   canvas.querySelectorAll(".node").forEach((el) => el.remove());
+  canvas.querySelector(".canvas-empty")?.remove();
+  if (!state.nodes.size) {
+    canvas.append(h("div", { class: "canvas-empty" },
+      h("strong", {}, "Empty canvas"),
+      h("div", {}, "Pick a shape from Templates, or add an Input Source from the palette to admit players.")));
+  }
   for (const node of state.nodes.values()) {
     const spec = nodeSpec(node);
     const color = CATEGORY_COLORS[spec?.category] || "var(--faint)";
-    const icon = ICONS[spec?.category] || "●";
     const size = nodeSize(node);
     const selected = state.selection === node.activityId ? " selected" : "";
 
     let el;
     if (spec?.kind === "terminal") {
+      const chip = h("span", { class: "chip", style: `color:${color}` });
+      chip.append(categoryIcon(spec?.category));
       el = h("div", {
         class: `node terminal${selected}`,
         style: `left:${node.x}px; top:${node.y}px`,
         "data-id": node.activityId,
       },
-        h("span", { class: "chip", style: `color:${color}` }, icon),
+        chip,
         h("span", { class: "node-title" },
           node.activityName === "end_of_journey" ? "End of journey" : "End of path"),
         h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
@@ -354,15 +348,20 @@ function renderNodes() {
       const completions = node.events.filter((event) => event.eventType !== "Boundary").length;
       /* rule 4.4 — warn when nothing is wired */
       const warn = wired === 0 && completions > 0;
+      const chip = h("span", {
+        class: "chip",
+        style: `color:${color}; background:color-mix(in srgb, ${color} 16%, transparent)`,
+      });
+      chip.append(categoryIcon(spec?.category));
       el = h("div", {
         class: `node${selected}`,
         style: `left:${node.x}px; top:${node.y}px`,
         "data-id": node.activityId,
       },
         h("div", { class: "node-head" },
-          h("span", { class: "chip", style: `color:${color}; background:color-mix(in srgb, ${color} 16%, transparent)` }, icon),
+          chip,
           h("span", { class: "node-title" }, node.displayName),
-          warn ? h("span", { class: "warn-dot", title: "no outgoing transition wired" }) : null),
+          warn ? h("span", { class: "warn-dot", title: "No outgoing transition wired — validation will fail" }) : null),
         h("div", { class: "node-body" },
           h("div", { class: "node-type" }, node.activityName),
           h("div", { class: "node-hint" }, `${wired}/${completions} events wired`)),
@@ -727,8 +726,10 @@ export async function renderBuilder(view, journeyId) {
   for (const group of state.palette) {
     paletteEl.append(h("h3", {}, group.category));
     for (const item of group.activities) {
+      const icon = categoryIcon(group.category);
+      icon.style.color = CATEGORY_COLORS[group.category];
       const button = h("button", { class: "palette-item", title: item.activityName },
-        h("span", { class: "dot", style: `background:${CATEGORY_COLORS[group.category]}` }),
+        icon,
         item.label,
         h("span", { class: "wire" }, item.kind));
       button.addEventListener("click", () => {

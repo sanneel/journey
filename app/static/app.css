@@ -8,8 +8,8 @@
   --line: #232a38;
   --line-strong: #2f3949;
   --text: #e8ecf4;
-  --muted: #8b94a7;
-  --faint: #5b6474;
+  --muted: #9aa4b8;
+  --faint: #7d8699;
   --accent: #5b8cff;
   --accent-soft: rgba(91, 140, 255, 0.14);
   --violet: #8b5cf6;
@@ -42,6 +42,23 @@ body {
   color: var(--text);
   font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow: hidden;
+}
+
+/* browser surfaces carry the design too */
+::selection { background: rgba(91, 140, 255, 0.32); }
+input, textarea { caret-color: var(--accent); }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.mono, table.list td, .node-hint, .zoom-label { font-variant-numeric: tabular-nums; }
+
+.icon { display: inline-grid; place-items: center; flex: none; }
+.icon svg { width: 15px; height: 15px; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
 /* ── chrome ── */
@@ -107,9 +124,10 @@ main { height: calc(100vh - 52px); overflow: auto; }
   font-weight: 550;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.12s, border-color 0.12s, opacity 0.12s;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s, transform 0.1s;
 }
 .btn:hover { background: var(--panel-3); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn.primary:hover { filter: brightness(1.1); }
@@ -185,17 +203,27 @@ table.list tr.rowlink:hover td { background: var(--panel-2); }
 /* ── toasts ── */
 #toast-root { position: fixed; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px; z-index: 90; }
 .toast {
+  position: relative;
   background: var(--panel-3);
   border: 1px solid var(--line-strong);
-  border-left: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 10px 14px 10px 30px;
   box-shadow: var(--shadow);
   max-width: 380px;
   animation: toast-in 0.18s ease-out;
 }
-.toast.err { border-left-color: var(--danger); }
-.toast.ok { border-left-color: var(--ok); }
+.toast::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 17px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.toast.err::before { background: var(--danger); }
+.toast.ok::before { background: var(--ok); }
 @keyframes toast-in { from { transform: translateY(8px); opacity: 0; } }
 
 /* ── builder layout ── */
@@ -293,7 +321,6 @@ table.list tr.rowlink:hover td { background: var(--panel-2); }
   text-align: left;
 }
 .palette-item:hover { background: var(--panel-2); border-color: var(--line); }
-.palette-item .dot { width: 8px; height: 8px; border-radius: 3px; flex: none; }
 .palette-item .wire { margin-left: auto; color: var(--faint); font-size: 10.5px; font-family: ui-monospace, Menlo, monospace; }
 
 /* ── canvas (rules in docs/CANVAS_RULES.md) ── */
@@ -307,6 +334,18 @@ table.list tr.rowlink:hover td { background: var(--panel-2); }
   background-size: 24px 24px;
 }
 .canvas svg.edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.canvas-empty {
+  position: absolute;
+  left: 530px;
+  top: 120px;
+  width: 260px;
+  text-align: center;
+  color: var(--faint);
+  font-size: 13px;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.canvas-empty strong { display: block; color: var(--muted); margin-bottom: 4px; }
 .edge-path { fill: none; stroke-width: 1.7; }
 .edge-path.neutral { stroke: var(--edge-neutral); }
 .edge-path.ok { stroke: var(--edge-ok); }

@@ -81,7 +81,7 @@ export async function renderRun(view, journeyId) {
   const eventProps = h("textarea", { class: "input", rows: "3" });
   eventProps.value = '{"amount": 15000, "currencyCode": "CLP"}';
   const eventPlayer = h("input", { class: "input", placeholder: "player id", value: "player-1" });
-  const sendEventBtn = h("button", { class: "btn", style: "width:100%; justify-content:center" }, "Ingest event");
+  const sendEventBtn = h("button", { class: "btn", style: "width:100%; justify-content:center" }, "Send event");
   sendEventBtn.addEventListener("click", async () => {
     try {
       const result = await api("POST", "/platform/v0/events", {
@@ -91,8 +91,8 @@ export async function renderRun(view, journeyId) {
       });
       const resolved = result.resolved.length
         ? result.resolved.map((r) => r.completion).join(", ")
-        : "nothing waiting on it";
-      toast(`Event ingested — ${resolved}`, result.resolved.length ? "ok" : "");
+        : "nothing was waiting on it";
+      toast(`Event sent — ${resolved}`, result.resolved.length ? "ok" : "");
       refresh();
     } catch (error) {
       toast(errText(error), "err");

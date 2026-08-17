@@ -93,6 +93,30 @@ export const CATEGORY_COLORS = {
   "Terminals": "var(--cat-terminal)",
 };
 
+/* One drawn icon per palette category — single 1.5px stroke family,
+ * 16px grid, currentColor. */
+const ICON_PATHS = {
+  "Input Source": '<path d="M5 3.5 12.5 8 5 12.5z"/>',
+  "Flow control": '<path d="M3 8h4m0 0 3-4.5H14M7 8l3 4.5H14"/><path d="M11.5 2 14 3.5 11.5 5M11.5 11 14 12.5 11.5 14"/>',
+  "Communication": '<rect x="2.5" y="4" width="11" height="8.5" rx="1.5"/><path d="m3 4.8 5 4 5-4"/>',
+  "Delays": '<circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2.2 1.4"/>',
+  "Connectors": '<path d="M6.5 9.5 9.5 6.5M5 11l-1.2 1.2a2.4 2.4 0 0 1-3.4-3.4L3.6 5.6M12.4 10.4l3.2-3.2a2.4 2.4 0 0 0-3.4-3.4L11 5" transform="translate(0 0.5)"/>',
+  "Promotion type": '<path d="M2.5 8.5 8 3h5v5l-5.5 5.5a1.4 1.4 0 0 1-2 0l-3-3a1.4 1.4 0 0 1 0-2z"/><circle cx="10.5" cy="5.5" r="0.9"/>',
+  "Conditions": '<path d="M8 2.5 13.5 8 8 13.5 2.5 8z"/>',
+  "Reward type": '<path d="m8 2.8 1.6 3.3 3.6.5-2.6 2.5.6 3.6L8 11l-3.2 1.7.6-3.6L2.8 6.6l3.6-.5z"/>',
+  "Terminals": '<rect x="4" y="4" width="8" height="8" rx="1.2"/>',
+};
+
+export function categoryIcon(category) {
+  const paths = ICON_PATHS[category] || ICON_PATHS["Terminals"];
+  const span = document.createElement("span");
+  span.className = "icon";
+  span.innerHTML =
+    `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" ` +
+    `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+  return span;
+}
+
 /* ── journeys list ── */
 async function renderJourneys(view) {
   view.innerHTML = "";

@@ -8,3 +8,6 @@ journey.db
 *.db
 .pytest_cache/
 .coverage
+node_modules/
+.claude/skills/impeccable/scripts/package.json
+.claude/skills/impeccable/scripts/package-lock.json
