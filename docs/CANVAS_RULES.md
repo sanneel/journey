@@ -26,11 +26,15 @@ must respect them — change the rule first, then the code.
 
 ## 3. Edges
 
-3.1 An edge is a vertical cubic Bézier: straight out of the bottom port,
-    straight into the top port (`C x1,y1+d  x2,y2-d`, `d = clamp(gap/2,
-    40, 120)`).
-3.2 An edge that must travel **upward** (a loop back) bows around the
-    side with a horizontal offset instead of cutting through nodes.
+3.1 An edge is an **orthogonal connector** — a plain flowchart line, no
+    curves: straight down out of the out-port, one horizontal run, then
+    straight down into the in-port (`M x1,y1 V ym H x2 V y2`). Corners
+    are square. The horizontal run sits at the vertical midpoint of the
+    gap; sibling edges leaving the same node stagger their runs by 12px
+    so horizontals never overlap.
+3.2 An edge that must travel **upward** (a loop back) routes
+    orthogonally around the left side of both nodes instead of cutting
+    through them.
 3.3 Every edge ends in an **arrowhead** at the in-port.
 3.4 Edge colour is **semantic**, derived from the event name:
     - *success* (`Satisfied|Accepted|Success|Sent(?!.*Not)|Completed|

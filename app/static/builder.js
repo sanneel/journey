@@ -457,7 +457,8 @@ function renderEdges() {
   svg.append(defs);
 
   for (const node of state.nodes.values()) {
-    for (const [anchorIndex, anchor] of outAnchors(node).entries()) {
+    const anchors = outAnchors(node);
+    for (const [anchorIndex, anchor] of anchors.entries()) {
       const event = anchor.event;
       const target = state.nodes.get(event.nextActivityId);
       const targetSize = nodeSize(target);
@@ -465,22 +466,21 @@ function renderEdges() {
       const p3 = { x: target.x + targetSize.w / 2, y: target.y };  /* rule 2.1 */
       const semantics = edgeSemantics(event.eventName);
 
-      let p1, p2;
+      let d;
       if (p3.y > p0.y + 20) {
-        /* rule 3.1 — vertical bezier, straight out / straight in */
-        const d = Math.min(120, Math.max(40, (p3.y - p0.y) / 2));
-        p1 = { x: p0.x, y: p0.y + d };
-        p2 = { x: p3.x, y: p3.y - d };
+        /* rule 3.1 — orthogonal connector; sibling runs staggered 12px */
+        let ym = p0.y + (p3.y - p0.y) / 2
+          + (anchorIndex - (anchors.length - 1) / 2) * 12;
+        ym = Math.max(p0.y + 14, Math.min(ym, p3.y - 12));
+        d = `M ${p0.x} ${p0.y} V ${ym} H ${p3.x} V ${p3.y}`;
       } else {
-        /* rule 3.2 — upward edge bows around the side */
-        const side = Math.min(p0.x, p3.x) - 180;
-        p1 = { x: side, y: p0.y + 80 };
-        p2 = { x: side, y: p3.y - 80 };
+        /* rule 3.2 — upward edge routes around the left side */
+        const side = Math.min(node.x, target.x) - 60;
+        d = `M ${p0.x} ${p0.y} V ${p0.y + 16} H ${side} V ${p3.y - 20} H ${p3.x} V ${p3.y}`;
       }
 
       const path = document.createElementNS(ns, "path");
-      path.setAttribute("d",
-        `M ${p0.x} ${p0.y} C ${p1.x} ${p1.y}, ${p2.x} ${p2.y}, ${p3.x} ${p3.y}`);
+      path.setAttribute("d", d);
       path.setAttribute("class",
         `edge-path ${semantics}${event.eventType === "Boundary" ? " boundary" : ""}`);
       path.setAttribute("marker-end", `url(#arr-${semantics})`);
