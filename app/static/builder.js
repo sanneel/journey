@@ -12,9 +12,9 @@ import {
 } from "./app.js";
 
 /* rule 5.4 — spacing constants live here */
-const NODE_W = 220, NODE_H = 78;
+const NODE_W = 232, NODE_H = 102;
 const TERM_W = 148, TERM_H = 36;
-const COL_GAP = 56, ROW_GAP = 104;
+const COL_GAP = 56, ROW_GAP = 116;
 const GRID = 8, TOP = 48, AXIS_X = 640;
 const ZOOM_STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3];
 
@@ -28,6 +28,165 @@ function edgeSemantics(eventName) {
 }
 
 const snap = (value) => Math.round(value / GRID) * GRID;
+
+/* ── human-readable config summaries (rule 4.1: a node shows its
+ *    decision content, not its JSON) ── */
+function humanizeIso(iso) {
+  if (!iso || typeof iso !== "string") return null;
+  const match = iso.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?/);
+  if (!match) return null;
+  const [, years, months, days, hours, minutes, seconds] = match.map((v) => Number(v) || 0);
+  const totalDays = years * 365 + months * 30 + days;
+  if (totalDays >= 1) return `${totalDays} day${totalDays > 1 ? "s" : ""}`;
+  if (hours >= 1) return `${hours} h`;
+  if (minutes >= 1) return `${minutes} min`;
+  if (seconds >= 1) return `${seconds} s`;
+  return "instant";
+}
+
+function humanizeMs(ms) {
+  if (typeof ms !== "number" || ms <= 0) return null;
+  const hours = ms / 3600000;
+  if (hours >= 48) return `${Math.round(hours / 24)} days`;
+  if (hours >= 1) return `${Math.round(hours)} h`;
+  return `${Math.round(ms / 60000)} min`;
+}
+
+const OP_SYMBOLS = { gte: "≥", gt: ">", lte: "≤", lt: "<", eq: "=", neq: "≠" };
+
+function nodeSummary(node) {
+  const init = node.init || {};
+  switch (node.activityName) {
+    case "external_system_source":
+      return { headline: init.targetSystem || "External system", sub: "webhook entry" };
+    case "dwh_source":
+      return {
+        headline: init.currentTemplate?.name || init.dataSourceName || "Segment",
+        sub: "segment audience",
+      };
+    case "registration": {
+      const codes = init.promocodeSettings?.refCodes || [];
+      return {
+        headline: codes.length ? codes.join(", ") : "Any reference code",
+        sub: "registration entry",
+      };
+    }
+    case "promotion":
+    case "multipurpose_promotion": {
+      const window = humanizeIso(init.timeToAccept);
+      return {
+        headline: init.autoAccept ? "Auto-accepted offer" : "Offer — manual accept",
+        sub: !init.autoAccept && window ? `${window} to accept` : "granted on arrival",
+      };
+    }
+    case "deposit": {
+      const minimum = init.depositConditions?.minDepositAmounts?.[0];
+      const window = humanizeIso(init.depositConditions?.expirationTimeout);
+      return {
+        headline: minimum
+          ? `≥ $${Math.round((minimum.amount || 0) / 100)} ${minimum.currencyCode || ""}`.trim()
+          : "Any deposit",
+        sub: window ? `${window} window` : "no time limit",
+      };
+    }
+    case "sport_bet_condition":
+      return {
+        headline: init.minBetAmount ? `Bet ≥ $${Math.round(init.minBetAmount / 100)}` : "Any bet",
+        sub: init.minOdd ? `odds ≥ ${init.minOdd}` : "any odds",
+      };
+    case "wait_interval":
+      return { headline: humanizeIso(init.waitPeriod) || "No delay", sub: "then continue" };
+    case "wait_date":
+      return {
+        headline: init.waitTo ? init.waitTo.slice(0, 10) : "Date not set",
+        sub: "wait until date",
+      };
+    case "event_detector": {
+      const option = init.properties?.subscriptionOptions?.[0];
+      const window = humanizeIso(init.properties?.startingOptions?.durationTime);
+      return {
+        headline: option?.event?.eventName || "No event chosen",
+        sub: window ? `within ${window}` : "no window",
+        mono: true,
+      };
+    }
+    case "freespin_bonus": {
+      const spins = init.freespinActivity?.spins;
+      const expiry = humanizeMs(init.freespinActivity?.spinsExpirationDuration);
+      return {
+        headline: spins ? `${spins} free spins` : "Free spins",
+        sub: [init.freespinActivity?.provider, expiry && `valid ${expiry}`]
+          .filter(Boolean).join(" · "),
+      };
+    }
+    case "casino_bonus_v2":
+      return {
+        headline: init.bonusPercent ? `${init.bonusPercent}% match bonus` : "Casino bonus",
+        sub: [
+          init.wageringRequirement && `x${init.wageringRequirement} wagering`,
+          humanizeMs(init.bonusExpirationTime),
+        ].filter(Boolean).join(" · "),
+      };
+    case "freebet":
+      return { headline: "Sport freebet", sub: "issued to player" };
+    case "sport_bonus":
+      return { headline: "Sport bonus", sub: "wagering bonus" };
+    case "notification_center":
+      return {
+        headline: init.contract === 5 ? "Pop-up message" : "Bell notification",
+        sub: Object.keys(init.templates || {}).length
+          ? `templates: ${Object.keys(init.templates).join(", ")}`
+          : "on-site message",
+      };
+    case "dextra_sms": {
+      const text = init.rawValues?.messageText;
+      return {
+        headline: text ? `“${text.length > 26 ? text.slice(0, 26) + "…" : text}”` : "SMS message",
+        sub: "SMS",
+      };
+    }
+    case "dextra_email":
+      return {
+        headline: init.emailSettings?.contentId || "Email",
+        sub: "email send",
+        mono: Boolean(init.emailSettings?.contentId),
+      };
+    case "native_push":
+      return { headline: "Native push", sub: "push notification" };
+    case "ams_decision_split": {
+      const rule = init.rules?.[0];
+      const property = rule?.filter?.property;
+      return {
+        headline: property
+          ? `${property.name} ${OP_SYMBOLS[property.operator] || property.operator} ${property.value}`
+          : "No rules yet",
+        sub: `${init.rules?.length || 0} rule${(init.rules?.length || 0) === 1 ? "" : "s"} + remainder`,
+        mono: Boolean(property),
+      };
+    }
+    case "random_split": {
+      const paths = init.paths || [];
+      return {
+        headline: paths.map((p) => `${p.probability}%`).join(" / ") || "No paths",
+        bar: paths.map((p) => Number(p.probability) || 0),
+      };
+    }
+    case "notification_center_engagement_split":
+    case "email_engagement_split": {
+      const paths = init.properties?.paths || [];
+      return {
+        headline: paths.map((p) => p.pathName).filter(Boolean).join(" / ") || "No paths",
+        sub: node.activityName.startsWith("email") ? "email engagement" : "on-site engagement",
+      };
+    }
+    case "campaign_connector": {
+      const host = init.campaignConnectorConditions?.activityData?.HostJourneyId;
+      return { headline: host || "No journey linked", sub: "sends player to journey", mono: Boolean(host) };
+    }
+    default:
+      return { headline: node.activityName, sub: "" };
+  }
+}
 
 /* starter initializationData per type, so a fresh node is runnable */
 const STARTERS = {
@@ -282,26 +441,54 @@ function autoLayout() {
   }
 
   let y = TOP;
-  for (const layer of [...layers.keys()].sort((a, b) => a - b)) {
+  const sorted = [...layers.keys()].sort((a, b) => a - b);
+  for (const layer of sorted) {
     const row = layers.get(layer);
+    const parentCenter = (node) => {
+      const parents = parentsOf.get(node.activityId)
+        .filter((parent) => (layerOf.get(parent.activityId) ?? 0) < layer);
+      if (!parents.length) return null;
+      return parents.reduce((sum, parent) => sum + parent.x + nodeSize(parent).w / 2, 0) / parents.length;
+    };
     if (layer > 0) {
-      const barycenter = (node) => {
-        const parents = parentsOf.get(node.activityId)
-          .filter((parent) => (layerOf.get(parent.activityId) ?? 0) < layer);
-        if (!parents.length) return Number.MAX_SAFE_INTEGER;
-        return parents.reduce((sum, parent) => sum + parent.x + nodeSize(parent).w / 2, 0) / parents.length;
-      };
-      row.sort((a, b) => barycenter(a) - barycenter(b));
+      row.sort((a, b) =>
+        (parentCenter(a) ?? Number.MAX_SAFE_INTEGER) - (parentCenter(b) ?? Number.MAX_SAFE_INTEGER));
     }
-    const total = row.reduce((sum, node) => sum + nodeSize(node).w, 0)
-      + COL_GAP * (row.length - 1);
-    let x = Math.max(24, AXIS_X - total / 2);
     const rowHeight = Math.max(...row.map((node) => nodeSize(node).h));
-    for (const node of row) {
-      const size = nodeSize(node);
-      node.x = snap(x);
-      node.y = snap(y + (rowHeight - size.h) / 2);
-      x += size.w + COL_GAP;
+    if (layer === sorted[0]) {
+      /* first layer: center the row on the axis */
+      const total = row.reduce((sum, node) => sum + nodeSize(node).w, 0)
+        + COL_GAP * (row.length - 1);
+      let x = Math.max(24, AXIS_X - total / 2);
+      for (const node of row) {
+        node.x = snap(x);
+        node.y = snap(y + (rowHeight - nodeSize(node).h) / 2);
+        x += nodeSize(node).w + COL_GAP;
+      }
+    } else {
+      /* deeper layers: place each node under the mean of its parents so
+       * single chains run straight; sweep right to resolve overlaps,
+       * then shift the row back by the average drift so siblings
+       * straddle their parent instead of staircasing rightward */
+      let minX = 24;
+      const drifts = [];
+      for (const node of row) {
+        const size = nodeSize(node);
+        const center = parentCenter(node);
+        const desired = center === null ? minX : center - size.w / 2;
+        node.x = Math.max(desired, minX);
+        node.y = snap(y + (rowHeight - size.h) / 2);
+        if (center !== null) drifts.push(node.x - desired);
+        minX = node.x + size.w + COL_GAP;
+      }
+      if (drifts.length) {
+        const shift = Math.min(
+          drifts.reduce((a, b) => a + b, 0) / drifts.length,
+          row[0].x - 24,
+        );
+        if (shift > 0) for (const node of row) node.x -= shift;
+      }
+      for (const node of row) node.x = snap(node.x);
     }
     y += rowHeight + ROW_GAP;
   }
@@ -353,6 +540,22 @@ function renderNodes() {
         style: `color:${color}; background:color-mix(in srgb, ${color} 16%, transparent)`,
       });
       chip.append(categoryIcon(spec?.category));
+
+      const summary = nodeSummary(node);
+      const body = h("div", { class: "node-body" },
+        h("div", { class: `node-headline${summary.mono ? " mono-line" : ""}` }, summary.headline));
+      if (summary.bar) {
+        const bar = h("div", { class: "node-bar" });
+        summary.bar.forEach((weight, index) => {
+          bar.append(h("span", {
+            style: `flex:${Math.max(weight, 1)}; background:${color}; opacity:${[0.9, 0.55, 0.32][index % 3]}`,
+          }));
+        });
+        body.append(bar);
+      } else if (summary.sub) {
+        body.append(h("div", { class: "node-sub" }, summary.sub));
+      }
+
       el = h("div", {
         class: `node${selected}`,
         style: `left:${node.x}px; top:${node.y}px`,
@@ -362,9 +565,10 @@ function renderNodes() {
           chip,
           h("span", { class: "node-title" }, node.displayName),
           warn ? h("span", { class: "warn-dot", title: "No outgoing transition wired — validation will fail" }) : null),
-        h("div", { class: "node-body" },
-          h("div", { class: "node-type" }, node.activityName),
-          h("div", { class: "node-hint" }, `${wired}/${completions} events wired`)),
+        body,
+        h("div", { class: "node-meta" },
+          h("span", { class: "node-type" }, node.activityName),
+          h("span", {}, `${wired}/${completions} wired`)),
         h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
         ...portDots(node, color),
       );

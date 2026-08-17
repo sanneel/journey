@@ -11,8 +11,10 @@ must respect them — change the rule first, then the code.
     sources). Auto-layout places layer *L* at
     `y = TOP + L * (NODE_H + ROW_GAP)`.
 1.3 Within a layer, nodes are ordered by the **barycenter** (average
-    horizontal position) of their parents — fewer edge crossings — and
-    the whole layer is centered on the canvas axis.
+    horizontal position) of their parents. The first layer is centered
+    on the canvas axis; every deeper node is placed **under the mean of
+    its parents** (overlaps resolved by sweeping right), so single
+    chains run perfectly straight.
 1.4 Manual drags are respected: auto-layout never runs implicitly on a
     journey that already has saved positions. It is a button.
 
@@ -54,8 +56,13 @@ must respect them — change the rule first, then the code.
 
 ## 4. Nodes
 
-4.1 A node is a 220px card: colour-coded **icon chip** + display name in
-    the header; wire `activityName` + wiring status in the body.
+4.1 A node is a 232px card with three zones: header (colour-coded
+    **icon chip** + display name), a **designed summary** derived from
+    `initializationData` — the node's decision content leads: the
+    deposit shows its amount and window, the freespin its spin count,
+    the wait its duration, the split its first rule or a probability
+    bar — and a meta strip (wire `activityName` + wiring status).
+    Config values render as content, never as raw JSON.
 4.2 The chip colour and icon come from the palette **category** (the
     single source of truth in `app.js`). Icons are **drawn SVGs** in one
     family — 16px grid, 1.5px rounded stroke, `currentColor` — never
@@ -73,8 +80,8 @@ must respect them — change the rule first, then the code.
 5.3 Zoom: 50–130% in 10% steps via toolbar buttons; drag math is
     zoom-corrected. Reset shows 100%.
 5.4 Spacing constants live in one place (`builder.js` top):
-    `NODE_W 220, NODE_H 78, TERM_W 148, TERM_H 36, COL_GAP 56,
-    ROW_GAP 104, GRID 8`.
+    `NODE_W 232, NODE_H 102, TERM_W 148, TERM_H 36, COL_GAP 56,
+    ROW_GAP 116, GRID 8`.
 
 ## 6. Colour
 
