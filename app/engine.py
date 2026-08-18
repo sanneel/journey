@@ -30,6 +30,8 @@ from sqlalchemy.orm import Session
 
 from . import metrics
 from .catalog import SOURCE_TYPES, spec_for
+from .compliance import active_exclusion, frequency_cap_hit, quiet_hours_release
+from .config import settings
 from .connectors import deliver_comms, deliver_reward
 from .durations import parse_iso_duration, parse_timestamp, utcnow
 from .ids import new_webhook_id
@@ -206,6 +208,12 @@ class Engine:
             raise EngineError(
                 "journey-not-publishable", f"status is {journey.status}"
             )
+        if settings.require_approval and journey.approval_state != "Approved":
+            raise EngineError(
+                "journey-not-approved",
+                "approval is required: submit for review and have a second "
+                "person approve before publishing",
+            )
         webhooks = self.register_webhooks(journey)
         journey.status = "Published"
         journey.version += 1
@@ -290,13 +298,22 @@ class Engine:
                 f"{entry_activity_id} is not an Input Source of {journey.journey_id}",
             )
 
+        exclusion = active_exclusion(self.session, player_id)
+        if exclusion is not None:
+            metrics.inc("journey_entries_blocked_total")
+            raise EngineError(
+                "player-excluded",
+                f"{player_id} is on the exclusion list ({exclusion.reason}); "
+                "excluded players cannot enter any journey",
+            )
         self._check_reentry(journey, player_id)
-        self._ensure_player(player_id, journey.brand)
+        player = self._ensure_player(player_id, journey.brand)
 
         activation = JourneyActivation(
             journey_id=journey.journey_id,
             player_id=player_id,
             journey_version=journey.version,
+            is_test=player.is_test,
             entry_activity_id=entry_activity_id,
             current_activity_id=entry_activity_id,
             context=context or {},
@@ -498,6 +515,9 @@ class Engine:
             activity_id=activity["activityId"],
             player_id=activation.player_id,
             promotion_display_id=init.get("promotionDisplayId"),
+            # significant terms travel with the offer so any front end
+            # can show them next to the "free" (regulators require it)
+            terms=init.get("terms") or init.get("termsAndConditions"),
         )
         self.session.add(offer)
         self.session.flush()
@@ -573,10 +593,69 @@ class Engine:
             activity_id=activity["activityId"],
             channel=spec.get("channel", "onsite"),
             status="Sent",
+            is_test=activation.is_test,
             body=body,
         )
         self.session.add(message)
         self.session.flush()
+
+        # compliance gates run before anything leaves the building
+        exclusion = active_exclusion(self.session, message.player_id)
+        if exclusion is not None:
+            message.status = "Suppressed"
+            message.delivery_detail = f"suppressed: player excluded ({exclusion.reason})"
+            metrics.inc("journey_comms_suppressed_total")
+            return (
+                "move",
+                spec["happy_path"],
+                f"{message.channel} message #{message.id} suppressed — "
+                f"player is on the exclusion list",
+            )
+        cap = frequency_cap_hit(
+            self.session, message.player_id, message.channel,
+            exclude_message_id=message.id,
+        )
+        if cap is not None:
+            message.status = "Suppressed"
+            message.delivery_detail = f"suppressed: frequency cap {cap}/24h on {message.channel}"
+            metrics.inc("journey_comms_suppressed_total")
+            return (
+                "move",
+                spec["happy_path"],
+                f"{message.channel} message #{message.id} suppressed — "
+                f"frequency cap ({cap} per 24h) reached",
+            )
+        release_at = quiet_hours_release(self.session, message.channel)
+        if release_at is not None:
+            message.status = "Held"
+            message.delivery_detail = (
+                f"held: quiet hours — release at {release_at.isoformat(timespec='minutes')}"
+            )
+            self.session.add(
+                Timer(
+                    activation_id=activation.id,
+                    activity_id=message.activity_id,
+                    kind="comms_release",
+                    due_at=release_at,
+                    payload={"messageId": message.id},
+                )
+            )
+            metrics.inc("journey_comms_held_total")
+            return (
+                "move",
+                spec["happy_path"],
+                f"{message.channel} message #{message.id} held until quiet "
+                f"hours end ({release_at.strftime('%H:%M')} UTC)",
+            )
+        if activation.is_test:
+            message.delivery_detail = "test player — not delivered to platform"
+            metrics.inc("journey_comms_delivered_total")
+            return (
+                "move",
+                spec["happy_path"],
+                f"{message.channel} message #{message.id} — test player, "
+                "delivery skipped",
+            )
 
         result = deliver_comms(
             message_id=message.id,
@@ -608,6 +687,11 @@ class Engine:
         target = {"show": "Shown", "read": "Read", "click": "Clicked"}.get(action)
         if target is None:
             raise EngineError("unknown-engagement-action", action)
+        if message.status not in ladder:
+            raise EngineError(
+                "message-not-engageable",
+                f"message #{message.id} is {message.status} — it was never delivered",
+            )
         if ladder.index(target) > ladder.index(message.status):
             message.status = target
             message.engaged_at = utcnow()
@@ -657,25 +741,20 @@ class Engine:
             activity_id=activity["activityId"],
             reward_type=name,
             detail=detail,
+            is_test=activation.is_test,
             expires_at=expires_at,
         )
         self.session.add(grant)
         self.session.flush()
 
-        result = deliver_reward(
-            grant_id=grant.id,
-            reward_type=name,
-            player_id=grant.player_id,
-            journey_id=grant.journey_id,
-            activity_id=grant.activity_id,
-            detail=detail,
-            expires_at=expires_at.isoformat() if expires_at else None,
-        )
-        grant.delivery_attempts = result.attempts
-        grant.delivery_detail = result.detail
-        if not result.ok:
-            grant.status = "Failed"
-            metrics.inc("journey_rewards_failed_total")
+        # awarding a bonus to an excluded player is prohibited — the grant
+        # is suppressed and the token takes the activity's failure path,
+        # exactly as if the platform had rejected it
+        exclusion = active_exclusion(self.session, grant.player_id)
+        if exclusion is not None:
+            grant.status = "Suppressed"
+            grant.delivery_detail = f"suppressed: player excluded ({exclusion.reason})"
+            metrics.inc("journey_rewards_suppressed_total")
             failed_boundary = {
                 "freespin_bonus": "FreespinBonusAwardFailed",
                 "casino_bonus_v2": "WageringBonusAwardFailed",
@@ -686,13 +765,49 @@ class Engine:
                     activity["activityId"],
                     failed_boundary,
                     "Boundary",
-                    f"platform rejected grant #{grant.id}: {result.detail}",
+                    f"grant #{grant.id} suppressed — player is on the exclusion list",
                 )
             return (
                 "move",
                 spec.get("failure_path") or "end_of_path",
-                f"{name} delivery failed: {result.detail}",
+                f"{name} suppressed: player excluded ({exclusion.reason})",
             )
+
+        if activation.is_test:
+            grant.delivery_detail = "test player — not delivered to platform"
+            result = None
+        else:
+            result = deliver_reward(
+                grant_id=grant.id,
+                reward_type=name,
+                player_id=grant.player_id,
+                journey_id=grant.journey_id,
+                activity_id=grant.activity_id,
+                detail=detail,
+                expires_at=expires_at.isoformat() if expires_at else None,
+            )
+            grant.delivery_attempts = result.attempts
+            grant.delivery_detail = result.detail
+            if not result.ok:
+                grant.status = "Failed"
+                metrics.inc("journey_rewards_failed_total")
+                failed_boundary = {
+                    "freespin_bonus": "FreespinBonusAwardFailed",
+                    "casino_bonus_v2": "WageringBonusAwardFailed",
+                }.get(name)
+                if failed_boundary:
+                    self._record(
+                        activation,
+                        activity["activityId"],
+                        failed_boundary,
+                        "Boundary",
+                        f"platform rejected grant #{grant.id}: {result.detail}",
+                    )
+                return (
+                    "move",
+                    spec.get("failure_path") or "end_of_path",
+                    f"{name} delivery failed: {result.detail}",
+                )
         metrics.inc("journey_rewards_delivered_total")
 
         if name == "freespin_bonus":
@@ -701,6 +816,8 @@ class Engine:
             granted = f"granted {detail.get('bonusPercent')}% match bonus (grant #{grant.id})"
         else:
             granted = f"granted {name} (grant #{grant.id})"
+        if activation.is_test:
+            granted += " — test player, delivery skipped"
         if spec.get("grant_boundary"):
             self._record(
                 activation,
@@ -1063,6 +1180,44 @@ class Engine:
             self._run(activation, journey, index, next_id)
         self.session.flush()
 
+    def _release_held_message(self, timer: Timer) -> None:
+        """Quiet hours ended: deliver a Held message — unless the player
+        was excluded in the meantime (the wall wins, always)."""
+        message_id = (timer.payload or {}).get("messageId")
+        message = self.session.get(CommsMessage, message_id) if message_id else None
+        if message is None or message.status != "Held":
+            return
+        exclusion = active_exclusion(self.session, message.player_id)
+        if exclusion is not None:
+            message.status = "Suppressed"
+            message.delivery_detail = (
+                f"suppressed at release: player excluded ({exclusion.reason})"
+            )
+            metrics.inc("journey_comms_suppressed_total")
+            return
+        if message.is_test:
+            message.status = "Sent"
+            message.delivery_detail = "released after quiet hours — test player, not delivered"
+            metrics.inc("journey_comms_delivered_total")
+            return
+        result = deliver_comms(
+            message_id=message.id,
+            channel=message.channel,
+            player_id=message.player_id,
+            journey_id=message.journey_id,
+            activity_id=message.activity_id,
+            body=message.body or {},
+        )
+        message.delivery_attempts = result.attempts
+        if result.ok:
+            message.status = "Sent"
+            message.delivery_detail = f"released after quiet hours — {result.detail}"
+            metrics.inc("journey_comms_delivered_total")
+        else:
+            message.status = "Failed"
+            message.delivery_detail = f"released after quiet hours — {result.detail}"
+            metrics.inc("journey_comms_failed_total")
+
     def _deactivate_waiting(self, activation: JourneyActivation) -> None:
         for subscription in (
             self.session.execute(
@@ -1078,7 +1233,10 @@ class Engine:
         for timer in (
             self.session.execute(
                 select(Timer).where(
-                    Timer.activation_id == activation.id, Timer.fired.is_(False)
+                    Timer.activation_id == activation.id,
+                    Timer.fired.is_(False),
+                    # a held message still goes out after the walk ends
+                    Timer.kind != "comms_release",
                 )
             )
             .scalars()
@@ -1319,6 +1477,20 @@ class Engine:
             if claimed.rowcount == 0:
                 continue
             self.session.expire(timer, ["fired"])
+            if timer.kind == "comms_release":
+                # quiet-hours release is not a walk resume — the token has
+                # long moved on (or completed); only the message goes out
+                fired += 1
+                metrics.inc("journey_timers_fired_total")
+                try:
+                    self._release_held_message(timer)
+                except Exception as error:
+                    print(
+                        f"[timer-error] timer={timer.id} "
+                        f"activation={timer.activation_id}: {error!r}",
+                        flush=True,
+                    )
+                continue
             activation = self.session.get(JourneyActivation, timer.activation_id)
             if (
                 activation is None

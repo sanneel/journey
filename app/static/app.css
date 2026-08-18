@@ -202,6 +202,21 @@ label.field > span {
 .badge.Active { color: #2d6c9e; background: rgba(45, 108, 158, 0.1); }
 .badge.Completed { color: var(--felt); background: var(--felt-soft); }
 .badge.Terminated { color: var(--wax); background: var(--wax-soft); }
+.badge.Stopping { color: var(--brass); background: rgba(150, 117, 43, 0.12); }
+/* four-eyes review states */
+.badge.InReview { color: #2d6c9e; background: rgba(45, 108, 158, 0.1); }
+.badge.Approved { color: var(--felt); background: var(--felt-soft); }
+.badge.Rejected { color: var(--wax); background: var(--wax-soft); }
+/* comms delivery states */
+.badge.Held { color: var(--brass); background: rgba(150, 117, 43, 0.12); }
+.badge.Suppressed { color: var(--wax); background: var(--wax-soft); }
+.badge.Failed { color: var(--wax); background: var(--wax-soft); }
+/* test-player rehearsal marker */
+.test-chip {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--brass); border: 1px dashed var(--brass); border-radius: 4px;
+  padding: 1px 6px; vertical-align: 1px;
+}
 
 .card {
   background: var(--card);

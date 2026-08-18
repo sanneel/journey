@@ -124,6 +124,48 @@ Attempts and the final detail are visible on every grant/message
 stand-in platform for rehearsing both paths — including `POST
 /fail-next {"times": N}` to force reds.
 
+## Compliance (P1)
+
+The responsible-gambling layer, enforced **inside the engine** so no API
+path can forget it (manage it at `/compliance/v0` or the Compliance page
+in the UI):
+
+- **Exclusion list** — an active `PlayerExclusion`
+  (self-exclusion / vulnerable / cool-off, optionally expiring) is a
+  hard wall: entry into any journey is refused (`player-excluded`),
+  in-flight comms are `Suppressed`, and rewards are `Suppressed` **and
+  take the activity's failure path** — being on the list mid-journey is
+  honoured too.
+- **Quiet hours** — a UTC window (`{"start": "21:00", "end": "09:00"}`)
+  during which sms / email / push are stored as `Held` and delivered by
+  a release timer when the window ends (on-site messages are exempt).
+  The walk itself is never held up.
+- **Frequency caps** — per-channel sends per player per rolling 24h;
+  beyond the cap the message is `Suppressed` (with the cap in
+  `deliveryDetail`) and the journey continues.
+- **Bonus T&C** — a promotion's `initializationData.terms` travels to
+  the player's offer (`terms` on `/players/{id}/offers`); the validate
+  endpoint returns a non-blocking `promotion-terms-missing` warning for
+  offers without significant terms.
+- **GDPR** — `GET /compliance/v0/players/{id}/export` (full data-subject
+  dump) and `DELETE /compliance/v0/players/{id}` (erasure; the exclusion
+  record is deliberately kept — honouring it is a legal obligation).
+
+## Approval & test players (P9)
+
+- **Four-eyes publishing** — `submit-review` → `approve` / `reject`
+  (the approver must differ from the submitter, `four-eyes-violation`
+  otherwise). With `JOURNEY_REQUIRE_APPROVAL=1`, publish is refused
+  (`journey-not-approved`) until the current body is approved; **any
+  edit voids the approval**. All of it lands in the audit trail
+  (`/journeys/{jrn}/audit`, `/compliance/v0/audit`) along with
+  publish / stop / archive / live-edit / exclusion / policy changes.
+- **Test players** — `POST /platform/v0/players {"isTest": true}` (or
+  the checkbox in the Run view): the player walks published journeys
+  for real — offers, timers, red paths, everything — but deliveries
+  never leave the building (even in webhook mode) and the run is
+  excluded from stats and campaign KPIs (`testRunsExcluded`).
+
 ## Reliability (P4)
 
 Built for more than one process and a flaky network:
@@ -193,11 +235,23 @@ Built for more than one process and a flaky network:
 | DELETE | `/journey-drafts/{draft_id}` | delete a Draft/Archived journey (frees its activity ids) |
 | GET | `/journeys` · `/journeys/{jrn}` | list / read |
 | POST | `/journeys/{jrn}/publish` | compile + register webhooks + go live |
+| POST | `/journeys/{jrn}/submit-review` · `/approve` · `/reject` | four-eyes review flow |
+| GET | `/journeys/{jrn}/audit` | this journey's audit trail |
 | POST | `/journeys/{jrn}/stop` · `/archive` | lifecycle |
 | POST | `/journeys/{jrn}/duplicate` | server-side clone (see ID classes) |
 | GET | `/activities/catalog` | the Tools palette with event vocabulary |
 | GET | `/journey-templates` | ready-made campaign shapes |
 | GET | `/journey-templates/{key}` | instantiate a template (fresh activity ids per call) |
+
+### Compliance — `/compliance/v0`
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET/POST | `/exclusions` · DELETE `/exclusions/{id}` | the exclusion list |
+| GET/PUT | `/policy` | quiet hours + frequency caps |
+| GET | `/audit` | global audit trail |
+| GET | `/players/{id}/export` | GDPR data-subject export |
+| DELETE | `/players/{id}` | GDPR erasure (exclusion record kept) |
 
 ### Promo — `/promo/v0`
 

@@ -207,7 +207,12 @@ async function renderJourneys(view) {
         h("strong", {}, journey.journeyName || "(unnamed)"),
         h("div", { class: "dim small" }, journey.brand)),
       h("td", { class: "mono dim" }, journey.journeyId),
-      h("td", {}, h("span", { class: `badge ${journey.status}` }, journey.status)),
+      h("td", {},
+        h("span", { class: `badge ${journey.status}` }, journey.status),
+        journey.approvalState
+          ? h("span", { class: `badge ${journey.approvalState}`, style: "margin-left:6px" },
+              journey.approvalState === "InReview" ? "In review" : journey.approvalState)
+          : null),
       players,
       h("td", { class: "dim" }, pct(journey.completionRate)),
       h("td", { class: "dim" }, String(journey.rewardGrantsCount)),
@@ -229,6 +234,30 @@ async function renderJourneys(view) {
       act("Run", "primary", async () => { location.hash = `#/run/${journey.journeyId}`; });
       act("Stop", "", () => api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/stop`));
     } else if (journey.status === "Draft" || journey.status === "Stopped") {
+      if (journey.approvalState === "InReview") {
+        act("Approve", "primary", async () => {
+          const approver = prompt("Approver name (must differ from the submitter):");
+          if (!approver) return;
+          await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/approve`,
+            { approvedBy: approver });
+          toast(`${journey.journeyId} approved by ${approver}`, "ok");
+        });
+        act("Reject", "danger", async () => {
+          const reason = prompt("Rejection reason:");
+          if (reason === null) return;
+          await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/reject`,
+            { rejectedBy: "reviewer", reason });
+          toast(`${journey.journeyId} sent back`, "");
+        });
+      } else {
+        act("Submit review", "", async () => {
+          const author = prompt("Submit for review as:", "author");
+          if (!author) return;
+          await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/submit-review`,
+            { requestedBy: author });
+          toast(`${journey.journeyId} waiting for a second pair of eyes`, "ok");
+        }, "Four-eyes: a second person approves before publish");
+      }
       act("Publish", "", async () => {
         await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/publish`);
         toast(`${journey.journeyId} published`, "ok");
@@ -253,6 +282,126 @@ async function renderJourneys(view) {
   renderRows();
 }
 
+/* ── compliance: exclusion list, marketing policy, audit trail ── */
+async function renderCompliance(view) {
+  view.innerHTML = "";
+  const page = h("div", { class: "page" });
+  page.append(h("div", { class: "page-head" },
+    h("h1", {}, "Compliance"),
+    h("div", { class: "spacer" }),
+    h("span", { class: "dim small" }, "enforced by the engine on every entry and every send")));
+  view.append(page);
+
+  const [exclusions, policy, audit] = await Promise.all([
+    api("GET", "/compliance/v0/exclusions"),
+    api("GET", "/compliance/v0/policy"),
+    api("GET", "/compliance/v0/audit?limit=30"),
+  ]);
+
+  /* exclusion list */
+  const exclusionCard = h("div", { class: "card", style: "margin-bottom:14px" });
+  exclusionCard.append(h("h4", { style: "margin-top:0" }, `Exclusion list (${exclusions.items.length})`));
+  if (!exclusions.items.length) {
+    exclusionCard.append(h("div", { class: "dim small" },
+      "Empty. Excluded players cannot enter any journey or receive any message or reward."));
+  }
+  for (const row of exclusions.items) {
+    const line = h("div", { class: "event-item" },
+      h("strong", { class: "mono" }, row.playerId),
+      h("span", { class: `badge ${row.active ? "Terminated" : "Draft"}` },
+        row.active ? row.reason.replace("_", "-") : "expired"),
+      h("span", { class: "dim small", style: "flex:1" },
+        row.expiresAt ? `until ${fmtTime(row.expiresAt)}` : "indefinite",
+        row.note ? ` · ${row.note}` : ""),
+    );
+    const remove = h("button", { class: "btn sm danger" }, "Remove");
+    remove.addEventListener("click", async () => {
+      if (!confirm(`Remove ${row.playerId} from the exclusion list?`)) return;
+      await api("DELETE", `/compliance/v0/exclusions/${encodeURIComponent(row.playerId)}`);
+      renderCompliance(view);
+    });
+    line.append(remove);
+    exclusionCard.append(line);
+  }
+  const exPlayer = h("input", { class: "input", placeholder: "player id", style: "flex:1" });
+  const exReason = h("select", { class: "input", style: "width:150px" },
+    h("option", { value: "self_exclusion" }, "self-exclusion"),
+    h("option", { value: "vulnerable" }, "vulnerable"),
+    h("option", { value: "cool_off" }, "cool-off (24h)"));
+  const exAdd = h("button", { class: "btn" }, "Exclude");
+  exAdd.addEventListener("click", async () => {
+    const playerId = exPlayer.value.trim();
+    if (!playerId) return toast("player id required", "err");
+    const payload = { playerId, reason: exReason.value };
+    if (exReason.value === "cool_off") {
+      payload.expiresAt = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
+    }
+    try {
+      await api("POST", "/compliance/v0/exclusions", payload);
+      toast(`${playerId} excluded`, "ok");
+      renderCompliance(view);
+    } catch (error) { toast(errText(error), "err"); }
+  });
+  exclusionCard.append(h("div", { class: "row", style: "margin-top:10px" }, exPlayer, exReason, exAdd));
+  page.append(exclusionCard);
+
+  /* marketing policy */
+  const quiet = policy.quietHours || {};
+  const caps = policy.frequencyCaps || {};
+  const qStart = h("input", { class: "input", placeholder: "21:00", value: quiet.start || "", style: "width:90px" });
+  const qEnd = h("input", { class: "input", placeholder: "09:00", value: quiet.end || "", style: "width:90px" });
+  const capInputs = {};
+  const capRow = h("div", { class: "row", style: "flex-wrap:wrap; gap:10px" });
+  for (const channel of ["sms", "email", "push", "onsite"]) {
+    capInputs[channel] = h("input", {
+      class: "input", type: "number", min: "0", placeholder: "∞",
+      value: caps[channel] ?? "", style: "width:70px",
+    });
+    capRow.append(h("label", { class: "field", style: "margin:0" },
+      h("span", {}, channel), capInputs[channel]));
+  }
+  const saveBtn = h("button", { class: "btn primary" }, "Save policy");
+  saveBtn.addEventListener("click", async () => {
+    const quietHours = qStart.value.trim() && qEnd.value.trim()
+      ? { start: qStart.value.trim(), end: qEnd.value.trim() }
+      : null;
+    const frequencyCaps = {};
+    for (const [channel, input] of Object.entries(capInputs)) {
+      if (input.value !== "" && Number(input.value) > 0) frequencyCaps[channel] = Number(input.value);
+    }
+    try {
+      await api("PUT", "/compliance/v0/policy", {
+        quietHours,
+        frequencyCaps: Object.keys(frequencyCaps).length ? frequencyCaps : null,
+      });
+      toast("Policy saved", "ok");
+    } catch (error) { toast(errText(error), "err"); }
+  });
+  page.append(h("div", { class: "card", style: "margin-bottom:14px" },
+    h("h4", { style: "margin-top:0" }, "Marketing policy"),
+    h("div", { class: "row", style: "align-items:flex-end; gap:10px" },
+      h("label", { class: "field", style: "margin:0" }, h("span", {}, "quiet from (UTC)"), qStart),
+      h("label", { class: "field", style: "margin:0" }, h("span", {}, "until"), qEnd),
+      h("span", { class: "dim small", style: "padding-bottom:8px" },
+        "sms / email / push are held and released after the window")),
+    h("h4", {}, "Frequency caps — sends per player per 24h"),
+    capRow,
+    h("div", { style: "margin-top:12px" }, saveBtn)));
+
+  /* audit trail */
+  const auditCard = h("div", { class: "card" },
+    h("h4", { style: "margin-top:0" }, "Audit trail — latest 30"));
+  if (!audit.items.length) auditCard.append(h("div", { class: "dim small" }, "nothing yet"));
+  for (const row of audit.items) {
+    auditCard.append(h("div", { class: "event-item" },
+      h("span", { class: "ename" }, row.action),
+      h("span", { class: "dim small", style: "flex:1" },
+        `${row.actor}${row.journeyId ? ` · ${row.journeyId}` : ""}${row.detail ? ` · ${row.detail}` : ""}`),
+      h("span", { class: "dim small" }, fmtTime(row.at))));
+  }
+  page.append(auditCard);
+}
+
 /* ── router ── */
 function setNav(active) {
   document.querySelectorAll("[data-nav]").forEach((link) => {
@@ -272,6 +421,9 @@ async function route() {
     } else if (parts[0] === "run" && parts[1]) {
       setNav("");
       await renderRun(view, parts[1]);
+    } else if (parts[0] === "compliance") {
+      setNav("compliance");
+      await renderCompliance(view);
     } else {
       setNav("journeys");
       await renderJourneys(view);

@@ -48,6 +48,7 @@ def _serialize_activation(activation: JourneyActivation) -> dict:
         "activationId": activation.id,
         "journeyId": activation.journey_id,
         "playerId": activation.player_id,
+        "isTest": activation.is_test,
         "status": activation.status,
         "currentActivityId": activation.current_activity_id,
         "entryActivityId": activation.entry_activity_id,
@@ -72,18 +73,22 @@ def upsert_player(payload: dict = Body(...), session: Session = Depends(get_sess
             brand=payload.get("brand", "JBCL"),
             currency=payload.get("currency", "CLP"),
             attributes=payload.get("attributes", {}),
+            is_test=bool(payload.get("isTest", False)),
         )
         session.add(player)
     else:
         player.brand = payload.get("brand", player.brand)
         player.currency = payload.get("currency", player.currency)
         player.attributes = {**(player.attributes or {}), **payload.get("attributes", {})}
+        if "isTest" in payload:
+            player.is_test = bool(payload["isTest"])
     session.flush()
     return {
         "playerId": player.player_id,
         "brand": player.brand,
         "currency": player.currency,
         "attributes": player.attributes,
+        "isTest": player.is_test,
     }
 
 
@@ -235,6 +240,7 @@ def list_offers(player_id: str, session: Session = Depends(get_session)):
                 "activationId": o.activation_id,
                 "activityId": o.activity_id,
                 "status": o.status,
+                "terms": o.terms,
                 "promotionDisplayId": o.promotion_display_id,
                 "createdAt": o.created_at.isoformat() if o.created_at else None,
             }
@@ -294,7 +300,7 @@ def journey_stats(journey_id: str, session: Session = Depends(get_session)):
     """The campaign view of a journey: who entered, where they are now,
     which transitions they took, and what the rewards cost so far."""
     _get_journey(session, journey_id)
-    activations = (
+    all_activations = (
         session.execute(
             select(JourneyActivation).where(
                 JourneyActivation.journey_id == journey_id
@@ -303,6 +309,9 @@ def journey_stats(journey_id: str, session: Session = Depends(get_session)):
         .scalars()
         .all()
     )
+    # test rehearsals walk the graph but never count as campaign numbers
+    activations = [a for a in all_activations if not a.is_test]
+    test_runs = len(all_activations) - len(activations)
 
     per_activity: dict[str, dict] = {}
 
@@ -334,7 +343,10 @@ def journey_stats(journey_id: str, session: Session = Depends(get_session)):
 
     grants = (
         session.execute(
-            select(RewardGrant).where(RewardGrant.journey_id == journey_id)
+            select(RewardGrant).where(
+                RewardGrant.journey_id == journey_id,
+                RewardGrant.is_test.is_(False),
+            )
         )
         .scalars()
         .all()
@@ -344,7 +356,10 @@ def journey_stats(journey_id: str, session: Session = Depends(get_session)):
     )
     comms_count = len(
         session.execute(
-            select(CommsMessage.id).where(CommsMessage.journey_id == journey_id)
+            select(CommsMessage.id).where(
+                CommsMessage.journey_id == journey_id,
+                CommsMessage.is_test.is_(False),
+            )
         ).all()
     )
     activation_ids = [a.id for a in activations]
@@ -364,6 +379,7 @@ def journey_stats(journey_id: str, session: Session = Depends(get_session)):
     return {
         "journeyId": journey_id,
         "totals": totals,
+        "testRunsExcluded": test_runs,
         "activities": per_activity,
         "rewards": {"grants": len(grants), "spinsGranted": spins_granted},
         "comms": {"sent": comms_count},

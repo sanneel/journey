@@ -30,5 +30,13 @@ class Settings:
         "no",
     )
 
+    # Four-eyes publishing: journeys must be submitted for review and
+    # approved by a second person before publish is allowed.
+    require_approval: bool = os.environ.get("JOURNEY_REQUIRE_APPROVAL", "0") in (
+        "1",
+        "true",
+        "yes",
+    )
+
 
 settings = Settings()

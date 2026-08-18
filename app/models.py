@@ -78,6 +78,12 @@ class Journey(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     changed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
     duplicated_from_id: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    # four-eyes review: None -> InReview -> Approved | Rejected. Any edit
+    # resets it — approval covers exactly one body.
+    approval_state: Mapped[str | None] = mapped_column(String(16), nullable=True)
+    submitted_by: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    approved_by: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    review_note: Mapped[str | None] = mapped_column(String(512), nullable=True)
 
     activations: Mapped[list["JourneyActivation"]] = relationship(back_populates="journey")
 
@@ -131,6 +137,53 @@ class Player(Base):
     brand: Mapped[str] = mapped_column(String(16), nullable=False)
     currency: Mapped[str] = mapped_column(String(8), default="CLP")
     attributes: Mapped[dict] = mapped_column(JSON, default=dict)
+    # test players walk journeys for real but nothing leaves the building
+    # and their runs are excluded from campaign numbers
+    is_test: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class PlayerExclusion(Base):
+    """The compliance list: self-excluded / vulnerable / cooling-off
+    players. An active row is a hard wall — no journey entry, no comms,
+    no rewards, anywhere."""
+
+    __tablename__ = "player_exclusions"
+
+    player_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    # self_exclusion | vulnerable | cool_off
+    reason: Mapped[str] = mapped_column(String(32), nullable=False)
+    note: Mapped[str | None] = mapped_column(String(256), nullable=True)
+    added_by: Mapped[str] = mapped_column(String(128), default="operator")
+    # cool-off periods end; self-exclusion rows usually never do
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class CompliancePolicy(Base):
+    """Single-row marketing policy: quiet hours and per-channel frequency
+    caps. Absent row = everything allowed (sandbox default)."""
+
+    __tablename__ = "compliance_policy"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
+    # {"start": "21:00", "end": "09:00"} — UTC wall-clock; None = off
+    quiet_hours: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    # {"sms": 3, "email": 5, ...} — max sends per channel per rolling 24h
+    frequency_caps: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class AuditLog(Base):
+    """Who did what: journey lifecycle, approvals, compliance changes."""
+
+    __tablename__ = "audit_log"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    actor: Mapped[str] = mapped_column(String(128), nullable=False)
+    action: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    journey_id: Mapped[str | None] = mapped_column(String(32), index=True, nullable=True)
+    detail: Mapped[str | None] = mapped_column(String(512), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
@@ -145,6 +198,8 @@ class JourneyActivation(Base):
     # the journey version this run entered on — the walk finishes on this
     # version's body even if the journey is live-edited underneath it
     journey_version: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    # copied from the player at entry: test runs are excluded from stats
+    is_test: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     # Active | Completed | Terminated
     status: Mapped[str] = mapped_column(String(16), default="Active", nullable=False)
     current_activity_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
@@ -188,6 +243,9 @@ class PromotionOffer(Base):
     # Offered | Accepted | Expired
     status: Mapped[str] = mapped_column(String(16), default="Offered", nullable=False)
     promotion_display_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # bonus T&C shown with the offer (wagering, expiry, max win) — the
+    # significant-terms disclosure regulators require next to any "free"
+    terms: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
@@ -205,8 +263,9 @@ class RewardGrant(Base):
     # freespin_bonus | casino_bonus_v2 | freebet | sport_bonus
     reward_type: Mapped[str] = mapped_column(String(32), nullable=False)
     detail: Mapped[dict] = mapped_column(JSON, default=dict)
-    # Awarded | Failed (connector exhausted retries)
+    # Awarded | Failed (connector exhausted retries) | Suppressed (compliance)
     status: Mapped[str] = mapped_column(String(16), default="Awarded", nullable=False)
+    is_test: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     delivery_attempts: Mapped[int] = mapped_column(Integer, default=0)
     delivery_detail: Mapped[str | None] = mapped_column(String(256), nullable=True)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -225,8 +284,10 @@ class CommsMessage(Base):
     activity_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
     channel: Mapped[str] = mapped_column(String(16), nullable=False)
     # Sent -> Shown -> Read -> Clicked (monotonic ladder); Failed = the
-    # connector exhausted its retries
+    # connector exhausted its retries; Held = parked until quiet hours
+    # end; Suppressed = compliance blocked it (exclusion / frequency cap)
     status: Mapped[str] = mapped_column(String(16), default="Sent", nullable=False)
+    is_test: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     body: Mapped[dict] = mapped_column(JSON, default=dict)
     delivery_attempts: Mapped[int] = mapped_column(Integer, default=0)
     delivery_detail: Mapped[str | None] = mapped_column(String(256), nullable=True)

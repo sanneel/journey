@@ -36,7 +36,7 @@ def _scheduler_loop(stop_event: threading.Event) -> None:
 
 
 def create_app() -> FastAPI:
-    from .routes import identifiers, journeys, runtime
+    from .routes import compliance, identifiers, journeys, runtime
 
     app = FastAPI(
         title="Journey Builder",
@@ -62,6 +62,7 @@ def create_app() -> FastAPI:
     app.include_router(journeys.router, prefix=API_PREFIX)
     app.include_router(identifiers.router, prefix=API_PREFIX)
     app.include_router(runtime.router, prefix=API_PREFIX)
+    app.include_router(compliance.router, prefix=API_PREFIX)
 
     @app.get("/health")
     def health():

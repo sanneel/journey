@@ -49,21 +49,24 @@ export async function renderRun(view, journeyId) {
     sourceSelect.append(h("option", { value: source.activityId },
       `${source.activityDisplayName || source.activityName}`));
   }
+  const testCheckbox = h("input", { type: "checkbox", style: "width:auto; margin-right:7px" });
   const enterBtn = h("button", { class: "btn primary", style: "width:100%; justify-content:center" }, "Enter journey");
   enterBtn.addEventListener("click", async () => {
     const playerId = playerInput.value.trim();
     if (!playerId) return toast("player id required", "err");
     try {
       const attributesRaw = attributesInput.value.trim();
-      if (attributesRaw) {
+      if (attributesRaw || testCheckbox.checked) {
         await api("POST", "/platform/v0/players", {
-          playerId, attributes: JSON.parse(attributesRaw),
+          playerId,
+          attributes: attributesRaw ? JSON.parse(attributesRaw) : {},
+          isTest: testCheckbox.checked,
         });
       }
       await api("POST",
         `/journey-builder/v0/journeys/${journeyId}/activities/${sourceSelect.value}/enter`,
         { playerId });
-      toast(`${playerId} entered`, "ok");
+      toast(testCheckbox.checked ? `${playerId} entered (test — nothing leaves)` : `${playerId} entered`, "ok");
       refresh();
     } catch (error) {
       toast(errText(error), "err");
@@ -73,6 +76,9 @@ export async function renderRun(view, journeyId) {
     h("label", { class: "field" }, h("span", {}, "Player"), playerInput),
     h("label", { class: "field" }, h("span", {}, "Attributes (JSON, upserted first)"), attributesInput),
     h("label", { class: "field" }, h("span", {}, "Input source"), sourceSelect),
+    h("label", { class: "field", style: "display:flex; align-items:center; cursor:pointer" },
+      testCheckbox,
+      h("span", { style: "margin:0" }, "Test player — walks for real, deliveries stay inside, excluded from stats")),
     enterBtn));
 
   /* platform event */
@@ -153,6 +159,9 @@ export async function renderRun(view, journeyId) {
       ["Comms sent", stats.comms.sent],
       ["Offers accepted", pct(stats.offers.acceptRate)],
     ];
+    if (stats.testRunsExcluded) {
+      tiles.push(["Test runs", stats.testRunsExcluded, "excluded from numbers"]);
+    }
     for (const [label, value, sub] of tiles) {
       kpiStrip.append(h("div", { class: "kpi" },
         h("div", { class: "kpi-value" }, String(value)),
@@ -198,6 +207,7 @@ function renderActivations(container, items, activityName) {
     const isOpen = expanded.has(activation.activationId);
     const head = h("div", { class: "row", style: "cursor:pointer" },
       h("strong", { style: "flex:none" }, activation.playerId),
+      activation.isTest ? h("span", { class: "test-chip", style: "flex:none" }, "TEST") : null,
       h("span", { class: `badge ${activation.status}`, style: "flex:none" }, activation.status),
       h("span", { class: "dim small", style: "flex:1" },
         activation.status === "Active"
@@ -250,8 +260,13 @@ async function renderLedger(container, playerId) {
 
     container.append(h("h4", {}, `Offers (${offers.items.length})`));
     for (const offer of offers.items) {
+      const terms = offer.terms
+        ? Object.entries(offer.terms).map(([key, value]) => `${key}: ${value}`).join(" · ")
+        : null;
       const row = h("div", { class: "event-item" },
-        h("span", { class: "ename" }, `#${offer.offerId}`),
+        h("span", { class: "ename" },
+          `#${offer.offerId}`,
+          terms ? h("div", { class: "edetail" }, `T&C — ${terms}`) : null),
         h("span", { class: `badge ${offer.status === "Offered" ? "Active" : offer.status === "Accepted" ? "Completed" : "Terminated"}` }, offer.status));
       if (offer.status === "Offered") {
         const accept = h("button", { class: "btn sm primary", style: "margin-left:auto" }, "Accept");
@@ -269,10 +284,16 @@ async function renderLedger(container, playerId) {
 
     container.append(h("h4", {}, `Comms (${comms.items.length})`));
     for (const message of comms.items) {
+      const special = ["Held", "Suppressed", "Failed"].includes(message.status);
       const row = h("div", { class: "event-item" },
-        h("span", { class: "ename" }, message.channel),
-        h("span", { class: "dim small" }, message.status));
-      if (message.status !== "Clicked") {
+        h("span", { class: "ename" },
+          message.channel,
+          special && message.deliveryDetail
+            ? h("div", { class: "edetail" }, message.deliveryDetail) : null),
+        special
+          ? h("span", { class: `badge ${message.status}` }, message.status)
+          : h("span", { class: "dim small" }, message.status));
+      if (!special && message.status !== "Clicked") {
         for (const action of ["read", "click"]) {
           const btn = h("button", { class: "btn sm", style: action === "read" ? "margin-left:auto" : "" }, action);
           btn.addEventListener("click", async () => {

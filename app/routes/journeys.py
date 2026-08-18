@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session
 
 from sqlalchemy import delete as sql_delete
 
+from ..audit import record
 from ..catalog import palette
 from ..cloner import clone_journey_body
 from ..config import settings
@@ -73,7 +74,27 @@ def validate_journey_draft(
     # not collide with itself
     existing = body.get("journeyId") or body.get("reservedJourneyId")
     problems = validate_draft(session, body, brand, existing_journey_id=existing)
-    return {"valid": not problems, **(aggregate(problems) if problems else {})}
+    # non-blocking compliance advisories: an offer that advertises a bonus
+    # without significant terms is a regulatory problem, not a graph one
+    warnings = [
+        {
+            "type": "promotion-terms-missing",
+            "activityId": activity.get("activityId"),
+            "detail": "offers must carry significant terms (wagering, expiry, "
+            "max win) — add initializationData.terms",
+        }
+        for activity in body.get("activities", [])
+        if activity.get("activityName") in ("promotion", "multipurpose_promotion")
+        and not (
+            (activity.get("initializationData") or {}).get("terms")
+            or (activity.get("initializationData") or {}).get("termsAndConditions")
+        )
+    ]
+    return {
+        "valid": not problems,
+        "warnings": warnings,
+        **(aggregate(problems) if problems else {}),
+    }
 
 
 @router.delete("/journey-drafts/{draft_id}")
@@ -125,6 +146,11 @@ def update_journey_draft(
         journey = update_draft(session, journey, body)
     except DraftError as error:
         raise HTTPException(status_code=error.status_code, detail=error.body())
+    # the content changed — any standing approval covered the old body
+    journey.approval_state = None
+    journey.submitted_by = None
+    journey.approved_by = None
+    journey.review_note = None
     if was_published:
         # live edit: this save IS the new published version. In-flight
         # players keep walking the revision they entered on; new entrants
@@ -132,6 +158,13 @@ def update_journey_draft(
         engine = Engine(session)
         engine.register_webhooks(journey)
         engine.snapshot_revision(journey)
+        record(
+            session,
+            body.get("actor"),
+            "live-edit",
+            journey.journey_id,
+            f"published v{journey.version} replaced in place",
+        )
     result = serialize_journey(session, journey)
     if was_published:
         result["liveEdit"] = True
@@ -161,15 +194,120 @@ def read_journey(journey_id: str, session: Session = Depends(get_session)):
     return serialize_journey(session, journey)
 
 
+@router.post("/journeys/{journey_id}/submit-review")
+def submit_review(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
+    """First half of four-eyes publishing: the author hands the journey
+    to a reviewer. Any later edit voids the submission."""
+    journey = _get_journey(session, journey_id)
+    if journey.status not in ("Draft", "Stopped"):
+        raise HTTPException(
+            status_code=409,
+            detail=f"{journey_id} is {journey.status}; only Draft or Stopped "
+            "journeys can be submitted for review",
+        )
+    journey.approval_state = "InReview"
+    journey.submitted_by = payload.get("requestedBy", "operator")
+    journey.approved_by = None
+    journey.review_note = None
+    record(session, journey.submitted_by, "submitted-for-review", journey_id)
+    return serialize_journey(session, journey, with_body=False)
+
+
+@router.post("/journeys/{journey_id}/approve")
+def approve_journey(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
+    journey = _get_journey(session, journey_id)
+    if journey.approval_state != "InReview":
+        raise HTTPException(
+            status_code=409,
+            detail={"type": "journey-not-in-review",
+                    "detail": f"approval state is {journey.approval_state}"},
+        )
+    approver = payload.get("approvedBy", "operator")
+    if journey.submitted_by and approver.strip().lower() == journey.submitted_by.strip().lower():
+        raise HTTPException(
+            status_code=409,
+            detail={"type": "four-eyes-violation",
+                    "detail": "the approver must be a different person than the submitter"},
+        )
+    journey.approval_state = "Approved"
+    journey.approved_by = approver
+    record(session, approver, "approved", journey_id,
+           f"submitted by {journey.submitted_by}")
+    return serialize_journey(session, journey, with_body=False)
+
+
+@router.post("/journeys/{journey_id}/reject")
+def reject_journey(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
+    journey = _get_journey(session, journey_id)
+    if journey.approval_state != "InReview":
+        raise HTTPException(
+            status_code=409,
+            detail={"type": "journey-not-in-review",
+                    "detail": f"approval state is {journey.approval_state}"},
+        )
+    journey.approval_state = "Rejected"
+    journey.review_note = payload.get("reason")
+    record(session, payload.get("rejectedBy"), "rejected", journey_id,
+           payload.get("reason"))
+    return serialize_journey(session, journey, with_body=False)
+
+
+@router.get("/journeys/{journey_id}/audit")
+def journey_audit(journey_id: str, session: Session = Depends(get_session)):
+    from ..models import AuditLog
+
+    _get_journey(session, journey_id)
+    rows = (
+        session.execute(
+            select(AuditLog)
+            .where(AuditLog.journey_id == journey_id)
+            .order_by(AuditLog.id.desc())
+            .limit(200)
+        )
+        .scalars()
+        .all()
+    )
+    return {
+        "items": [
+            {
+                "actor": r.actor,
+                "action": r.action,
+                "detail": r.detail,
+                "at": r.created_at.isoformat() if r.created_at else None,
+            }
+            for r in rows
+        ]
+    }
+
+
 @router.post("/journeys/{journey_id}/publish")
-def publish_journey(journey_id: str, session: Session = Depends(get_session)):
+def publish_journey(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
     journey = _get_journey(session, journey_id)
     try:
-        return Engine(session).publish(journey)
+        result = Engine(session).publish(journey)
     except EngineError as error:
         raise HTTPException(
             status_code=409, detail={"type": error.slug, "detail": error.detail}
         )
+    record(session, payload.get("actor"), "published", journey_id,
+           f"v{journey.version}")
+    return result
 
 
 @router.post("/journeys/{journey_id}/stop")
@@ -185,15 +323,22 @@ def stop_journey(
     mode = payload.get("mode", "terminate")
     if mode not in ("terminate", "drain"):
         raise HTTPException(status_code=400, detail="mode must be terminate or drain")
-    return Engine(session).stop(journey, mode=mode)
+    result = Engine(session).stop(journey, mode=mode)
+    record(session, payload.get("actor"), "stopped", journey_id, f"mode={mode}")
+    return result
 
 
 @router.post("/journeys/{journey_id}/archive")
-def archive_journey(journey_id: str, session: Session = Depends(get_session)):
+def archive_journey(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
     journey = _get_journey(session, journey_id)
     if journey.status == "Published":
         Engine(session).stop(journey)
     journey.status = "Archived"
+    record(session, payload.get("actor"), "archived", journey_id)
     return {"journeyId": journey.journey_id, "status": "Archived"}
 
 

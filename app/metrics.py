@@ -18,6 +18,10 @@ HELP = {
     "journey_rewards_delivered_total": "Reward grants delivered",
     "journey_rewards_failed_total": "Reward deliveries that exhausted retries",
     "journey_published_total": "Journeys published",
+    "journey_entries_blocked_total": "Entries refused for excluded players",
+    "journey_comms_suppressed_total": "Comms suppressed by compliance (exclusion / frequency cap)",
+    "journey_comms_held_total": "Comms held for quiet hours",
+    "journey_rewards_suppressed_total": "Reward grants suppressed for excluded players",
 }
 
 
