@@ -31,7 +31,18 @@ the captured behaviour documented in `liveapi`'s
 pip install -r requirements.txt
 python scripts/demo.py        # end-to-end campaign, no server needed
 python server.py              # serve API + builder UI on :8000
-pytest                        # 59 tests
+pytest                        # 69 tests
+```
+
+To watch deliveries leave the building for real, run the stand-in
+platform and point the connectors at it:
+
+```bash
+python scripts/mock_platform.py &          # receives wallet + comms calls on :9009
+CONNECTOR_MODE=webhook \
+CONNECTOR_REWARDS_URL=http://127.0.0.1:9009/wallet \
+CONNECTOR_COMMS_URL=http://127.0.0.1:9009/comms \
+python server.py
 ```
 
 Open **http://localhost:8000/** for the visual builder (API docs at `/docs`).
@@ -87,6 +98,63 @@ voice.
 
 `DATABASE_URL` (default `sqlite:///./journey.db`) and
 `JOURNEY_API_TOKEN` (default: auth off) configure persistence and auth.
+
+## Delivery connectors (P3)
+
+Rewards and comms don't stop at the ledger/outbox — each grant and each
+message goes through a **delivery connector** (`app/connectors.py`):
+
+- `CONNECTOR_MODE=log` (default) — deliveries are acknowledged locally
+  and logged; nothing leaves the process. Right for demos and tests.
+- `CONNECTOR_MODE=webhook` — the engine POSTs a self-describing JSON
+  payload to the real platform: reward grants to
+  `CONNECTOR_REWARDS_URL` (the wallet / game-aggregator side), comms to
+  `CONNECTOR_COMMS_URL` (the gateway side), with optional
+  `CONNECTOR_TOKEN` as a bearer header, `CONNECTOR_RETRIES` attempts
+  (default 2 retries, exponential backoff) and `CONNECTOR_TIMEOUT`
+  seconds per attempt.
+
+Delivery outcome is part of the graph semantics: a failed reward
+delivery marks the grant `Failed`, records the type's failed boundary
+(`FreespinBonusAwardFailed` / `WageringBonusAwardFailed`) and routes the
+token down the activity's **failure path** (`…Aborted`); a failed comms
+delivery marks the message `Failed` and takes the comms failure event.
+Attempts and the final detail are visible on every grant/message
+(`deliveryAttempts`, `deliveryDetail`). `scripts/mock_platform.py` is a
+stand-in platform for rehearsing both paths — including `POST
+/fail-next {"times": N}` to force reds.
+
+## Reliability (P4)
+
+Built for more than one process and a flaky network:
+
+- **Idempotent ingestion** — send `eventId` with a platform event and
+  replays are detected (`{"duplicate": true}`) and processed exactly
+  once, enforced by a unique key in storage.
+- **Competing schedulers** — timer firing does an atomic claim
+  (`UPDATE … WHERE fired = false`), so N workers never double-fire a
+  wake-up; each timer resumes in its own error boundary, so one bad
+  walk can't take down a sweep.
+- **`GET /metrics`** — Prometheus counters: activations entered, events
+  ingested/duplicate, timers fired, rewards and comms
+  delivered/failed, journeys published.
+
+## Versioning & live operations (P5)
+
+- **Publish snapshots a revision.** Every publish (and every live edit)
+  stores an immutable `JourneyRevision` of the full body.
+- **Live edit** — `PUT /journey-drafts/{id}` is allowed on a
+  **Published** journey: the change goes live instantly as version
+  N+1. In-flight players are **pinned to the version they entered**
+  (their walk resolves transitions against their revision's snapshot);
+  new entries get the new version. No stop-the-world, no stranded
+  tokens.
+- **Drain stop** — `POST /journeys/{jrn}/stop` with
+  `{"mode": "drain"}` closes the doors (new entries → 409), flips the
+  journey to `Stopping`, lets everyone in flight finish, and the
+  journey moves itself to `Stopped` when the last active walk
+  completes. `{"mode": "terminate"}` (default) keeps the old
+  hard-stop.
 
 ## The mental model
 
@@ -144,14 +212,16 @@ voice.
 | POST | `/journey-builder/v0/journeys/{jrn}/activities/{id}/enter` | direct `{journeyId, activityId}` entry |
 | POST | `/journey-builder/v0/journeys/{jrn}/players` | bulk segment injection (`dwh_source`) |
 | POST | `/platform/v0/players` | upsert a player + attributes (decision splits read these) |
-| POST | `/platform/v0/events` | ingest `deposit.approved`, `player.registered`, `bet.settled`, … |
+| POST | `/platform/v0/events` | ingest `deposit.approved`, `player.registered`, `bet.settled`, … (optional `eventId` → idempotent replay detection) |
 | POST | `/runtime/v0/offers/{id}/accept` | player accepts a promotion |
 | POST | `/runtime/v0/comms/{id}/{show\|read\|click}` | engagement (feeds engagement splits) |
 | POST | `/runtime/v0/timers/run` | fire due timers now (scheduler also runs in-process) |
 | GET | `/runtime/v0/activations/{id}` | one run: current node + full event history |
 | GET | `/runtime/v0/journeys/{jrn}/activations` | all runs of a journey |
-| GET | `/runtime/v0/players/{id}/rewards` · `/comms` · `/offers` | the ledger / outbox |
+| GET | `/runtime/v0/players/{id}/rewards` · `/comms` · `/offers` | the ledger / outbox (with `deliveryAttempts` / `deliveryDetail`) |
+| GET | `/runtime/v0/journeys/{jrn}/stats` | per-node/per-edge live funnel numbers |
 | GET | `/runtime/v0/timers` | pending wake-ups |
+| GET | `/metrics` | Prometheus counters (no `/api/v0/crm` prefix) |
 
 ## The activity palette
 
@@ -245,12 +315,16 @@ app/
   cloner.py      ID-class clone mechanism
   drafts.py      draft persistence, display-id minting, registries
   engine.py      the runtime: entry, walk, park/resume, timers, events
+  connectors.py  reward/comms delivery: log or webhook + retries
+  metrics.py     Prometheus counters behind GET /metrics
   ids.py         JRN / display-id sequences, structural-id regeneration
   durations.py   ISO-8601 durations + both timestamp flavours
-  models.py      journeys, activations, timers, subscriptions, ledger, outbox
+  models.py      journeys, revisions, activations, timers, ledger, outbox
   routes/        journeys.py (builder), identifiers.py, runtime.py
-scripts/demo.py  three-journey birthday-style campaign, end to end
-tests/           23 tests: units, builder API, full engine walks
+scripts/demo.py            three-journey birthday-style campaign, end to end
+scripts/mock_platform.py   stand-in casino platform for webhook mode
+tests/           69 tests: units, builder API, engine walks, per-type
+                 coverage, real captured journeys, production hardening
 ```
 
 ## What's deliberately simplified
@@ -258,7 +332,10 @@ tests/           23 tests: units, builder API, full engine walks
 - No visual canvas: `rawJourneyData.elements` is stored and
   consistency-checked, never rendered or generated.
 - Single-token walks (no parallel/choosable flow fan-out).
-- Comms are an outbox, not real SMS/email delivery.
-- Reward outcomes follow the happy path after granting; the full
-  reject/cancel/expiry sub-state machines of bonuses are not modelled.
+- In `CONNECTOR_MODE=log`, comms and rewards stop at the outbox/ledger;
+  webhook mode delivers them to a real endpoint but the payload shape is
+  ours, not a specific gateway's.
+- Reward sub-state machines beyond award success/failure (player-side
+  cancel, wagering progress, withdrawal-confirmed reverts) are recorded
+  as vocabulary but not simulated.
 - `registration` source matching is a promocode substring check.

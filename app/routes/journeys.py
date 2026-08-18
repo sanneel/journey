@@ -115,16 +115,27 @@ def update_journey_draft(
     journey = session.get(Journey, draft_id)
     if journey is None:
         raise HTTPException(status_code=404, detail=f"draft {draft_id} not found")
-    if journey.status not in ("Draft", "Stopped"):
+    if journey.status not in ("Draft", "Stopped", "Published"):
         raise HTTPException(
             status_code=409,
-            detail=f"draft {draft_id} is {journey.status}; stop it before editing",
+            detail=f"draft {draft_id} is {journey.status} and cannot be edited",
         )
+    was_published = journey.status == "Published"
     try:
         journey = update_draft(session, journey, body)
     except DraftError as error:
         raise HTTPException(status_code=error.status_code, detail=error.body())
-    return serialize_journey(session, journey)
+    if was_published:
+        # live edit: this save IS the new published version. In-flight
+        # players keep walking the revision they entered on; new entrants
+        # get this body from now on.
+        engine = Engine(session)
+        engine.register_webhooks(journey)
+        engine.snapshot_revision(journey)
+    result = serialize_journey(session, journey)
+    if was_published:
+        result["liveEdit"] = True
+    return result
 
 
 @router.get("/journeys")
@@ -162,9 +173,19 @@ def publish_journey(journey_id: str, session: Session = Depends(get_session)):
 
 
 @router.post("/journeys/{journey_id}/stop")
-def stop_journey(journey_id: str, session: Session = Depends(get_session)):
+def stop_journey(
+    journey_id: str,
+    payload: dict = Body(default={}),
+    session: Session = Depends(get_session),
+):
+    """mode "terminate" (default) ends active runs now; mode "drain"
+    closes the doors and lets in-flight players finish — the journey
+    flips to Stopped by itself when the last one completes."""
     journey = _get_journey(session, journey_id)
-    return Engine(session).stop(journey)
+    mode = payload.get("mode", "terminate")
+    if mode not in ("terminate", "drain"):
+        raise HTTPException(status_code=400, detail="mode must be terminate or drain")
+    return Engine(session).stop(journey, mode=mode)
 
 
 @router.post("/journeys/{journey_id}/archive")

@@ -131,11 +131,19 @@ def test_activity_type_executes(client, target_type):
     )
     assert entered.status_code == 201, entered.text
 
-    # resolve anything the node parked on: pending offers, then timers
+    # resolve anything the node parked on: offers, qualifying platform
+    # events (deterministic — no racing tiny timer windows), then timers
     offers = client.get(f"{API}/runtime/v0/players/{player}/offers").json()["items"]
     for offer in offers:
         if offer["status"] == "Offered":
             client.post(f"{API}/runtime/v0/offers/{offer['offerId']}/accept")
+    for event_name, props in (
+        ("deposit.approved", {"amount": 99999, "currencyCode": "CLP"}),
+        ("bet.settled", {"amount": 99999, "odd": 2.5}),
+    ):
+        client.post(f"{API}/platform/v0/events", json={
+            "eventName": event_name, "playerId": player, "properties": props,
+        })
     client.post(f"{API}/runtime/v0/timers/run")
 
     activation = client.get(

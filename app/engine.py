@@ -25,16 +25,19 @@ import random
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
+from . import metrics
 from .catalog import SOURCE_TYPES, spec_for
+from .connectors import deliver_comms, deliver_reward
 from .durations import parse_iso_duration, parse_timestamp, utcnow
 from .ids import new_webhook_id
 from .models import (
     CommsMessage,
     Journey,
     JourneyActivation,
+    JourneyRevision,
     ParkedSubscription,
     PlatformEvent,
     Player,
@@ -152,11 +155,7 @@ class Engine:
 
     # ── lifecycle ────────────────────────────────────────────────────
 
-    def publish(self, journey: Journey) -> dict:
-        if journey.status not in ("Draft", "Stopped"):
-            raise EngineError(
-                "journey-not-publishable", f"status is {journey.status}"
-            )
+    def register_webhooks(self, journey: Journey) -> list[dict]:
         webhooks: list[dict] = []
         for activity in entry_sources(journey):
             if activity.get("activityName") != "external_system_source":
@@ -182,12 +181,61 @@ class Engine:
                 }
             )
         journey.body = dict(journey.body)  # force JSON column update
+        return webhooks
+
+    def snapshot_revision(self, journey: Journey) -> None:
+        """Freeze the current body as this version's immutable revision —
+        the body in-flight players will finish on."""
+        existing = self.session.execute(
+            select(JourneyRevision).where(
+                JourneyRevision.journey_id == journey.journey_id,
+                JourneyRevision.version == journey.version,
+            )
+        ).scalar_one_or_none()
+        if existing is None:
+            self.session.add(
+                JourneyRevision(
+                    journey_id=journey.journey_id,
+                    version=journey.version,
+                    body=journey.body,
+                )
+            )
+
+    def publish(self, journey: Journey) -> dict:
+        if journey.status not in ("Draft", "Stopped"):
+            raise EngineError(
+                "journey-not-publishable", f"status is {journey.status}"
+            )
+        webhooks = self.register_webhooks(journey)
         journey.status = "Published"
         journey.version += 1
+        self.snapshot_revision(journey)
+        metrics.inc("journey_published_total")
         self.session.flush()
         return {"journeyId": journey.journey_id, "status": "Published", "webhooks": webhooks}
 
-    def stop(self, journey: Journey) -> dict:
+    def stop(self, journey: Journey, mode: str = "terminate") -> dict:
+        """terminate: end every active run now. drain: close the doors —
+        no new entries — and let in-flight players finish; the journey
+        flips to Stopped by itself once the last one completes."""
+        if mode == "drain":
+            journey.status = "Stopping"
+            active = len(
+                self.session.execute(
+                    select(JourneyActivation.id).where(
+                        JourneyActivation.journey_id == journey.journey_id,
+                        JourneyActivation.status == "Active",
+                    )
+                ).all()
+            )
+            if active == 0:
+                journey.status = "Stopped"
+            self.session.flush()
+            return {
+                "journeyId": journey.journey_id,
+                "status": journey.status,
+                "draining": active,
+            }
         journey.status = "Stopped"
         activations = (
             self.session.execute(
@@ -248,12 +296,14 @@ class Engine:
         activation = JourneyActivation(
             journey_id=journey.journey_id,
             player_id=player_id,
+            journey_version=journey.version,
             entry_activity_id=entry_activity_id,
             current_activity_id=entry_activity_id,
             context=context or {},
         )
         self.session.add(activation)
         self.session.flush()
+        metrics.inc("journey_activations_entered_total")
 
         self._record(
             activation,
@@ -362,6 +412,23 @@ class Engine:
         activation.status = "Completed"
         activation.context = {**(activation.context or {}), "completedVia": how}
         self._deactivate_waiting(activation)
+        self._maybe_finish_draining(activation.journey_id)
+
+    def _maybe_finish_draining(self, journey_id: str) -> None:
+        self.session.flush()  # the just-completed run must be visible to the count
+        journey = self.session.execute(
+            select(Journey).where(Journey.journey_id == journey_id)
+        ).scalar_one_or_none()
+        if journey is None or journey.status != "Stopping":
+            return
+        remaining = self.session.execute(
+            select(JourneyActivation.id).where(
+                JourneyActivation.journey_id == journey_id,
+                JourneyActivation.status == "Active",
+            )
+        ).first()
+        if remaining is None:
+            journey.status = "Stopped"
 
     def _record(
         self,
@@ -510,10 +577,30 @@ class Engine:
         )
         self.session.add(message)
         self.session.flush()
+
+        result = deliver_comms(
+            message_id=message.id,
+            channel=message.channel,
+            player_id=message.player_id,
+            journey_id=message.journey_id,
+            activity_id=message.activity_id,
+            body=body,
+        )
+        message.delivery_attempts = result.attempts
+        message.delivery_detail = result.detail
+        if not result.ok:
+            message.status = "Failed"
+            metrics.inc("journey_comms_failed_total")
+            return (
+                "move",
+                spec.get("failure_path") or spec["happy_path"],
+                f"{message.channel} delivery failed: {result.detail}",
+            )
+        metrics.inc("journey_comms_delivered_total")
         return (
             "move",
             spec["happy_path"],
-            f"queued {message.channel} message #{message.id}",
+            f"{message.channel} message #{message.id} — {result.detail}",
         )
 
     def engage_comms(self, message: CommsMessage, action: str) -> CommsMessage:
@@ -574,6 +661,40 @@ class Engine:
         )
         self.session.add(grant)
         self.session.flush()
+
+        result = deliver_reward(
+            grant_id=grant.id,
+            reward_type=name,
+            player_id=grant.player_id,
+            journey_id=grant.journey_id,
+            activity_id=grant.activity_id,
+            detail=detail,
+            expires_at=expires_at.isoformat() if expires_at else None,
+        )
+        grant.delivery_attempts = result.attempts
+        grant.delivery_detail = result.detail
+        if not result.ok:
+            grant.status = "Failed"
+            metrics.inc("journey_rewards_failed_total")
+            failed_boundary = {
+                "freespin_bonus": "FreespinBonusAwardFailed",
+                "casino_bonus_v2": "WageringBonusAwardFailed",
+            }.get(name)
+            if failed_boundary:
+                self._record(
+                    activation,
+                    activity["activityId"],
+                    failed_boundary,
+                    "Boundary",
+                    f"platform rejected grant #{grant.id}: {result.detail}",
+                )
+            return (
+                "move",
+                spec.get("failure_path") or "end_of_path",
+                f"{name} delivery failed: {result.detail}",
+            )
+        metrics.inc("journey_rewards_delivered_total")
+
         if name == "freespin_bonus":
             granted = f"granted {detail.get('spins')} free spins (grant #{grant.id})"
         elif name == "casino_bonus_v2":
@@ -905,6 +1026,24 @@ class Engine:
 
     # ── resuming a parked token ──────────────────────────────────────
 
+    def _pinned_index(self, activation: JourneyActivation, journey: Journey) -> dict[str, dict]:
+        """The activity graph this run walks: the revision it entered on.
+        A live edit changes the journey for new entrants only."""
+        if activation.journey_version and activation.journey_version != journey.version:
+            revision = self.session.execute(
+                select(JourneyRevision).where(
+                    JourneyRevision.journey_id == journey.journey_id,
+                    JourneyRevision.version == activation.journey_version,
+                )
+            ).scalar_one_or_none()
+            if revision is not None:
+                return {
+                    a["activityId"]: a
+                    for a in revision.body.get("activities", [])
+                    if a.get("activityId")
+                }
+        return activity_index(journey)
+
     def _resume(
         self,
         activation: JourneyActivation,
@@ -915,7 +1054,7 @@ class Engine:
         journey = self.session.execute(
             select(Journey).where(Journey.journey_id == activation.journey_id)
         ).scalar_one()
-        index = activity_index(journey)
+        index = self._pinned_index(activation, journey)
         activity = index.get(activity_id)
         if activity is None:
             raise EngineError("transition-target-not-found", activity_id)
@@ -985,9 +1124,23 @@ class Engine:
         player_id: str,
         properties: dict | None = None,
         source_name: str = "platform",
+        event_key: str | None = None,
     ) -> dict:
         properties = properties or {}
+        if event_key:
+            duplicate = self.session.execute(
+                select(PlatformEvent.id).where(PlatformEvent.event_key == event_key)
+            ).first()
+            if duplicate is not None:
+                metrics.inc("journey_events_duplicate_total")
+                return {
+                    "eventId": duplicate[0],
+                    "duplicate": True,
+                    "resolved": [],
+                    "entered": [],
+                }
         record = PlatformEvent(
+            event_key=event_key,
             event_name=event_name,
             source_name=source_name,
             player_id=player_id,
@@ -995,6 +1148,7 @@ class Engine:
         )
         self.session.add(record)
         self.session.flush()
+        metrics.inc("journey_events_ingested_total")
 
         resolved: list[dict] = []
         subscriptions = (
@@ -1155,9 +1309,16 @@ class Engine:
         )
         fired = 0
         for timer in timers:
-            if timer.fired:  # may have been cancelled by an earlier resume
+            # atomic claim: with several scheduler workers only one wins
+            # this row; everyone else moves on
+            claimed = self.session.execute(
+                update(Timer)
+                .where(Timer.id == timer.id, Timer.fired.is_(False))
+                .values(fired=True)
+            )
+            if claimed.rowcount == 0:
                 continue
-            timer.fired = True
+            self.session.expire(timer, ["fired"])
             activation = self.session.get(JourneyActivation, timer.activation_id)
             if (
                 activation is None
@@ -1166,44 +1327,48 @@ class Engine:
             ):
                 continue
             fired += 1
-            self._cancel_subscriptions(activation, timer.activity_id)
-            self._cancel_timers(activation, timer.activity_id)
-            if timer.kind == "wait":
-                self._resume(
-                    activation, timer.activity_id, "WaitTimeCompleted", "wait elapsed"
-                )
-            elif timer.kind == "offer_expiry":
-                offer_id = (timer.payload or {}).get("offerId")
-                offer = self.session.get(PromotionOffer, offer_id) if offer_id else None
-                if offer is not None and offer.status == "Offered":
-                    offer.status = "Expired"
-                    offer.resolved_at = utcnow()
-                self._resume(
-                    activation,
-                    timer.activity_id,
-                    "PromotionExpired",
-                    "accept window expired",
-                )
-            elif timer.kind == "deposit_window":
-                self._resume(
-                    activation,
-                    timer.activity_id,
-                    "DepositConditionUnsatisfied",
-                    "deposit window expired",
-                )
-            elif timer.kind == "detector_window":
-                self._record(
-                    activation, timer.activity_id, "EventNotReceived", "Boundary"
-                )
-                self._resume(
-                    activation,
-                    timer.activity_id,
-                    "DetectorFailed",
-                    "window closed without a matching event",
-                )
-            elif timer.kind == "bet_window":
-                self._resume(
-                    activation, timer.activity_id, "Unsatisfied", "bet window expired"
-                )
+            metrics.inc("journey_timers_fired_total")
+            try:
+                self._cancel_subscriptions(activation, timer.activity_id)
+                self._cancel_timers(activation, timer.activity_id)
+                if timer.kind == "wait":
+                    self._resume(
+                        activation, timer.activity_id, "WaitTimeCompleted", "wait elapsed"
+                    )
+                elif timer.kind == "offer_expiry":
+                    offer_id = (timer.payload or {}).get("offerId")
+                    offer = self.session.get(PromotionOffer, offer_id) if offer_id else None
+                    if offer is not None and offer.status == "Offered":
+                        offer.status = "Expired"
+                        offer.resolved_at = utcnow()
+                    self._resume(
+                        activation,
+                        timer.activity_id,
+                        "PromotionExpired",
+                        "accept window expired",
+                    )
+                elif timer.kind == "deposit_window":
+                    self._resume(
+                        activation,
+                        timer.activity_id,
+                        "DepositConditionUnsatisfied",
+                        "deposit window expired",
+                    )
+                elif timer.kind == "detector_window":
+                    self._record(
+                        activation, timer.activity_id, "EventNotReceived", "Boundary"
+                    )
+                    self._resume(
+                        activation,
+                        timer.activity_id,
+                        "DetectorFailed",
+                        "window closed without a matching event",
+                    )
+                elif timer.kind == "bet_window":
+                    self._resume(
+                        activation, timer.activity_id, "Unsatisfied", "bet window expired"
+                    )
+            except Exception as error:  # one bad walk must not stall the rest
+                print(f"[timer-error] timer={timer.id} activation={timer.activation_id}: {error!r}", flush=True)
         self.session.flush()
         return fired

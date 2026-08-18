@@ -67,6 +67,14 @@ def create_app() -> FastAPI:
     def health():
         return {"status": "ok"}
 
+    @app.get("/metrics", include_in_schema=False)
+    def metrics_endpoint():
+        from fastapi.responses import PlainTextResponse
+
+        from . import metrics
+
+        return PlainTextResponse(metrics.render(), media_type="text/plain; version=0.0.4")
+
     # ── the builder UI ───────────────────────────────────────────────
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 

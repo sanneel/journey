@@ -434,7 +434,9 @@ function defaultMeta() {
 }
 
 function editable() {
-  return state.meta.status === "Draft" || state.meta.status === "Stopped";
+  // Published is editable too: saving publishes a new version instantly;
+  // in-flight players finish on the version they entered
+  return ["Draft", "Stopped", "Published"].includes(state.meta.status);
 }
 
 function nodeSpec(node) {
@@ -1512,6 +1514,7 @@ export async function renderBuilder(view, journeyId) {
     holder.append(statusBadge());
     const locked = !editable();
     saveBtn.disabled = locked;
+    saveBtn.textContent = state.meta.status === "Published" ? "Publish changes" : "Save draft";
     templatesBtn.disabled = locked;
     publishBtn.disabled = !(state.meta.draftId && (state.meta.status === "Draft" || state.meta.status === "Stopped"));
     runLink.style.display = state.meta.status === "Published" ? "" : "none";
@@ -1549,7 +1552,9 @@ export async function renderBuilder(view, journeyId) {
       resetHistory();
       render();
       showProblems(problems, null);
-      toast(`Saved ${saved.journeyId} (v${saved.version})`, "ok");
+      toast(saved.liveEdit
+        ? `Published v${saved.version} — new players get it now; in-flight finish on their version`
+        : `Saved ${saved.journeyId} (v${saved.version})`, "ok");
       refreshMeta();
       window.history.replaceState(null, "", `#/builder/${saved.journeyId}`);
     } catch (error) {

@@ -187,6 +187,9 @@ def ingest_event(payload: dict = Body(...), session: Session = Depends(get_sessi
         player_id,
         properties=payload.get("properties") or {},
         source_name=payload.get("sourceName", "platform"),
+        # optional idempotency key: replays of the same eventId are
+        # acknowledged but processed exactly once
+        event_key=payload.get("eventId"),
     )
     return result
 
@@ -274,6 +277,8 @@ def list_comms(player_id: str, session: Session = Depends(get_session)):
                 "channel": m.channel,
                 "status": m.status,
                 "body": m.body,
+                "deliveryAttempts": m.delivery_attempts,
+                "deliveryDetail": m.delivery_detail,
                 "createdAt": m.created_at.isoformat() if m.created_at else None,
             }
             for m in messages
@@ -412,6 +417,8 @@ def list_rewards(player_id: str, session: Session = Depends(get_session)):
                 "rewardType": g.reward_type,
                 "status": g.status,
                 "detail": g.detail,
+                "deliveryAttempts": g.delivery_attempts,
+                "deliveryDetail": g.delivery_detail,
                 "expiresAt": g.expires_at.isoformat() if g.expires_at else None,
                 "createdAt": g.created_at.isoformat() if g.created_at else None,
             }

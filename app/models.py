@@ -84,6 +84,24 @@ class Journey(Base):
     __table_args__ = (Index("ix_journeys_brand_name", "brand", "journey_name"),)
 
 
+class JourneyRevision(Base):
+    """Immutable snapshot of a journey body per published version. In-flight
+    activations resume against the revision they entered on; new entrants
+    always get the journey's current body."""
+
+    __tablename__ = "journey_revisions"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    journey_id: Mapped[str] = mapped_column(String(32), index=True, nullable=False)
+    version: Mapped[int] = mapped_column(Integer, nullable=False)
+    body: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+    __table_args__ = (
+        Index("ix_revision_journey_version", "journey_id", "version", unique=True),
+    )
+
+
 class ActivityIdRegistry(Base):
     """activityIds are unique across all journeys of a brand — reusing one on
     a fresh draft is the classic un-regenerated-clone failure."""
@@ -124,6 +142,9 @@ class JourneyActivation(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     journey_id: Mapped[str] = mapped_column(ForeignKey("journeys.journey_id"), index=True)
     player_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    # the journey version this run entered on — the walk finishes on this
+    # version's body even if the journey is live-edited underneath it
+    journey_version: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     # Active | Completed | Terminated
     status: Mapped[str] = mapped_column(String(16), default="Active", nullable=False)
     current_activity_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
@@ -184,7 +205,10 @@ class RewardGrant(Base):
     # freespin_bonus | casino_bonus_v2 | freebet | sport_bonus
     reward_type: Mapped[str] = mapped_column(String(32), nullable=False)
     detail: Mapped[dict] = mapped_column(JSON, default=dict)
+    # Awarded | Failed (connector exhausted retries)
     status: Mapped[str] = mapped_column(String(16), default="Awarded", nullable=False)
+    delivery_attempts: Mapped[int] = mapped_column(Integer, default=0)
+    delivery_detail: Mapped[str | None] = mapped_column(String(256), nullable=True)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
@@ -200,9 +224,12 @@ class CommsMessage(Base):
     journey_id: Mapped[str] = mapped_column(String(32), nullable=False)
     activity_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
     channel: Mapped[str] = mapped_column(String(16), nullable=False)
-    # Sent -> Read -> Clicked (monotonic engagement ladder)
+    # Sent -> Shown -> Read -> Clicked (monotonic ladder); Failed = the
+    # connector exhausted its retries
     status: Mapped[str] = mapped_column(String(16), default="Sent", nullable=False)
     body: Mapped[dict] = mapped_column(JSON, default=dict)
+    delivery_attempts: Mapped[int] = mapped_column(Integer, default=0)
+    delivery_detail: Mapped[str | None] = mapped_column(String(256), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     engaged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
@@ -213,6 +240,11 @@ class PlatformEvent(Base):
     __tablename__ = "platform_events"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    # optional client-supplied idempotency key: the same eventId is
+    # accepted once and acknowledged as a duplicate afterwards
+    event_key: Mapped[str | None] = mapped_column(
+        String(128), unique=True, nullable=True
+    )
     event_name: Mapped[str] = mapped_column(String(128), index=True, nullable=False)
     source_name: Mapped[str] = mapped_column(String(128), nullable=False, default="platform")
     player_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
