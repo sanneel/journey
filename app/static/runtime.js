@@ -31,7 +31,7 @@ export async function renderRun(view, journeyId) {
       h("button", {
         class: "btn ghost sm",
         onclick: () => (location.hash = `#/builder/${journey.journeyId}`),
-      }, "<- Builder")),
+      }, "← Builder")),
   );
 
   if (journey.status !== "Published") {

@@ -64,6 +64,57 @@ export function fmtTime(iso) {
   return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" });
 }
 
+/* In-place question anchored to the control that asked it — the ledger
+ * never opens a browser prompt. Resolves the entered text, or null. */
+export function askInline(anchor, { label, placeholder = "", value = "", submitLabel = "Confirm", danger = false }) {
+  return new Promise((resolve) => {
+    document.querySelector(".ask-pop")?.remove();
+    const input = h("input", { class: "input", placeholder, value });
+    const ok = h("button", { class: `btn sm ${danger ? "danger" : "primary"}` }, submitLabel);
+    const pop = h("div", { class: "ask-pop" },
+      h("div", { class: "ask-pop-label" }, label),
+      h("div", { class: "row" }, input, ok));
+    const close = (result) => {
+      pop.remove();
+      document.removeEventListener("pointerdown", outside, true);
+      resolve(result);
+    };
+    const outside = (event) => { if (!pop.contains(event.target)) close(null); };
+    ok.addEventListener("click", () => close(input.value.trim() || null));
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") close(input.value.trim() || null);
+      if (event.key === "Escape") close(null);
+    });
+    pop.addEventListener("click", (event) => event.stopPropagation());
+    document.body.append(pop);
+    const rect = anchor.getBoundingClientRect();
+    pop.style.top = `${Math.min(rect.bottom + 6, innerHeight - pop.offsetHeight - 10)}px`;
+    pop.style.left = `${Math.max(10, Math.min(rect.left, innerWidth - pop.offsetWidth - 10))}px`;
+    document.addEventListener("pointerdown", outside, true);
+    input.focus();
+  });
+}
+
+/* Two-step destructive confirm: first press arms the button ("Sure?"),
+ * second press within the window goes through. Returns true to proceed. */
+export function armConfirm(button, armedLabel = "Sure?") {
+  if (button.dataset.armed) {
+    delete button.dataset.armed;
+    return true;
+  }
+  button.dataset.armed = "1";
+  const original = button.textContent;
+  button.textContent = armedLabel;
+  button.classList.add("confirming");
+  setTimeout(() => {
+    if (!button.isConnected || !button.dataset.armed) return;
+    delete button.dataset.armed;
+    button.textContent = original;
+    button.classList.remove("confirming");
+  }, 2600);
+  return false;
+}
+
 /* ── activity catalog (shared cache) ── */
 let paletteCache = null;
 export async function getPalette() {
@@ -208,11 +259,12 @@ async function renderJourneys(view) {
         h("div", { class: "dim small" }, journey.brand)),
       h("td", { class: "mono dim" }, journey.journeyId),
       h("td", {},
-        h("span", { class: `badge ${journey.status}` }, journey.status),
-        journey.approvalState
-          ? h("span", { class: `badge ${journey.approvalState}`, style: "margin-left:6px" },
-              journey.approvalState === "InReview" ? "In review" : journey.approvalState)
-          : null),
+        h("div", { class: "stamp-stack" },
+          h("span", { class: `badge ${journey.status}` }, journey.status),
+          journey.approvalState
+            ? h("span", { class: `badge ${journey.approvalState}` },
+                journey.approvalState === "InReview" ? "In review" : journey.approvalState)
+            : null)),
       players,
       h("td", { class: "dim" }, pct(journey.completionRate)),
       h("td", { class: "dim" }, String(journey.rewardGrantsCount)),
@@ -225,7 +277,12 @@ async function renderJourneys(view) {
       const btn = h("button", { class: `btn sm ${cls || ""}`, title: title || label }, label);
       btn.addEventListener("click", async (event) => {
         event.stopPropagation();
-        try { await handler(); renderJourneys(view); } catch (error) { toast(errText(error), "err"); }
+        try {
+          // a handler returns false when nothing happened (cancelled ask,
+          // first press of a two-step confirm) — keep the row as it is
+          const result = await handler(btn);
+          if (result !== false) renderJourneys(view);
+        } catch (error) { toast(errText(error), "err"); }
       });
       actions.append(btn, " ");
       return btn;
@@ -235,24 +292,37 @@ async function renderJourneys(view) {
       act("Stop", "", () => api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/stop`));
     } else if (journey.status === "Draft" || journey.status === "Stopped") {
       if (journey.approvalState === "InReview") {
-        act("Approve", "primary", async () => {
-          const approver = prompt("Approver name (must differ from the submitter):");
-          if (!approver) return;
+        act("Approve", "primary", async (btn) => {
+          const approver = await askInline(btn, {
+            label: `Approve ${journey.journeyId} — countersign as`,
+            placeholder: journey.submittedBy ? `anyone but ${journey.submittedBy}` : "your name",
+            submitLabel: "Approve",
+          });
+          if (!approver) return false;
           await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/approve`,
             { approvedBy: approver });
           toast(`${journey.journeyId} approved by ${approver}`, "ok");
         });
-        act("Reject", "danger", async () => {
-          const reason = prompt("Rejection reason:");
-          if (reason === null) return;
+        act("Reject", "danger", async (btn) => {
+          const reason = await askInline(btn, {
+            label: `Send ${journey.journeyId} back — because`,
+            placeholder: "what needs to change",
+            submitLabel: "Reject",
+            danger: true,
+          });
+          if (!reason) return false;
           await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/reject`,
             { rejectedBy: "reviewer", reason });
           toast(`${journey.journeyId} sent back`, "");
         });
       } else {
-        act("Submit review", "", async () => {
-          const author = prompt("Submit for review as:", "author");
-          if (!author) return;
+        act("Submit review", "", async (btn) => {
+          const author = await askInline(btn, {
+            label: `Hand ${journey.journeyId} to a reviewer — signed`,
+            placeholder: "your name",
+            submitLabel: "Submit",
+          });
+          if (!author) return false;
           await api("POST", `/journey-builder/v0/journeys/${journey.journeyId}/submit-review`,
             { requestedBy: author });
           toast(`${journey.journeyId} waiting for a second pair of eyes`, "ok");
@@ -268,8 +338,8 @@ async function renderJourneys(view) {
       toast(`Duplicated as ${copy.journeyId}`, "ok");
     });
     if (journey.status === "Draft" || journey.status === "Archived") {
-      act("Delete", "danger", async () => {
-        if (!confirm(`Delete ${journey.journeyId} "${journey.journeyName}"?`)) return;
+      act("Delete", "danger", async (btn) => {
+        if (!armConfirm(btn)) return false;
         await api("DELETE", `/journey-builder/v0/journey-drafts/${journey.id}`);
         toast(`${journey.journeyId} deleted`, "ok");
       });
@@ -298,13 +368,16 @@ async function renderCompliance(view) {
     api("GET", "/compliance/v0/audit?limit=30"),
   ]);
 
-  /* exclusion list */
-  const exclusionCard = h("div", { class: "card", style: "margin-bottom:14px" });
-  exclusionCard.append(h("h4", { style: "margin-top:0" }, `Exclusion list (${exclusions.items.length})`));
-  if (!exclusions.items.length) {
-    exclusionCard.append(h("div", { class: "dim small" },
-      "Empty. Excluded players cannot enter any journey or receive any message or reward."));
-  }
+  /* one ledger page, three ruled sections */
+  const sheet = h("div", { class: "sheet" });
+  page.append(sheet);
+
+  /* exclusion register */
+  const exclusionSection = h("section", { class: "sheet-section" },
+    h("h3", {}, "Exclusion register",
+      h("span", { class: "count" }, String(exclusions.items.length))),
+    h("p", { class: "section-note" },
+      "A listed player cannot enter any journey or receive any message or reward — in-flight runs included."));
   for (const row of exclusions.items) {
     const line = h("div", { class: "event-item" },
       h("strong", { class: "mono" }, row.playerId),
@@ -316,12 +389,12 @@ async function renderCompliance(view) {
     );
     const remove = h("button", { class: "btn sm danger" }, "Remove");
     remove.addEventListener("click", async () => {
-      if (!confirm(`Remove ${row.playerId} from the exclusion list?`)) return;
+      if (!armConfirm(remove)) return;
       await api("DELETE", `/compliance/v0/exclusions/${encodeURIComponent(row.playerId)}`);
       renderCompliance(view);
     });
     line.append(remove);
-    exclusionCard.append(line);
+    exclusionSection.append(line);
   }
   const exPlayer = h("input", { class: "input", placeholder: "player id", style: "flex:1" });
   const exReason = h("select", { class: "input", style: "width:150px" },
@@ -342,8 +415,8 @@ async function renderCompliance(view) {
       renderCompliance(view);
     } catch (error) { toast(errText(error), "err"); }
   });
-  exclusionCard.append(h("div", { class: "row", style: "margin-top:10px" }, exPlayer, exReason, exAdd));
-  page.append(exclusionCard);
+  exclusionSection.append(h("div", { class: "row", style: "margin-top:12px" }, exPlayer, exReason, exAdd));
+  sheet.append(exclusionSection);
 
   /* marketing policy */
   const quiet = policy.quietHours || {};
@@ -354,8 +427,8 @@ async function renderCompliance(view) {
   const capRow = h("div", { class: "row", style: "flex-wrap:wrap; gap:10px" });
   for (const channel of ["sms", "email", "push", "onsite"]) {
     capInputs[channel] = h("input", {
-      class: "input", type: "number", min: "0", placeholder: "∞",
-      value: caps[channel] ?? "", style: "width:70px",
+      class: "input", type: "number", min: "0", placeholder: "no cap",
+      value: caps[channel] ?? "", style: "width:80px",
     });
     capRow.append(h("label", { class: "field", style: "margin:0" },
       h("span", {}, channel), capInputs[channel]));
@@ -377,29 +450,32 @@ async function renderCompliance(view) {
       toast("Policy saved", "ok");
     } catch (error) { toast(errText(error), "err"); }
   });
-  page.append(h("div", { class: "card", style: "margin-bottom:14px" },
-    h("h4", { style: "margin-top:0" }, "Marketing policy"),
+  sheet.append(h("section", { class: "sheet-section" },
+    h("h3", {}, "Marketing policy"),
+    h("p", { class: "section-note" },
+      "Quiet hours hold sms / email / push until the window ends; caps bound sends per player per rolling 24 hours."),
     h("div", { class: "row", style: "align-items:flex-end; gap:10px" },
       h("label", { class: "field", style: "margin:0" }, h("span", {}, "quiet from (UTC)"), qStart),
       h("label", { class: "field", style: "margin:0" }, h("span", {}, "until"), qEnd),
-      h("span", { class: "dim small", style: "padding-bottom:8px" },
-        "sms / email / push are held and released after the window")),
-    h("h4", {}, "Frequency caps — sends per player per 24h"),
-    capRow,
-    h("div", { style: "margin-top:12px" }, saveBtn)));
+      h("span", { style: "flex:2" })),
+    h("div", { class: "row", style: "align-items:flex-end; gap:10px; margin-top:12px" },
+      capRow,
+      h("span", { style: "flex:1" }),
+      saveBtn)));
 
   /* audit trail */
-  const auditCard = h("div", { class: "card" },
-    h("h4", { style: "margin-top:0" }, "Audit trail — latest 30"));
-  if (!audit.items.length) auditCard.append(h("div", { class: "dim small" }, "nothing yet"));
+  const auditSection = h("section", { class: "sheet-section" },
+    h("h3", {}, "Audit trail",
+      h("span", { class: "count" }, "latest 30")));
+  if (!audit.items.length) auditSection.append(h("div", { class: "dim small" }, "nothing yet"));
   for (const row of audit.items) {
-    auditCard.append(h("div", { class: "event-item" },
+    auditSection.append(h("div", { class: "event-item" },
       h("span", { class: "ename" }, row.action),
       h("span", { class: "dim small", style: "flex:1" },
         `${row.actor}${row.journeyId ? ` · ${row.journeyId}` : ""}${row.detail ? ` · ${row.detail}` : ""}`),
       h("span", { class: "dim small" }, fmtTime(row.at))));
   }
-  page.append(auditCard);
+  sheet.append(auditSection);
 }
 
 /* ── router ── */

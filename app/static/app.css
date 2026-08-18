@@ -184,38 +184,32 @@ label.field > span {
   letter-spacing: 0.2px;
 }
 
+/* statuses are rubber stamps, not pills: uppercase letterpress text in
+   a thin frame — the way a ledger row gets marked PAID / VOID */
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 9px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 600;
-  border: 1px solid transparent;
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1.7;
+  border: 1px solid currentColor;
+  background: transparent;
 }
-.badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.badge.Draft { color: var(--muted); background: rgba(32, 38, 31, 0.07); }
-.badge.Published { color: var(--felt); background: var(--felt-soft); }
-.badge.Stopped { color: var(--brass); background: rgba(150, 117, 43, 0.12); }
-.badge.Archived { color: var(--faint); background: rgba(32, 38, 31, 0.05); }
-.badge.Active { color: #2d6c9e; background: rgba(45, 108, 158, 0.1); }
-.badge.Completed { color: var(--felt); background: var(--felt-soft); }
-.badge.Terminated { color: var(--wax); background: var(--wax-soft); }
-.badge.Stopping { color: var(--brass); background: rgba(150, 117, 43, 0.12); }
-/* four-eyes review states */
-.badge.InReview { color: #2d6c9e; background: rgba(45, 108, 158, 0.1); }
-.badge.Approved { color: var(--felt); background: var(--felt-soft); }
-.badge.Rejected { color: var(--wax); background: var(--wax-soft); }
-/* comms delivery states */
-.badge.Held { color: var(--brass); background: rgba(150, 117, 43, 0.12); }
-.badge.Suppressed { color: var(--wax); background: var(--wax-soft); }
-.badge.Failed { color: var(--wax); background: var(--wax-soft); }
-/* test-player rehearsal marker */
+.badge.Draft { color: var(--muted); }
+.badge.Published, .badge.Completed, .badge.Approved { color: var(--felt); }
+.badge.Stopped, .badge.Stopping, .badge.Held { color: #7a5e20; }
+.badge.Archived { color: var(--muted); border-style: dashed; }
+.badge.Active, .badge.InReview { color: #275e88; }
+.badge.Terminated, .badge.Rejected, .badge.Suppressed, .badge.Failed { color: #9a3e2b; }
+.stamp-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+/* test-player rehearsal marker — same stamp family, perforated frame */
 .test-chip {
-  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-  color: var(--brass); border: 1px dashed var(--brass); border-radius: 4px;
-  padding: 1px 6px; vertical-align: 1px;
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+  line-height: 1.7; color: #7a5e20; border: 1px dashed currentColor; border-radius: 3px;
+  padding: 1px 7px;
 }
 
 .card {
@@ -248,27 +242,16 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 /* ── toasts ── */
 #toast-root { position: fixed; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px; z-index: 90; }
 .toast {
-  position: relative;
   background: var(--card);
   border: 1px solid var(--line-strong);
   border-radius: 8px;
-  padding: 10px 14px 10px 30px;
+  padding: 10px 14px;
   box-shadow: var(--shadow-pop);
   max-width: 380px;
   animation: toast-in 0.18s ease-out;
 }
-.toast::before {
-  content: "";
-  position: absolute;
-  left: 13px;
-  top: 17px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--felt);
-}
-.toast.err::before { background: var(--wax); }
-.toast.ok::before { background: var(--felt); }
+.toast.ok { border-color: rgba(23, 90, 65, 0.45); }
+.toast.err { border-color: rgba(176, 69, 47, 0.5); color: #9a3e2b; }
 @keyframes toast-in { from { transform: translateY(8px); opacity: 0; } }
 
 /* ── builder layout ── */
@@ -622,22 +605,26 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 .event-item .ename { font-family: var(--mono); font-size: 12px; }
 .event-item .edetail { color: var(--muted); font-size: 11.5px; margin-top: 1px; }
 .event-item .enode { color: var(--faint); font-size: 11px; }
-/* KPI strip — stat tiles: numbers wear ink, labels stay muted */
+/* campaign figures — the totals line at the foot of a ledger page:
+   one ruled band, columns split by hairlines, not a grid of tiles */
 .kpis {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-  gap: 10px;
-}
-.kpi {
+  display: flex;
+  flex-wrap: wrap;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 10px 13px;
   box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
+.kpi {
+  flex: 1 1 110px;
+  padding: 10px 16px 9px;
+  border-right: 1px solid var(--line);
+}
+.kpi:last-child { border-right: none; }
 .kpi-value {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
@@ -703,6 +690,7 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 .evt.fail { color: #9a3e2b; }
 .switch-row { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .switch-row input { accent-color: var(--felt); width: 15px; height: 15px; }
+label.field input[type="checkbox"] { accent-color: var(--felt); }
 .hint { font-size: 10.5px; color: var(--faint); margin-top: 2px; }
 .advanced { margin-top: 16px; }
 .advanced summary {
@@ -719,7 +707,7 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 .filter-row .input { width: 260px; }
 .filter-chip {
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 7px;
   border: 1px solid var(--line-strong);
   background: var(--card);
   color: var(--muted);
@@ -735,3 +723,51 @@ table.list tr.rowlink:hover td { background: var(--panel); }
 .row > * { flex: 1; }
 .row > .btn { flex: none; }
 .hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+
+/* ── the compliance sheet: one ledger page, ruled sections ── */
+.sheet {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+.sheet-section { padding: 18px 20px 16px; }
+.sheet-section + .sheet-section { border-top: 1px solid var(--line); }
+.sheet-section > h3 {
+  font-family: var(--display);
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+.sheet-section > h3 .count {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--faint);
+}
+.sheet-section .section-note { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; max-width: 68ch; }
+
+/* in-place question — replaces the browser prompt() */
+.ask-pop {
+  position: fixed;
+  z-index: 85;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: var(--shadow-pop);
+  padding: 10px 12px;
+  width: 264px;
+}
+.ask-pop-label { font-size: 11.5px; font-weight: 550; color: var(--muted); margin-bottom: 7px; }
+
+/* two-step destructive confirm — the button itself asks */
+.btn.confirming,
+.btn.danger.confirming,
+.btn.danger.confirming:hover {
+  background: var(--wax);
+  border-color: var(--wax);
+  color: #fff;
+}

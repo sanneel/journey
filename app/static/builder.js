@@ -1220,8 +1220,6 @@ function showProblems(container, detail, okMessage) {
 
 /* ── templates: server-provided campaign shapes, fresh ids per call ── */
 async function loadTemplate(key, nameInput, refreshMeta) {
-  if (state.nodes.size &&
-      !confirm("Replace the current canvas with this template?")) return;
   try {
     const { body } = await api("GET", `/journey-builder/v0/journey-templates/${key}`);
     const meta = state.meta;
@@ -1345,6 +1343,20 @@ export async function renderBuilder(view, journeyId) {
           h("span", { class: "dim small" }, ` · ${template.activities} activities`),
           h("div", { class: "dim small" }, template.description));
         item.addEventListener("click", () => {
+          // a non-empty canvas gets a two-press confirm on the item itself
+          if (state.nodes.size && !item.dataset.armed) {
+            item.dataset.armed = "1";
+            const name = item.querySelector("strong");
+            const original = name.textContent;
+            name.textContent = "Replace the canvas?";
+            setTimeout(() => {
+              if (!item.isConnected || !item.dataset.armed) return;
+              delete item.dataset.armed;
+              name.textContent = original;
+            }, 2600);
+            return;
+          }
+          delete item.dataset.armed;
           templatesMenu.style.display = "none";
           loadTemplate(template.key, nameInput, refreshMeta);
         });
