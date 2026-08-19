@@ -1,0 +1,881 @@
+{
+  "journeyId": "JRN-0-658812",
+  "journeyName": "VIPSMART_JBCL_Level_UP_Bonus_Lvl_13",
+  "author": {
+    "authorId": "ed93933e-a0ff-4460-a974-8063e7ec00ab",
+    "authorName": "Tasnim G"
+  },
+  "status": "Terminating",
+  "brand": "JBCL",
+  "currencyCodes": [
+    "CLP"
+  ],
+  "activities": [
+    {
+      "activityId": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+      "activityName": "external_system_source",
+      "activityDisplayName": "API",
+      "events": [
+        {
+          "eventName": "PlayerAdded",
+          "eventDisplayName": "Players added to journey",
+          "eventType": "Activation",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "webhookId": "pkVWQovYbmXD",
+        "description": "VIPSMART_JBCL_Level_UP_Bonus_Lvl_12",
+        "displayData": [
+          "Webhook"
+        ],
+        "targetSystem": "Webhook",
+        "isWebhookUrlHidden": false
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "ed93933e-a0ff-4460-a974-8063e7ec00ab",
+        "authorName": "Tasnim G"
+      },
+      "changedAt": "2026-08-19T11:40:00.1284990Z",
+      "version": 1
+    },
+    {
+      "activityId": "41eb0798-4368-42b9-8379-9ba7d0c8f42d",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-19T11:40:00.1285460Z",
+      "version": 1
+    },
+    {
+      "activityId": "45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-19T11:40:00.1285450Z",
+      "version": 1
+    },
+    {
+      "activityId": "45e9c00c-bb00-4f02-a784-c8b0833c89b1",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-19T11:40:00.1285310Z",
+      "version": 1
+    },
+    {
+      "activityId": "494b5634-8f54-4158-8981-3e4658585af6",
+      "activityName": "money_bonus",
+      "activityDisplayName": "Money Bonus",
+      "events": [
+        {
+          "eventName": "MoneyBonusNotAccrued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "41eb0798-4368-42b9-8379-9ba7d0c8f42d",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "MoneyBonusAccrued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+          "key": "CurrencyCode",
+          "isOptional": false
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "displayData": [
+          "Activity customized"
+        ],
+        "currencyAmounts": [
+          {
+            "brand": "JBCL",
+            "amount": 250000,
+            "currencyCode": "CLP"
+          }
+        ],
+        "transactionTitle": "Nivel de bono 13",
+        "amountAccrualType": "Fixed"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "ed93933e-a0ff-4460-a974-8063e7ec00ab",
+        "authorName": "Tasnim G"
+      },
+      "changedAt": "2026-08-19T11:40:00.1285440Z",
+      "version": 1
+    },
+    {
+      "activityId": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+      "activityName": "promotion",
+      "activityDisplayName": "Promotion",
+      "events": [
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "494b5634-8f54-4158-8981-3e4658585af6",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "45e9c00c-bb00-4f02-a784-c8b0833c89b1",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+          "key": "PromotionLinkId",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "autoAccept": false,
+        "placements": [
+          {
+            "data": {
+              "FrontId": "7146d4c6-7e04-47d6-a505-3553c9d4a579",
+              "ContentId": "05754182-a33f-496a-a2d7-70d18c21ccd3",
+              "bonusType": "money_bonus",
+              "moduleType": "SportBonus",
+              "bonusAmount": {
+                "CLP": 250000
+              },
+              "isActivityCurrencies": false
+            },
+            "dataSources": [
+              {
+                "keys": [
+                  "moneyBonusStatus"
+                ],
+                "journeyActivityId": "494b5634-8f54-4158-8981-3e4658585af6"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Offered within 3d 0h 0m"
+        ],
+        "promotionId": "c5342abe-926f-47f5-a6e5-b535723b1b52",
+        "currencyMode": "automated",
+        "timeToAccept": "P0Y0M3DT0H0M0S",
+        "showAsUpcoming": false,
+        "promotionLinkId": "c624dccc-5543-4e09-82a9-aca2d2237888",
+        "promotionStatus": "Offered",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "792152"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "ed93933e-a0ff-4460-a974-8063e7ec00ab",
+        "authorName": "Tasnim G"
+      },
+      "changedAt": "2026-08-19T11:40:00.1285280Z",
+      "version": 1
+    }
+  ],
+  "startAt": "2026-08-19T11:40:02.9596450Z",
+  "stopAt": "2027-06-01T04:00:00.0000000Z",
+  "changedAt": "2026-08-19T11:42:55.6864770Z",
+  "terminatedAt": "2026-08-19T11:42:55.6864770Z",
+  "changeHistory": {
+    "terminationInfo": {
+      "author": {
+        "authorId": "ed93933e-a0ff-4460-a974-8063e7ec00ab",
+        "authorName": "Tasnim G"
+      },
+      "changedAt": "2026-08-19T11:42:55.6864770Z"
+    }
+  },
+  "createdAt": "2026-08-19T11:40:00.1334700Z",
+  "metadata": {
+    "purpose": "Retention",
+    "category": "Marketing",
+    "priority": 2,
+    "productType": "Sport&Casino"
+  },
+  "reEntryRule": {
+    "reEntryMode": "Prohibited"
+  },
+  "timeZoneId": "Chile/Continental",
+  "testControlGroupParameters": {
+    "playersAddingStrategy": "IncludeAll",
+    "isEnabled": false
+  },
+  "activityEventConversionMetrics": [],
+  "areJourneyMetricsAvailable": true,
+  "journeySource": "UBO",
+  "isArchived": false,
+  "version": 6,
+  "isUnlimited": false,
+  "isImmediatelyAfterPublish": true,
+  "rawJourneyData": {
+    "elements": [
+      {
+        "id": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+        "data": {
+          "name": "external_system_source",
+          "ports": [
+            {
+              "id": "PlayerAdded-3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAdded",
+              "eventType": "Activation",
+              "payloadKeys": [
+                "Brand",
+                "CurrencyCode"
+              ],
+              "eventDisplayName": "Players added to journey",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "source",
+          "activityDisplayName": "API"
+        },
+        "type": "source",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f"
+            },
+            {
+              "id": "PromotionOffered-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f"
+            },
+            {
+              "id": "PromotionAccepted-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f"
+            },
+            {
+              "id": "PromotionExpired-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "PromotionAcceptedAt"
+              ],
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 199
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 264
+        }
+      },
+      {
+        "id": "45e9c00c-bb00-4f02-a784-c8b0833c89b1",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-45e9c00c-bb00-4f02-a784-c8b0833c89b1"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 347,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 232.5,
+          "y": 528
+        }
+      },
+      {
+        "id": "53894537-9a52-4218-9926-a669f7340b42",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "target": "45e9c00c-bb00-4f02-a784-c8b0833c89b1",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "targetHandle": "input-45e9c00c-bb00-4f02-a784-c8b0833c89b1",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "831e98b0-476b-476d-9159-d39f9d10c8c5",
+        "data": {
+          "isHidden": false,
+          "eventName": "PlayerAdded",
+          "eventType": "Activation",
+          "payloadKeys": [
+            "Brand",
+            "CurrencyCode"
+          ],
+          "activityName": "external_system_source",
+          "isLabelHidden": true,
+          "isReconnectable": false,
+          "eventDisplayName": "Players added to journey",
+          "isDisconnectable": false,
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+        "target": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAdded-3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2",
+        "targetHandle": "input-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "494b5634-8f54-4158-8981-3e4658585af6",
+        "data": {
+          "name": "money_bonus",
+          "ports": [
+            {
+              "id": "input-494b5634-8f54-4158-8981-3e4658585af6"
+            },
+            {
+              "id": "MoneyBonusAccrued-494b5634-8f54-4158-8981-3e4658585af6"
+            },
+            {
+              "id": "MoneyBonusNotAccrued-494b5634-8f54-4158-8981-3e4658585af6"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "MoneyBonusAccrued",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "transactionId",
+                "bonusAmount",
+                "moneyBonusStatus"
+              ],
+              "eventDisplayName": "Accrued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "MoneyBonusNotAccrued",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "reason",
+                "moneyBonusStatus"
+              ],
+              "eventDisplayName": "Not accrued",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Cash Bonus"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -120,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "MoneyBonusAccrued",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "transactionId",
+            "bonusAmount",
+            "moneyBonusStatus"
+          ],
+          "eventDisplayName": "Accrued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -126.5,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "41eb0798-4368-42b9-8379-9ba7d0c8f42d",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-41eb0798-4368-42b9-8379-9ba7d0c8f42d"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "MoneyBonusNotAccrued",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "reason",
+            "moneyBonusStatus"
+          ],
+          "eventDisplayName": "Not accrued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 113.5,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "44afd13e-6e79-4245-8c85-a7355dd0b203",
+        "data": {
+          "eventName": "MoneyBonusAccrued",
+          "eventType": "Completion",
+          "activityName": "money_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "494b5634-8f54-4158-8981-3e4658585af6",
+        "target": "45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "MoneyBonusAccrued-494b5634-8f54-4158-8981-3e4658585af6",
+        "targetHandle": "input-45757e6f-64e6-4e3c-8aaa-9fea2fc6ee21",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "0cf64851-6d3b-49f9-af64-8d4a2a98fe86",
+        "data": {
+          "eventName": "MoneyBonusNotAccrued",
+          "eventType": "Completion",
+          "activityName": "money_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "494b5634-8f54-4158-8981-3e4658585af6",
+        "target": "41eb0798-4368-42b9-8379-9ba7d0c8f42d",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "MoneyBonusNotAccrued-494b5634-8f54-4158-8981-3e4658585af6",
+        "targetHandle": "input-41eb0798-4368-42b9-8379-9ba7d0c8f42d",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "b5afbbff-21ff-4624-a86f-f80b4e56393b",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "target": "494b5634-8f54-4158-8981-3e4658585af6",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f",
+        "targetHandle": "input-494b5634-8f54-4158-8981-3e4658585af6",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      }
+    ],
+    "infoValues": {
+      "brand": "JBCL",
+      "stopAt": "2027-06-01T04:00:00.0000000Z",
+      "metadata": {
+        "purpose": "Retention",
+        "category": "Marketing",
+        "priority": 2,
+        "productType": "Sport&Casino"
+      },
+      "timeZoneId": "Chile/Continental",
+      "isUnlimited": false,
+      "journeyName": "VIPSMART_JBCL_Level_UP_Bonus_Lvl_13",
+      "reEntryRule": {
+        "reEntryMode": "Prohibited",
+        "reEntryPeriod": null
+      },
+      "currencyCodes": [
+        "CLP"
+      ],
+      "isImmediatelyAfterPublish": true,
+      "testControlGroupParameters": {
+        "isEnabled": false,
+        "controlGroupPercent": null,
+        "playersAddingStrategy": "IncludeAll",
+        "daysToKeepInControlGroup": null
+      }
+    },
+    "pathesConfiguration": {},
+    "exitCriteriaSettings": null,
+    "boundaryConfiguration": {},
+    "activitiesConfiguration": {
+      "3d6ee969-9456-4f8b-b6c7-5d13d2ce48e2": {
+        "data": {
+          "dataKeys": [],
+          "webhookId": "pkVWQovYbmXD",
+          "description": "VIPSMART_JBCL_Level_UP_Bonus_Lvl_12",
+          "targetSystem": "Webhook",
+          "isWebhookUrlHidden": false
+        },
+        "error": false,
+        "isTouched": true,
+        "displayData": [
+          "Webhook"
+        ],
+        "displayName": "API"
+      },
+      "494b5634-8f54-4158-8981-3e4658585af6": {
+        "data": {
+          "currencyAmounts": [
+            {
+              "brand": "JBCL",
+              "amount": 250000,
+              "currencyCode": "CLP"
+            }
+          ],
+          "transactionTitle": "Nivel de bono 13",
+          "amountAccrualType": "Fixed"
+        },
+        "error": false,
+        "isTouched": true,
+        "displayData": [
+          "Activity customized"
+        ],
+        "displayName": "Money Bonus",
+        "promotionId": "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f"
+      },
+      "7a3f3aa8-5eea-4a84-ab16-35d40c8ff28f": {
+        "data": {
+          "autoAccept": false,
+          "promotionId": "c5342abe-926f-47f5-a6e5-b535723b1b52",
+          "currencyMode": "automated",
+          "timeToAccept": "P0Y0M3DT0H0M0S",
+          "showAsUpcoming": false,
+          "promotionLinkId": "c624dccc-5543-4e09-82a9-aca2d2237888",
+          "promotionStatus": "Offered",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "792152"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "7146d4c6-7e04-47d6-a505-3553c9d4a579",
+          "contentId": "05754182-a33f-496a-a2d7-70d18c21ccd3"
+        },
+        "isTouched": true,
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "FrontId": "7146d4c6-7e04-47d6-a505-3553c9d4a579",
+                "ContentId": "05754182-a33f-496a-a2d7-70d18c21ccd3",
+                "bonusType": "money_bonus",
+                "moduleType": "SportBonus",
+                "bonusAmount": {
+                  "CLP": 200000
+                },
+                "isActivityCurrencies": false
+              },
+              "dataSources": [
+                {
+                  "keys": [
+                    "moneyBonusStatus"
+                  ],
+                  "journeyActivityId": "494b5634-8f54-4158-8981-3e4658585af6"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": false
+        },
+        "displayData": [
+          "Offered within 3d 0h 0m"
+        ],
+        "displayName": "Promotion"
+      }
+    }
+  },
+  "duplicatedFromVersion": 5,
+  "duplicatedFromId": "JRN-0-255135"
+}

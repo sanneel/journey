@@ -1,0 +1,585 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/player/promo/translations/en.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "adventCalendar",
+      "campaign",
+      "levelProgram",
+      "lp",
+      "promo",
+      "vlp"
+    ],
+    "example": "{\n  \"adventCalendar\": {\n    \"buttonName\": \"Claim reward\",\n    \"buttonNameForNonLoggedInUser\": \"Login to claim\",\n    \"claimedRewardModalButtonName\": \"Got it!\",\n    \"claimedRewardModalRewardDescription\": \"Reward name\",\n    \"claimedRewardModalSubtitle\": \"Your reward\",\n    \"claimedRewardModalTitle\": \"Da"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/player/promo/translations/es-jbcl.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "adventCalendar",
+      "campaign",
+      "levelProgram",
+      "lp",
+      "promo",
+      "vlp"
+    ],
+    "example": "{\n  \"adventCalendar\": {},\n  \"campaign\": {\n    \"cancelBonus\": \"Tras la confirmación, el bono será cancelado y los fondos del depósito no utilizados se devolverán al saldo total.\"\n  },\n  \"levelProgram\": {},\n  \"lp\": {},\n  \"promo\": {},\n  \"vlp\": {}\n}\n"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/player/promo/translations/es.json",
+    "count": 2,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "adventCalendar",
+      "campaign",
+      "levelProgram",
+      "lp",
+      "promo",
+      "vlp"
+    ],
+    "example": "{\n  \"adventCalendar\": {\n    \"buttonName\": \"Reclamar recompensa\",\n    \"buttonNameForNonLoggedInUser\": \"Iniciar sesión para reclamar\",\n    \"claimedRewardModalButtonName\": \"¡Entendido!\",\n    \"claimedRewardModalRewardDescription\": \"Nombre de la recompensa\",\n    \"claimedRewardModalSubtitle\": \"Tu recompen"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/player/WidgetModulor/manifest.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "remoteEntry"
+    ],
+    "example": "{\n  \"remoteEntry\": \"WidgetModulor/js/remoteEntry-6394703.js\"\n}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/418b8ade-2e3b-4223-b058-a20aba18f406/spa/settings.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "hiddenBlocks",
+      "redirects",
+      "listGroupBonuses",
+      "withDescription",
+      "backgroundColor",
+      "type"
+    ],
+    "example": "{\"hiddenBlocks\":[],\"redirects\":[],\"listGroupBonuses\":[],\"withDescription\":true,\"backgroundColor\":\"--dynamic-green\",\"type\":\"Casino\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/418b8ade-2e3b-4223-b058-a20aba18f406/widget/settings.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "redirect",
+      "redirects",
+      "type"
+    ],
+    "example": "{\"redirect\":null,\"redirects\":[],\"type\":\"Casino\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/418b8ade-2e3b-4223-b058-a20aba18f406/widgetModulor/settings.json",
+    "count": 1,
+    "lastStatus": 404,
+    "shape": "object",
+    "sampleKeys": [
+      "type",
+      "title",
+      "status",
+      "traceId"
+    ],
+    "example": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.5\",\"title\":\"Not Found\",\"status\":404,\"traceId\":\"00-ec315ee59255cd59714cad7d8bbb6e22-80be2b4ad61b4a2a-00\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/cashier/content/content-en.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "bonusName",
+      "bonusDescription",
+      "cashierBonusName",
+      "cashierBonusDescription"
+    ],
+    "example": "{\"bonusName\":\"Bonificación\",\"bonusDescription\":\"Bonus description\",\"cashierBonusName\":\"Bonus\",\"cashierBonusDescription\":\"Get a bonus for making a deposit\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/cashier/content/content-es.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "bonusName",
+      "bonusDescription",
+      "cashierBonusName",
+      "cashierBonusDescription"
+    ],
+    "example": "{\"bonusName\":\"Bonificación\",\"bonusDescription\":\"Bonus description\",\"cashierBonusName\":\"Bonificación\",\"cashierBonusDescription\":\"Get a bonus for making a deposit\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/cashier/manifest.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "es",
+      "en"
+    ],
+    "example": "{\"es\":\"content-es.json\",\"en\":\"content-en.json\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/spa/content/content-en.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Bonus pack\",\"BtnWidgetOpen\":\"Open\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"The promo has expired\",\"FaildeTitle\":\"Problem loading\",\"ForecastFailedText\":\"Something went wrong. Please try again.\",\"ForecastFailedTitle\":\"Prediction failed\",\"ForecastLateChangeText\":\"The time for accepting predicti"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/spa/content/content-es.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Paquete de bonificación\",\"BtnWidgetOpen\":\"Abre\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"La promo terminó\",\"FaildeTitle\":\"Problema cargando\",\"ForecastFailedText\":\"Se produjo un error. Intente de nuevo.\",\"ForecastFailedTitle\":\"Error de predicción\",\"ForecastLateChangeText\":\"Se acabó el tiempo p"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/spa/manifest.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "es",
+      "en"
+    ],
+    "example": "{\"es\":\"content-es.json\",\"en\":\"content-en.json\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widget/content/content-en.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Bonus pack\",\"BtnWidgetOpen\":\"Open\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"The promo has expired\",\"FaildeTitle\":\"Problem loading\",\"ForecastFailedText\":\"Something went wrong. Please try again.\",\"ForecastFailedTitle\":\"Prediction failed\",\"ForecastLateChangeText\":\"The time for accepting predicti"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widget/content/content-es.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Paquete de bonificación\",\"BtnWidgetOpen\":\"Abre\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"La promo terminó\",\"FaildeTitle\":\"Problema cargando\",\"ForecastFailedText\":\"Se produjo un error. Intente de nuevo.\",\"ForecastFailedTitle\":\"Error de predicción\",\"ForecastLateChangeText\":\"Se acabó el tiempo p"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widget/manifest.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "es",
+      "en"
+    ],
+    "example": "{\"es\":\"content-es.json\",\"en\":\"content-en.json\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widgetModulor/content/content-en.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Bonus pack\",\"BtnWidgetOpen\":\"Open\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"The promo has expired\",\"FaildeTitle\":\"Problem loading\",\"ForecastFailedText\":\"Something went wrong. Please try again.\",\"ForecastFailedTitle\":\"Prediction failed\",\"ForecastLateChangeText\":\"The time for accepting predicti"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widgetModulor/content/content-es.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "BonusPack",
+      "BtnWidgetOpen",
+      "Casino",
+      "ExpiredTitle",
+      "FaildeTitle",
+      "ForecastFailedText",
+      "ForecastFailedTitle",
+      "ForecastLateChangeText",
+      "ForecastLateChangeTitle",
+      "ForecastLateText",
+      "ForecastLateTitle",
+      "ForecastSavedTitle",
+      "InfoText",
+      "InstantGames",
+      "LiveCasino",
+      "ModalDetailsTitleDescriptionKey",
+      "ModalDetailsTitleKey",
+      "OfferedTitle",
+      "PlayerID",
+      "PromotionActiveWagering",
+      "ReqiredBet",
+      "Slots",
+      "Sport",
+      "TermsDescriptionText",
+      "TermsTitleKey"
+    ],
+    "example": "{\"BonusPack\":\"Paquete de bonificación\",\"BtnWidgetOpen\":\"Abre\",\"Casino\":\"Casino\",\"ExpiredTitle\":\"La promo terminó\",\"FaildeTitle\":\"Problema cargando\",\"ForecastFailedText\":\"Se produjo un error. Intente de nuevo.\",\"ForecastFailedTitle\":\"Error de predicción\",\"ForecastLateChangeText\":\"Se acabó el tiempo p"
+  },
+  {
+    "method": "GET",
+    "path": "/api/aws-get/mf/v1/fcfc6e9e-bfbf-4cfe-8c64-c68ba8d25f92/widgetModulor/manifest.json",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "es",
+      "en"
+    ],
+    "example": "{\"es\":\"content-es.json\",\"en\":\"content-en.json\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/growthbook/features",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "status",
+      "features",
+      "dateUpdated"
+    ],
+    "example": "{\"status\":200,\"features\":{\"demo_feature\":{\"defaultValue\":\"#00FFFF\"},\"platform.dummypages\":{\"defaultValue\":[{\"place\":\"promo\",\"title\":\"tech_support\",\"message\":\"make_bet_awhile\",\"contacts\":[{\"name\":\"WHATSAPP\",\"value\":\"+255-766-880-011\",\"link\":\"whatsapp://send?phone=+255766880011\",\"androidAppId\":\"com.wh"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/brand-properties/v0/time-zones",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "timeZoneIds"
+    ],
+    "example": "{\"timeZoneIds\":[\"Australia/Darwin\",\"Australia/Sydney\",\"Australia/Melbourne\",\"Asia/Kabul\",\"America/Anchorage\",\"America/Juneau\",\"America/Metlakatla\",\"America/Nome\",\"America/Sitka\",\"America/Yakutat\",\"America/Adak\",\"Asia/Barnaul\",\"Asia/Riyadh\",\"Asia/Bahrain\",\"Asia/Kuwait\",\"Asia/Qatar\",\"Asia/Aden\",\"Asia/"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/content-api/v0/templates",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "pageNumber",
+      "pageSize",
+      "totalPages",
+      "itemsCount",
+      "items"
+    ],
+    "example": "{\"pageNumber\":1,\"pageSize\":100,\"totalPages\":11,\"itemsCount\":100,\"items\":[{\"id\":\"VST-0-3835\",\"name\":\"Avi 10\",\"status\":\"Published\",\"type\":\"FreeSpin\",\"languages\":[\"en\",\"ur\"],\"createdAt\":\"2026-08-18T18:54:07.5334220Z\",\"createdBy\":{\"authorId\":\"950e856a-938f-4e43-9ccf-95910e5812b2\",\"authorName\":\"Edvard S\""
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/content-studio/v0/eb-backoffice/email/contents",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "items",
+      "pagination"
+    ],
+    "example": "{\"items\":[{\"id\":\"CSE-0-17006\",\"name\":\"JBCL - Libertadores dep n get 10% - 18.08\",\"brand\":\"JBCL\",\"type\":\"template\",\"latestStatus\":\"published\",\"latestVersion\":2,\"publishedVersion\":2,\"lastPublishedBy\":{\"id\":\"0953c253-470b-4d86-8c72-1d1480d10048\",\"name\":\"Magda G\",\"email\":null},\"createdBy\":{\"id\":\"0953c25"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/journey-builder/v0/casino-bonus-deposit/data/brands/wager-bonus-type",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "wagerBonusType"
+    ],
+    "example": "{\"wagerBonusType\":\"wagerWithLockBalance\"}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/journey-builder/v0/journey-drafts",
+    "count": 4,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "title",
+      "status",
+      "errors"
+    ],
+    "example": "{\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"page\":[\"The field Page must be between 1 and 2147483647.\"],\"size\":[\"The field Size must be between 1 and 100.\"]}}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/journey-builder/v0/journey-drafts/667772",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "journeyId",
+      "journeyName",
+      "brand",
+      "currencyCodes",
+      "activities",
+      "stopAt",
+      "metadata",
+      "reEntryRule",
+      "timeZoneId",
+      "testControlGroupParameters",
+      "activityEventConversionMetrics",
+      "createdAt",
+      "reservedJourneyId",
+      "author",
+      "journeySource",
+      "isArchived",
+      "isUnlimited",
+      "isImmediatelyAfterPublish",
+      "rawJourneyData",
+      "duplicatedFromVersion",
+      "duplicatedFromId"
+    ],
+    "example": "{\"journeyId\":667772,\"journeyName\":\"Copy of JBCL | CS | Sorry Bonus | $5000 Casino Bonus\",\"brand\":\"JBCL\",\"currencyCodes\":[\"CLP\"],\"activities\":[{\"activityId\":\"01bc451c-f153-4451-9a65-64b57b3e4087\",\"activityName\":\"end_of_journey\",\"events\":[],\"dependencies\":[],\"dataDependencies\":[],\"initializationData\":"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/journey-builder/v0/journeys",
+    "count": 3,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "type",
+      "title",
+      "status",
+      "errors",
+      "traceId"
+    ],
+    "example": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"limit\":[\"The field Limit must be between 1 and 100.\"],\"brandedCurrency\":[\"The BrandedCurrency field is required.\"]},\"traceId\":\"00-01ec6e2aea5730ee0c146b0efa27fe8b-81"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/level-system/v1/level-programs",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "pageNumber",
+      "pageSize",
+      "totalPages",
+      "itemsCount",
+      "items"
+    ],
+    "example": "{\"pageNumber\":1,\"pageSize\":10,\"totalPages\":0,\"itemsCount\":0,\"items\":[]}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/media-library/v0/folder",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "array[114]",
+    "sampleKeys": [
+      "id",
+      "name",
+      "operator",
+      "brand",
+      "is_readonly",
+      "created_at",
+      "created_by",
+      "modified_at",
+      "modified_by",
+      "is_deleted"
+    ],
+    "example": "[{\"id\":\"c5c7c614-5169-4346-b90b-8225836a1c63\",\"name\":\"JBCL\",\"operator\":\"PMI\",\"brand\":\"JBCL\",\"is_readonly\":true,\"created_at\":\"2024-04-10T07:54:03.654Z\",\"created_by\":\"system\",\"modified_at\":\"2024-04-10T07:54:03.654Z\",\"modified_by\":\"system\",\"is_deleted\":false},{\"id\":\"089fcd08-eaaf-43bb-8158-4d8447a3e2ea"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/media-library/v0/folder/089fcd08-eaaf-43bb-8158-4d8447a3e2ea/assets",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "page_total",
+      "page_current",
+      "total_count",
+      "items",
+      "current_count"
+    ],
+    "example": "{\"page_total\":352,\"page_current\":1,\"total_count\":3512,\"items\":[{\"id\":\"06be1167-a657-411d-b472-1f150b98451a\",\"name\":\"email br (15)\",\"operator\":\"PMI\",\"folder_id\":\"089fcd08-eaaf-43bb-8158-4d8447a3e2ea\",\"allocation_id\":66,\"type\":\"png\",\"size\":284678,\"height\":300,\"width\":600,\"created_at\":\"2026-08-19T06:43"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/promo/v2/promo",
+    "count": 2,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "items",
+      "count"
+    ],
+    "example": "{\"items\":[{\"id\":\"RND-0-18105\",\"status\":\"Active\",\"internalName\":\"E-Sport SC AUG\",\"type\":\"Randomizer\",\"subType\":\"ScratchCard\",\"brand\":\"JBCL\",\"currencies\":[\"CLP\"],\"languages\":[\"es\"],\"riskLevels\":null,\"hasCsv\":false,\"startDate\":\"2026-08-18T20:55:00.0000000Z\",\"endDate\":\"2026-08-20T20:55:00.0000000Z\",\"pro"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ubo/api/v0/crm/promo/v3/loyalty-program",
+    "count": 1,
+    "lastStatus": 200,
+    "shape": "object",
+    "sampleKeys": [
+      "items",
+      "count"
+    ],
+    "example": "{\"items\":[],\"count\":0}"
+  }
+]

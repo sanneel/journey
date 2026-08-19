@@ -1,0 +1,913 @@
+{
+  "journeyId": "JRN-0-658041",
+  "journeyName": "JBCL Hosted Light 50FS - 18.08.2026 13:03",
+  "author": {
+    "authorId": "b592a4af-146c-482a-ad68-9ce1f5081de1",
+    "authorName": "Oscar V"
+  },
+  "status": "Running",
+  "brand": "JBCL",
+  "currencyCodes": [
+    "CLP"
+  ],
+  "activities": [
+    {
+      "activityId": "4e32f9ad-acd4-431f-afcf-20ae53d77f6e",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T17:09:51.5095330Z",
+      "version": 1
+    },
+    {
+      "activityId": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+      "activityName": "notification_center",
+      "activityDisplayName": "On-site messaging",
+      "events": [
+        {
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "4e32f9ad-acd4-431f-afcf-20ae53d77f6e",
+          "count": 135,
+          "version": 1
+        },
+        {
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5cb4bde8-dcc7-4249-85b8-a7daea2b3652",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "channel": 3,
+        "category": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "contract": 8,
+        "accountId": "",
+        "languages": [
+          {
+            "languageCode": "es"
+          },
+          {
+            "languageCode": "en"
+          }
+        ],
+        "templates": 8006,
+        "displayData": [
+          "8006. JBCL Lightbox Custom - 2025"
+        ],
+        "deliveryType": "singleChannel",
+        "validityType": "disabledValidityAmount",
+        "objectForSend": {
+          "metadata": {
+            "utm_source": "boris",
+            "journeyName": "JBCL Hosted Light 50FS - 18.08.2026 13:03"
+          },
+          "variables": [
+            {
+              "name": "title",
+              "value": "%title_es%"
+            },
+            {
+              "name": "description",
+              "value": "%description_es%"
+            },
+            {
+              "name": "isBackground",
+              "value": "True"
+            },
+            {
+              "name": "imageLink",
+              "value": "%background_image_src%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption_es%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_variant",
+              "value": "primary"
+            },
+            {
+              "name": "title_es",
+              "value": "¡¿50 Y GRATIS?!🎁"
+            },
+            {
+              "name": "description_es",
+              "value": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥"
+            },
+            {
+              "name": "caption_es",
+              "value": "Lo quiero!"
+            },
+            {
+              "name": "title",
+              "value": "%title_en%"
+            },
+            {
+              "name": "description",
+              "value": "%description_en%"
+            },
+            {
+              "name": "isBackground",
+              "value": "True"
+            },
+            {
+              "name": "imageLink",
+              "value": "%background_image_src%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption_en%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_variant",
+              "value": "primary"
+            },
+            {
+              "name": "title_en",
+              "value": "¡¿50 Y GRATIS?!🎁"
+            },
+            {
+              "name": "description_en",
+              "value": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥"
+            },
+            {
+              "name": "caption_en",
+              "value": "Lo quiero!"
+            },
+            {
+              "name": "background_image_src",
+              "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/c36df815-b856-4866-8a00-597dfb6712f4.png"
+            },
+            {
+              "name": "link",
+              "value": "https://jugabet.cl/page/support?%$utm_tags%"
+            },
+            {
+              "name": "deeplink",
+              "value": "https://jugabet.cl/page/support?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_variant",
+              "value": "primary"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            }
+          ],
+          "template_id": 8006,
+          "defaultVariables": [],
+          "localizedVariables": []
+        },
+        "singleChannel": {
+          "accordion": {
+            "validList": {
+              "template8006": {
+                "en": true,
+                "es": true
+              }
+            }
+          },
+          "activityName": "JBCL Lightbox Custom - 2025",
+          "localizedLanguagesTab": {
+            "en": {
+              "title": "%title_en%",
+              "title_en": "¡¿50 Y GRATIS?!🎁",
+              "imageLink": "%background_image_src%?%$utm_tags%",
+              "caption_en": "Lo quiero!",
+              "description": "%description_en%",
+              "isBackground": "True",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description_en": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥",
+              "buttons_1_caption": "%caption_en%",
+              "buttons_1_variant": "primary",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%"
+            },
+            "es": {
+              "title": "%title_es%",
+              "title_es": "¡¿50 Y GRATIS?!🎁",
+              "imageLink": "%background_image_src%?%$utm_tags%",
+              "caption_es": "Lo quiero!",
+              "description": "%description_es%",
+              "isBackground": "True",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description_es": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥",
+              "buttons_1_caption": "%caption_es%",
+              "buttons_1_variant": "primary",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%"
+            },
+            "common": {
+              "link": "https://jugabet.cl/page/support?%$utm_tags%",
+              "deeplink": "https://jugabet.cl/page/support?%$utm_tags%",
+              "background_image_src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/c36df815-b856-4866-8a00-597dfb6712f4.png"
+            },
+            "dwhVariables": {
+              "en": [],
+              "es": [],
+              "common": []
+            },
+            "buttons_1_variant": "primary"
+          }
+        },
+        "validityAmount": "",
+        "dataDependencies": [],
+        "listOfUsedVariables": []
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "b592a4af-146c-482a-ad68-9ce1f5081de1",
+        "authorName": "Oscar V"
+      },
+      "changedAt": "2026-08-18T17:09:51.5095310Z",
+      "version": 1
+    },
+    {
+      "activityId": "5cb4bde8-dcc7-4249-85b8-a7daea2b3652",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T17:09:51.5095340Z",
+      "version": 1
+    },
+    {
+      "activityId": "e59bd723-27d4-46e4-a3ad-9513e4a80b60",
+      "activityName": "csv_import",
+      "activityDisplayName": "CSV",
+      "events": [
+        {
+          "eventName": "PlayerAdded",
+          "eventDisplayName": "Players added to journey",
+          "eventType": "Activation",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+          "count": 135,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "fileId": "821dae3f-a27e-4432-9c6e-af2bde159023",
+        "displayData": [
+          "sample-players (1).csv"
+        ],
+        "progressData": {
+          "fileId": "821dae3f-a27e-4432-9c6e-af2bde159023",
+          "fileName": "sample-players (1).csv",
+          "fileStatus": "Processed",
+          "playersCount": 135
+        },
+        "uploadStatus": "UPLOADED"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "b592a4af-146c-482a-ad68-9ce1f5081de1",
+        "authorName": "Oscar V"
+      },
+      "changedAt": "2026-08-18T17:09:51.5095150Z",
+      "version": 1
+    }
+  ],
+  "startAt": "2026-08-18T18:00:00.0000000Z",
+  "stopAt": "2026-08-21T03:59:00.0000000Z",
+  "changedAt": "2026-08-18T18:00:15.4242550Z",
+  "changeHistory": {},
+  "createdAt": "2026-08-18T17:09:51.5137610Z",
+  "metadata": {
+    "purpose": "UpSell",
+    "category": "Marketing",
+    "priority": 2,
+    "productType": "Casino"
+  },
+  "recurringRule": {
+    "type": "Daily",
+    "recurringPeriod": "P1D"
+  },
+  "reEntryRule": {
+    "reEntryMode": "Prohibited"
+  },
+  "timeZoneId": "America/Santiago",
+  "testControlGroupParameters": {
+    "playersAddingStrategy": "ExcludeAll",
+    "isEnabled": false
+  },
+  "activityEventConversionMetrics": [],
+  "areJourneyMetricsAvailable": true,
+  "allJourneyActivationsCount": 135,
+  "overJourneyActivationsCount": 135,
+  "journeySource": "UBO",
+  "isArchived": false,
+  "version": 5,
+  "isUnlimited": false,
+  "isImmediatelyAfterPublish": false,
+  "rawJourneyData": {
+    "elements": [
+      {
+        "id": "e59bd723-27d4-46e4-a3ad-9513e4a80b60",
+        "data": {
+          "name": "csv_import",
+          "ports": [
+            {
+              "id": "PlayerAdded-e59bd723-27d4-46e4-a3ad-9513e4a80b60"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAdded",
+              "eventType": "Activation",
+              "payloadKeys": [
+                "CurrencyCode"
+              ],
+              "isLabelHidden": true,
+              "payloadKeysV2": [
+                {
+                  "key": "CurrencyCode",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "csv_import.player_added",
+              "eventDisplayName": "Players added to journey",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "source",
+          "activityDisplayName": "CSV"
+        },
+        "type": "source",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "data": {
+          "name": "notification_center",
+          "ports": [
+            {
+              "id": "input-5502dd5c-6700-4aac-a310-e1d191bc0fd3"
+            },
+            {
+              "id": "NotificationSent-5502dd5c-6700-4aac-a310-e1d191bc0fd3"
+            },
+            {
+              "id": "NotificationNotSent-5502dd5c-6700-4aac-a310-e1d191bc0fd3"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "NotificationSent",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "notification_center.notification_sent",
+              "eventDisplayName": "Sent",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "NotificationNotSent",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "notification_center.notification_not_sent",
+              "eventDisplayName": "Not Sent",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "communication",
+          "activityDisplayName": "On-site messaging"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 199
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "4e32f9ad-acd4-431f-afcf-20ae53d77f6e",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-4e32f9ad-acd4-431f-afcf-20ae53d77f6e"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "notification_center.notification_sent",
+          "eventDisplayName": "Sent",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -6.5,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "5cb4bde8-dcc7-4249-85b8-a7daea2b3652",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-5cb4bde8-dcc7-4249-85b8-a7daea2b3652"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "notification_center.notification_not_sent",
+          "eventDisplayName": "Not Sent",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 233.5,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "66d54860-41ad-4690-8e35-e88d62537390",
+        "data": {
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "activityName": "notification_center",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "target": "4e32f9ad-acd4-431f-afcf-20ae53d77f6e",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "NotificationSent-5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "targetHandle": "input-4e32f9ad-acd4-431f-afcf-20ae53d77f6e",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "84a4559d-d857-4aab-9b11-371b17cd9c72",
+        "data": {
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "activityName": "notification_center",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "target": "5cb4bde8-dcc7-4249-85b8-a7daea2b3652",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "NotificationNotSent-5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "targetHandle": "input-5cb4bde8-dcc7-4249-85b8-a7daea2b3652",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "92509419-a8b0-40e4-90e4-c6436e4645e3",
+        "data": {
+          "isHidden": false,
+          "eventName": "PlayerAdded",
+          "eventType": "Activation",
+          "payloadKeys": [
+            "CurrencyCode"
+          ],
+          "activityName": "csv_import",
+          "isLabelHidden": true,
+          "payloadKeysV2": [
+            {
+              "key": "CurrencyCode",
+              "isHidden": true,
+              "isOptional": false,
+              "optionalPolicies": []
+            }
+          ],
+          "isReconnectable": false,
+          "localizationKey": "csv_import.player_added",
+          "eventDisplayName": "Players added to journey",
+          "isDisconnectable": true,
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "e59bd723-27d4-46e4-a3ad-9513e4a80b60",
+        "target": "5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "zIndex": 6,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAdded-e59bd723-27d4-46e4-a3ad-9513e4a80b60",
+        "targetHandle": "input-5502dd5c-6700-4aac-a310-e1d191bc0fd3",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      }
+    ],
+    "infoValues": {
+      "brand": "JBCL",
+      "stopAt": "2026-08-21T03:59:00Z",
+      "startAt": "2026-08-18T18:00:00Z",
+      "metadata": {
+        "purpose": "UpSell",
+        "category": "Marketing",
+        "priority": 2,
+        "productType": "Casino"
+      },
+      "timeZoneId": "America/Santiago",
+      "isUnlimited": false,
+      "journeyName": "JBCL Hosted Light 50FS - 18.08.2026 13:03",
+      "reEntryRule": {
+        "reEntryMode": "Prohibited",
+        "reEntryPeriod": null
+      },
+      "currencyCodes": [
+        "CLP"
+      ],
+      "recurringRule": {
+        "type": "Daily",
+        "recurringPeriod": "P1D"
+      },
+      "isImmediatelyAfterPublish": false,
+      "testControlGroupParameters": {
+        "isEnabled": false,
+        "controlGroupPercent": null,
+        "playersAddingStrategy": "ExcludeAll",
+        "daysToKeepInControlGroup": null
+      }
+    },
+    "pathesConfiguration": {},
+    "exitCriteriaSettings": null,
+    "boundaryConfiguration": {},
+    "activitiesConfiguration": {
+      "5502dd5c-6700-4aac-a310-e1d191bc0fd3": {
+        "data": {
+          "channel": 3,
+          "category": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "contract": 8,
+          "accountId": "",
+          "languages": [
+            {
+              "languageCode": "es"
+            },
+            {
+              "languageCode": "en"
+            }
+          ],
+          "templates": 8006,
+          "deliveryType": "singleChannel",
+          "validityType": "disabledValidityAmount",
+          "objectForSend": {
+            "metadata": {
+              "utm_source": "boris",
+              "journeyName": "JBCL Hosted Light 50FS - 18.08.2026 13:03"
+            },
+            "variables": [
+              {
+                "name": "title",
+                "value": "%title_es%"
+              },
+              {
+                "name": "description",
+                "value": "%description_es%"
+              },
+              {
+                "name": "isBackground",
+                "value": "True"
+              },
+              {
+                "name": "imageLink",
+                "value": "%background_image_src%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption_es%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_variant",
+                "value": "primary"
+              },
+              {
+                "name": "title_es",
+                "value": "¡¿50 Y GRATIS?!🎁"
+              },
+              {
+                "name": "description_es",
+                "value": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥"
+              },
+              {
+                "name": "caption_es",
+                "value": "Lo quiero!"
+              },
+              {
+                "name": "title",
+                "value": "%title_en%"
+              },
+              {
+                "name": "description",
+                "value": "%description_en%"
+              },
+              {
+                "name": "isBackground",
+                "value": "True"
+              },
+              {
+                "name": "imageLink",
+                "value": "%background_image_src%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption_en%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_variant",
+                "value": "primary"
+              },
+              {
+                "name": "title_en",
+                "value": "¡¿50 Y GRATIS?!🎁"
+              },
+              {
+                "name": "description_en",
+                "value": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥"
+              },
+              {
+                "name": "caption_en",
+                "value": "Lo quiero!"
+              },
+              {
+                "name": "background_image_src",
+                "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/c36df815-b856-4866-8a00-597dfb6712f4.png"
+              },
+              {
+                "name": "link",
+                "value": "https://jugabet.cl/page/support?%$utm_tags%"
+              },
+              {
+                "name": "deeplink",
+                "value": "https://jugabet.cl/page/support?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_variant",
+                "value": "primary"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              }
+            ],
+            "template_id": 8006,
+            "defaultVariables": [],
+            "localizedVariables": []
+          },
+          "singleChannel": {
+            "accordion": {
+              "validList": {
+                "template8006": {
+                  "en": true,
+                  "es": true
+                }
+              }
+            },
+            "activityName": "JBCL Lightbox Custom - 2025",
+            "localizedLanguagesTab": {
+              "en": {
+                "title": "%title_en%",
+                "title_en": "¡¿50 Y GRATIS?!🎁",
+                "imageLink": "%background_image_src%?%$utm_tags%",
+                "caption_en": "Lo quiero!",
+                "description": "%description_en%",
+                "isBackground": "True",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description_en": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥",
+                "buttons_1_caption": "%caption_en%",
+                "buttons_1_variant": "primary",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%"
+              },
+              "es": {
+                "title": "%title_es%",
+                "title_es": "¡¿50 Y GRATIS?!🎁",
+                "imageLink": "%background_image_src%?%$utm_tags%",
+                "caption_es": "Lo quiero!",
+                "description": "%description_es%",
+                "isBackground": "True",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description_es": "¡No es un truco! Contáctanos y reclama tu bono de 50 giros. ¡No dejes pasar esta oportunidad de aumentar tus ganancias! ¡Corre antes de que expire la promoción!🔥",
+                "buttons_1_caption": "%caption_es%",
+                "buttons_1_variant": "primary",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%"
+              },
+              "common": {
+                "link": "https://jugabet.cl/page/support?%$utm_tags%",
+                "deeplink": "https://jugabet.cl/page/support?%$utm_tags%",
+                "background_image_src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/c36df815-b856-4866-8a00-597dfb6712f4.png"
+              },
+              "dwhVariables": {
+                "en": [],
+                "es": [],
+                "common": []
+              },
+              "buttons_1_variant": "primary"
+            }
+          },
+          "validityAmount": "",
+          "dataDependencies": [],
+          "listOfUsedVariables": []
+        },
+        "error": false,
+        "displayData": [
+          "8006. JBCL Lightbox Custom - 2025"
+        ],
+        "displayName": "On-site messaging"
+      },
+      "e59bd723-27d4-46e4-a3ad-9513e4a80b60": {
+        "data": {
+          "fileId": "821dae3f-a27e-4432-9c6e-af2bde159023",
+          "dataKeys": [],
+          "progressData": {
+            "fileId": "821dae3f-a27e-4432-9c6e-af2bde159023",
+            "fileName": "sample-players (1).csv",
+            "fileStatus": "Processed",
+            "playersCount": 135
+          },
+          "uploadStatus": "UPLOADED"
+        },
+        "error": false,
+        "displayData": [
+          "sample-players (1).csv"
+        ],
+        "displayName": "CSV"
+      }
+    }
+  }
+}

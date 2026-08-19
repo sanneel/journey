@@ -1,0 +1,5756 @@
+{
+  "journeyId": "JRN-0-655557",
+  "journeyName": "VIPCRM_JBCL_BetInsurance_LDP_GGXSIL_AUG",
+  "author": {
+    "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+    "authorName": "Vatche C"
+  },
+  "status": "Planned",
+  "brand": "JBCL",
+  "currencyCodes": [
+    "CLP"
+  ],
+  "activities": [
+    {
+      "activityId": "140bff7e-af6d-4cac-9fa9-a65a590161b3",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9108250Z",
+      "version": 1
+    },
+    {
+      "activityId": "190a41a7-f4a3-46f8-a9fc-863de5926152",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112140Z",
+      "version": 1
+    },
+    {
+      "activityId": "2d94832b-dfac-4750-8628-0ed248579013",
+      "activityName": "notification_center",
+      "activityDisplayName": "On-site messaging",
+      "events": [
+        {
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "6bbe89ab-62c0-420b-9121-820b7190496c",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "channel": 1,
+        "category": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "contract": 1,
+        "accountId": "",
+        "languages": [
+          {
+            "languageCode": "es"
+          },
+          {
+            "languageCode": "en"
+          }
+        ],
+        "templates": 1312,
+        "displayData": [
+          "1312. JBCL Custom. Dynamic. CRM. Information. PROMO"
+        ],
+        "deliveryType": "singleChannel",
+        "validityType": "days",
+        "objectForSend": {
+          "metadata": {
+            "utm_source": "boris",
+            "journeyName": "VIPCRM_JBCL_BetInsurance_LDP_GGXSIL_AUG"
+          },
+          "variables": [
+            {
+              "name": "group",
+              "value": "regular"
+            },
+            {
+              "name": "title",
+              "value": "%title-en%"
+            },
+            {
+              "name": "layout",
+              "value": "1"
+            },
+            {
+              "name": "icon-src",
+              "value": "%icon-src%"
+            },
+            {
+              "name": "title-en",
+              "value": "¡Tu apuesta, protegida! "
+            },
+            {
+              "name": "caption-en",
+              "value": "Activa tu seguro"
+            },
+            {
+              "name": "description",
+              "value": "%description-en%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "description-en",
+              "value": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta."
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption-en%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_highlighted",
+              "value": "True"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            },
+            {
+              "name": "title",
+              "value": "%title-es%"
+            },
+            {
+              "name": "layout",
+              "value": "1"
+            },
+            {
+              "name": "icon-src",
+              "value": "%icon-src%"
+            },
+            {
+              "name": "title-es",
+              "value": "¡Tu apuesta, protegida! "
+            },
+            {
+              "name": "caption-es",
+              "value": "Activa tu seguro"
+            },
+            {
+              "name": "description",
+              "value": "%description-es%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "description-es",
+              "value": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta."
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption-es%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_highlighted",
+              "value": "True"
+            },
+            {
+              "name": "link",
+              "value": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%"
+            },
+            {
+              "name": "deeplink",
+              "value": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%"
+            },
+            {
+              "name": "icon-src",
+              "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/fe7fcc85-6533-40f3-964e-f20fdfbf7e82.png"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            }
+          ],
+          "template_id": 1312,
+          "expire_after": "3.00:00:00.000",
+          "defaultVariables": [],
+          "localizedVariables": []
+        },
+        "singleChannel": {
+          "accordion": {
+            "validList": {
+              "template1312": {
+                "en": true,
+                "es": true
+              }
+            }
+          },
+          "activityName": "JBCL Custom. Dynamic. CRM. Information. PROMO",
+          "localizedLanguagesTab": {
+            "en": {
+              "group": "regular",
+              "title": "%title-en%",
+              "layout": "1",
+              "icon-src": "%icon-src%",
+              "title-en": "¡Tu apuesta, protegida! ",
+              "caption-en": "Activa tu seguro",
+              "description": "%description-en%",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description-en": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta.",
+              "buttons_1_caption": "%caption-en%",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+              "buttons_1_highlighted": "True"
+            },
+            "es": {
+              "group": "regular",
+              "title": "%title-es%",
+              "layout": "1",
+              "icon-src": "%icon-src%",
+              "title-es": "¡Tu apuesta, protegida! ",
+              "caption-es": "Activa tu seguro",
+              "description": "%description-es%",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description-es": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta.",
+              "buttons_1_caption": "%caption-es%",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+              "buttons_1_highlighted": "True"
+            },
+            "common": {
+              "link": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%",
+              "deeplink": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%",
+              "icon-src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/fe7fcc85-6533-40f3-964e-f20fdfbf7e82.png"
+            },
+            "dwhVariables": {
+              "en": [],
+              "es": [],
+              "common": []
+            }
+          }
+        },
+        "validityAmount": "3",
+        "dataDependencies": [],
+        "listOfUsedVariables": []
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:49:55.5675320Z",
+      "version": 1
+    },
+    {
+      "activityId": "350a3cd3-0cc9-4f28-88ea-a49fae613f68",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:49:55.5674610Z",
+      "version": 1
+    },
+    {
+      "activityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+      "activityName": "promotion",
+      "activityDisplayName": "Promotion",
+      "events": [
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "140bff7e-af6d-4cac-9fa9-a65a590161b3",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "2d94832b-dfac-4750-8628-0ed248579013",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "autoAccept": false,
+        "placements": [
+          {
+            "data": {
+              "FrontId": "e9f8e4fc-a0b7-48d0-a040-ede4480e23be",
+              "ContentId": "3606eef5-2d6a-48b2-9c2e-2ba9fee87b50",
+              "bonusType": null,
+              "mechanics": [
+                {
+                  "id": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+                  "title": "LDP 20% Bet Insurance",
+                  "depositRate": 0.2,
+                  "wageringInfo": {
+                    "minOdd": 1.6,
+                    "betTypes": [
+                      "ordinar",
+                      "express"
+                    ],
+                    "channels": [
+                      "ALL"
+                    ],
+                    "minItems": 2,
+                    "lineTypes": [
+                      "live",
+                      "prematch"
+                    ],
+                    "wagerFactor": 10,
+                    "minOddParlay": 1.96,
+                    "wageringDays": 5,
+                    "itemsCheckType": "All",
+                    "minOddItemParlay": 1.4,
+                    "prolongationDays": 2,
+                    "isAllowedToCancel": true,
+                    "maxBonusReleaseRate": 5
+                  },
+                  "maxBonusAmount": {
+                    "CLP": 150000
+                  },
+                  "isSportBonusLockEnabled": true
+                }
+              ],
+              "conditions": [
+                {
+                  "name": "Bet insurance condition 1",
+                  "minOdd": "",
+                  "betTypes": [
+                    "express"
+                  ],
+                  "channels": [
+                    "ALL"
+                  ],
+                  "lineTypes": [
+                    "live",
+                    "prematch"
+                  ],
+                  "sportTags": [
+                    {
+                      "id": "F",
+                      "names": {
+                        "en": "Football",
+                        "es": "Fútbol"
+                      }
+                    }
+                  ],
+                  "isCollapsed": false,
+                  "expireInDays": "",
+                  "minBetAmount": {
+                    "CLP": "50000"
+                  },
+                  "minOddParlay": 1.96,
+                  "sportTickets": [
+                    {
+                      "names": {
+                        "event": {},
+                        "sport": {
+                          "es": "Fútbol"
+                        },
+                        "tournament": {}
+                      },
+                      "sport": "Football",
+                      "eventId": null,
+                      "tournamentId": null,
+                      "sportShortKey": "F"
+                    }
+                  ],
+                  "itemsCheckType": "All",
+                  "availableEvents": [],
+                  "availableSports": [
+                    "F"
+                  ],
+                  "minOddItemParlay": 1.4,
+                  "availableTournaments": []
+                }
+              ],
+              "moduleType": "SportBetInsurance",
+              "isActivityCurrencies": false,
+              "minNumberOfEventsInParlay": "2"
+            },
+            "dataSources": [
+              {
+                "keys": [],
+                "type": "Sync",
+                "journeyActivityId": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+              },
+              {
+                "keys": [
+                  "BetInsuranceStatus",
+                  "BetInsuranceExpirationDate"
+                ],
+                "type": "Sync",
+                "journeyActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f"
+              },
+              {
+                "keys": [
+                  "ReceivedAmount"
+                ],
+                "journeyActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Offered within 1d 0h 0m"
+        ],
+        "promotionId": "9b48ec25-8e8d-444e-8378-7e953e2939e3",
+        "currencyMode": "automated",
+        "timeToAccept": "P0Y0M1DT0H0M0S",
+        "showAsUpcoming": false,
+        "promotionLinkId": "6ddf8f9e-045a-4195-8d39-0ab8bc45b887",
+        "promotionStatus": "Offered",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "788500"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:49:55.5674540Z",
+      "version": 1
+    },
+    {
+      "activityId": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+      "activityName": "end_of_path",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112340Z",
+      "version": 1
+    },
+    {
+      "activityId": "5eb2ea29-95b0-4d2d-9148-e69825315f48",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:49:55.5674610Z",
+      "version": 1
+    },
+    {
+      "activityId": "6bbe89ab-62c0-420b-9121-820b7190496c",
+      "activityName": "end_of_path",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112350Z",
+      "version": 1
+    },
+    {
+      "activityId": "788cab2f-9dce-43cd-9f3f-d026d368fde8",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112190Z",
+      "version": 1
+    },
+    {
+      "activityId": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+      "activityName": "sport_bonus",
+      "activityDisplayName": "Sport Bonus",
+      "events": [
+        {
+          "eventName": "Lost",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "9a883d08-55d5-4156-8d9a-0b50ff8956b2",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "Canceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "788cab2f-9dce-43cd-9f3f-d026d368fde8",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "Completed",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "190a41a7-f4a3-46f8-a9fc-863de5926152",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "Expired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "f9511176-7362-4a24-9a5e-d5732a805931",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "Issued",
+          "eventDisplayName": "Issued",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "NotIssued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "b4de670c-081f-4b04-9882-8078942f7997",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "Terminated",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "WageringStarted",
+          "eventDisplayName": "Wageringstarted",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+          "key": "PromotionId",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+          "key": "PromotionAcceptedAt",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+          "key": "ReceivedAmount",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "properties": {
+          "title": "LDP 20% Bet Insurance",
+          "depositRate": 0.2,
+          "wageringInfo": {
+            "minOdd": 1.6,
+            "betTypes": [
+              "ordinar",
+              "express"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "minItems": 2,
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "wagerFactor": 10,
+            "minOddParlay": 1.96,
+            "wageringDays": 5,
+            "itemsCheckType": "All",
+            "minOddItemParlay": 1.4,
+            "prolongationDays": 2,
+            "isAllowedToCancel": true,
+            "maxBonusReleaseRate": 5
+          },
+          "maxBonusAmount": {
+            "CLP": 150000
+          },
+          "isSportBonusLockEnabled": true
+        },
+        "displayData": [
+          "5 days"
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:42:33.9112130Z",
+      "version": 1
+    },
+    {
+      "activityId": "9854789e-9d17-47cc-8462-81a91006f84a",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:49:55.5674590Z",
+      "version": 1
+    },
+    {
+      "activityId": "9a883d08-55d5-4156-8d9a-0b50ff8956b2",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112180Z",
+      "version": 1
+    },
+    {
+      "activityId": "b2e49549-5f48-4759-bb9f-3057b0e9a61f",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9111860Z",
+      "version": 1
+    },
+    {
+      "activityId": "b4de670c-081f-4b04-9882-8078942f7997",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112180Z",
+      "version": 1
+    },
+    {
+      "activityId": "bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112170Z",
+      "version": 1
+    },
+    {
+      "activityId": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+      "activityName": "dwh_source",
+      "activityDisplayName": "Custom Segment",
+      "events": [
+        {
+          "eventName": "PlayerAdded",
+          "eventDisplayName": "Players added to journey",
+          "eventType": "Activation",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "displayData": [
+          "Activity customized"
+        ],
+        "filterDetails": {
+          "filtersTree": [
+            {
+              "nodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+              "children": [
+                "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "1c528260-2d99-4500-a8c1-e7c23e030ccd"
+              ],
+              "nodeType": "Operator",
+              "isDeprecated": true,
+              "parentNodeId": null,
+              "groupOperator": "Exclude",
+              "filterConditionId": null
+            },
+            {
+              "name": "risk_casino_segment",
+              "column": {
+                "name": "risk_casino_segment",
+                "tableName": "agg_player_summary",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Risk segment related to casino.",
+                "displayName": "risk_casino_segment",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "isPredefinedValuesAvailable": true
+              },
+              "height": 42,
+              "nodeId": "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "in",
+              "settings": {
+                "values": [
+                  "Good guys-X",
+                  "VIP-Silver"
+                ],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "agg_player_summary",
+              "filterName": "Multiple select",
+              "isRequired": false,
+              "description": "Risk segment related to casino.",
+              "displayName": "risk_casino_segment",
+              "databaseName": "dv_marts",
+              "isDeprecated": false,
+              "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+              "valuesSource": null,
+              "conditionType": "MultiSelect",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "in",
+                  "conditionType": "MultiSelect"
+                },
+                {
+                  "operator": "notIn",
+                  "conditionType": "MultiSelect"
+                }
+              ],
+              "filterConditionId": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+              "isPredefinedValuesAvailable": true
+            },
+            {
+              "name": "last_bet_total",
+              "column": {
+                "name": "last_bet_total",
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last bet across all products.",
+                "displayName": "last_bet_total",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "isPredefinedValuesAvailable": false
+              },
+              "height": 42,
+              "nodeId": "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "lte",
+              "settings": {
+                "amount": "30",
+                "values": [],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "agg_player_summary",
+              "filterName": "Date&time",
+              "isRequired": false,
+              "description": "Timestamp of the player's last bet across all products.",
+              "displayName": "last_bet_total",
+              "databaseName": "dv_marts",
+              "dateTimeMode": "Relative",
+              "isDeprecated": false,
+              "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+              "valuesSource": null,
+              "conditionType": "DateTimeRelative",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "equal",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "notEqual",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "gte",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "lte",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "between",
+                  "conditionType": "DateTimeBetween"
+                },
+                {
+                  "operator": "equal",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "notEqual",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "gte",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "lte",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "between",
+                  "conditionType": "DateTimeRelativeBetween"
+                }
+              ],
+              "filterConditionId": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+              "isPredefinedValuesAvailable": false
+            },
+            {
+              "name": "last_deposit",
+              "column": {
+                "name": "last_deposit",
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last deposit.",
+                "displayName": "last_deposit",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "isPredefinedValuesAvailable": false
+              },
+              "height": 42,
+              "nodeId": "3d467d60-22df-4cd9-a0d6-4676885f19b9",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "lte",
+              "settings": {
+                "amount": "30",
+                "values": [],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "agg_player_summary",
+              "filterName": "Date&time",
+              "isRequired": false,
+              "description": "Timestamp of the player's last deposit.",
+              "displayName": "last_deposit",
+              "databaseName": "dv_marts",
+              "dateTimeMode": "Relative",
+              "isDeprecated": false,
+              "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+              "valuesSource": null,
+              "conditionType": "DateTimeRelative",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "equal",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "notEqual",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "gte",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "lte",
+                  "conditionType": "DateTime"
+                },
+                {
+                  "operator": "between",
+                  "conditionType": "DateTimeBetween"
+                },
+                {
+                  "operator": "equal",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "notEqual",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "gte",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "lte",
+                  "conditionType": "DateTimeRelative"
+                },
+                {
+                  "operator": "between",
+                  "conditionType": "DateTimeRelativeBetween"
+                }
+              ],
+              "filterConditionId": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+              "isPredefinedValuesAvailable": false
+            },
+            {
+              "name": "is_cancel",
+              "column": {
+                "name": "is_cancel",
+                "tableName": "d_player_risk_tag",
+                "filterName": "Boolean",
+                "isRequired": false,
+                "description": "Flag indicating if the risk tag has been canceled.",
+                "displayName": "is_cancel",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "is",
+                    "conditionType": "Boolean"
+                  }
+                ],
+                "isPredefinedValuesAvailable": false
+              },
+              "height": 42,
+              "nodeId": "082f58ed-5317-4312-ad2e-85670b08a31e",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "is",
+              "settings": {
+                "value": "no",
+                "values": [],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "d_player_risk_tag",
+              "filterName": "Boolean",
+              "isRequired": false,
+              "description": "Flag indicating if the risk tag has been canceled.",
+              "displayName": "is_cancel",
+              "databaseName": "dv_marts",
+              "isDeprecated": false,
+              "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+              "valuesSource": null,
+              "conditionType": "Boolean",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "is",
+                  "conditionType": "Boolean"
+                }
+              ],
+              "filterConditionId": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+              "isPredefinedValuesAvailable": false
+            },
+            {
+              "nodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+              "children": [
+                "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b"
+              ],
+              "nodeType": "Operator",
+              "isDeprecated": true,
+              "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+              "groupOperator": "And",
+              "filterConditionId": null
+            },
+            {
+              "name": "tag_name",
+              "column": {
+                "name": "tag_name",
+                "tableName": "d_player_risk_tag",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Name of the risk tag.",
+                "displayName": "tag_name",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "isPredefinedValuesAvailable": true
+              },
+              "height": 42,
+              "nodeId": "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "in",
+              "settings": {
+                "values": [
+                  "Excluded from CRM"
+                ],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "d_player_risk_tag",
+              "filterName": "Multiple select",
+              "isRequired": false,
+              "description": "Name of the risk tag.",
+              "displayName": "tag_name",
+              "databaseName": "dv_marts",
+              "isDeprecated": false,
+              "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+              "valuesSource": null,
+              "conditionType": "MultiSelect",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "in",
+                  "conditionType": "MultiSelect"
+                },
+                {
+                  "operator": "notIn",
+                  "conditionType": "MultiSelect"
+                }
+              ],
+              "filterConditionId": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+              "isPredefinedValuesAvailable": true
+            },
+            {
+              "name": "restriction_name",
+              "column": {
+                "name": "restriction_name",
+                "tableName": "d_player_restriction",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "The name of restriction",
+                "displayName": "restriction_name",
+                "valuesSource": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "isPredefinedValuesAvailable": true
+              },
+              "height": 42,
+              "nodeId": "1c528260-2d99-4500-a8c1-e7c23e030ccd",
+              "children": [],
+              "nodeType": "Filter",
+              "operator": "in",
+              "settings": {
+                "values": [
+                  "login",
+                  "deposit"
+                ],
+                "dateType": "days",
+                "hasEmptyState": false
+              },
+              "showForm": false,
+              "tableName": "d_player_restriction",
+              "filterName": "Multiple select",
+              "isRequired": false,
+              "description": "The name of restriction",
+              "displayName": "restriction_name",
+              "databaseName": "dv_marts",
+              "isDeprecated": false,
+              "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+              "valuesSource": null,
+              "conditionType": "MultiSelect",
+              "groupOperator": null,
+              "filterConditions": [
+                {
+                  "operator": "in",
+                  "conditionType": "MultiSelect"
+                },
+                {
+                  "operator": "notIn",
+                  "conditionType": "MultiSelect"
+                }
+              ],
+              "filterConditionId": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+              "isPredefinedValuesAvailable": true
+            },
+            {
+              "nodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+              "children": [
+                "082f58ed-5317-4312-ad2e-85670b08a31e",
+                "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17"
+              ],
+              "nodeType": "Operator",
+              "isDeprecated": true,
+              "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+              "groupOperator": "And",
+              "filterConditionId": null
+            },
+            {
+              "nodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+              "children": [
+                "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                "3d467d60-22df-4cd9-a0d6-4676885f19b9"
+              ],
+              "nodeType": "Operator",
+              "isDeprecated": true,
+              "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+              "groupOperator": "Or",
+              "filterConditionId": null
+            }
+          ],
+          "filterConditions": [
+            {
+              "id": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+              "values": [
+                "Good guys-X",
+                "VIP-Silver"
+              ],
+              "nodeType": "Filter",
+              "operator": "in",
+              "fieldName": "risk_casino_segment",
+              "tableName": "agg_player_summary",
+              "columnName": "risk_casino_segment",
+              "databaseName": "dv_marts",
+              "conditionType": "MultiSelect",
+              "hasEmptyState": false
+            },
+            {
+              "id": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+              "value": "P0Y0M30DT0H0M0S",
+              "nodeType": "Filter",
+              "operator": "lte",
+              "fieldName": "last_bet_total",
+              "tableName": "agg_player_summary",
+              "columnName": "last_bet_total",
+              "databaseName": "dv_marts",
+              "conditionType": "DateTimeRelative",
+              "hasEmptyState": false
+            },
+            {
+              "id": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+              "value": "P0Y0M30DT0H0M0S",
+              "nodeType": "Filter",
+              "operator": "lte",
+              "fieldName": "last_deposit",
+              "tableName": "agg_player_summary",
+              "columnName": "last_deposit",
+              "databaseName": "dv_marts",
+              "conditionType": "DateTimeRelative",
+              "hasEmptyState": false
+            },
+            {
+              "id": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+              "value": false,
+              "nodeType": "Filter",
+              "operator": "is",
+              "fieldName": "is_cancel",
+              "tableName": "d_player_risk_tag",
+              "columnName": "is_cancel",
+              "databaseName": "dv_marts",
+              "conditionType": "Boolean",
+              "hasEmptyState": false
+            },
+            {
+              "id": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+              "values": [
+                "Excluded from CRM"
+              ],
+              "nodeType": "Filter",
+              "operator": "in",
+              "fieldName": "tag_name",
+              "tableName": "d_player_risk_tag",
+              "columnName": "tag_name",
+              "databaseName": "dv_marts",
+              "conditionType": "MultiSelect",
+              "hasEmptyState": false
+            },
+            {
+              "id": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+              "values": [
+                "login",
+                "deposit"
+              ],
+              "nodeType": "Filter",
+              "operator": "in",
+              "fieldName": "restriction_name",
+              "tableName": "d_player_restriction",
+              "columnName": "restriction_name",
+              "databaseName": "dv_marts",
+              "conditionType": "MultiSelect",
+              "hasEmptyState": false
+            }
+          ]
+        },
+        "dataSourceName": "default",
+        "currentTemplate": {
+          "id": "227cb28d-cbdc-4c29-8f92-eee67c955f00",
+          "name": "26_GGX",
+          "brand": "JBCL",
+          "group": "myFilterTemplates",
+          "createdBy": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+          "currencyCodes": [
+            "CLP"
+          ],
+          "filterDetails": {
+            "filtersTree": [
+              {
+                "nodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "children": [
+                  "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                  "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                  "1c528260-2d99-4500-a8c1-e7c23e030ccd"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": null,
+                "groupOperator": "Exclude",
+                "filterConditionId": null
+              },
+              {
+                "name": "risk_casino_segment",
+                "column": {
+                  "name": "risk_casino_segment",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Risk segment related to casino.",
+                  "displayName": "risk_casino_segment",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "Good guys-X",
+                    "VIP-Silver"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Risk segment related to casino.",
+                "displayName": "risk_casino_segment",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "name": "last_bet_total",
+                "column": {
+                  "name": "last_bet_total",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last bet across all products.",
+                  "displayName": "last_bet_total",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "lte",
+                "settings": {
+                  "amount": "14",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last bet across all products.",
+                "displayName": "last_bet_total",
+                "databaseName": "dv_marts",
+                "dateTimeMode": "Relative",
+                "isDeprecated": false,
+                "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "valuesSource": null,
+                "conditionType": "DateTimeRelative",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "filterConditionId": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "name": "last_deposit",
+                "column": {
+                  "name": "last_deposit",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last deposit.",
+                  "displayName": "last_deposit",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "3d467d60-22df-4cd9-a0d6-4676885f19b9",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "lte",
+                "settings": {
+                  "amount": "14",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last deposit.",
+                "displayName": "last_deposit",
+                "databaseName": "dv_marts",
+                "dateTimeMode": "Relative",
+                "isDeprecated": false,
+                "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "valuesSource": null,
+                "conditionType": "DateTimeRelative",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "filterConditionId": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "name": "is_cancel",
+                "column": {
+                  "name": "is_cancel",
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Boolean",
+                  "isRequired": false,
+                  "description": "Flag indicating if the risk tag has been canceled.",
+                  "displayName": "is_cancel",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "is",
+                      "conditionType": "Boolean"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "082f58ed-5317-4312-ad2e-85670b08a31e",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "is",
+                "settings": {
+                  "value": "no",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_risk_tag",
+                "filterName": "Boolean",
+                "isRequired": false,
+                "description": "Flag indicating if the risk tag has been canceled.",
+                "displayName": "is_cancel",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "valuesSource": null,
+                "conditionType": "Boolean",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "is",
+                    "conditionType": "Boolean"
+                  }
+                ],
+                "filterConditionId": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "nodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "children": [
+                  "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                  "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "groupOperator": "And",
+                "filterConditionId": null
+              },
+              {
+                "name": "tag_name",
+                "column": {
+                  "name": "tag_name",
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Name of the risk tag.",
+                  "displayName": "tag_name",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "Excluded from CRM"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_risk_tag",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Name of the risk tag.",
+                "displayName": "tag_name",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "name": "restriction_name",
+                "column": {
+                  "name": "restriction_name",
+                  "tableName": "d_player_restriction",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "The name of restriction",
+                  "displayName": "restriction_name",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "1c528260-2d99-4500-a8c1-e7c23e030ccd",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "login",
+                    "deposit"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_restriction",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "The name of restriction",
+                "displayName": "restriction_name",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "nodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "children": [
+                  "082f58ed-5317-4312-ad2e-85670b08a31e",
+                  "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "groupOperator": "And",
+                "filterConditionId": null
+              },
+              {
+                "nodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "children": [
+                  "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                  "3d467d60-22df-4cd9-a0d6-4676885f19b9"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "groupOperator": "Or",
+                "filterConditionId": null
+              }
+            ],
+            "filterConditions": [
+              {
+                "id": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                "values": [
+                  "Good guys-X",
+                  "VIP-Silver"
+                ],
+                "operator": "in",
+                "fieldName": "risk_casino_segment",
+                "tableName": "agg_player_summary",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              },
+              {
+                "id": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                "value": "P14D",
+                "operator": "lte",
+                "fieldName": "last_bet_total",
+                "tableName": "agg_player_summary",
+                "databaseName": "dv_marts",
+                "conditionType": "DateTimeRelative",
+                "hasEmptyState": null
+              },
+              {
+                "id": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                "value": "P14D",
+                "operator": "lte",
+                "fieldName": "last_deposit",
+                "tableName": "agg_player_summary",
+                "databaseName": "dv_marts",
+                "conditionType": "DateTimeRelative",
+                "hasEmptyState": null
+              },
+              {
+                "id": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                "value": false,
+                "operator": "is",
+                "fieldName": "is_cancel",
+                "tableName": "d_player_risk_tag",
+                "databaseName": "dv_marts",
+                "conditionType": "Boolean",
+                "hasEmptyState": false
+              },
+              {
+                "id": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                "values": [
+                  "Excluded from CRM"
+                ],
+                "operator": "in",
+                "fieldName": "tag_name",
+                "tableName": "d_player_risk_tag",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              },
+              {
+                "id": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                "values": [
+                  "login",
+                  "deposit"
+                ],
+                "operator": "in",
+                "fieldName": "restriction_name",
+                "tableName": "d_player_restriction",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              }
+            ]
+          }
+        }
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:42:33.9107910Z",
+      "version": 1
+    },
+    {
+      "activityId": "d161fc21-31c2-498c-bdd4-77d18e757195",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9111870Z",
+      "version": 1
+    },
+    {
+      "activityId": "d170c533-0838-4c55-95d4-a02c362c53ef",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:49:55.5674580Z",
+      "version": 1
+    },
+    {
+      "activityId": "d751c907-17e3-4b64-902e-766bd1c0b181",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:49:55.5674590Z",
+      "version": 1
+    },
+    {
+      "activityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+      "activityName": "sport_bet_insurance",
+      "activityDisplayName": "Bet Insurance",
+      "events": [
+        {
+          "eventName": "ParleySatisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "SingleBetSatisfied",
+          "eventDisplayName": "Single bet satisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "d170c533-0838-4c55-95d4-a02c362c53ef",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Activated",
+          "eventDisplayName": "Activated",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Canceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "d161fc21-31c2-498c-bdd4-77d18e757195",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Parley41Satisfied",
+          "eventDisplayName": "Parlay 4/1 satisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "d751c907-17e3-4b64-902e-766bd1c0b181",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Parley51Satisfied",
+          "eventDisplayName": "Parlay 5/1 satisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "9854789e-9d17-47cc-8462-81a91006f84a",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Parley52Satisfied",
+          "eventDisplayName": "Parlay 5/2 satisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "350a3cd3-0cc9-4f28-88ea-a49fae613f68",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Terminated",
+          "eventDisplayName": "Terminated",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5eb2ea29-95b0-4d2d-9148-e69825315f48",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        },
+        {
+          "eventName": "Unsatisfied",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "b2e49549-5f48-4759-bb9f-3057b0e9a61f",
+          "count": 0,
+          "externalPatchId": "initial-external-patch-id",
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+          "key": "PromotionId",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+          "key": "PromotionAcceptedAt",
+          "isOptional": false
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "title": "Bet Insurance",
+        "conditions": [
+          {
+            "name": "Bet insurance condition 1",
+            "minOdd": "",
+            "betTypes": [
+              "express"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "isCollapsed": false,
+            "expireInDays": "",
+            "minBetAmount": {
+              "CLP": "50000"
+            },
+            "minOddParlay": 1.96,
+            "sportTickets": [
+              {
+                "names": {
+                  "event": {},
+                  "sport": {
+                    "en": "Football",
+                    "es": "Fútbol"
+                  },
+                  "tournament": {}
+                },
+                "sport": "Football",
+                "eventId": null,
+                "tournamentId": null,
+                "sportShortKey": "F"
+              }
+            ],
+            "itemsCheckType": "All",
+            "availableEvents": [],
+            "availableSports": [
+              "F"
+            ],
+            "minOddItemParlay": 1.4,
+            "availableTournaments": []
+          }
+        ],
+        "parlayType": "simple",
+        "displayData": [
+          "4 days"
+        ],
+        "expireInDays": 4,
+        "pathesConfig": [
+          {
+            "empty": true,
+            "events": [
+              {
+                "eventName": "Unsatisfied",
+                "eventType": "Completion"
+              }
+            ],
+            "pathId": "Unsatisfied",
+            "pathName": "Unsatisfied",
+            "nextActivityId": "b2e49549-5f48-4759-bb9f-3057b0e9a61f"
+          },
+          {
+            "empty": true,
+            "events": [
+              {
+                "eventName": "Canceled",
+                "eventType": "Completion"
+              }
+            ],
+            "pathId": "Canceled",
+            "pathName": "Canceled",
+            "nextActivityId": "d161fc21-31c2-498c-bdd4-77d18e757195"
+          },
+          {
+            "events": [
+              {
+                "eventName": "ParleySatisfied",
+                "eventType": "Completion"
+              }
+            ],
+            "pathId": "ParleySatisfied",
+            "pathName": "Parlay satisfied",
+            "nextActivityId": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+          }
+        ],
+        "parlaySatisfied": {
+          "minItems": "2"
+        },
+        "satisfiedResults": [
+          {
+            "name": "ParleySatisfied",
+            "betType": "Express",
+            "minItems": 2
+          }
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:49:55.5674920Z",
+      "version": 1
+    },
+    {
+      "activityId": "f9511176-7362-4a24-9a5e-d5732a805931",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-17T07:42:33.9112160Z",
+      "version": 1
+    }
+  ],
+  "startAt": "2026-08-21T04:01:00.0000000Z",
+  "stopAt": "2026-08-25T03:59:00.0000000Z",
+  "changedAt": "2026-08-17T07:49:55.5721160Z",
+  "changeHistory": {
+    "editingInfo": {
+      "author": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-17T07:49:55.5721160Z"
+    }
+  },
+  "createdAt": "2026-08-17T07:42:33.9237110Z",
+  "metadata": {
+    "purpose": "Retention",
+    "category": "Marketing",
+    "priority": 2,
+    "productType": "Sport"
+  },
+  "reEntryRule": {
+    "reEntryMode": "Prohibited"
+  },
+  "timeZoneId": "Chile/Continental",
+  "testControlGroupParameters": {
+    "playersAddingStrategy": "IncludeAll",
+    "isEnabled": false
+  },
+  "activityEventConversionMetrics": [],
+  "areJourneyMetricsAvailable": true,
+  "journeySource": "UBO",
+  "isArchived": false,
+  "version": 4,
+  "isUnlimited": false,
+  "isImmediatelyAfterPublish": false,
+  "rawJourneyData": {
+    "elements": [
+      {
+        "id": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+        "data": {
+          "name": "dwh_source",
+          "ports": [
+            {
+              "id": "PlayerAdded-bf3fae05-1262-4bcc-9a97-eed29fe00647"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAdded",
+              "eventType": "Activation",
+              "payloadKeys": [
+                "CurrencyCode"
+              ],
+              "isLabelHidden": true,
+              "payloadKeysV2": [
+                {
+                  "key": "CurrencyCode",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "dwh_source.player_added",
+              "eventDisplayName": "Players added to journey",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "source",
+          "activityDisplayName": "Custom Segment"
+        },
+        "type": "source",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-45c57269-0c0c-4aec-9221-cd4fc402b15a"
+            },
+            {
+              "id": "PromotionOffered-45c57269-0c0c-4aec-9221-cd4fc402b15a"
+            },
+            {
+              "id": "PromotionAccepted-45c57269-0c0c-4aec-9221-cd4fc402b15a"
+            },
+            {
+              "id": "PromotionExpired-45c57269-0c0c-4aec-9221-cd4fc402b15a"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "promotion.promotion_offered",
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "CurrencyCode",
+                "PromotionId",
+                "PromotionAcceptedAt"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "CurrencyCode",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                },
+                {
+                  "key": "PromotionId",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                },
+                {
+                  "key": "PromotionAcceptedAt",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "promotion.promotion_accepted",
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "promotion.promotion_expired",
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 199
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 199
+        }
+      },
+      {
+        "id": "140bff7e-af6d-4cac-9fa9-a65a590161b3",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-140bff7e-af6d-4cac-9fa9-a65a590161b3"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "promotion.promotion_expired",
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 347,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 347,
+          "y": 463
+        }
+      },
+      {
+        "id": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "data": {
+          "name": "sport_bet_insurance",
+          "ports": [
+            {
+              "id": "input-efef636f-ff69-4723-adaf-89d2abcb3b6f"
+            },
+            {
+              "id": "SingleBetSatisfied-efef636f-ff69-4723-adaf-89d2abcb3b6f"
+            },
+            {
+              "id": "ParleySatisfied-efef636f-ff69-4723-adaf-89d2abcb3b6f"
+            },
+            {
+              "id": "Unsatisfied-efef636f-ff69-4723-adaf-89d2abcb3b6f"
+            },
+            {
+              "id": "Canceled-efef636f-ff69-4723-adaf-89d2abcb3b6f"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "Activated",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bet_insurance.activated",
+              "eventDisplayName": "Activated",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "SingleBetSatisfied",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "ReceivedAmount"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "ReceivedAmount",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "sport_bet_insurance.single_bet_satisfied",
+              "eventDisplayName": "Single bet satisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "ParleySatisfied",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "ReceivedAmount"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "ReceivedAmount",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "sport_bet_insurance.parley_satisfied",
+              "eventDisplayName": "Parlay satisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Parley41Satisfied",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "ReceivedAmount"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "ReceivedAmount",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "sport_bet_insurance.parley41_satisfied",
+              "eventDisplayName": "Parlay 4/1 satisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Parley51Satisfied",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "ReceivedAmount"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "ReceivedAmount",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "sport_bet_insurance.parley51_satisfied",
+              "eventDisplayName": "Parlay 5/1 satisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Parley52Satisfied",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "ReceivedAmount"
+              ],
+              "isLabelHidden": false,
+              "payloadKeysV2": [
+                {
+                  "key": "ReceivedAmount",
+                  "isHidden": true,
+                  "isOptional": false,
+                  "optionalPolicies": []
+                }
+              ],
+              "localizationKey": "sport_bet_insurance.parley52_satisfied",
+              "eventDisplayName": "Parlay 5/2 satisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Unsatisfied",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bet_insurance.unsatisfied",
+              "eventDisplayName": "Unsatisfied",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "Terminated",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bet_insurance.terminated",
+              "eventDisplayName": "Terminated",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Canceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bet_insurance.canceled",
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "pathes": [
+            {
+              "events": [
+                {
+                  "eventName": "SingleBetSatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "SingleBetSatisfied",
+              "pathName": "Single bet satisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "ParleySatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "ParleySatisfied",
+              "pathName": "Parlay satisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "Unsatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "Unsatisfied",
+              "pathName": "Unsatisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "Canceled",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "Canceled",
+              "pathName": "Canceled"
+            }
+          ],
+          "activityType": "condition",
+          "activityDisplayName": "Bet Insurance"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -120,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -120,
+          "y": 463
+        }
+      },
+      {
+        "id": "b2e49549-5f48-4759-bb9f-3057b0e9a61f",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-b2e49549-5f48-4759-bb9f-3057b0e9a61f"
+            }
+          ],
+          "width": 40,
+          "events": [
+            {
+              "eventName": "Unsatisfied",
+              "eventType": "Completion"
+            }
+          ],
+          "height": 40,
+          "pathId": "Unsatisfied",
+          "pathName": "Unsatisfied"
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 107,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 107,
+          "y": 727
+        }
+      },
+      {
+        "id": "d161fc21-31c2-498c-bdd4-77d18e757195",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-d161fc21-31c2-498c-bdd4-77d18e757195"
+            }
+          ],
+          "width": 40,
+          "events": [
+            {
+              "eventName": "Canceled",
+              "eventType": "Completion"
+            }
+          ],
+          "height": 40,
+          "pathId": "Canceled",
+          "pathName": "Canceled"
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 347,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 347,
+          "y": 727
+        }
+      },
+      {
+        "id": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "data": {
+          "name": "sport_bonus",
+          "ports": [
+            {
+              "id": "input-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Issued-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "WageringStarted-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Completed-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Expired-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Terminated-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Lost-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "NotIssued-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            },
+            {
+              "id": "Canceled-7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "Issued",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.issued",
+              "eventDisplayName": "Issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "WageringStarted",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.wagering_started",
+              "eventDisplayName": "Wageringstarted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Completed",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.completed",
+              "eventDisplayName": "Wagered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Expired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.expired",
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "Terminated",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.terminated",
+              "eventDisplayName": "Terminated",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Lost",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.lost",
+              "eventDisplayName": "Lost",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "NotIssued",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.not_issued",
+              "eventDisplayName": "Not issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "Canceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "sport_bonus.canceled",
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Sport Bonus"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -360,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -360,
+          "y": 727
+        }
+      },
+      {
+        "id": "190a41a7-f4a3-46f8-a9fc-863de5926152",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-190a41a7-f4a3-46f8-a9fc-863de5926152"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "Completed",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.completed",
+          "eventDisplayName": "Wagered",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -606.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -606.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "f9511176-7362-4a24-9a5e-d5732a805931",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-f9511176-7362-4a24-9a5e-d5732a805931"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "Expired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.expired",
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -366.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -366.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "Terminated",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.terminated",
+          "eventDisplayName": "Terminated",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": true,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "9a883d08-55d5-4156-8d9a-0b50ff8956b2",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-9a883d08-55d5-4156-8d9a-0b50ff8956b2"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "Lost",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.lost",
+          "eventDisplayName": "Lost",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -126.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -126.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "b4de670c-081f-4b04-9882-8078942f7997",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-b4de670c-081f-4b04-9882-8078942f7997"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "NotIssued",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.not_issued",
+          "eventDisplayName": "Not issued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": true,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "788cab2f-9dce-43cd-9f3f-d026d368fde8",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-788cab2f-9dce-43cd-9f3f-d026d368fde8"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "Canceled",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "sport_bonus.canceled",
+          "eventDisplayName": "Canceled",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 113.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 113.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "6297ab7d-82e7-4ee7-9627-e8d364347511",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "target": "140bff7e-af6d-4cac-9fa9-a65a590161b3",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "targetHandle": "input-140bff7e-af6d-4cac-9fa9-a65a590161b3",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "814967dc-d3b3-4f31-821b-637eb2b491b0",
+        "data": {
+          "isHidden": false,
+          "eventName": "PlayerAdded",
+          "eventType": "Activation",
+          "payloadKeys": [
+            "CurrencyCode"
+          ],
+          "activityName": "dwh_source",
+          "isLabelHidden": true,
+          "payloadKeysV2": [
+            {
+              "key": "CurrencyCode",
+              "isHidden": true,
+              "isOptional": false,
+              "optionalPolicies": []
+            }
+          ],
+          "isReconnectable": false,
+          "localizationKey": "dwh_source.player_added",
+          "eventDisplayName": "Players added to journey",
+          "isDisconnectable": false,
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "bf3fae05-1262-4bcc-9a97-eed29fe00647",
+        "target": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAdded-bf3fae05-1262-4bcc-9a97-eed29fe00647",
+        "targetHandle": "input-45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "d083d265-a66d-427d-b679-d5e77a8eaa15",
+        "data": {
+          "pathId": "Unsatisfied",
+          "pathName": "Unsatisfied",
+          "activityName": "sport_bet_insurance",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "target": "b2e49549-5f48-4759-bb9f-3057b0e9a61f",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Unsatisfied-efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "targetHandle": "input-b2e49549-5f48-4759-bb9f-3057b0e9a61f",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "63008438-6c33-4505-a893-7029a6883cf5",
+        "data": {
+          "pathId": "Canceled",
+          "pathName": "Canceled",
+          "activityName": "sport_bet_insurance",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "target": "d161fc21-31c2-498c-bdd4-77d18e757195",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Canceled-efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "targetHandle": "input-d161fc21-31c2-498c-bdd4-77d18e757195",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "ed387227-5fd8-453f-88ac-ccbfa69f8cba",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "target": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-45c57269-0c0c-4aec-9221-cd4fc402b15a",
+        "targetHandle": "input-efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "0251f135-f720-4db5-8944-0ddad5e63d6a",
+        "data": {
+          "eventName": "Completed",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "190a41a7-f4a3-46f8-a9fc-863de5926152",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Completed-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-190a41a7-f4a3-46f8-a9fc-863de5926152",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "ed7cbd16-7650-4eaa-b777-4bc33bda32ac",
+        "data": {
+          "eventName": "Expired",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "f9511176-7362-4a24-9a5e-d5732a805931",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Expired-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-f9511176-7362-4a24-9a5e-d5732a805931",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "f0129883-971f-4e39-ba16-d2c6c2c0c00b",
+        "data": {
+          "eventName": "Terminated",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": true,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Terminated-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-bc6b86e6-0ca6-48b3-8b87-34ee5895bdd3",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "7ff9ba3d-9aaa-4537-ae2a-85d2521569da",
+        "data": {
+          "eventName": "Lost",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "9a883d08-55d5-4156-8d9a-0b50ff8956b2",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Lost-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-9a883d08-55d5-4156-8d9a-0b50ff8956b2",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "f4912b56-0234-4a8b-b27b-a718d60d812f",
+        "data": {
+          "eventName": "NotIssued",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": true,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "b4de670c-081f-4b04-9882-8078942f7997",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "NotIssued-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-b4de670c-081f-4b04-9882-8078942f7997",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "a06a53bb-db49-4d76-89db-40ad8f1a68bc",
+        "data": {
+          "eventName": "Canceled",
+          "eventType": "Completion",
+          "activityName": "sport_bonus",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "target": "788cab2f-9dce-43cd-9f3f-d026d368fde8",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "Canceled-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "targetHandle": "input-788cab2f-9dce-43cd-9f3f-d026d368fde8",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "3b7ff21f-a48a-41d3-a60b-700f983449e6",
+        "data": {
+          "pathId": "ParleySatisfied",
+          "pathName": "Parlay satisfied",
+          "activityName": "sport_bet_insurance",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "target": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "SingleBetSatisfied-efef636f-ff69-4723-adaf-89d2abcb3b6f",
+        "targetHandle": "input-7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      }
+    ],
+    "infoValues": {
+      "brand": "JBCL",
+      "stopAt": "2026-08-25T03:59:00.0000000Z",
+      "startAt": "2026-08-21T04:01:00.0000000Z",
+      "metadata": {
+        "purpose": "Retention",
+        "category": "Marketing",
+        "priority": 2,
+        "productType": "Sport"
+      },
+      "timeZoneId": "Chile/Continental",
+      "isUnlimited": false,
+      "journeyName": "VIPCRM_JBCL_BetInsurance_LDP_GGXSIL_AUG",
+      "reEntryRule": {
+        "reEntryMode": "Prohibited",
+        "reEntryPeriod": null
+      },
+      "currencyCodes": [
+        "CLP"
+      ],
+      "isImmediatelyAfterPublish": false,
+      "testControlGroupParameters": {
+        "isEnabled": false,
+        "controlGroupPercent": null,
+        "playersAddingStrategy": "IncludeAll",
+        "daysToKeepInControlGroup": null
+      }
+    },
+    "pathesConfiguration": {
+      "efef636f-ff69-4723-adaf-89d2abcb3b6f": [
+        {
+          "empty": true,
+          "events": [
+            {
+              "eventName": "Unsatisfied",
+              "eventType": "Completion"
+            }
+          ],
+          "pathId": "Unsatisfied",
+          "pathName": "Unsatisfied"
+        },
+        {
+          "empty": true,
+          "events": [
+            {
+              "eventName": "Canceled",
+              "eventType": "Completion"
+            }
+          ],
+          "pathId": "Canceled",
+          "pathName": "Canceled"
+        },
+        {
+          "events": [
+            {
+              "eventName": "ParleySatisfied",
+              "eventType": "Completion"
+            }
+          ],
+          "pathId": "ParleySatisfied",
+          "pathName": "Parlay satisfied"
+        }
+      ]
+    },
+    "exitCriteriaSettings": null,
+    "boundaryConfiguration": {
+      "45c57269-0c0c-4aec-9221-cd4fc402b15a": {
+        "error": false,
+        "elements": [
+          {
+            "id": "2d94832b-dfac-4750-8628-0ed248579013",
+            "data": {
+              "name": "notification_center",
+              "ports": [
+                {
+                  "id": "input-2d94832b-dfac-4750-8628-0ed248579013"
+                },
+                {
+                  "id": "NotificationSent-2d94832b-dfac-4750-8628-0ed248579013"
+                },
+                {
+                  "id": "NotificationNotSent-2d94832b-dfac-4750-8628-0ed248579013"
+                }
+              ],
+              "events": [
+                {
+                  "isHidden": false,
+                  "eventName": "NotificationSent",
+                  "eventType": "Completion",
+                  "payloadKeys": [],
+                  "isLabelHidden": false,
+                  "payloadKeysV2": [],
+                  "localizationKey": "notification_center.notification_sent",
+                  "eventDisplayName": "Sent",
+                  "canBeUsedInChoosableFlow": false
+                },
+                {
+                  "isHidden": false,
+                  "eventName": "NotificationNotSent",
+                  "eventType": "Completion",
+                  "payloadKeys": [],
+                  "isLabelHidden": false,
+                  "payloadKeysV2": [],
+                  "localizationKey": "notification_center.notification_not_sent",
+                  "eventDisplayName": "Not Sent",
+                  "canBeUsedInChoosableFlow": false
+                }
+              ],
+              "activityType": "communication",
+              "activityDisplayName": "On-site messaging",
+              "withoutSourceHandle": false
+            },
+            "type": "action",
+            "style": {
+              "cursor": "pointer"
+            },
+            "width": 267,
+            "height": 64,
+            "zIndex": 5,
+            "position": {
+              "x": 0,
+              "y": 114
+            },
+            "selected": false,
+            "draggable": false,
+            "connectable": false
+          },
+          {
+            "id": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+            "data": {
+              "name": "end_of_path",
+              "ports": [
+                {
+                  "id": "input-470dc2ff-998f-44e4-8c61-0728a7e7ed8e"
+                }
+              ],
+              "width": 40,
+              "height": 40,
+              "isHidden": false,
+              "eventName": "NotificationSent",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "notification_center.notification_sent",
+              "eventDisplayName": "Sent",
+              "canBeUsedInChoosableFlow": false
+            },
+            "type": "exit",
+            "style": {
+              "cursor": "default"
+            },
+            "width": 40,
+            "height": 40,
+            "hidden": false,
+            "zIndex": 5,
+            "position": {
+              "x": -6.5,
+              "y": 378
+            },
+            "selected": false,
+            "draggable": false,
+            "connectable": false
+          },
+          {
+            "id": "6bbe89ab-62c0-420b-9121-820b7190496c",
+            "data": {
+              "name": "end_of_path",
+              "ports": [
+                {
+                  "id": "input-6bbe89ab-62c0-420b-9121-820b7190496c"
+                }
+              ],
+              "width": 40,
+              "height": 40,
+              "isHidden": false,
+              "eventName": "NotificationNotSent",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "notification_center.notification_not_sent",
+              "eventDisplayName": "Not Sent",
+              "canBeUsedInChoosableFlow": false
+            },
+            "type": "exit",
+            "style": {
+              "cursor": "default"
+            },
+            "width": 40,
+            "height": 40,
+            "hidden": false,
+            "zIndex": 5,
+            "position": {
+              "x": 233.5,
+              "y": 378
+            },
+            "selected": false,
+            "draggable": false,
+            "connectable": false
+          },
+          {
+            "id": "d9873ea8-4b8e-456a-b03e-00f108870f3b",
+            "data": {
+              "eventName": "NotificationSent",
+              "eventType": "Completion",
+              "activityName": "notification_center",
+              "isReconnectable": false,
+              "isDisconnectable": false
+            },
+            "type": "dropEdge",
+            "style": {
+              "strokeDasharray": "3"
+            },
+            "hidden": false,
+            "source": "2d94832b-dfac-4750-8628-0ed248579013",
+            "target": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+            "zIndex": 1,
+            "labelStyle": {
+              "color": "#000",
+              "fontSize": 14,
+              "fontWeight": 700
+            },
+            "labelBgStyle": {
+              "fill": "#D2D2D2"
+            },
+            "sourceHandle": "NotificationSent-2d94832b-dfac-4750-8628-0ed248579013",
+            "targetHandle": "input-470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+            "labelBgPadding": [
+              10,
+              3
+            ],
+            "labelBgBorderRadius": 4
+          },
+          {
+            "id": "7c8e2327-b203-4d9f-854a-c93cceb33549",
+            "data": {
+              "eventName": "NotificationNotSent",
+              "eventType": "Completion",
+              "activityName": "notification_center",
+              "isReconnectable": false,
+              "isDisconnectable": false
+            },
+            "type": "dropEdge",
+            "style": {
+              "strokeDasharray": "3"
+            },
+            "hidden": false,
+            "source": "2d94832b-dfac-4750-8628-0ed248579013",
+            "target": "6bbe89ab-62c0-420b-9121-820b7190496c",
+            "zIndex": 1,
+            "labelStyle": {
+              "color": "#000",
+              "fontSize": 14,
+              "fontWeight": 700
+            },
+            "labelBgStyle": {
+              "fill": "#D2D2D2"
+            },
+            "sourceHandle": "NotificationNotSent-2d94832b-dfac-4750-8628-0ed248579013",
+            "targetHandle": "input-6bbe89ab-62c0-420b-9121-820b7190496c",
+            "labelBgPadding": [
+              10,
+              3
+            ],
+            "labelBgBorderRadius": 4
+          },
+          {
+            "id": "7b0e12de-63ab-40d5-b465-a416bb414c2d",
+            "data": {
+              "ports": [
+                {
+                  "id": "input-7b0e12de-63ab-40d5-b465-a416bb414c2d"
+                },
+                {
+                  "id": "output-7b0e12de-63ab-40d5-b465-a416bb414c2d"
+                }
+              ],
+              "withoutSourceHandle": true
+            },
+            "type": "boundaryEntry",
+            "style": {
+              "cursor": "pointer"
+            },
+            "width": 267,
+            "height": 1,
+            "zIndex": 5,
+            "position": {
+              "x": 0,
+              "y": 0
+            },
+            "selected": false,
+            "draggable": false,
+            "connectable": false
+          },
+          {
+            "id": "1d5f79a5-64bb-49a6-ae7b-5eb9c1555e87",
+            "data": {
+              "pathId": "output",
+              "isLabelHidden": true,
+              "isReconnectable": false,
+              "isDisconnectable": true
+            },
+            "type": "default",
+            "style": {
+              "strokeDasharray": "3"
+            },
+            "source": "7b0e12de-63ab-40d5-b465-a416bb414c2d",
+            "target": "2d94832b-dfac-4750-8628-0ed248579013",
+            "zIndex": 6,
+            "labelStyle": {
+              "color": "#000",
+              "fontSize": 14,
+              "fontWeight": 700
+            },
+            "labelBgStyle": {
+              "fill": "#D2D2D2"
+            },
+            "sourceHandle": "output-7b0e12de-63ab-40d5-b465-a416bb414c2d",
+            "targetHandle": "input-2d94832b-dfac-4750-8628-0ed248579013",
+            "labelBgPadding": [
+              10,
+              3
+            ],
+            "labelBgBorderRadius": 4
+          }
+        ],
+        "journeyConfiguration": [
+          {
+            "events": [
+              {
+                "eventName": "NotificationSent",
+                "eventType": "Completion",
+                "nextActivityId": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+                "isUsedInChoosableFlow": false
+              },
+              {
+                "eventName": "NotificationNotSent",
+                "eventType": "Completion",
+                "nextActivityId": "6bbe89ab-62c0-420b-9121-820b7190496c",
+                "isUsedInChoosableFlow": false
+              }
+            ],
+            "activityId": "2d94832b-dfac-4750-8628-0ed248579013",
+            "activityName": "notification_center"
+          },
+          {
+            "events": [],
+            "activityId": "470dc2ff-998f-44e4-8c61-0728a7e7ed8e",
+            "activityName": "end_of_path"
+          },
+          {
+            "events": [],
+            "activityId": "6bbe89ab-62c0-420b-9121-820b7190496c",
+            "activityName": "end_of_path"
+          }
+        ]
+      }
+    },
+    "activitiesConfiguration": {
+      "2d94832b-dfac-4750-8628-0ed248579013": {
+        "data": {
+          "channel": 1,
+          "category": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "contract": 1,
+          "accountId": "",
+          "languages": [
+            {
+              "languageCode": "es"
+            },
+            {
+              "languageCode": "en"
+            }
+          ],
+          "templates": 1312,
+          "deliveryType": "singleChannel",
+          "validityType": "days",
+          "objectForSend": {
+            "metadata": {
+              "utm_source": "boris",
+              "journeyName": "VIPCRM_JBCL_BetInsurance_LDP_GGXSIL_AUG"
+            },
+            "variables": [
+              {
+                "name": "group",
+                "value": "regular"
+              },
+              {
+                "name": "title",
+                "value": "%title-en%"
+              },
+              {
+                "name": "layout",
+                "value": "1"
+              },
+              {
+                "name": "icon-src",
+                "value": "%icon-src%"
+              },
+              {
+                "name": "title-en",
+                "value": "¡Tu apuesta, protegida! "
+              },
+              {
+                "name": "caption-en",
+                "value": "Activa tu seguro"
+              },
+              {
+                "name": "description",
+                "value": "%description-en%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "description-en",
+                "value": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta."
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption-en%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_highlighted",
+                "value": "True"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              },
+              {
+                "name": "title",
+                "value": "%title-es%"
+              },
+              {
+                "name": "layout",
+                "value": "1"
+              },
+              {
+                "name": "icon-src",
+                "value": "%icon-src%"
+              },
+              {
+                "name": "title-es",
+                "value": "¡Tu apuesta, protegida! "
+              },
+              {
+                "name": "caption-es",
+                "value": "Activa tu seguro"
+              },
+              {
+                "name": "description",
+                "value": "%description-es%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "description-es",
+                "value": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta."
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption-es%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_highlighted",
+                "value": "True"
+              },
+              {
+                "name": "link",
+                "value": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%"
+              },
+              {
+                "name": "deeplink",
+                "value": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%"
+              },
+              {
+                "name": "icon-src",
+                "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/fe7fcc85-6533-40f3-964e-f20fdfbf7e82.png"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              }
+            ],
+            "template_id": 1312,
+            "expire_after": "3.00:00:00.000",
+            "defaultVariables": [],
+            "localizedVariables": []
+          },
+          "singleChannel": {
+            "accordion": {
+              "validList": {
+                "template1312": {
+                  "en": true,
+                  "es": true
+                }
+              }
+            },
+            "activityName": "JBCL Custom. Dynamic. CRM. Information. PROMO",
+            "localizedLanguagesTab": {
+              "en": {
+                "group": "regular",
+                "title": "%title-en%",
+                "layout": "1",
+                "icon-src": "%icon-src%",
+                "title-en": "¡Tu apuesta, protegida! ",
+                "caption-en": "Activa tu seguro",
+                "description": "%description-en%",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description-en": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta.",
+                "buttons_1_caption": "%caption-en%",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+                "buttons_1_highlighted": "True"
+              },
+              "es": {
+                "group": "regular",
+                "title": "%title-es%",
+                "layout": "1",
+                "icon-src": "%icon-src%",
+                "title-es": "¡Tu apuesta, protegida! ",
+                "caption-es": "Activa tu seguro",
+                "description": "%description-es%",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description-es": "Disfruta apostando en la Liga de Primera sin riesgo de perder. Aseguramos tu apuesta.",
+                "buttons_1_caption": "%caption-es%",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+                "buttons_1_highlighted": "True"
+              },
+              "common": {
+                "link": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%",
+                "deeplink": "https://jb2916-cl.xyz/services/promo/promotion/6ddf8f9e-045a-4195-8d39-0ab8bc45b887?seq=last&%$utm_tags%",
+                "icon-src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/fe7fcc85-6533-40f3-964e-f20fdfbf7e82.png"
+              },
+              "dwhVariables": {
+                "en": [],
+                "es": [],
+                "common": []
+              }
+            }
+          },
+          "validityAmount": "3",
+          "dataDependencies": [],
+          "listOfUsedVariables": []
+        },
+        "error": false,
+        "displayData": [
+          "1312. JBCL Custom. Dynamic. CRM. Information. PROMO"
+        ],
+        "displayName": "On-site messaging"
+      },
+      "45c57269-0c0c-4aec-9221-cd4fc402b15a": {
+        "data": {
+          "autoAccept": false,
+          "promotionId": "9b48ec25-8e8d-444e-8378-7e953e2939e3",
+          "currencyMode": "automated",
+          "timeToAccept": "P0Y0M1DT0H0M0S",
+          "showAsUpcoming": false,
+          "promotionLinkId": "6ddf8f9e-045a-4195-8d39-0ab8bc45b887",
+          "promotionStatus": "Offered",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "788500"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "e9f8e4fc-a0b7-48d0-a040-ede4480e23be",
+          "contentId": "3606eef5-2d6a-48b2-9c2e-2ba9fee87b50"
+        },
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "FrontId": "e9f8e4fc-a0b7-48d0-a040-ede4480e23be",
+                "ContentId": "3606eef5-2d6a-48b2-9c2e-2ba9fee87b50",
+                "bonusType": null,
+                "mechanics": [
+                  {
+                    "id": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d",
+                    "title": "LDP 20% Bet Insurance",
+                    "depositRate": 0.2,
+                    "wageringInfo": {
+                      "minOdd": 1.6,
+                      "betTypes": [
+                        "ordinar",
+                        "express"
+                      ],
+                      "channels": [
+                        "ALL"
+                      ],
+                      "minItems": 2,
+                      "lineTypes": [
+                        "live",
+                        "prematch"
+                      ],
+                      "wagerFactor": 10,
+                      "minOddParlay": 1.96,
+                      "wageringDays": 5,
+                      "itemsCheckType": "All",
+                      "minOddItemParlay": 1.4,
+                      "prolongationDays": 2,
+                      "isAllowedToCancel": true,
+                      "maxBonusReleaseRate": 5
+                    },
+                    "maxBonusAmount": {
+                      "CLP": 150000
+                    },
+                    "isSportBonusLockEnabled": true
+                  }
+                ],
+                "conditions": [
+                  {
+                    "name": "Bet insurance condition 1",
+                    "minOdd": "",
+                    "betTypes": [
+                      "express"
+                    ],
+                    "channels": [
+                      "ALL"
+                    ],
+                    "lineTypes": [
+                      "live",
+                      "prematch"
+                    ],
+                    "sportTags": [
+                      {
+                        "id": "F",
+                        "names": {
+                          "en": "Football",
+                          "es": "Fútbol"
+                        }
+                      }
+                    ],
+                    "isCollapsed": false,
+                    "expireInDays": "",
+                    "minBetAmount": {
+                      "CLP": "35000"
+                    },
+                    "minOddParlay": 1.96,
+                    "sportTickets": [
+                      {
+                        "names": {
+                          "event": {},
+                          "sport": {
+                            "es": "Fútbol"
+                          },
+                          "tournament": {}
+                        },
+                        "sport": "Football",
+                        "eventId": null,
+                        "tournamentId": null,
+                        "sportShortKey": "F"
+                      }
+                    ],
+                    "itemsCheckType": "All",
+                    "availableEvents": [],
+                    "availableSports": [
+                      "F"
+                    ],
+                    "minOddItemParlay": 1.4,
+                    "availableTournaments": []
+                  }
+                ],
+                "moduleType": "SportBetInsurance",
+                "isActivityCurrencies": false,
+                "minNumberOfEventsInParlay": "2"
+              },
+              "dataSources": [
+                {
+                  "keys": [],
+                  "type": "Sync",
+                  "journeyActivityId": "7e5093dc-c3e8-4e33-8ccd-58ee8284032d"
+                },
+                {
+                  "keys": [
+                    "BetInsuranceStatus",
+                    "BetInsuranceExpirationDate"
+                  ],
+                  "type": "Sync",
+                  "journeyActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f"
+                },
+                {
+                  "keys": [
+                    "ReceivedAmount"
+                  ],
+                  "journeyActivityId": "efef636f-ff69-4723-adaf-89d2abcb3b6f"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": false
+        },
+        "displayData": [
+          "Offered within 1d 0h 0m"
+        ],
+        "displayName": "Promotion"
+      },
+      "7e5093dc-c3e8-4e33-8ccd-58ee8284032d": {
+        "data": {
+          "properties": {
+            "title": "LDP 20% Bet Insurance",
+            "depositRate": 0.2,
+            "wageringInfo": {
+              "minOdd": 1.6,
+              "betTypes": [
+                "ordinar",
+                "express"
+              ],
+              "channels": [
+                "ALL"
+              ],
+              "minItems": 2,
+              "lineTypes": [
+                "live",
+                "prematch"
+              ],
+              "wagerFactor": 10,
+              "minOddParlay": 1.96,
+              "wageringDays": 5,
+              "itemsCheckType": "All",
+              "minOddItemParlay": 1.4,
+              "prolongationDays": 2,
+              "isAllowedToCancel": true,
+              "maxBonusReleaseRate": 5
+            },
+            "maxBonusAmount": {
+              "CLP": 150000
+            },
+            "isSportBonusLockEnabled": true
+          }
+        },
+        "error": false,
+        "displayData": [
+          "5 days"
+        ],
+        "displayName": "Sport Bonus",
+        "promotionId": "45c57269-0c0c-4aec-9221-cd4fc402b15a"
+      },
+      "bf3fae05-1262-4bcc-9a97-eed29fe00647": {
+        "data": {
+          "filterDetails": {
+            "filtersTree": [
+              {
+                "nodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "children": [
+                  "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                  "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                  "1c528260-2d99-4500-a8c1-e7c23e030ccd"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": null,
+                "groupOperator": "Exclude",
+                "filterConditionId": null
+              },
+              {
+                "name": "risk_casino_segment",
+                "column": {
+                  "name": "risk_casino_segment",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Risk segment related to casino.",
+                  "displayName": "risk_casino_segment",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "Good guys-X",
+                    "VIP-Silver"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Risk segment related to casino.",
+                "displayName": "risk_casino_segment",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "name": "last_bet_total",
+                "column": {
+                  "name": "last_bet_total",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last bet across all products.",
+                  "displayName": "last_bet_total",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "lte",
+                "settings": {
+                  "amount": "30",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last bet across all products.",
+                "displayName": "last_bet_total",
+                "databaseName": "dv_marts",
+                "dateTimeMode": "Relative",
+                "isDeprecated": false,
+                "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "valuesSource": null,
+                "conditionType": "DateTimeRelative",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "filterConditionId": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "name": "last_deposit",
+                "column": {
+                  "name": "last_deposit",
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last deposit.",
+                  "displayName": "last_deposit",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "3d467d60-22df-4cd9-a0d6-4676885f19b9",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "lte",
+                "settings": {
+                  "amount": "30",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "agg_player_summary",
+                "filterName": "Date&time",
+                "isRequired": false,
+                "description": "Timestamp of the player's last deposit.",
+                "displayName": "last_deposit",
+                "databaseName": "dv_marts",
+                "dateTimeMode": "Relative",
+                "isDeprecated": false,
+                "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "valuesSource": null,
+                "conditionType": "DateTimeRelative",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTime"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeBetween"
+                  },
+                  {
+                    "operator": "equal",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "notEqual",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "gte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "lte",
+                    "conditionType": "DateTimeRelative"
+                  },
+                  {
+                    "operator": "between",
+                    "conditionType": "DateTimeRelativeBetween"
+                  }
+                ],
+                "filterConditionId": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "name": "is_cancel",
+                "column": {
+                  "name": "is_cancel",
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Boolean",
+                  "isRequired": false,
+                  "description": "Flag indicating if the risk tag has been canceled.",
+                  "displayName": "is_cancel",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "is",
+                      "conditionType": "Boolean"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": false
+                },
+                "height": 42,
+                "nodeId": "082f58ed-5317-4312-ad2e-85670b08a31e",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "is",
+                "settings": {
+                  "value": "no",
+                  "values": [],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_risk_tag",
+                "filterName": "Boolean",
+                "isRequired": false,
+                "description": "Flag indicating if the risk tag has been canceled.",
+                "displayName": "is_cancel",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "valuesSource": null,
+                "conditionType": "Boolean",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "is",
+                    "conditionType": "Boolean"
+                  }
+                ],
+                "filterConditionId": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                "isPredefinedValuesAvailable": false
+              },
+              {
+                "nodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "children": [
+                  "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                  "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "groupOperator": "And",
+                "filterConditionId": null
+              },
+              {
+                "name": "tag_name",
+                "column": {
+                  "name": "tag_name",
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Name of the risk tag.",
+                  "displayName": "tag_name",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "Excluded from CRM"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_risk_tag",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "Name of the risk tag.",
+                "displayName": "tag_name",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "name": "restriction_name",
+                "column": {
+                  "name": "restriction_name",
+                  "tableName": "d_player_restriction",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "The name of restriction",
+                  "displayName": "restriction_name",
+                  "valuesSource": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "isPredefinedValuesAvailable": true
+                },
+                "height": 42,
+                "nodeId": "1c528260-2d99-4500-a8c1-e7c23e030ccd",
+                "children": [],
+                "nodeType": "Filter",
+                "operator": "in",
+                "settings": {
+                  "values": [
+                    "login",
+                    "deposit"
+                  ],
+                  "dateType": "days",
+                  "hasEmptyState": false
+                },
+                "showForm": false,
+                "tableName": "d_player_restriction",
+                "filterName": "Multiple select",
+                "isRequired": false,
+                "description": "The name of restriction",
+                "displayName": "restriction_name",
+                "databaseName": "dv_marts",
+                "isDeprecated": false,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "valuesSource": null,
+                "conditionType": "MultiSelect",
+                "groupOperator": null,
+                "filterConditions": [
+                  {
+                    "operator": "in",
+                    "conditionType": "MultiSelect"
+                  },
+                  {
+                    "operator": "notIn",
+                    "conditionType": "MultiSelect"
+                  }
+                ],
+                "filterConditionId": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                "isPredefinedValuesAvailable": true
+              },
+              {
+                "nodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                "children": [
+                  "082f58ed-5317-4312-ad2e-85670b08a31e",
+                  "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                "groupOperator": "And",
+                "filterConditionId": null
+              },
+              {
+                "nodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                "children": [
+                  "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                  "3d467d60-22df-4cd9-a0d6-4676885f19b9"
+                ],
+                "nodeType": "Operator",
+                "isDeprecated": true,
+                "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                "groupOperator": "Or",
+                "filterConditionId": null
+              }
+            ],
+            "filterConditions": [
+              {
+                "id": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                "values": [
+                  "Good guys-X",
+                  "VIP-Silver"
+                ],
+                "nodeType": "Filter",
+                "operator": "in",
+                "fieldName": "risk_casino_segment",
+                "tableName": "agg_player_summary",
+                "columnName": "risk_casino_segment",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              },
+              {
+                "id": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                "value": "P0Y0M30DT0H0M0S",
+                "nodeType": "Filter",
+                "operator": "lte",
+                "fieldName": "last_bet_total",
+                "tableName": "agg_player_summary",
+                "columnName": "last_bet_total",
+                "databaseName": "dv_marts",
+                "conditionType": "DateTimeRelative",
+                "hasEmptyState": false
+              },
+              {
+                "id": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                "value": "P0Y0M30DT0H0M0S",
+                "nodeType": "Filter",
+                "operator": "lte",
+                "fieldName": "last_deposit",
+                "tableName": "agg_player_summary",
+                "columnName": "last_deposit",
+                "databaseName": "dv_marts",
+                "conditionType": "DateTimeRelative",
+                "hasEmptyState": false
+              },
+              {
+                "id": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                "value": false,
+                "nodeType": "Filter",
+                "operator": "is",
+                "fieldName": "is_cancel",
+                "tableName": "d_player_risk_tag",
+                "columnName": "is_cancel",
+                "databaseName": "dv_marts",
+                "conditionType": "Boolean",
+                "hasEmptyState": false
+              },
+              {
+                "id": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                "values": [
+                  "Excluded from CRM"
+                ],
+                "nodeType": "Filter",
+                "operator": "in",
+                "fieldName": "tag_name",
+                "tableName": "d_player_risk_tag",
+                "columnName": "tag_name",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              },
+              {
+                "id": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                "values": [
+                  "login",
+                  "deposit"
+                ],
+                "nodeType": "Filter",
+                "operator": "in",
+                "fieldName": "restriction_name",
+                "tableName": "d_player_restriction",
+                "columnName": "restriction_name",
+                "databaseName": "dv_marts",
+                "conditionType": "MultiSelect",
+                "hasEmptyState": false
+              }
+            ]
+          },
+          "dataSourceName": "default",
+          "currentTemplate": {
+            "id": "227cb28d-cbdc-4c29-8f92-eee67c955f00",
+            "name": "26_GGX",
+            "brand": "JBCL",
+            "group": "myFilterTemplates",
+            "createdBy": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+            "currencyCodes": [
+              "CLP"
+            ],
+            "filterDetails": {
+              "filtersTree": [
+                {
+                  "nodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                  "children": [
+                    "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                    "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                    "1c528260-2d99-4500-a8c1-e7c23e030ccd"
+                  ],
+                  "nodeType": "Operator",
+                  "isDeprecated": true,
+                  "parentNodeId": null,
+                  "groupOperator": "Exclude",
+                  "filterConditionId": null
+                },
+                {
+                  "name": "risk_casino_segment",
+                  "column": {
+                    "name": "risk_casino_segment",
+                    "tableName": "agg_player_summary",
+                    "filterName": "Multiple select",
+                    "isRequired": false,
+                    "description": "Risk segment related to casino.",
+                    "displayName": "risk_casino_segment",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "in",
+                        "conditionType": "MultiSelect"
+                      },
+                      {
+                        "operator": "notIn",
+                        "conditionType": "MultiSelect"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": true
+                  },
+                  "height": 42,
+                  "nodeId": "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "in",
+                  "settings": {
+                    "values": [
+                      "Good guys-X",
+                      "VIP-Silver"
+                    ],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "agg_player_summary",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Risk segment related to casino.",
+                  "displayName": "risk_casino_segment",
+                  "databaseName": "dv_marts",
+                  "isDeprecated": false,
+                  "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                  "valuesSource": null,
+                  "conditionType": "MultiSelect",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "filterConditionId": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                  "isPredefinedValuesAvailable": true
+                },
+                {
+                  "name": "last_bet_total",
+                  "column": {
+                    "name": "last_bet_total",
+                    "tableName": "agg_player_summary",
+                    "filterName": "Date&time",
+                    "isRequired": false,
+                    "description": "Timestamp of the player's last bet across all products.",
+                    "displayName": "last_bet_total",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "equal",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "notEqual",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "gte",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "lte",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "between",
+                        "conditionType": "DateTimeBetween"
+                      },
+                      {
+                        "operator": "equal",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "notEqual",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "gte",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "lte",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "between",
+                        "conditionType": "DateTimeRelativeBetween"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": false
+                  },
+                  "height": 42,
+                  "nodeId": "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "lte",
+                  "settings": {
+                    "amount": "14",
+                    "values": [],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last bet across all products.",
+                  "displayName": "last_bet_total",
+                  "databaseName": "dv_marts",
+                  "dateTimeMode": "Relative",
+                  "isDeprecated": false,
+                  "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                  "valuesSource": null,
+                  "conditionType": "DateTimeRelative",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "filterConditionId": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                  "isPredefinedValuesAvailable": false
+                },
+                {
+                  "name": "last_deposit",
+                  "column": {
+                    "name": "last_deposit",
+                    "tableName": "agg_player_summary",
+                    "filterName": "Date&time",
+                    "isRequired": false,
+                    "description": "Timestamp of the player's last deposit.",
+                    "displayName": "last_deposit",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "equal",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "notEqual",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "gte",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "lte",
+                        "conditionType": "DateTime"
+                      },
+                      {
+                        "operator": "between",
+                        "conditionType": "DateTimeBetween"
+                      },
+                      {
+                        "operator": "equal",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "notEqual",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "gte",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "lte",
+                        "conditionType": "DateTimeRelative"
+                      },
+                      {
+                        "operator": "between",
+                        "conditionType": "DateTimeRelativeBetween"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": false
+                  },
+                  "height": 42,
+                  "nodeId": "3d467d60-22df-4cd9-a0d6-4676885f19b9",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "lte",
+                  "settings": {
+                    "amount": "14",
+                    "values": [],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "agg_player_summary",
+                  "filterName": "Date&time",
+                  "isRequired": false,
+                  "description": "Timestamp of the player's last deposit.",
+                  "displayName": "last_deposit",
+                  "databaseName": "dv_marts",
+                  "dateTimeMode": "Relative",
+                  "isDeprecated": false,
+                  "parentNodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                  "valuesSource": null,
+                  "conditionType": "DateTimeRelative",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTime"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeBetween"
+                    },
+                    {
+                      "operator": "equal",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "notEqual",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "gte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "lte",
+                      "conditionType": "DateTimeRelative"
+                    },
+                    {
+                      "operator": "between",
+                      "conditionType": "DateTimeRelativeBetween"
+                    }
+                  ],
+                  "filterConditionId": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                  "isPredefinedValuesAvailable": false
+                },
+                {
+                  "name": "is_cancel",
+                  "column": {
+                    "name": "is_cancel",
+                    "tableName": "d_player_risk_tag",
+                    "filterName": "Boolean",
+                    "isRequired": false,
+                    "description": "Flag indicating if the risk tag has been canceled.",
+                    "displayName": "is_cancel",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "is",
+                        "conditionType": "Boolean"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": false
+                  },
+                  "height": 42,
+                  "nodeId": "082f58ed-5317-4312-ad2e-85670b08a31e",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "is",
+                  "settings": {
+                    "value": "no",
+                    "values": [],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Boolean",
+                  "isRequired": false,
+                  "description": "Flag indicating if the risk tag has been canceled.",
+                  "displayName": "is_cancel",
+                  "databaseName": "dv_marts",
+                  "isDeprecated": false,
+                  "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                  "valuesSource": null,
+                  "conditionType": "Boolean",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "is",
+                      "conditionType": "Boolean"
+                    }
+                  ],
+                  "filterConditionId": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                  "isPredefinedValuesAvailable": false
+                },
+                {
+                  "nodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                  "children": [
+                    "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                    "cc005d09-8ca1-4f71-b8f4-6c5ceda9a12b"
+                  ],
+                  "nodeType": "Operator",
+                  "isDeprecated": true,
+                  "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                  "groupOperator": "And",
+                  "filterConditionId": null
+                },
+                {
+                  "name": "tag_name",
+                  "column": {
+                    "name": "tag_name",
+                    "tableName": "d_player_risk_tag",
+                    "filterName": "Multiple select",
+                    "isRequired": false,
+                    "description": "Name of the risk tag.",
+                    "displayName": "tag_name",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "in",
+                        "conditionType": "MultiSelect"
+                      },
+                      {
+                        "operator": "notIn",
+                        "conditionType": "MultiSelect"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": true
+                  },
+                  "height": 42,
+                  "nodeId": "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "in",
+                  "settings": {
+                    "values": [
+                      "Excluded from CRM"
+                    ],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "d_player_risk_tag",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "Name of the risk tag.",
+                  "displayName": "tag_name",
+                  "databaseName": "dv_marts",
+                  "isDeprecated": false,
+                  "parentNodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                  "valuesSource": null,
+                  "conditionType": "MultiSelect",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "filterConditionId": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                  "isPredefinedValuesAvailable": true
+                },
+                {
+                  "name": "restriction_name",
+                  "column": {
+                    "name": "restriction_name",
+                    "tableName": "d_player_restriction",
+                    "filterName": "Multiple select",
+                    "isRequired": false,
+                    "description": "The name of restriction",
+                    "displayName": "restriction_name",
+                    "valuesSource": null,
+                    "filterConditions": [
+                      {
+                        "operator": "in",
+                        "conditionType": "MultiSelect"
+                      },
+                      {
+                        "operator": "notIn",
+                        "conditionType": "MultiSelect"
+                      }
+                    ],
+                    "isPredefinedValuesAvailable": true
+                  },
+                  "height": 42,
+                  "nodeId": "1c528260-2d99-4500-a8c1-e7c23e030ccd",
+                  "children": [],
+                  "nodeType": "Filter",
+                  "operator": "in",
+                  "settings": {
+                    "values": [
+                      "login",
+                      "deposit"
+                    ],
+                    "dateType": "days",
+                    "hasEmptyState": false
+                  },
+                  "showForm": false,
+                  "tableName": "d_player_restriction",
+                  "filterName": "Multiple select",
+                  "isRequired": false,
+                  "description": "The name of restriction",
+                  "displayName": "restriction_name",
+                  "databaseName": "dv_marts",
+                  "isDeprecated": false,
+                  "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                  "valuesSource": null,
+                  "conditionType": "MultiSelect",
+                  "groupOperator": null,
+                  "filterConditions": [
+                    {
+                      "operator": "in",
+                      "conditionType": "MultiSelect"
+                    },
+                    {
+                      "operator": "notIn",
+                      "conditionType": "MultiSelect"
+                    }
+                  ],
+                  "filterConditionId": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                  "isPredefinedValuesAvailable": true
+                },
+                {
+                  "nodeId": "98dcf15c-f13b-45da-9cc0-4e842e517fd4",
+                  "children": [
+                    "082f58ed-5317-4312-ad2e-85670b08a31e",
+                    "8f61be7e-aba6-4ab0-9ba6-2ab13de4ad17"
+                  ],
+                  "nodeType": "Operator",
+                  "isDeprecated": true,
+                  "parentNodeId": "bedf5862-2dcf-4faa-a68a-9e3a0d217f64",
+                  "groupOperator": "And",
+                  "filterConditionId": null
+                },
+                {
+                  "nodeId": "640e9ed8-bd3a-4b54-9223-ced80b6a8024",
+                  "children": [
+                    "7c0ac039-a234-4ff1-b42a-72dcc2a764bd",
+                    "3d467d60-22df-4cd9-a0d6-4676885f19b9"
+                  ],
+                  "nodeType": "Operator",
+                  "isDeprecated": true,
+                  "parentNodeId": "d8fe71d2-0054-4262-a708-39e4e19d5a5b",
+                  "groupOperator": "Or",
+                  "filterConditionId": null
+                }
+              ],
+              "filterConditions": [
+                {
+                  "id": "82ffb9f1-bca2-4966-b482-ade57acf3eaf",
+                  "values": [
+                    "Good guys-X",
+                    "VIP-Silver"
+                  ],
+                  "operator": "in",
+                  "fieldName": "risk_casino_segment",
+                  "tableName": "agg_player_summary",
+                  "databaseName": "dv_marts",
+                  "conditionType": "MultiSelect",
+                  "hasEmptyState": false
+                },
+                {
+                  "id": "a8f160d9-2c86-4559-8470-8f0008dfa68b",
+                  "value": "P14D",
+                  "operator": "lte",
+                  "fieldName": "last_bet_total",
+                  "tableName": "agg_player_summary",
+                  "databaseName": "dv_marts",
+                  "conditionType": "DateTimeRelative",
+                  "hasEmptyState": null
+                },
+                {
+                  "id": "7eb17607-cc2e-4a40-bb2d-bcc410133ac8",
+                  "value": "P14D",
+                  "operator": "lte",
+                  "fieldName": "last_deposit",
+                  "tableName": "agg_player_summary",
+                  "databaseName": "dv_marts",
+                  "conditionType": "DateTimeRelative",
+                  "hasEmptyState": null
+                },
+                {
+                  "id": "f1a8931b-c57f-4205-851a-f5d0bfc566eb",
+                  "value": false,
+                  "operator": "is",
+                  "fieldName": "is_cancel",
+                  "tableName": "d_player_risk_tag",
+                  "databaseName": "dv_marts",
+                  "conditionType": "Boolean",
+                  "hasEmptyState": false
+                },
+                {
+                  "id": "1f412fa5-89be-4947-b060-c8cd77f9bf9d",
+                  "values": [
+                    "Excluded from CRM"
+                  ],
+                  "operator": "in",
+                  "fieldName": "tag_name",
+                  "tableName": "d_player_risk_tag",
+                  "databaseName": "dv_marts",
+                  "conditionType": "MultiSelect",
+                  "hasEmptyState": false
+                },
+                {
+                  "id": "f99a4782-f8a0-468f-aa20-4ae4eef29ac2",
+                  "values": [
+                    "login",
+                    "deposit"
+                  ],
+                  "operator": "in",
+                  "fieldName": "restriction_name",
+                  "tableName": "d_player_restriction",
+                  "databaseName": "dv_marts",
+                  "conditionType": "MultiSelect",
+                  "hasEmptyState": false
+                }
+              ]
+            }
+          }
+        },
+        "error": false,
+        "displayData": [
+          "Activity customized"
+        ],
+        "displayName": "Custom Segment"
+      },
+      "efef636f-ff69-4723-adaf-89d2abcb3b6f": {
+        "data": {
+          "title": "Bet Insurance",
+          "conditions": [
+            {
+              "name": "Bet insurance condition 1",
+              "minOdd": "",
+              "betTypes": [
+                "express"
+              ],
+              "channels": [
+                "ALL"
+              ],
+              "lineTypes": [
+                "live",
+                "prematch"
+              ],
+              "isCollapsed": false,
+              "expireInDays": "",
+              "minBetAmount": {
+                "CLP": "50000"
+              },
+              "minOddParlay": 1.96,
+              "sportTickets": [
+                {
+                  "names": {
+                    "event": {},
+                    "sport": {
+                      "en": "Football",
+                      "es": "Fútbol"
+                    },
+                    "tournament": {}
+                  },
+                  "sport": "Football",
+                  "eventId": null,
+                  "tournamentId": null,
+                  "sportShortKey": "F"
+                }
+              ],
+              "itemsCheckType": "All",
+              "availableEvents": [],
+              "availableSports": [
+                "F"
+              ],
+              "minOddItemParlay": 1.4,
+              "availableTournaments": []
+            }
+          ],
+          "parlayType": "simple",
+          "expireInDays": 4,
+          "pathesConfig": [
+            {
+              "events": [
+                {
+                  "eventName": "SingleBetSatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "SingleBetSatisfied",
+              "pathName": "Single bet satisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "ParleySatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "ParleySatisfied",
+              "pathName": "Parlay satisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "Unsatisfied",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "Unsatisfied",
+              "pathName": "Unsatisfied"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "Canceled",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "Canceled",
+              "pathName": "Canceled"
+            }
+          ],
+          "parlaySatisfied": {
+            "minItems": "2"
+          },
+          "satisfiedResults": [
+            {
+              "name": "ParleySatisfied",
+              "betType": "Express",
+              "minItems": 2
+            }
+          ]
+        },
+        "error": false,
+        "displayData": [
+          "4 days"
+        ],
+        "displayName": "Bet Insurance"
+      }
+    }
+  },
+  "duplicatedFromVersion": 8,
+  "duplicatedFromId": "JRN-0-433988"
+}

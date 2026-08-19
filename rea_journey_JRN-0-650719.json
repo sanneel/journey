@@ -1,0 +1,903 @@
+{
+  "journeyId": "JRN-0-650719",
+  "journeyName": "VIPCRM_JBCL_Sports_LP_Notification_12.08",
+  "author": {
+    "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+    "authorName": "Vatche C"
+  },
+  "status": "Running",
+  "brand": "JBCL",
+  "currencyCodes": [
+    "CLP"
+  ],
+  "activities": [
+    {
+      "activityId": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+      "activityName": "notification_center",
+      "activityDisplayName": "Notification Center",
+      "events": [
+        {
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "988cb916-331a-4e6f-8547-bf017df922aa",
+          "count": 390,
+          "version": 1
+        },
+        {
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "b66f6cb0-463d-43fe-ace8-ce87c8afdbc1",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "channel": 1,
+        "category": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "contract": 1,
+        "accountId": "",
+        "languages": [
+          {
+            "languageCode": "es"
+          },
+          {
+            "languageCode": "en"
+          }
+        ],
+        "templates": 1312,
+        "displayData": [
+          "1312. JBCL Custom. Dynamic. CRM. Information. PROMO"
+        ],
+        "deliveryType": "singleChannel",
+        "validityType": "days",
+        "objectForSend": {
+          "metadata": {
+            "utm_source": "boris",
+            "journeyName": "VIPCRM_JBCL_Sports_LP_Notification_12.08"
+          },
+          "variables": [
+            {
+              "name": "title-en",
+              "value": "¡Es hora de obtener tu bono semanal!⭐"
+            },
+            {
+              "name": "caption-en",
+              "value": "¡Consulta los términos!"
+            },
+            {
+              "name": "description-en",
+              "value": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!"
+            },
+            {
+              "name": "title",
+              "value": "%title-en%"
+            },
+            {
+              "name": "description",
+              "value": "%description-en%"
+            },
+            {
+              "name": "icon-src",
+              "value": "%icon-src%"
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption-en%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_highlighted",
+              "value": "True"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            },
+            {
+              "name": "layout",
+              "value": "1"
+            },
+            {
+              "name": "title-es",
+              "value": "¡Es hora de obtener tu bono semanal!⭐"
+            },
+            {
+              "name": "caption-es",
+              "value": "¡Consulta los términos!"
+            },
+            {
+              "name": "description-es",
+              "value": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!"
+            },
+            {
+              "name": "title",
+              "value": "%title-es%"
+            },
+            {
+              "name": "description",
+              "value": "%description-es%"
+            },
+            {
+              "name": "icon-src",
+              "value": "%icon-src%"
+            },
+            {
+              "name": "buttons_1_caption",
+              "value": "%caption-es%"
+            },
+            {
+              "name": "buttons_1_link",
+              "value": "%link%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_deeplink",
+              "value": "%deeplink%?%$utm_tags%"
+            },
+            {
+              "name": "buttons_1_highlighted",
+              "value": "True"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            },
+            {
+              "name": "layout",
+              "value": "1"
+            },
+            {
+              "name": "link",
+              "value": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%"
+            },
+            {
+              "name": "deeplink",
+              "value": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%"
+            },
+            {
+              "name": "icon-src",
+              "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/b377aa6f-61c5-417b-b899-ccb247df3a04.png"
+            },
+            {
+              "name": "group",
+              "value": "regular"
+            }
+          ],
+          "template_id": 1312,
+          "expire_after": "1.00:00:00.000",
+          "defaultVariables": [],
+          "localizedVariables": []
+        },
+        "singleChannel": {
+          "accordion": {
+            "validList": {
+              "template1312": {
+                "en": true,
+                "es": true
+              },
+              "template1935": {
+                "en": true,
+                "es": true
+              }
+            }
+          },
+          "activityName": "JBCL Custom. Dynamic. CRM. Information. PROMO",
+          "localizedLanguagesTab": {
+            "en": {
+              "group": "regular",
+              "title": "%title-en%",
+              "layout": "1",
+              "icon-src": "%icon-src%",
+              "title-en": "¡Es hora de obtener tu bono semanal!⭐",
+              "caption-en": "¡Consulta los términos!",
+              "description": "%description-en%",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description-en": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!",
+              "buttons_1_caption": "%caption-en%",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+              "buttons_1_highlighted": "True"
+            },
+            "es": {
+              "group": "regular",
+              "title": "%title-es%",
+              "layout": "1",
+              "icon-src": "%icon-src%",
+              "title-es": "¡Es hora de obtener tu bono semanal!⭐",
+              "caption-es": "¡Consulta los términos!",
+              "description": "%description-es%",
+              "buttons_1_link": "%link%?%$utm_tags%",
+              "description-es": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!",
+              "buttons_1_caption": "%caption-es%",
+              "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+              "buttons_1_highlighted": "True"
+            },
+            "common": {
+              "link": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%",
+              "deeplink": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%",
+              "icon-src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/b377aa6f-61c5-417b-b899-ccb247df3a04.png"
+            },
+            "dwhVariables": {
+              "en": [],
+              "es": [],
+              "common": []
+            }
+          }
+        },
+        "validityAmount": "1",
+        "dataDependencies": [],
+        "listOfUsedVariables": []
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-12T12:48:39.8037350Z",
+      "version": 1
+    },
+    {
+      "activityId": "988cb916-331a-4e6f-8547-bf017df922aa",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-12T12:48:39.8037380Z",
+      "version": 1
+    },
+    {
+      "activityId": "b66f6cb0-463d-43fe-ace8-ce87c8afdbc1",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-12T12:48:39.8037380Z",
+      "version": 1
+    },
+    {
+      "activityId": "c71a9918-221b-4282-8ed1-99b386e324d4",
+      "activityName": "csv_import",
+      "activityDisplayName": "CSV",
+      "events": [
+        {
+          "eventName": "PlayerAdded",
+          "eventDisplayName": "Players added to journey",
+          "eventType": "Activation",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+          "count": 390,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "fileId": "5614e8e2-57e4-4a2e-8bf5-6c7af6861309",
+        "displayData": [
+          "𝗝𝗕𝗖𝗟 𝗩𝗜𝗣 𝗦𝗽𝗼𝗿𝘁𝘀 𝗟𝗣 - Comms.csv"
+        ],
+        "progressData": {
+          "fileId": "5614e8e2-57e4-4a2e-8bf5-6c7af6861309",
+          "fileName": "𝗝𝗕𝗖𝗟 𝗩𝗜𝗣 𝗦𝗽𝗼𝗿𝘁𝘀 𝗟𝗣 - Comms.csv",
+          "fileStatus": "Processed",
+          "playersCount": 390
+        },
+        "uploadStatus": "UPLOADED"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "09c7d95d-fe63-451a-806b-1045a7d3cd42",
+        "authorName": "Vatche C"
+      },
+      "changedAt": "2026-08-12T12:48:39.8037620Z",
+      "version": 1
+    }
+  ],
+  "startAt": "2026-08-12T12:48:42.2488690Z",
+  "changedAt": "2026-08-12T12:48:42.2488690Z",
+  "changeHistory": {},
+  "createdAt": "2026-08-12T12:48:39.8066860Z",
+  "metadata": {
+    "purpose": "Newsletter",
+    "category": "Information",
+    "priority": 3,
+    "productType": ""
+  },
+  "reEntryRule": {
+    "reEntryMode": "Prohibited"
+  },
+  "timeZoneId": "Chile/EasterIsland",
+  "testControlGroupParameters": {
+    "playersAddingStrategy": "IncludeAll",
+    "isEnabled": false
+  },
+  "activityEventConversionMetrics": [],
+  "areJourneyMetricsAvailable": true,
+  "allJourneyActivationsCount": 390,
+  "overJourneyActivationsCount": 390,
+  "journeySource": "UBO",
+  "isArchived": false,
+  "version": 5,
+  "isUnlimited": true,
+  "isImmediatelyAfterPublish": true,
+  "rawJourneyData": {
+    "elements": [
+      {
+        "id": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "data": {
+          "name": "notification_center",
+          "type": "communication",
+          "order": 21,
+          "ports": [
+            {
+              "id": "input-130ecbd9-0d6a-4841-8a07-4e44f4db23ab"
+            },
+            {
+              "id": "NotificationSent-130ecbd9-0d6a-4841-8a07-4e44f4db23ab"
+            },
+            {
+              "id": "NotificationNotSent-130ecbd9-0d6a-4841-8a07-4e44f4db23ab"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "NotificationSent",
+              "eventType": "Completion",
+              "eventDisplayName": "Sent"
+            },
+            {
+              "isHidden": false,
+              "eventName": "NotificationNotSent",
+              "eventType": "Completion",
+              "eventDisplayName": "Not Sent"
+            }
+          ],
+          "nodeType": "action",
+          "boundaryDefinition": false,
+          "activityDisplayName": "Notification Center"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 199
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 264
+        }
+      },
+      {
+        "id": "988cb916-331a-4e6f-8547-bf017df922aa",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-988cb916-331a-4e6f-8547-bf017df922aa"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "eventDisplayName": "Sent"
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -6.5,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -7.5,
+          "y": 528
+        }
+      },
+      {
+        "id": "b66f6cb0-463d-43fe-ace8-ce87c8afdbc1",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-b66f6cb0-463d-43fe-ace8-ce87c8afdbc1"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "eventDisplayName": "Not Sent"
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 233.5,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 232.5,
+          "y": 528
+        }
+      },
+      {
+        "id": "c1614c41-a398-47db-9070-ab660a1ac174",
+        "data": {
+          "eventName": "NotificationSent",
+          "eventType": "Completion",
+          "activityName": "notification_center",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "target": "988cb916-331a-4e6f-8547-bf017df922aa",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "NotificationSent-130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "targetHandle": "input-988cb916-331a-4e6f-8547-bf017df922aa",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "939fd904-6baa-4f10-9e36-238f12f9a72e",
+        "data": {
+          "eventName": "NotificationNotSent",
+          "eventType": "Completion",
+          "activityName": "notification_center",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "target": "b66f6cb0-463d-43fe-ace8-ce87c8afdbc1",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "NotificationNotSent-130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "targetHandle": "input-b66f6cb0-463d-43fe-ace8-ce87c8afdbc1",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "c71a9918-221b-4282-8ed1-99b386e324d4",
+        "data": {
+          "name": "csv_import",
+          "type": "source",
+          "order": 2,
+          "ports": [
+            {
+              "id": "PlayerAdded-c71a9918-221b-4282-8ed1-99b386e324d4"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAdded",
+              "eventType": "Activation",
+              "payloadKeys": [
+                "Brand",
+                "CurrencyCode"
+              ],
+              "eventDisplayName": "Players added to journey",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "nodeType": "source",
+          "boundaryDefinition": false,
+          "activityDisplayName": "CSV"
+        },
+        "type": "source",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false
+      },
+      {
+        "id": "e670fc43-9f9d-4d7d-8608-2482c78af942",
+        "data": {
+          "isHidden": false,
+          "eventName": "PlayerAdded",
+          "eventType": "Activation",
+          "payloadKeys": [
+            "Brand",
+            "CurrencyCode"
+          ],
+          "activityName": "csv_import",
+          "isLabelHidden": true,
+          "isReconnectable": false,
+          "eventDisplayName": "Players added to journey",
+          "isDisconnectable": true,
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "c71a9918-221b-4282-8ed1-99b386e324d4",
+        "target": "130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "zIndex": 6,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAdded-c71a9918-221b-4282-8ed1-99b386e324d4",
+        "targetHandle": "input-130ecbd9-0d6a-4841-8a07-4e44f4db23ab",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      }
+    ],
+    "infoValues": {
+      "brand": "JBCL",
+      "stopAt": "Unlimited",
+      "metadata": {
+        "purpose": "Newsletter",
+        "category": "Information",
+        "priority": 3,
+        "productType": ""
+      },
+      "timeZoneId": "Chile/EasterIsland",
+      "isUnlimited": true,
+      "journeyName": "VIPCRM_JBCL_Sports_LP_Notification_12.08",
+      "reEntryRule": {
+        "reEntryMode": "Prohibited",
+        "reEntryPeriod": null
+      },
+      "currencyCodes": [
+        "CLP"
+      ],
+      "isImmediatelyAfterPublish": true,
+      "testControlGroupParameters": {
+        "isEnabled": false,
+        "controlGroupPercent": null,
+        "playersAddingStrategy": "IncludeAll",
+        "daysToKeepInControlGroup": null
+      }
+    },
+    "pathesConfiguration": {},
+    "exitCriteriaSettings": null,
+    "boundaryConfiguration": {},
+    "activitiesConfiguration": {
+      "130ecbd9-0d6a-4841-8a07-4e44f4db23ab": {
+        "data": {
+          "channel": 1,
+          "category": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "contract": 1,
+          "accountId": "",
+          "languages": [
+            {
+              "languageCode": "es"
+            },
+            {
+              "languageCode": "en"
+            }
+          ],
+          "templates": 1312,
+          "deliveryType": "singleChannel",
+          "validityType": "days",
+          "objectForSend": {
+            "metadata": {
+              "utm_source": "boris",
+              "journeyName": "VIPCRM_JBCL_Sports_LP_Notification_12.08"
+            },
+            "variables": [
+              {
+                "name": "title-en",
+                "value": "¡Es hora de obtener tu bono semanal!⭐"
+              },
+              {
+                "name": "caption-en",
+                "value": "¡Consulta los términos!"
+              },
+              {
+                "name": "description-en",
+                "value": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!"
+              },
+              {
+                "name": "title",
+                "value": "%title-en%"
+              },
+              {
+                "name": "description",
+                "value": "%description-en%"
+              },
+              {
+                "name": "icon-src",
+                "value": "%icon-src%"
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption-en%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_highlighted",
+                "value": "True"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              },
+              {
+                "name": "layout",
+                "value": "1"
+              },
+              {
+                "name": "title-es",
+                "value": "¡Es hora de obtener tu bono semanal!⭐"
+              },
+              {
+                "name": "caption-es",
+                "value": "¡Consulta los términos!"
+              },
+              {
+                "name": "description-es",
+                "value": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!"
+              },
+              {
+                "name": "title",
+                "value": "%title-es%"
+              },
+              {
+                "name": "description",
+                "value": "%description-es%"
+              },
+              {
+                "name": "icon-src",
+                "value": "%icon-src%"
+              },
+              {
+                "name": "buttons_1_caption",
+                "value": "%caption-es%"
+              },
+              {
+                "name": "buttons_1_link",
+                "value": "%link%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_deeplink",
+                "value": "%deeplink%?%$utm_tags%"
+              },
+              {
+                "name": "buttons_1_highlighted",
+                "value": "True"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              },
+              {
+                "name": "layout",
+                "value": "1"
+              },
+              {
+                "name": "link",
+                "value": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%"
+              },
+              {
+                "name": "deeplink",
+                "value": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%"
+              },
+              {
+                "name": "icon-src",
+                "value": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/b377aa6f-61c5-417b-b899-ccb247df3a04.png"
+              },
+              {
+                "name": "group",
+                "value": "regular"
+              }
+            ],
+            "template_id": 1312,
+            "expire_after": "1.00:00:00.000",
+            "defaultVariables": [],
+            "localizedVariables": []
+          },
+          "singleChannel": {
+            "accordion": {
+              "validList": {
+                "template1312": {
+                  "en": true,
+                  "es": true
+                },
+                "template1935": {
+                  "en": true,
+                  "es": true
+                }
+              }
+            },
+            "activityName": "JBCL Custom. Dynamic. CRM. Information. PROMO",
+            "localizedLanguagesTab": {
+              "en": {
+                "group": "regular",
+                "title": "%title-en%",
+                "layout": "1",
+                "icon-src": "%icon-src%",
+                "title-en": "¡Es hora de obtener tu bono semanal!⭐",
+                "caption-en": "¡Consulta los términos!",
+                "description": "%description-en%",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description-en": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!",
+                "buttons_1_caption": "%caption-en%",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+                "buttons_1_highlighted": "True"
+              },
+              "es": {
+                "group": "regular",
+                "title": "%title-es%",
+                "layout": "1",
+                "icon-src": "%icon-src%",
+                "title-es": "¡Es hora de obtener tu bono semanal!⭐",
+                "caption-es": "¡Consulta los términos!",
+                "description": "%description-es%",
+                "buttons_1_link": "%link%?%$utm_tags%",
+                "description-es": "Has ganado tu reembolso VIP del programa de lealtad. ¡Diviértete hoy en Jugabet con nuestros eventos deportivos exclusivos!",
+                "buttons_1_caption": "%caption-es%",
+                "buttons_1_deeplink": "%deeplink%?%$utm_tags%",
+                "buttons_1_highlighted": "True"
+              },
+              "common": {
+                "link": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%",
+                "deeplink": "https://jugabet.cl/services/promo/offers/promoPage/57380322-5cce-49f4-b9cc-21fd9503b4a6?%$utm_tags%",
+                "icon-src": "https://static.contentin.cloud/c93ad623-44ae-40f6-9aa5-b1aef7fd931a/b377aa6f-61c5-417b-b899-ccb247df3a04.png"
+              },
+              "dwhVariables": {
+                "en": [],
+                "es": [],
+                "common": []
+              }
+            }
+          },
+          "validityAmount": "1",
+          "dataDependencies": [],
+          "listOfUsedVariables": []
+        },
+        "error": false,
+        "isTouched": true,
+        "displayData": [
+          "1312. JBCL Custom. Dynamic. CRM. Information. PROMO"
+        ],
+        "displayName": "Notification Center"
+      },
+      "c71a9918-221b-4282-8ed1-99b386e324d4": {
+        "data": {
+          "fileId": "5614e8e2-57e4-4a2e-8bf5-6c7af6861309",
+          "dataKeys": [],
+          "progressData": {
+            "fileId": "5614e8e2-57e4-4a2e-8bf5-6c7af6861309",
+            "fileName": "𝗝𝗕𝗖𝗟 𝗩𝗜𝗣 𝗦𝗽𝗼𝗿𝘁𝘀 𝗟𝗣 - Comms.csv",
+            "fileStatus": "Processed",
+            "playersCount": 390
+          },
+          "uploadStatus": "UPLOADED"
+        },
+        "error": false,
+        "displayData": [
+          "𝗝𝗕𝗖𝗟 𝗩𝗜𝗣 𝗦𝗽𝗼𝗿𝘁𝘀 𝗟𝗣 - Comms.csv"
+        ],
+        "displayName": "CSV"
+      }
+    }
+  },
+  "duplicatedFromVersion": 5,
+  "duplicatedFromId": "JRN-0-496243"
+}

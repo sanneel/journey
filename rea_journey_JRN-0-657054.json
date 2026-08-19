@@ -1,0 +1,5884 @@
+{
+  "journeyId": "JRN-0-657054",
+  "journeyName": "JBCL | SP | Superclasico Promo - Giveaway 🏟 23.08.26 / 1-2-5 k FB v1",
+  "author": {
+    "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+    "authorName": "Magda G"
+  },
+  "status": "Planned",
+  "brand": "JBCL",
+  "currencyCodes": [
+    "CLP"
+  ],
+  "activities": [
+    {
+      "activityId": "05414c0a-de83-4c06-9087-7beede6847e1",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052860Z",
+      "version": 1
+    },
+    {
+      "activityId": "09190e4f-aa01-463c-9757-d3769092b364",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052890Z",
+      "version": 1
+    },
+    {
+      "activityId": "0a95feec-472b-4db6-8a46-5301ee80ac6a",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052120Z",
+      "version": 1
+    },
+    {
+      "activityId": "0af1b2ab-d02c-477b-9315-56519d9fe290",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052810Z",
+      "version": 1
+    },
+    {
+      "activityId": "0bc11b4f-fce0-411f-8e8a-ec91c9d443c7",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050810Z",
+      "version": 1
+    },
+    {
+      "activityId": "0e65efd2-2938-4708-9e82-56b965298892",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052870Z",
+      "version": 1
+    },
+    {
+      "activityId": "1476fcac-b909-4800-82da-47f6fd1bbba4",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053970Z",
+      "version": 1
+    },
+    {
+      "activityId": "182c85cc-ec4c-43c6-ab88-a0129a9fb2c8",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052860Z",
+      "version": 1
+    },
+    {
+      "activityId": "18363884-bc61-44c4-a844-e6baeb699009",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052840Z",
+      "version": 1
+    },
+    {
+      "activityId": "1c53e6cd-0c39-4b94-97bd-c33cd5e83ee4",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050760Z",
+      "version": 1
+    },
+    {
+      "activityId": "1e15599c-a1a8-4b54-bbe5-787914f421d7",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050830Z",
+      "version": 1
+    },
+    {
+      "activityId": "1ebffb87-ad50-4991-864a-80905f9dab6a",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052820Z",
+      "version": 1
+    },
+    {
+      "activityId": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+      "activityName": "campaign_connector",
+      "activityDisplayName": "Campaign Connector",
+      "events": [
+        {
+          "eventName": "PlayerAddedToCampaign",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "d76026aa-f375-480d-b74b-a59358a335a2",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerNotAddedToCampaign",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1476fcac-b909-4800-82da-47f6fd1bbba4",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "displayData": [
+          "JRN-0-657111 • JBCL | SP | Superclasico Promo Code | Follow Up"
+        ],
+        "currencyMode": "automated",
+        "campaignConnectorConditions": {
+          "campaignId": "b8a27d05-6e86-42b0-87c0-d79e190ece4e",
+          "activityData": {
+            "HostJourneyId": "JRN-0-657111"
+          },
+          "campaignProductType": "Journey",
+          "campaignSubProductType": ""
+        }
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3053950Z",
+      "version": 1
+    },
+    {
+      "activityId": "2b1fa404-1f45-4671-86f2-9bed0a5a2e92",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052310Z",
+      "version": 1
+    },
+    {
+      "activityId": "2e31a6dc-437c-4f0f-ab78-18f5b571222c",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052470Z",
+      "version": 1
+    },
+    {
+      "activityId": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+      "activityName": "ams_decision_split",
+      "activityDisplayName": "Decision split",
+      "events": [
+        {
+          "eventName": "DecisionSplitPassedPath01",
+          "eventDisplayName": "Path 1",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath02",
+          "eventDisplayName": "Path 2",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "0af1b2ab-d02c-477b-9315-56519d9fe290",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath03",
+          "eventDisplayName": "Path 3",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1ebffb87-ad50-4991-864a-80905f9dab6a",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath04",
+          "eventDisplayName": "Path 4",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "60a170f1-08b7-496f-a64c-98f9d8502507",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath05",
+          "eventDisplayName": "Path 5",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "c2c0c83b-4389-4c24-ac00-bc7d8463ff98",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath06",
+          "eventDisplayName": "Path 6",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "18363884-bc61-44c4-a844-e6baeb699009",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath07",
+          "eventDisplayName": "Path 7",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "6271b85a-f118-4e99-abf7-0cdea292eaa0",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath08",
+          "eventDisplayName": "Path 8",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "182c85cc-ec4c-43c6-ab88-a0129a9fb2c8",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath09",
+          "eventDisplayName": "Path 9",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "05414c0a-de83-4c06-9087-7beede6847e1",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath10",
+          "eventDisplayName": "Path 10",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "0e65efd2-2938-4708-9e82-56b965298892",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath11",
+          "eventDisplayName": "Path 11",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "a525a769-cc63-4649-be38-2770ac02fdd6",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath12",
+          "eventDisplayName": "Path 12",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "dc453e90-5944-495a-ad81-557760b45d5d",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath13",
+          "eventDisplayName": "Path 13",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "728ce96b-6f05-43d3-af07-d1f91397a49e",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath14",
+          "eventDisplayName": "Path 14",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "09190e4f-aa01-463c-9757-d3769092b364",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath15",
+          "eventDisplayName": "Path 15",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "c54f3137-8cdc-4578-9604-51254bfb932a",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath16",
+          "eventDisplayName": "Path 16",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "568392eb-0a9d-4afe-aa2a-d37846d3dd6c",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath17",
+          "eventDisplayName": "Path 17",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "c0fde92e-3e24-4920-94f8-8f0e84b60e5c",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath18",
+          "eventDisplayName": "Path 18",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "bf1061e8-65b9-4800-a930-dbfb920b4223",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath19",
+          "eventDisplayName": "Path 19",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "38c6d5bc-0726-446f-a848-993858094b0d",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedPath20",
+          "eventDisplayName": "Path 20",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "c023b4d2-a111-4c3a-92f4-491402d09396",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "DecisionSplitPassedRemainderPath",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "rules": [
+          {
+            "name": "Path 1",
+            "filter": {
+              "filters": [
+                {
+                  "property": {
+                    "name": "playerBonusRate.bonusRateSport1month",
+                    "type": "number",
+                    "value": "1",
+                    "operator": "lt"
+                  },
+                  "variables": []
+                },
+                {
+                  "property": {
+                    "name": "fmFairplayBusinessSegmentNew?.segmentId",
+                    "type": "string",
+                    "value": "31",
+                    "operator": "isNot"
+                  },
+                  "variables": []
+                }
+              ],
+              "condition": "and"
+            }
+          }
+        ],
+        "remainder": "other",
+        "displayData": [
+          "1 paths"
+        ],
+        "pathesConfig": [
+          {
+            "events": [
+              {
+                "eventName": "DecisionSplitPassedPath01",
+                "eventType": "Completion",
+                "eventDisplayName": "Path 1"
+              }
+            ],
+            "pathId": "path1",
+            "pathName": "Path 1",
+            "nextActivityId": "4094ecb9-b1e5-469b-ad34-318bfbac8741"
+          },
+          {
+            "events": [
+              {
+                "eventName": "DecisionSplitPassedRemainderPath",
+                "eventType": "Completion"
+              }
+            ],
+            "pathId": "other",
+            "pathName": "Other",
+            "nextActivityId": "53ba110d-75de-4860-9b03-3e15cf6668f0"
+          }
+        ],
+        "usedSourceVariables": []
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3053430Z",
+      "version": 1
+    },
+    {
+      "activityId": "3690e1e9-84df-49ad-aa6d-f85dadc09e0c",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052640Z",
+      "version": 1
+    },
+    {
+      "activityId": "38c6d5bc-0726-446f-a848-993858094b0d",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052930Z",
+      "version": 1
+    },
+    {
+      "activityId": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+      "activityName": "random_split",
+      "activityDisplayName": "Random split",
+      "events": [
+        {
+          "eventName": "RandomSplitPassedPath1",
+          "eventDisplayName": "Path 1",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath10",
+          "eventDisplayName": "Path 10",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1e15599c-a1a8-4b54-bbe5-787914f421d7",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath2",
+          "eventDisplayName": "Path 2",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath3",
+          "eventDisplayName": "Path 3",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath4",
+          "eventDisplayName": "Path 4",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1c53e6cd-0c39-4b94-97bd-c33cd5e83ee4",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath5",
+          "eventDisplayName": "Path 5",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5c49cb09-3e0a-40b1-b86e-e372507f09b5",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath6",
+          "eventDisplayName": "Path 6",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "0bc11b4f-fce0-411f-8e8a-ec91c9d443c7",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath7",
+          "eventDisplayName": "Path 7",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "81569c3d-7480-4f05-801f-ee54eb356426",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath8",
+          "eventDisplayName": "Path 8",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5897d068-573f-400f-87cd-67f14bff8464",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "RandomSplitPassedPath9",
+          "eventDisplayName": "Path 9",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "ee6cd329-7a82-4e48-9b63-1364132faee4",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "paths": [
+          {
+            "pathId": "path1",
+            "pathName": "Path 1",
+            "probability": 40
+          },
+          {
+            "pathId": "path2",
+            "pathName": "Path 2",
+            "probability": 55
+          },
+          {
+            "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+            "pathName": "Path 3",
+            "probability": 5
+          }
+        ],
+        "displayData": [
+          " 40% / 55% / 5%"
+        ],
+        "pathesConfig": [
+          {
+            "events": [
+              {
+                "eventName": "RandomSplitPassedPath1",
+                "eventType": "Completion",
+                "eventDisplayName": "Path 1"
+              }
+            ],
+            "pathId": "path1",
+            "pathName": "Path 1",
+            "nextActivityId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+          },
+          {
+            "events": [
+              {
+                "eventName": "RandomSplitPassedPath2",
+                "eventType": "Completion",
+                "eventDisplayName": "Path 2"
+              }
+            ],
+            "pathId": "path2",
+            "pathName": "Path 2",
+            "nextActivityId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+          },
+          {
+            "events": [
+              {
+                "eventName": "RandomSplitPassedPath3",
+                "eventType": "Completion",
+                "eventDisplayName": "Path 3"
+              }
+            ],
+            "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+            "pathName": "Path 3",
+            "nextActivityId": "70c0bc41-a365-484e-a71e-f507f5415d0a"
+          }
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3051540Z",
+      "version": 1
+    },
+    {
+      "activityId": "4416b9c6-c9d7-4f23-aa74-8359ce8b8598",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052490Z",
+      "version": 1
+    },
+    {
+      "activityId": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+      "activityName": "freebet",
+      "activityDisplayName": "1000 FreeBet",
+      "events": [
+        {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "a8eea2c3-7e53-4a24-83e2-5540a9b14f9a",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "FreebetIssued",
+          "eventDisplayName": "Issued",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "77c341fc-a25d-4558-a115-3b42f8f11a6c",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "f1b76aa6-aeea-48e4-83cd-2973cf0dfc71",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+          "key": "PromotionId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+          "key": "PromotionAcceptedAt",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "properties": {
+          "maxOdd": 5,
+          "betTypes": [
+            "express",
+            "ordinar"
+          ],
+          "channels": [
+            "ALL"
+          ],
+          "lineTypes": [
+            "live",
+            "prematch"
+          ],
+          "expireInDays": 1,
+          "freeBetAmount": {
+            "CLP": 1000
+          },
+          "availableEvents": [],
+          "availableSports": [
+            "ALL"
+          ],
+          "amountAccrualType": "as_amount",
+          "availableTournaments": [],
+          "isBetBuilderRequired": false
+        },
+        "displayData": [
+          "1 days"
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3053820Z",
+      "version": 1
+    },
+    {
+      "activityId": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+      "activityName": "promotion",
+      "activityDisplayName": "1000 Free Bet",
+      "events": [
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "efdac690-66b1-48a7-8b45-c7c41f06e522",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PromotionLinkId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SourceActivityEntryTimestamp",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PlayerEntrySource",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "placements": [
+          {
+            "data": {
+              "maxOdd": 5,
+              "FrontId": "6b95695f-ed37-44dd-80d2-6c9a4f6ff3e2",
+              "ContentId": "efb16395-910c-4ea6-91cf-e75fbed263b5",
+              "moduleType": "FreeBet",
+              "expirationTimeout": 1,
+              "isActivityCurrencies": false,
+              "currencyCodeAmountSettings": [
+                {
+                  "amount": 1000,
+                  "currencyCode": "CLP"
+                }
+              ]
+            },
+            "dataSources": [
+              {
+                "keys": [
+                  "FreebetStatus",
+                  "FreebetAmount",
+                  "CurrencyCode",
+                  "FreebetExpireAt",
+                  "FreebetExpiredAt",
+                  "FreebetUsedAt",
+                  "FreebetTerminatedAt"
+                ],
+                "type": "Sync",
+                "journeyActivityId": "4ed967dc-2801-471a-9692-fc1323b19eb2"
+              },
+              {
+                "keys": [
+                  "FreebetIssuanceErrorType",
+                  "FreebetIssuanceErrorMessage"
+                ],
+                "type": "Async",
+                "journeyActivityId": "4ed967dc-2801-471a-9692-fc1323b19eb2"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Accepted by default"
+        ],
+        "promotionId": "fd59b83c-33df-4d1f-96bd-eeb045228a02",
+        "promotionLinkId": "4a3c4529-e106-478e-b105-8b6517243780",
+        "promotionStatus": "Accepted",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "790176"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3053670Z",
+      "version": 1
+    },
+    {
+      "activityId": "568392eb-0a9d-4afe-aa2a-d37846d3dd6c",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052910Z",
+      "version": 1
+    },
+    {
+      "activityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+      "activityName": "freebet",
+      "activityDisplayName": "2000 FreeBet",
+      "events": [
+        {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "2e31a6dc-437c-4f0f-ab78-18f5b571222c",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "9aeab215-5242-4daf-8092-f6fab718eb30",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "4416b9c6-c9d7-4f23-aa74-8359ce8b8598",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "FreebetIssued",
+          "eventDisplayName": "Issued",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+          "key": "PromotionId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+          "key": "PromotionAcceptedAt",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "properties": {
+          "maxOdd": 5,
+          "betTypes": [
+            "ordinar",
+            "express"
+          ],
+          "channels": [
+            "ALL"
+          ],
+          "lineTypes": [
+            "live",
+            "prematch"
+          ],
+          "expireInDays": 1,
+          "sportTickets": [],
+          "freeBetAmount": {
+            "CLP": 2000
+          },
+          "itemsCheckType": "Single",
+          "availableEvents": [],
+          "availableSports": [
+            "ALL"
+          ],
+          "amountAccrualType": "as_amount",
+          "availableTournaments": [],
+          "isBetBuilderRequired": false
+        },
+        "displayData": [
+          "1 days"
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3052460Z",
+      "version": 1
+    },
+    {
+      "activityId": "5897d068-573f-400f-87cd-67f14bff8464",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050820Z",
+      "version": 1
+    },
+    {
+      "activityId": "5c49cb09-3e0a-40b1-b86e-e372507f09b5",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050800Z",
+      "version": 1
+    },
+    {
+      "activityId": "60a170f1-08b7-496f-a64c-98f9d8502507",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052830Z",
+      "version": 1
+    },
+    {
+      "activityId": "617e59c3-4ead-4151-abb1-35d36580f40b",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052110Z",
+      "version": 1
+    },
+    {
+      "activityId": "6271b85a-f118-4e99-abf7-0cdea292eaa0",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052850Z",
+      "version": 1
+    },
+    {
+      "activityId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+      "activityName": "promotion",
+      "activityDisplayName": "2000 Free Bet",
+      "events": [
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "884bb418-9b76-4a61-9d7a-6e29daf09b95",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PromotionLinkId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SourceActivityEntryTimestamp",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PlayerEntrySource",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "placements": [
+          {
+            "data": {
+              "maxOdd": 5,
+              "FrontId": "580b1541-2c0b-41f4-becd-83881f9dafec",
+              "ContentId": "4b66216e-8b34-4d67-affc-47a8fb9e1c6a",
+              "moduleType": "FreeBet",
+              "expirationTimeout": 1,
+              "isActivityCurrencies": false,
+              "currencyCodeAmountSettings": [
+                {
+                  "amount": 2000,
+                  "currencyCode": "CLP"
+                }
+              ]
+            },
+            "dataSources": [
+              {
+                "keys": [
+                  "FreebetStatus",
+                  "FreebetAmount",
+                  "CurrencyCode",
+                  "FreebetExpireAt",
+                  "FreebetExpiredAt",
+                  "FreebetUsedAt",
+                  "FreebetTerminatedAt"
+                ],
+                "type": "Sync",
+                "journeyActivityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+              },
+              {
+                "keys": [
+                  "FreebetIssuanceErrorType",
+                  "FreebetIssuanceErrorMessage"
+                ],
+                "type": "Async",
+                "journeyActivityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Accepted by default"
+        ],
+        "promotionId": "a9488048-cd21-40eb-a188-552e6f1f07e6",
+        "promotionLinkId": "d2e85a2d-7188-41a8-a9ed-48d4c3f50082",
+        "promotionStatus": "Accepted",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "790177"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3051950Z",
+      "version": 1
+    },
+    {
+      "activityId": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+      "activityName": "promotion",
+      "activityDisplayName": "5000 Free Bet",
+      "events": [
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "617e59c3-4ead-4151-abb1-35d36580f40b",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PromotionLinkId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SourceActivityEntryTimestamp",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PlayerEntrySource",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "placements": [
+          {
+            "data": {
+              "maxOdd": 5,
+              "FrontId": "c2a6864c-f1c9-4309-afba-8d4c44f777ac",
+              "ContentId": "1b18ac2e-dc98-43bd-8164-a6f2e36d1f8f",
+              "moduleType": "FreeBet",
+              "expirationTimeout": 1,
+              "isActivityCurrencies": false,
+              "currencyCodeAmountSettings": [
+                {
+                  "amount": 5000,
+                  "currencyCode": "CLP"
+                }
+              ]
+            },
+            "dataSources": [
+              {
+                "keys": [
+                  "FreebetStatus",
+                  "FreebetAmount",
+                  "CurrencyCode",
+                  "FreebetExpireAt",
+                  "FreebetExpiredAt",
+                  "FreebetUsedAt",
+                  "FreebetTerminatedAt"
+                ],
+                "type": "Sync",
+                "journeyActivityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+              },
+              {
+                "keys": [
+                  "FreebetIssuanceErrorType",
+                  "FreebetIssuanceErrorMessage"
+                ],
+                "type": "Async",
+                "journeyActivityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Accepted by default"
+        ],
+        "promotionId": "feb3ecc5-92fb-44d5-b4e6-f38621839cfb",
+        "promotionLinkId": "8f8b177a-b706-4c73-8535-4830454c040d",
+        "promotionStatus": "Accepted",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "790175"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3052100Z",
+      "version": 1
+    },
+    {
+      "activityId": "728ce96b-6f05-43d3-af07-d1f91397a49e",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052890Z",
+      "version": 1
+    },
+    {
+      "activityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+      "activityName": "registration",
+      "activityDisplayName": "Reference codes",
+      "events": [
+        {
+          "eventName": "PlayerAdded",
+          "eventDisplayName": "Players added to journey",
+          "eventType": "Activation",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "version": "v2",
+        "displayData": [
+          "Promo codes: promo code superclassico.csv"
+        ],
+        "refCodeTypes": [
+          "Promocode"
+        ],
+        "promocodeSettings": {
+          "fileId": "0a9e4239-85e3-48b0-b4a0-6b84e57b36a2",
+          "values": [],
+          "purpose": "Crm",
+          "availability": [
+            "ExistingUser"
+          ],
+          "progressData": {
+            "fileId": "0a9e4239-85e3-48b0-b4a0-6b84e57b36a2",
+            "status": "Processed",
+            "fileName": "promo code superclassico.csv",
+            "totalCount": 2000,
+            "failedCount": 0,
+            "successCount": 2000,
+            "validationProgress": 1
+          },
+          "promocodeSource": "csvFile",
+          "maxActivationsForAllPlayers": 1
+        }
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3052800Z",
+      "version": 1
+    },
+    {
+      "activityId": "77c341fc-a25d-4558-a115-3b42f8f11a6c",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053840Z",
+      "version": 1
+    },
+    {
+      "activityId": "81569c3d-7480-4f05-801f-ee54eb356426",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050810Z",
+      "version": 1
+    },
+    {
+      "activityId": "884bb418-9b76-4a61-9d7a-6e29daf09b95",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3051970Z",
+      "version": 1
+    },
+    {
+      "activityId": "88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052610Z",
+      "version": 1
+    },
+    {
+      "activityId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+      "activityName": "promotion",
+      "activityDisplayName": "1000 Free Bet",
+      "events": [
+        {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "0a95feec-472b-4db6-8a46-5301ee80ac6a",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionOffered",
+          "eventDisplayName": "Offered",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PromotionUpcoming",
+          "eventDisplayName": "Upcoming",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SelectedCurrencyCode",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PromotionLinkId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "SourceActivityEntryTimestamp",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "PlayerEntrySource",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "languages": [
+          "es"
+        ],
+        "placements": [
+          {
+            "data": {
+              "maxOdd": 5,
+              "FrontId": "99080d95-569c-4b00-95a1-0f9f7042543c",
+              "ContentId": "67e70162-15b3-4ad6-a363-614264f26cf7",
+              "moduleType": "FreeBet",
+              "expirationTimeout": 1,
+              "isActivityCurrencies": false,
+              "currencyCodeAmountSettings": [
+                {
+                  "amount": 1000,
+                  "currencyCode": "CLP"
+                }
+              ]
+            },
+            "dataSources": [
+              {
+                "keys": [
+                  "FreebetStatus",
+                  "FreebetAmount",
+                  "CurrencyCode",
+                  "FreebetExpireAt",
+                  "FreebetExpiredAt",
+                  "FreebetUsedAt",
+                  "FreebetTerminatedAt"
+                ],
+                "type": "Sync",
+                "journeyActivityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+              },
+              {
+                "keys": [
+                  "FreebetIssuanceErrorType",
+                  "FreebetIssuanceErrorMessage"
+                ],
+                "type": "Async",
+                "journeyActivityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+              }
+            ],
+            "placementType": "PromoLobby"
+          }
+        ],
+        "displayData": [
+          "Accepted by default"
+        ],
+        "promotionId": "70ca1290-ed18-45ac-8773-7507f76e2106",
+        "promotionLinkId": "847901c5-32a1-4076-80c1-af41ac1a7f84",
+        "promotionStatus": "Accepted",
+        "channelsCondition": {
+          "values": [],
+          "isEnabled": false
+        },
+        "promotionDisplayId": "790174"
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3051810Z",
+      "version": 1
+    },
+    {
+      "activityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+      "activityName": "freebet",
+      "activityDisplayName": "5000 FreeBet",
+      "events": [
+        {
+          "eventName": "FreebetIssued",
+          "eventDisplayName": "Issued",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "3690e1e9-84df-49ad-aa6d-f85dadc09e0c",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "c4227630-d387-4b17-8e97-7ebdd8b04214",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+          "key": "PromotionId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+          "key": "PromotionAcceptedAt",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "properties": {
+          "maxOdd": 5,
+          "betTypes": [
+            "ordinar",
+            "express"
+          ],
+          "channels": [
+            "ALL"
+          ],
+          "lineTypes": [
+            "live",
+            "prematch"
+          ],
+          "expireInDays": 1,
+          "sportTickets": [],
+          "freeBetAmount": {
+            "CLP": 5000
+          },
+          "itemsCheckType": "Single",
+          "availableEvents": [],
+          "availableSports": [
+            "ALL"
+          ],
+          "amountAccrualType": "as_amount",
+          "availableTournaments": [],
+          "isBetBuilderRequired": false
+        },
+        "displayData": [
+          "1 days"
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3052610Z",
+      "version": 1
+    },
+    {
+      "activityId": "9aeab215-5242-4daf-8092-f6fab718eb30",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052470Z",
+      "version": 1
+    },
+    {
+      "activityId": "a525a769-cc63-4649-be38-2770ac02fdd6",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052880Z",
+      "version": 1
+    },
+    {
+      "activityId": "a8eea2c3-7e53-4a24-83e2-5540a9b14f9a",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053840Z",
+      "version": 1
+    },
+    {
+      "activityId": "aa3d01fd-cdba-40f6-819f-83e3a6bb8393",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052300Z",
+      "version": 1
+    },
+    {
+      "activityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+      "activityName": "freebet",
+      "activityDisplayName": "1000 FreeBet",
+      "events": [
+        {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "2b1fa404-1f45-4671-86f2-9bed0a5a2e92",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "aa3d01fd-cdba-40f6-819f-83e3a6bb8393",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "nextActivityId": "e3e44fcf-4280-4d0d-97f3-a5fd195654fa",
+          "count": 0,
+          "version": 1
+        },
+        {
+          "eventName": "FreebetIssued",
+          "eventDisplayName": "Issued",
+          "eventType": "Boundary",
+          "checkExitCriteria": false,
+          "isUsedInChoosableFlow": false,
+          "count": 0,
+          "version": 1
+        }
+      ],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [
+        {
+          "journeyActivityId": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+          "key": "CurrencyCode",
+          "isOptional": false
+        },
+        {
+          "journeyActivityId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+          "key": "PromotionId",
+          "isOptional": true
+        },
+        {
+          "journeyActivityId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+          "key": "PromotionAcceptedAt",
+          "isOptional": true
+        }
+      ],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "initializationData": {
+        "properties": {
+          "maxOdd": 5,
+          "betTypes": [
+            "express",
+            "ordinar"
+          ],
+          "channels": [
+            "ALL"
+          ],
+          "lineTypes": [
+            "live",
+            "prematch"
+          ],
+          "expireInDays": 1,
+          "sportTickets": [],
+          "freeBetAmount": {
+            "CLP": 1000
+          },
+          "itemsCheckType": "Single",
+          "availableEvents": [],
+          "availableSports": [
+            "ALL"
+          ],
+          "amountAccrualType": "as_amount",
+          "availableTournaments": [],
+          "isBetBuilderRequired": false
+        },
+        "displayData": [
+          "1 days"
+        ]
+      },
+      "isEditable": true,
+      "changedBy": {
+        "authorId": "0953c253-470b-4d86-8c72-1d1480d10048",
+        "authorName": "Magda G"
+      },
+      "changedAt": "2026-08-18T09:10:07.3052290Z",
+      "version": 1
+    },
+    {
+      "activityId": "bf1061e8-65b9-4800-a930-dbfb920b4223",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052930Z",
+      "version": 1
+    },
+    {
+      "activityId": "c023b4d2-a111-4c3a-92f4-491402d09396",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052940Z",
+      "version": 1
+    },
+    {
+      "activityId": "c0fde92e-3e24-4920-94f8-8f0e84b60e5c",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052920Z",
+      "version": 1
+    },
+    {
+      "activityId": "c2c0c83b-4389-4c24-ac00-bc7d8463ff98",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052830Z",
+      "version": 1
+    },
+    {
+      "activityId": "c4227630-d387-4b17-8e97-7ebdd8b04214",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052630Z",
+      "version": 1
+    },
+    {
+      "activityId": "c54f3137-8cdc-4578-9604-51254bfb932a",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052900Z",
+      "version": 1
+    },
+    {
+      "activityId": "d76026aa-f375-480d-b74b-a59358a335a2",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053960Z",
+      "version": 1
+    },
+    {
+      "activityId": "dc453e90-5944-495a-ad81-557760b45d5d",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052880Z",
+      "version": 1
+    },
+    {
+      "activityId": "e3e44fcf-4280-4d0d-97f3-a5fd195654fa",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3052310Z",
+      "version": 1
+    },
+    {
+      "activityId": "ee6cd329-7a82-4e48-9b63-1364132faee4",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3050830Z",
+      "version": 1
+    },
+    {
+      "activityId": "efdac690-66b1-48a7-8b45-c7c41f06e522",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053680Z",
+      "version": 1
+    },
+    {
+      "activityId": "f1b76aa6-aeea-48e4-83cd-2973cf0dfc71",
+      "activityName": "end_of_journey",
+      "events": [],
+      "eventsHistory": [],
+      "tcGroupEvents": [],
+      "dependencies": [],
+      "dataDependencies": [],
+      "dataKeys": [],
+      "isEditable": true,
+      "changedAt": "2026-08-18T09:10:07.3053830Z",
+      "version": 1
+    }
+  ],
+  "startAt": "2026-08-23T04:00:00.0000000Z",
+  "stopAt": "2026-08-25T04:00:00.0000000Z",
+  "changedAt": "2026-08-18T09:10:09.9729060Z",
+  "changeHistory": {},
+  "createdAt": "2026-08-18T09:10:07.3234540Z",
+  "metadata": {
+    "purpose": "Retention",
+    "category": "Marketing",
+    "priority": 2,
+    "productType": "Sport"
+  },
+  "reEntryRule": {
+    "reEntryMode": "Prohibited"
+  },
+  "timeZoneId": "Chile/Continental",
+  "testControlGroupParameters": {
+    "playersAddingStrategy": "IncludeAll",
+    "isEnabled": false
+  },
+  "activityEventConversionMetrics": [],
+  "areJourneyMetricsAvailable": true,
+  "journeySource": "UBO",
+  "isArchived": false,
+  "version": 3,
+  "isUnlimited": false,
+  "isImmediatelyAfterPublish": false,
+  "rawJourneyData": {
+    "elements": [
+      {
+        "id": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "data": {
+          "name": "random_split",
+          "ports": [
+            {
+              "id": "input-4094ecb9-b1e5-469b-ad34-318bfbac8741"
+            },
+            {
+              "id": "path1-4094ecb9-b1e5-469b-ad34-318bfbac8741"
+            },
+            {
+              "id": "path2-4094ecb9-b1e5-469b-ad34-318bfbac8741"
+            },
+            {
+              "id": "55cb8351-31b5-41d4-8a90-adb129274226-4094ecb9-b1e5-469b-ad34-318bfbac8741"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath1",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 1",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath2",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 2",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath3",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 3",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath4",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 4",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath5",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 5",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath6",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 6",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath7",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 7",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath8",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 8",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath9",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 9",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "RandomSplitPassedPath10",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Path 10",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "pathes": [
+            {
+              "events": [
+                {
+                  "eventName": "RandomSplitPassedPath1",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "path1",
+              "pathName": "Path 1"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "RandomSplitPassedPath2",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "path2",
+              "pathName": "Path 2"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "RandomSplitPassedPath3",
+                  "eventType": "Completion",
+                  "eventDisplayName": "Path 3"
+                }
+              ],
+              "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+              "pathName": "Path 3"
+            }
+          ],
+          "activityType": "flowControl",
+          "activityDisplayName": "Random split"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1187,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -708.75,
+          "y": 463
+        }
+      },
+      {
+        "id": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+            },
+            {
+              "id": "PromotionOffered-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+            },
+            {
+              "id": "PromotionAccepted-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+            },
+            {
+              "id": "PromotionExpired-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "PromotionAcceptedAt"
+              ],
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion",
+          "withoutSourceHandle": false
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2507,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1725,
+          "y": 727
+        }
+      },
+      {
+        "id": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+            },
+            {
+              "id": "PromotionOffered-6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+            },
+            {
+              "id": "PromotionAccepted-6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+            },
+            {
+              "id": "PromotionExpired-6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "PromotionAcceptedAt"
+              ],
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion",
+          "withoutSourceHandle": false
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1433.5,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -652.5,
+          "y": 727
+        }
+      },
+      {
+        "id": "884bb418-9b76-4a61-9d7a-6e29daf09b95",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-884bb418-9b76-4a61-9d7a-6e29daf09b95"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1086.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -307.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-70c0bc41-a365-484e-a71e-f507f5415d0a"
+            },
+            {
+              "id": "PromotionOffered-70c0bc41-a365-484e-a71e-f507f5415d0a"
+            },
+            {
+              "id": "PromotionAccepted-70c0bc41-a365-484e-a71e-f507f5415d0a"
+            },
+            {
+              "id": "PromotionExpired-70c0bc41-a365-484e-a71e-f507f5415d0a"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "PromotionAcceptedAt"
+              ],
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion",
+          "withoutSourceHandle": false
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -473.5,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 307.5,
+          "y": 727
+        }
+      },
+      {
+        "id": "617e59c3-4ead-4151-abb1-35d36580f40b",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-617e59c3-4ead-4151-abb1-35d36580f40b"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -126.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 652.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "0a95feec-472b-4db6-8a46-5301ee80ac6a",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-0a95feec-472b-4db6-8a46-5301ee80ac6a"
+            }
+          ],
+          "width": 40,
+          "height": 40
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2160,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1380,
+          "y": 991
+        }
+      },
+      {
+        "id": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "data": {
+          "name": "freebet",
+          "ports": [
+            {
+              "id": "input-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            },
+            {
+              "id": "FreebetIssued-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            },
+            {
+              "id": "PlayerFreebetUsed-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            },
+            {
+              "id": "PlayerFreebetExpired-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            },
+            {
+              "id": "PlayerFreebetCanceled-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            },
+            {
+              "id": "FreebetNotIssued-b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "FreebetIssued",
+              "eventType": "Boundary",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetUsed",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Used",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetExpired",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Timeout",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "PlayerFreebetCanceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "FreebetNotIssued",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Not issued",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Sport FreeBet"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2627,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1845,
+          "y": 991
+        }
+      },
+      {
+        "id": "aa3d01fd-cdba-40f6-819f-83e3a6bb8393",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-aa3d01fd-cdba-40f6-819f-83e3a6bb8393"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "FreebetAmount"
+          ],
+          "eventDisplayName": "Timeout",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2520,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1740,
+          "y": 1255
+        }
+      },
+      {
+        "id": "e3e44fcf-4280-4d0d-97f3-a5fd195654fa",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-e3e44fcf-4280-4d0d-97f3-a5fd195654fa"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Canceled",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2280,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1500,
+          "y": 1255
+        }
+      },
+      {
+        "id": "2b1fa404-1f45-4671-86f2-9bed0a5a2e92",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-2b1fa404-1f45-4671-86f2-9bed0a5a2e92"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Not issued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2040,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1260,
+          "y": 1255
+        }
+      },
+      {
+        "id": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "data": {
+          "name": "freebet",
+          "ports": [
+            {
+              "id": "input-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            },
+            {
+              "id": "FreebetIssued-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            },
+            {
+              "id": "PlayerFreebetUsed-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            },
+            {
+              "id": "PlayerFreebetExpired-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            },
+            {
+              "id": "PlayerFreebetCanceled-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            },
+            {
+              "id": "FreebetNotIssued-5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "FreebetIssued",
+              "eventType": "Boundary",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetUsed",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Used",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetExpired",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Timeout",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "PlayerFreebetCanceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "FreebetNotIssued",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Not issued",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Sport FreeBet"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1553.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -772.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "2e31a6dc-437c-4f0f-ab78-18f5b571222c",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-2e31a6dc-437c-4f0f-ab78-18f5b571222c"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "FreebetAmount"
+          ],
+          "eventDisplayName": "Timeout",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1560,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -780,
+          "y": 1255
+        }
+      },
+      {
+        "id": "9aeab215-5242-4daf-8092-f6fab718eb30",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-9aeab215-5242-4daf-8092-f6fab718eb30"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Canceled",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1320,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -540,
+          "y": 1255
+        }
+      },
+      {
+        "id": "4416b9c6-c9d7-4f23-aa74-8359ce8b8598",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-4416b9c6-c9d7-4f23-aa74-8359ce8b8598"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Not issued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -1080,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -300,
+          "y": 1255
+        }
+      },
+      {
+        "id": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "data": {
+          "name": "freebet",
+          "ports": [
+            {
+              "id": "input-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            },
+            {
+              "id": "FreebetIssued-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            },
+            {
+              "id": "PlayerFreebetUsed-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            },
+            {
+              "id": "PlayerFreebetExpired-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            },
+            {
+              "id": "PlayerFreebetCanceled-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            },
+            {
+              "id": "FreebetNotIssued-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "FreebetIssued",
+              "eventType": "Boundary",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetUsed",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Used",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetExpired",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Timeout",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "PlayerFreebetCanceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "FreebetNotIssued",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Not issued",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Sport FreeBet"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -593.5,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 187.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "FreebetAmount"
+          ],
+          "eventDisplayName": "Timeout",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -600,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 180,
+          "y": 1255
+        }
+      },
+      {
+        "id": "c4227630-d387-4b17-8e97-7ebdd8b04214",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-c4227630-d387-4b17-8e97-7ebdd8b04214"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Canceled",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -360,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 420,
+          "y": 1255
+        }
+      },
+      {
+        "id": "3690e1e9-84df-49ad-aa6d-f85dadc09e0c",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-3690e1e9-84df-49ad-aa6d-f85dadc09e0c"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Not issued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -120,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 660,
+          "y": 1255
+        }
+      },
+      {
+        "id": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+        "data": {
+          "name": "registration",
+          "type": "source",
+          "order": 1,
+          "ports": [
+            {
+              "id": "PlayerAdded-75eb3c5d-9761-4aa1-a144-857d2d0fe305"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAdded",
+              "eventType": "Activation",
+              "payloadKeys": [
+                "Brand",
+                "CurrencyCode"
+              ],
+              "eventDisplayName": "Players added to journey",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "nodeType": "source",
+          "boundaryDefinition": false,
+          "activityDisplayName": "Reference codes"
+        },
+        "type": "source",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "data": {
+          "name": "ams_decision_split",
+          "ports": [
+            {
+              "id": "input-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8"
+            },
+            {
+              "id": "path1-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8"
+            },
+            {
+              "id": "other-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath01",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path01",
+              "eventDisplayName": "Path 1",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath02",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path02",
+              "eventDisplayName": "Path 2",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath03",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path03",
+              "eventDisplayName": "Path 3",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath04",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path04",
+              "eventDisplayName": "Path 4",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath05",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path05",
+              "eventDisplayName": "Path 5",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath06",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path06",
+              "eventDisplayName": "Path 6",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath07",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path07",
+              "eventDisplayName": "Path 7",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath08",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path08",
+              "eventDisplayName": "Path 8",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath09",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path09",
+              "eventDisplayName": "Path 9",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath10",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path10",
+              "eventDisplayName": "Path 10",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath11",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path11",
+              "eventDisplayName": "Path 11",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath12",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path12",
+              "eventDisplayName": "Path 12",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath13",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path13",
+              "eventDisplayName": "Path 13",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath14",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path14",
+              "eventDisplayName": "Path 14",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath15",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path15",
+              "eventDisplayName": "Path 15",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath16",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path16",
+              "eventDisplayName": "Path 16",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath17",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path17",
+              "eventDisplayName": "Path 17",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath18",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path18",
+              "eventDisplayName": "Path 18",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath19",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path19",
+              "eventDisplayName": "Path 19",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedPath20",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_path20",
+              "eventDisplayName": "Path 20",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "DecisionSplitPassedRemainderPath",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "ams_decision_split.decision_split_passed_remainder_path",
+              "eventDisplayName": "Other",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "pathes": [
+            {
+              "events": [
+                {
+                  "eventName": "DecisionSplitPassedPath01",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "path1",
+              "pathName": "Path 1"
+            },
+            {
+              "events": [
+                {
+                  "eventName": "DecisionSplitPassedPath02",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath03",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath04",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath05",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath06",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath07",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath08",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath09",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath10",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath11",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath12",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath13",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath14",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath15",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath16",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath17",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath18",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath19",
+                  "eventType": "Completion"
+                },
+                {
+                  "eventName": "DecisionSplitPassedPath20",
+                  "eventType": "Completion"
+                }
+              ],
+              "pathId": "other",
+              "pathName": "Other"
+            }
+          ],
+          "activityType": "flowControl",
+          "activityDisplayName": "Decision split"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 0,
+          "y": 199
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 0,
+          "y": 199
+        }
+      },
+      {
+        "id": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "data": {
+          "name": "promotion",
+          "ports": [
+            {
+              "id": "input-53ba110d-75de-4860-9b03-3e15cf6668f0"
+            },
+            {
+              "id": "PromotionOffered-53ba110d-75de-4860-9b03-3e15cf6668f0"
+            },
+            {
+              "id": "PromotionAccepted-53ba110d-75de-4860-9b03-3e15cf6668f0"
+            },
+            {
+              "id": "PromotionExpired-53ba110d-75de-4860-9b03-3e15cf6668f0"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PromotionOffered",
+              "eventType": "Boundary",
+              "payloadKeys": [],
+              "eventDisplayName": "Offered",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionAccepted",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "PromotionAcceptedAt"
+              ],
+              "eventDisplayName": "Accepted",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PromotionExpired",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Expired",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Promotion",
+          "withoutSourceHandle": false
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 710.25,
+          "y": 463
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 708.75,
+          "y": 463
+        }
+      },
+      {
+        "id": "efdac690-66b1-48a7-8b45-c7c41f06e522",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-efdac690-66b1-48a7-8b45-c7c41f06e522"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Expired",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 1730.25,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 1605,
+          "y": 727
+        }
+      },
+      {
+        "id": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "data": {
+          "name": "freebet",
+          "ports": [
+            {
+              "id": "input-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            },
+            {
+              "id": "FreebetIssued-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            },
+            {
+              "id": "PlayerFreebetUsed-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            },
+            {
+              "id": "PlayerFreebetExpired-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            },
+            {
+              "id": "PlayerFreebetCanceled-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            },
+            {
+              "id": "FreebetNotIssued-4ed967dc-2801-471a-9692-fc1323b19eb2"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "FreebetIssued",
+              "eventType": "Boundary",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Issued",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetUsed",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Used",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerFreebetExpired",
+              "eventType": "Completion",
+              "payloadKeys": [
+                "FreebetAmount"
+              ],
+              "eventDisplayName": "Timeout",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": true,
+              "eventName": "PlayerFreebetCanceled",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Canceled",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "FreebetNotIssued",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "eventDisplayName": "Not issued",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "mechanic",
+          "activityDisplayName": "Sport FreeBet",
+          "withoutSourceHandle": false
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 836.75,
+          "y": 727
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 1140,
+          "y": 727
+        }
+      },
+      {
+        "id": "f1b76aa6-aeea-48e4-83cd-2973cf0dfc71",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-f1b76aa6-aeea-48e4-83cd-2973cf0dfc71"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "payloadKeys": [
+            "FreebetAmount"
+          ],
+          "eventDisplayName": "Timeout",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 830.25,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 1132.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "77c341fc-a25d-4558-a115-3b42f8f11a6c",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-77c341fc-a25d-4558-a115-3b42f8f11a6c"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": true,
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Canceled",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 1070.25,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 1372.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "a8eea2c3-7e53-4a24-83e2-5540a9b14f9a",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-a8eea2c3-7e53-4a24-83e2-5540a9b14f9a"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "eventDisplayName": "Not issued",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": 1310.25,
+          "y": 991
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": 1612.5,
+          "y": 991
+        }
+      },
+      {
+        "id": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "data": {
+          "name": "campaign_connector",
+          "ports": [
+            {
+              "id": "input-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256"
+            },
+            {
+              "id": "PlayerAddedToCampaign-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256"
+            },
+            {
+              "id": "PlayerNotAddedToCampaign-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256"
+            }
+          ],
+          "events": [
+            {
+              "isHidden": false,
+              "eventName": "PlayerAddedToCampaign",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "campaign_connector.player_added_to_campaign",
+              "eventDisplayName": "Added",
+              "canBeUsedInChoosableFlow": false
+            },
+            {
+              "isHidden": false,
+              "eventName": "PlayerNotAddedToCampaign",
+              "eventType": "Completion",
+              "payloadKeys": [],
+              "isLabelHidden": false,
+              "payloadKeysV2": [],
+              "localizationKey": "campaign_connector.player_not_added_to_campaign",
+              "eventDisplayName": "Not added",
+              "canBeUsedInChoosableFlow": false
+            }
+          ],
+          "activityType": "promotion",
+          "activityDisplayName": "Campaign Connector"
+        },
+        "type": "action",
+        "style": {
+          "cursor": "pointer"
+        },
+        "width": 267,
+        "height": 64,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2987,
+          "y": 1255
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -2205,
+          "y": 1255
+        }
+      },
+      {
+        "id": "d76026aa-f375-480d-b74b-a59358a335a2",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-d76026aa-f375-480d-b74b-a59358a335a2"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerAddedToCampaign",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "campaign_connector.player_added_to_campaign",
+          "eventDisplayName": "Added",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2993.5,
+          "y": 1519
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -2212.5,
+          "y": 1519
+        }
+      },
+      {
+        "id": "1476fcac-b909-4800-82da-47f6fd1bbba4",
+        "data": {
+          "name": "end_of_journey",
+          "ports": [
+            {
+              "id": "input-1476fcac-b909-4800-82da-47f6fd1bbba4"
+            }
+          ],
+          "width": 40,
+          "height": 40,
+          "isHidden": false,
+          "eventName": "PlayerNotAddedToCampaign",
+          "eventType": "Completion",
+          "payloadKeys": [],
+          "isLabelHidden": false,
+          "payloadKeysV2": [],
+          "localizationKey": "campaign_connector.player_not_added_to_campaign",
+          "eventDisplayName": "Not added",
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "exit",
+        "style": {
+          "cursor": "default"
+        },
+        "width": 40,
+        "height": 40,
+        "hidden": false,
+        "zIndex": 5,
+        "position": {
+          "x": -2753.5,
+          "y": 1519
+        },
+        "selected": false,
+        "draggable": false,
+        "connectable": false,
+        "positionAbsolute": {
+          "x": -1972.5,
+          "y": 1519
+        }
+      },
+      {
+        "id": "d275a9e0-f1db-4d98-a8cb-0381673041f1",
+        "data": {
+          "pathId": "path1",
+          "pathName": "Path 1",
+          "activityName": "random_split",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "target": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "path1-4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "targetHandle": "input-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "89d31ebe-0f4f-4d51-956a-ab920e14e090",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "target": "884bb418-9b76-4a61-9d7a-6e29daf09b95",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "targetHandle": "input-884bb418-9b76-4a61-9d7a-6e29daf09b95",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "aa3edc15-2e0d-449b-8dde-93c996003be3",
+        "data": {
+          "pathId": "path2",
+          "pathName": "Path 2",
+          "activityName": "random_split",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "target": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "path2-4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "targetHandle": "input-6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "e8345397-5852-4460-ac1e-eb7ea6e0039e",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "target": "617e59c3-4ead-4151-abb1-35d36580f40b",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "targetHandle": "input-617e59c3-4ead-4151-abb1-35d36580f40b",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "d3c8e033-7186-4149-9090-3154c25fed11",
+        "data": {
+          "events": [
+            {
+              "eventName": "RandomSplitPassedPath3",
+              "eventType": "Completion",
+              "eventDisplayName": "Path 3"
+            }
+          ],
+          "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+          "pathName": "Path 3",
+          "activityName": "random_split",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "target": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "55cb8351-31b5-41d4-8a90-adb129274226-4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "targetHandle": "input-70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "8e6baf0c-a6a8-4106-9820-28f82a03c2f1",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "target": "0a95feec-472b-4db6-8a46-5301ee80ac6a",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "targetHandle": "input-0a95feec-472b-4db6-8a46-5301ee80ac6a",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "1693c247-007d-4b3f-8b9e-5ebbffbda70a",
+        "data": {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "target": "aa3d01fd-cdba-40f6-819f-83e3a6bb8393",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetExpired-b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "targetHandle": "input-aa3d01fd-cdba-40f6-819f-83e3a6bb8393",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "30c75f4d-0c33-4718-b38b-fadefa4dbc37",
+        "data": {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "target": "e3e44fcf-4280-4d0d-97f3-a5fd195654fa",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetCanceled-b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "targetHandle": "input-e3e44fcf-4280-4d0d-97f3-a5fd195654fa",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "e07e6647-6fc9-4599-9673-86489b486941",
+        "data": {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "target": "2b1fa404-1f45-4671-86f2-9bed0a5a2e92",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "FreebetNotIssued-b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "targetHandle": "input-2b1fa404-1f45-4671-86f2-9bed0a5a2e92",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "e6833953-3f67-4e72-b632-8c9c688da86f",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "target": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-89d6ee07-44e3-4b13-9273-cf7c4e3b19c4",
+        "targetHandle": "input-b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "84c8b0c8-abf0-4628-8867-fe38df136e4b",
+        "data": {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "target": "2e31a6dc-437c-4f0f-ab78-18f5b571222c",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetExpired-5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "targetHandle": "input-2e31a6dc-437c-4f0f-ab78-18f5b571222c",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "08b6dd91-00a2-464b-87f0-7426f0f09716",
+        "data": {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "target": "9aeab215-5242-4daf-8092-f6fab718eb30",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetCanceled-5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "targetHandle": "input-9aeab215-5242-4daf-8092-f6fab718eb30",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "0a500a4b-6562-48f4-a400-a7303442c3f7",
+        "data": {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "target": "4416b9c6-c9d7-4f23-aa74-8359ce8b8598",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "FreebetNotIssued-5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "targetHandle": "input-4416b9c6-c9d7-4f23-aa74-8359ce8b8598",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "8e05cc17-b5a6-4e8c-9057-e1be6a3e01f6",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "target": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-6dbd67c9-d3c0-4607-bc53-569622f7dd34",
+        "targetHandle": "input-5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "1272f06c-6e42-4fb3-94b9-7ab288345e26",
+        "data": {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "target": "88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetExpired-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "targetHandle": "input-88a8dea5-2e8a-4ed9-8a7c-5a1afdae3547",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "b28c7fd4-8862-46d0-b998-0d37cc0597fa",
+        "data": {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "target": "c4227630-d387-4b17-8e97-7ebdd8b04214",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetCanceled-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "targetHandle": "input-c4227630-d387-4b17-8e97-7ebdd8b04214",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "9db2df6e-a6aa-472e-a221-bc2cb471927e",
+        "data": {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "target": "3690e1e9-84df-49ad-aa6d-f85dadc09e0c",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "FreebetNotIssued-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "targetHandle": "input-3690e1e9-84df-49ad-aa6d-f85dadc09e0c",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "90858041-eb8b-4f5e-bc82-f6809a926c83",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "target": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-70c0bc41-a365-484e-a71e-f507f5415d0a",
+        "targetHandle": "input-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "e83031f9-c7b1-4e81-a56f-510813dd5b75",
+        "data": {
+          "isHidden": false,
+          "eventName": "PlayerAdded",
+          "eventType": "Activation",
+          "payloadKeys": [
+            "Brand",
+            "CurrencyCode"
+          ],
+          "activityName": "registration",
+          "isLabelHidden": true,
+          "isReconnectable": false,
+          "eventDisplayName": "Players added to journey",
+          "isDisconnectable": false,
+          "canBeUsedInChoosableFlow": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+        "target": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAdded-75eb3c5d-9761-4aa1-a144-857d2d0fe305",
+        "targetHandle": "input-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "be8fe67e-d7b5-4e51-bc83-47d67a131c8d",
+        "data": {
+          "pathId": "path1",
+          "pathName": "Path 1",
+          "activityName": "ams_decision_split",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "target": "4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "path1-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "targetHandle": "input-4094ecb9-b1e5-469b-ad34-318bfbac8741",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "16d0805f-a246-45ae-a870-4e5fff5f6a34",
+        "data": {
+          "eventName": "PromotionExpired",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "target": "efdac690-66b1-48a7-8b45-c7c41f06e522",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionExpired-53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "targetHandle": "input-efdac690-66b1-48a7-8b45-c7c41f06e522",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "4d8596e5-a801-4d22-bf30-1fe5cf969229",
+        "data": {
+          "pathId": "other",
+          "pathName": "Other",
+          "activityName": "ams_decision_split",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "target": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "other-2ed3deb8-85bc-4f3c-83d4-543c5d62cda8",
+        "targetHandle": "input-53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "40cb58b0-1670-43a9-9236-0b023010b551",
+        "data": {
+          "eventName": "PlayerFreebetExpired",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "target": "f1b76aa6-aeea-48e4-83cd-2973cf0dfc71",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetExpired-4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "targetHandle": "input-f1b76aa6-aeea-48e4-83cd-2973cf0dfc71",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "dadbe463-485f-498c-ae80-eca03a92af14",
+        "data": {
+          "eventName": "PlayerFreebetCanceled",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "target": "77c341fc-a25d-4558-a115-3b42f8f11a6c",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetCanceled-4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "targetHandle": "input-77c341fc-a25d-4558-a115-3b42f8f11a6c",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "afa550b1-dc90-4ed7-853b-46c177eb42e1",
+        "data": {
+          "eventName": "FreebetNotIssued",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "target": "a8eea2c3-7e53-4a24-83e2-5540a9b14f9a",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "FreebetNotIssued-4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "targetHandle": "input-a8eea2c3-7e53-4a24-83e2-5540a9b14f9a",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "2bda8d4b-4461-4ac5-ba55-406969973f44",
+        "data": {
+          "eventName": "PromotionAccepted",
+          "eventType": "Completion",
+          "activityName": "promotion",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "target": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PromotionAccepted-53ba110d-75de-4860-9b03-3e15cf6668f0",
+        "targetHandle": "input-4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "4ac077d3-68f5-4a89-a82b-63c3cf167db4",
+        "data": {
+          "eventName": "PlayerAddedToCampaign",
+          "eventType": "Completion",
+          "activityName": "campaign_connector",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "target": "d76026aa-f375-480d-b74b-a59358a335a2",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerAddedToCampaign-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "targetHandle": "input-d76026aa-f375-480d-b74b-a59358a335a2",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "4dde1c0b-66b8-436b-9416-818c0f9e346e",
+        "data": {
+          "eventName": "PlayerNotAddedToCampaign",
+          "eventType": "Completion",
+          "activityName": "campaign_connector",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "dropEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "target": "1476fcac-b909-4800-82da-47f6fd1bbba4",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerNotAddedToCampaign-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "targetHandle": "input-1476fcac-b909-4800-82da-47f6fd1bbba4",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "71498e23-c97c-4113-a5ac-801b094e35b7",
+        "data": {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "default",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "target": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "zIndex": 1,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetUsed-b99ec96b-1cd2-4b34-b294-7bead1c3b546",
+        "targetHandle": "input-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "39ed846a-92d9-49b9-8b97-550f702ec9e3",
+        "data": {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "joinEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "target": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "zIndex": 0,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetUsed-5794cdc6-936b-43d8-9c1c-c81486a0d23f",
+        "targetHandle": "input-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "34406397-7bc6-4d6d-86a9-493873e45ddc",
+        "data": {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "joinEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "target": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "zIndex": 0,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetUsed-8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2",
+        "targetHandle": "input-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      },
+      {
+        "id": "eebba1d3-f8de-4520-8c67-8e97e61fa194",
+        "data": {
+          "eventName": "PlayerFreebetUsed",
+          "eventType": "Completion",
+          "activityName": "freebet",
+          "isReconnectable": false,
+          "isDisconnectable": false
+        },
+        "type": "joinEdge",
+        "style": {
+          "strokeDasharray": "3"
+        },
+        "hidden": false,
+        "source": "4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "target": "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "zIndex": 0,
+        "labelStyle": {
+          "color": "#000",
+          "fontSize": 14,
+          "fontWeight": 700
+        },
+        "labelBgStyle": {
+          "fill": "#D2D2D2"
+        },
+        "sourceHandle": "PlayerFreebetUsed-4ed967dc-2801-471a-9692-fc1323b19eb2",
+        "targetHandle": "input-1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256",
+        "labelBgPadding": [
+          10,
+          3
+        ],
+        "labelBgBorderRadius": 4
+      }
+    ],
+    "infoValues": {
+      "brand": "JBCL",
+      "stopAt": "2026-08-25T04:00:00.0000000Z",
+      "startAt": "2026-08-23T04:00:00.0000000Z",
+      "metadata": {
+        "purpose": "Retention",
+        "category": "Marketing",
+        "priority": 2,
+        "productType": "Sport"
+      },
+      "timeZoneId": "Chile/Continental",
+      "isUnlimited": false,
+      "journeyName": "JBCL | SP | Superclasico Promo - Giveaway 🏟 23.08.26 / 1-2-5 k FB v1",
+      "reEntryRule": {
+        "reEntryMode": "Prohibited",
+        "reEntryPeriod": null
+      },
+      "currencyCodes": [
+        "CLP"
+      ],
+      "isImmediatelyAfterPublish": false,
+      "testControlGroupParameters": {
+        "isEnabled": false,
+        "controlGroupPercent": null,
+        "playersAddingStrategy": "IncludeAll",
+        "daysToKeepInControlGroup": null
+      }
+    },
+    "pathesConfiguration": {
+      "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8": [
+        {
+          "events": [
+            {
+              "eventName": "DecisionSplitPassedPath01",
+              "eventType": "Completion",
+              "eventDisplayName": "Path 1"
+            }
+          ],
+          "pathId": "path1",
+          "pathName": "Path 1"
+        },
+        {
+          "events": [
+            {
+              "eventName": "DecisionSplitPassedRemainderPath",
+              "eventType": "Completion"
+            }
+          ],
+          "pathId": "other",
+          "pathName": "Other"
+        }
+      ],
+      "4094ecb9-b1e5-469b-ad34-318bfbac8741": [
+        {
+          "events": [
+            {
+              "eventName": "RandomSplitPassedPath1",
+              "eventType": "Completion",
+              "eventDisplayName": "Path 1"
+            }
+          ],
+          "pathId": "path1",
+          "pathName": "Path 1"
+        },
+        {
+          "events": [
+            {
+              "eventName": "RandomSplitPassedPath2",
+              "eventType": "Completion",
+              "eventDisplayName": "Path 2"
+            }
+          ],
+          "pathId": "path2",
+          "pathName": "Path 2"
+        },
+        {
+          "events": [
+            {
+              "eventName": "RandomSplitPassedPath3",
+              "eventType": "Completion",
+              "eventDisplayName": "Path 3"
+            }
+          ],
+          "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+          "pathName": "Path 3"
+        }
+      ]
+    },
+    "exitCriteriaSettings": null,
+    "boundaryConfiguration": {},
+    "activitiesConfiguration": {
+      "1ef52cee-ccc8-4d41-a7d7-fffbd7b8d256": {
+        "data": {
+          "currencyMode": "automated",
+          "campaignConnectorConditions": {
+            "campaignId": "b8a27d05-6e86-42b0-87c0-d79e190ece4e",
+            "activityData": {
+              "HostJourneyId": "JRN-0-657111"
+            },
+            "campaignProductType": "Journey",
+            "campaignSubProductType": ""
+          }
+        },
+        "error": false,
+        "displayData": [
+          "JRN-0-657111 • JBCL | SP | Superclasico Promo Code | Follow Up"
+        ],
+        "displayName": "Campaign Connector"
+      },
+      "2ed3deb8-85bc-4f3c-83d4-543c5d62cda8": {
+        "data": {
+          "rules": [
+            {
+              "name": "Path 1",
+              "filter": {
+                "filters": [
+                  {
+                    "property": {
+                      "name": "playerBonusRate.bonusRateSport1month",
+                      "type": "number",
+                      "value": "1",
+                      "operator": "lt"
+                    },
+                    "variables": []
+                  },
+                  {
+                    "property": {
+                      "name": "fmFairplayBusinessSegmentNew?.segmentId",
+                      "type": "string",
+                      "value": "31",
+                      "operator": "isNot"
+                    },
+                    "variables": []
+                  }
+                ],
+                "condition": "and"
+              }
+            }
+          ],
+          "remainder": "other",
+          "usedSourceVariables": []
+        },
+        "error": false,
+        "displayData": [
+          "1 paths"
+        ],
+        "displayName": "Decision split"
+      },
+      "4094ecb9-b1e5-469b-ad34-318bfbac8741": {
+        "data": {
+          "paths": [
+            {
+              "pathId": "path1",
+              "pathName": "Path 1",
+              "probability": 40
+            },
+            {
+              "pathId": "path2",
+              "pathName": "Path 2",
+              "probability": 55
+            },
+            {
+              "pathId": "55cb8351-31b5-41d4-8a90-adb129274226",
+              "pathName": "Path 3",
+              "probability": 5
+            }
+          ]
+        },
+        "error": false,
+        "displayData": [
+          " 40% / 55% / 5%"
+        ],
+        "displayName": "Random split"
+      },
+      "4ed967dc-2801-471a-9692-fc1323b19eb2": {
+        "data": {
+          "properties": {
+            "maxOdd": 5,
+            "betTypes": [
+              "express",
+              "ordinar"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "expireInDays": 1,
+            "freeBetAmount": {
+              "CLP": 1000
+            },
+            "availableEvents": [],
+            "availableSports": [
+              "ALL"
+            ],
+            "amountAccrualType": "as_amount",
+            "availableTournaments": [],
+            "isBetBuilderRequired": false
+          }
+        },
+        "error": false,
+        "displayData": [
+          "1 days"
+        ],
+        "displayName": "1000 FreeBet",
+        "promotionId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+      },
+      "53ba110d-75de-4860-9b03-3e15cf6668f0": {
+        "data": {
+          "promotionId": "fd59b83c-33df-4d1f-96bd-eeb045228a02",
+          "promotionLinkId": "4a3c4529-e106-478e-b105-8b6517243780",
+          "promotionStatus": "Accepted",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "475526"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "6b95695f-ed37-44dd-80d2-6c9a4f6ff3e2",
+          "contentId": "efb16395-910c-4ea6-91cf-e75fbed263b5"
+        },
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "maxOdd": 5,
+                "FrontId": "6b95695f-ed37-44dd-80d2-6c9a4f6ff3e2",
+                "ContentId": "efb16395-910c-4ea6-91cf-e75fbed263b5",
+                "moduleType": "FreeBet",
+                "expirationTimeout": 1,
+                "isActivityCurrencies": false,
+                "currencyCodeAmountSettings": [
+                  {
+                    "amount": 1000,
+                    "currencyCode": "CLP"
+                  }
+                ]
+              },
+              "dataSources": [
+                {
+                  "keys": [
+                    "FreebetStatus",
+                    "FreebetAmount",
+                    "CurrencyCode",
+                    "FreebetExpireAt",
+                    "FreebetExpiredAt",
+                    "FreebetUsedAt",
+                    "FreebetTerminatedAt"
+                  ],
+                  "type": "Sync",
+                  "journeyActivityId": "4ed967dc-2801-471a-9692-fc1323b19eb2"
+                },
+                {
+                  "keys": [
+                    "FreebetIssuanceErrorType",
+                    "FreebetIssuanceErrorMessage"
+                  ],
+                  "type": "Async",
+                  "journeyActivityId": "4ed967dc-2801-471a-9692-fc1323b19eb2"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": true
+        },
+        "displayData": [
+          "Accepted by default"
+        ],
+        "displayName": "1000 Free Bet"
+      },
+      "5794cdc6-936b-43d8-9c1c-c81486a0d23f": {
+        "data": {
+          "properties": {
+            "maxOdd": 5,
+            "betTypes": [
+              "ordinar",
+              "express"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "expireInDays": 1,
+            "sportTickets": [],
+            "freeBetAmount": {
+              "CLP": 2000
+            },
+            "itemsCheckType": "Single",
+            "availableEvents": [],
+            "availableSports": [
+              "ALL"
+            ],
+            "amountAccrualType": "as_amount",
+            "availableTournaments": [],
+            "isBetBuilderRequired": false
+          }
+        },
+        "error": false,
+        "displayData": [
+          "1 days"
+        ],
+        "displayName": "2000 FreeBet",
+        "promotionId": "6dbd67c9-d3c0-4607-bc53-569622f7dd34"
+      },
+      "6dbd67c9-d3c0-4607-bc53-569622f7dd34": {
+        "data": {
+          "promotionId": "a9488048-cd21-40eb-a188-552e6f1f07e6",
+          "promotionLinkId": "d2e85a2d-7188-41a8-a9ed-48d4c3f50082",
+          "promotionStatus": "Accepted",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "160842"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "580b1541-2c0b-41f4-becd-83881f9dafec",
+          "contentId": "4b66216e-8b34-4d67-affc-47a8fb9e1c6a"
+        },
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "maxOdd": 5,
+                "FrontId": "580b1541-2c0b-41f4-becd-83881f9dafec",
+                "ContentId": "4b66216e-8b34-4d67-affc-47a8fb9e1c6a",
+                "moduleType": "FreeBet",
+                "expirationTimeout": 1,
+                "isActivityCurrencies": false,
+                "currencyCodeAmountSettings": [
+                  {
+                    "amount": 2000,
+                    "currencyCode": "CLP"
+                  }
+                ]
+              },
+              "dataSources": [
+                {
+                  "keys": [
+                    "FreebetStatus",
+                    "FreebetAmount",
+                    "CurrencyCode",
+                    "FreebetExpireAt",
+                    "FreebetExpiredAt",
+                    "FreebetUsedAt",
+                    "FreebetTerminatedAt"
+                  ],
+                  "type": "Sync",
+                  "journeyActivityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+                },
+                {
+                  "keys": [
+                    "FreebetIssuanceErrorType",
+                    "FreebetIssuanceErrorMessage"
+                  ],
+                  "type": "Async",
+                  "journeyActivityId": "5794cdc6-936b-43d8-9c1c-c81486a0d23f"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": true
+        },
+        "displayData": [
+          "Accepted by default"
+        ],
+        "displayName": "2000 Free Bet"
+      },
+      "70c0bc41-a365-484e-a71e-f507f5415d0a": {
+        "data": {
+          "promotionId": "feb3ecc5-92fb-44d5-b4e6-f38621839cfb",
+          "promotionLinkId": "8f8b177a-b706-4c73-8535-4830454c040d",
+          "promotionStatus": "Accepted",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "160841"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "c2a6864c-f1c9-4309-afba-8d4c44f777ac",
+          "contentId": "1b18ac2e-dc98-43bd-8164-a6f2e36d1f8f"
+        },
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "maxOdd": 5,
+                "FrontId": "c2a6864c-f1c9-4309-afba-8d4c44f777ac",
+                "ContentId": "1b18ac2e-dc98-43bd-8164-a6f2e36d1f8f",
+                "moduleType": "FreeBet",
+                "expirationTimeout": 1,
+                "isActivityCurrencies": false,
+                "currencyCodeAmountSettings": [
+                  {
+                    "amount": 5000,
+                    "currencyCode": "CLP"
+                  }
+                ]
+              },
+              "dataSources": [
+                {
+                  "keys": [
+                    "FreebetStatus",
+                    "FreebetAmount",
+                    "CurrencyCode",
+                    "FreebetExpireAt",
+                    "FreebetExpiredAt",
+                    "FreebetUsedAt",
+                    "FreebetTerminatedAt"
+                  ],
+                  "type": "Sync",
+                  "journeyActivityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+                },
+                {
+                  "keys": [
+                    "FreebetIssuanceErrorType",
+                    "FreebetIssuanceErrorMessage"
+                  ],
+                  "type": "Async",
+                  "journeyActivityId": "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": true
+        },
+        "displayData": [
+          "Accepted by default"
+        ],
+        "displayName": "5000 Free Bet"
+      },
+      "75eb3c5d-9761-4aa1-a144-857d2d0fe305": {
+        "data": {
+          "version": "v2",
+          "refCodeTypes": [
+            "Promocode"
+          ],
+          "promocodeSettings": {
+            "fileId": "0a9e4239-85e3-48b0-b4a0-6b84e57b36a2",
+            "values": [],
+            "purpose": "Crm",
+            "availability": [
+              "ExistingUser"
+            ],
+            "progressData": {
+              "fileId": "0a9e4239-85e3-48b0-b4a0-6b84e57b36a2",
+              "status": "Processed",
+              "fileName": "promo code superclassico.csv",
+              "totalCount": 2000,
+              "failedCount": 0,
+              "successCount": 2000,
+              "validationProgress": 1
+            },
+            "promocodeSource": "csvFile",
+            "maxActivationsForAllPlayers": 1
+          }
+        },
+        "error": false,
+        "displayData": [
+          "Promo codes: promo code superclassico.csv"
+        ],
+        "displayName": "Reference codes"
+      },
+      "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4": {
+        "data": {
+          "promotionId": "70ca1290-ed18-45ac-8773-7507f76e2106",
+          "promotionLinkId": "847901c5-32a1-4076-80c1-af41ac1a7f84",
+          "promotionStatus": "Accepted",
+          "channelsCondition": {
+            "values": [],
+            "isEnabled": false
+          },
+          "promotionDisplayId": "160840"
+        },
+        "error": false,
+        "metadata": {
+          "frontId": "99080d95-569c-4b00-95a1-0f9f7042543c",
+          "contentId": "67e70162-15b3-4ad6-a363-614264f26cf7"
+        },
+        "properties": {
+          "placements": [
+            {
+              "data": {
+                "maxOdd": 5,
+                "FrontId": "99080d95-569c-4b00-95a1-0f9f7042543c",
+                "ContentId": "67e70162-15b3-4ad6-a363-614264f26cf7",
+                "moduleType": "FreeBet",
+                "expirationTimeout": 1,
+                "isActivityCurrencies": false,
+                "currencyCodeAmountSettings": [
+                  {
+                    "amount": 1000,
+                    "currencyCode": "CLP"
+                  }
+                ]
+              },
+              "dataSources": [
+                {
+                  "keys": [
+                    "FreebetStatus",
+                    "FreebetAmount",
+                    "CurrencyCode",
+                    "FreebetExpireAt",
+                    "FreebetExpiredAt",
+                    "FreebetUsedAt",
+                    "FreebetTerminatedAt"
+                  ],
+                  "type": "Sync",
+                  "journeyActivityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+                },
+                {
+                  "keys": [
+                    "FreebetIssuanceErrorType",
+                    "FreebetIssuanceErrorMessage"
+                  ],
+                  "type": "Async",
+                  "journeyActivityId": "b99ec96b-1cd2-4b34-b294-7bead1c3b546"
+                }
+              ],
+              "placementType": "PromoLobby"
+            }
+          ],
+          "isBoundaryEventDisabled": true
+        },
+        "displayData": [
+          "Accepted by default"
+        ],
+        "displayName": "1000 Free Bet"
+      },
+      "8f9579f1-03c7-4ea7-9a3c-e967f16f5bf2": {
+        "data": {
+          "properties": {
+            "maxOdd": 5,
+            "betTypes": [
+              "ordinar",
+              "express"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "expireInDays": 1,
+            "sportTickets": [],
+            "freeBetAmount": {
+              "CLP": 5000
+            },
+            "itemsCheckType": "Single",
+            "availableEvents": [],
+            "availableSports": [
+              "ALL"
+            ],
+            "amountAccrualType": "as_amount",
+            "availableTournaments": [],
+            "isBetBuilderRequired": false
+          }
+        },
+        "error": false,
+        "displayData": [
+          "1 days"
+        ],
+        "displayName": "5000 FreeBet",
+        "promotionId": "70c0bc41-a365-484e-a71e-f507f5415d0a"
+      },
+      "b99ec96b-1cd2-4b34-b294-7bead1c3b546": {
+        "data": {
+          "properties": {
+            "maxOdd": 5,
+            "betTypes": [
+              "express",
+              "ordinar"
+            ],
+            "channels": [
+              "ALL"
+            ],
+            "lineTypes": [
+              "live",
+              "prematch"
+            ],
+            "expireInDays": 1,
+            "sportTickets": [],
+            "freeBetAmount": {
+              "CLP": 1000
+            },
+            "itemsCheckType": "Single",
+            "availableEvents": [],
+            "availableSports": [
+              "ALL"
+            ],
+            "amountAccrualType": "as_amount",
+            "availableTournaments": [],
+            "isBetBuilderRequired": false
+          }
+        },
+        "error": false,
+        "displayData": [
+          "1 days"
+        ],
+        "displayName": "1000 FreeBet",
+        "promotionId": "89d6ee07-44e3-4b13-9273-cf7c4e3b19c4"
+      }
+    }
+  },
+  "duplicatedFromVersion": 7,
+  "duplicatedFromId": "JRN-0-641567"
+}
