@@ -110,7 +110,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["NotificationSent", "NotificationNotSent"],
         "happy_path": "NotificationSent",
         "failure_path": "NotificationNotSent",
-        "init_keys": ["contract", "channel", "templates", "deliveryType", "validityAmount", "languages", "objectForSend", "displayData", "placements"],
+        "init_keys": ["contract", "channel", "templates", "deliveryType", "validityAmount", "languages", "objectForSend", "displayData", "placements", "accountId", "category", "dataDependencies", "listOfUsedVariables", "singleChannel", "validityType"],
     },
     "dextra_sms": {
         "category": "Communication",
@@ -122,7 +122,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["SuccessSmsSend", "FailedSmsSend"],
         "happy_path": "SuccessSmsSend",
         "failure_path": "FailedSmsSend",
-        "init_keys": ["smsSettings", "rawValues", "listOfUsedVariables", "displayData", "placements", "version"],
+        "init_keys": ["smsSettings", "rawValues", "listOfUsedVariables", "displayData", "placements", "version", "dataDependencies", "dependencies"],
     },
     "dextra_email": {
         "category": "Communication",
@@ -134,7 +134,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["SuccessEmailSend", "FailedEmailSend"],
         "happy_path": "SuccessEmailSend",
         "failure_path": "FailedEmailSend",
-        "init_keys": ["emailSettings", "displayData", "placements"],
+        "init_keys": ["emailSettings", "displayData", "placements", "dataDependencies"],
     },
     "native_push": {
         "category": "Communication",
@@ -190,7 +190,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["PlayerAddedToCampaign", "PlayerNotAddedToCampaign"],
         "happy_path": "PlayerAddedToCampaign",
         "failure_path": "PlayerNotAddedToCampaign",
-        "init_keys": ["campaignConnectorConditions", "displayData", "placements"],
+        "init_keys": ["campaignConnectorConditions", "displayData", "placements", "currencyMode"],
     },
     # ── Promotion type ───────────────────────────────────────────────
     "promotion": {
@@ -202,7 +202,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["PromotionAccepted", "PromotionExpired"],
         "happy_path": "PromotionAccepted",
         "failure_path": "PromotionExpired",
-        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements"],
+        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements", "currencyMode", "showAsUpcoming"],
     },
     "multipurpose_promotion": {
         "category": "Promotion type",
@@ -262,7 +262,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         ],
         "happy_path": "SingleBetSatisfied",
         "failure_path": "Unsatisfied",
-        "init_keys": ["title", "conditions", "parlayType", "expireInDays", "pathesConfig", "displayData", "placements"],
+        "init_keys": ["title", "conditions", "parlayType", "expireInDays", "pathesConfig", "displayData", "placements", "parlaySatisfied", "satisfiedResults"],
     },
     # ── Reward type ──────────────────────────────────────────────────
     "freespin_bonus": {
