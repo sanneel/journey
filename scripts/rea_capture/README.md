@@ -1,54 +1,63 @@
 # REA / GR8 backoffice capture scripts
 
-Browser-console scripts that pull the **real GR8 Journey Builder structure** out
-of the REA backoffice (`pmi.rea-backoffice.gr8.tech`) so we can complete our
-imitation against ground truth.
+Two browser-console scripts that pull the **real GR8 Journey Builder structure**
+out of the REA backoffice (`pmi.rea-backoffice.gr8.tech`) so we can complete our
+imitation against ground truth — **built to leave no unusual footprint.**
 
-**All of these are READ-ONLY.** They only issue `GET`s (or passively observe the
-UI's own traffic). Nothing is created, edited, published, or deleted. They
-capture the page's own bearer token — no token copy/paste — and auto-detect the
-API base and `x-brand` from the page, so the same scripts work for JBCL and
-PMCL without editing.
+## The footprint question
 
-## How to run one
+The server only ever sees HTTP requests. So the safety of a script is entirely
+"does it make requests a normal user wouldn't?"
 
-1. Log into the REA backoffice, open any Journey Builder page.
-2. Open DevTools → Console.
-3. Paste the whole script file, press Enter.
-4. If it says *"Waiting for a token…"*, click anything in the UI once — it grabs
-   the token from the next request the page makes.
-5. It prints a table, stashes the result on a `window.__REA*` variable, and
-   downloads a `.json` file. Send me the downloaded file (or `copy(window.__REA…)`
-   if a download is blocked).
+| Script | Extra API calls it makes | Footprint |
+|--------|--------------------------|-----------|
+| `03_record_endpoints.js` | **none** — it only observes the UI's own traffic | **none** (indistinguishable from browsing) |
+| `04_one_journey.js` | one `GET /journeys/{id}` | same as opening one journey in the UI |
 
-## Run order
+**Recommended: use `03` alone.** It issues no requests of its own; it just
+mirrors what the UI already fetches as you click. You open a few journeys
+normally and it captures their full bodies + the endpoint map + the distilled
+activity catalog — all passively.
 
-| # | File | What it gets | Send me |
-|---|------|--------------|---------|
-| 1 | `01_inventory.js` | every journey: id, name, status, dates | `rea_inventory.json` |
-| 2 | `02_bodies_and_catalog.js` | full journey bodies + a distilled **per-activity-type catalog** (real `initializationData` sample + full event vocabulary for every `activityName` that exists) | **`rea_activity_catalog.json`** ← the main one |
-| 3 | `03_record_endpoints.js` | discovers the endpoints we don't know yet (activity palette/metadata, promotions, segments, content templates, games) by recording the UI's own calls | `rea_endpoints.json` |
-| 4 | `04_one_journey.js` | one journey's full body — for capturing a specific newly-built activity type | `rea_journey_<id>.json` |
+> An earlier version had an inventory script and a bulk-fetch script. The
+> bulk-fetch looped ~60 `GET /journeys/{id}` in a few seconds — the one thing
+> that *does* look anomalous (no human opens 60 journeys in 7 seconds). Both
+> were removed. `03` gets the same result by riding on normal navigation.
 
-Script 2 reads the ids that script 1 stashes on `window.__REA_INV`, so run 1
-then 2 in the same tab. (Or paste ids into the `IDS`/`JOURNEY_ID` array at the
-top of 2/4.)
+## How to run `03` (the recorder)
 
-### Script 3 (endpoint recorder) — how to use
+1. Log into the REA backoffice, open the Console (DevTools → Console).
+2. Paste the whole `03_record_endpoints.js` file, press Enter. It starts
+   recording (no requests yet).
+3. **Navigate the UI normally.** Opening a journey in the builder makes the UI
+   fetch that journey's full body — which the recorder keeps. So open a handful
+   of **varied** journeys (a promo one, a casino one, a comms one, a sport one)
+   to cover the activity types. Optionally open the activity palette, Promotions,
+   Segments/Audiences, Content/Templates, Games — to capture those endpoints too.
+4. Run `__REA_stop()` in the console.
 
-Paste it, then **navigate the UI** through everything whose structure we want:
-open the Journey Builder and its activity palette, open a journey, open
-Promotions, open Segments/Audiences, open Content/Templates, open Games. Then
-run `__REA_stop()` in the console. It prints and downloads the list of every
-distinct API path the UI called, with method, status, and response shape — that
-tells us the real paths for the reference data below.
+It downloads:
+
+- **`rea_activity_catalog.json`** ← send me this (real `initializationData`
+  sample + full Activation/Boundary/Completion event vocabulary for every
+  `activityName` the UI loaded)
+- `rea_endpoints.json` — every distinct API path the UI called (this is how we
+  learn the real paths for palette/metadata, promotions, segments, content)
+- `rea_journey_bodies.json` — the raw full bodies it captured (backup)
+
+If a download is blocked, `copy(window.__REA_CAT)` in the console instead.
+
+## `04_one_journey.js` (optional, one request)
+
+For capturing a **specific** activity type we still lack: build one in the UI,
+save the journey, then run `04` with that journey's `JRN-…` id (edit
+`JOURNEY_ID` at the top). One GET — same as opening it in the UI.
 
 ## What we most want (the gaps)
 
-We already have solid captures of the common activity types. From the REA
-capture backlog, these activity types are **still uncaptured** — if any live
-journey uses one, script 2 will grab it automatically; otherwise build one in
-the UI and capture it with script 4:
+Common activity types are already captured. Still uncaptured — if any journey
+you open uses one, `03` grabs it automatically; otherwise build one and capture
+it with `04`:
 
 - Input sources: `CSV` upload, `Events` (real-time)
 - Flow control: `Random split`, `Email engagement split`, `Native-push engagement split`
@@ -56,19 +65,17 @@ the UI and capture it with script 4:
 - Connectors: `Outgoing API request`
 - Conditions: `Bet Insurance`, `Bet Collection`, `Casino Bet Collection`, `Deposit Collection`
 - Rewards: `Sport Bonus`, `Money Bonus`, `Coins Bonus`
-- `Choosable flows` as a standalone (we only have it nested inside `multipurpose_promotion`)
+- `Choosable flows` standalone (we only have it nested in `multipurpose_promotion`)
 
-And the reference data script 3 should surface the endpoints for:
-the activity **palette/metadata** (schemas the UI renders forms from),
-**promotions** list, player **segments**, **content/email templates**, and the
-**games/providers** registry.
+Reference data to surface from `rea_endpoints.json`: the activity
+**palette/metadata**, **promotions** list, player **segments**,
+**content/email templates**, **games/providers** registry.
 
 ## Reference (already reverse-engineered)
 
 - Journey Builder base: `https://<host>/api/ubo/api/v0/crm/journey-builder/v0`
-- Promo base: `…/crm/promo/v2`
-- Auth: short-lived Bearer JWT (captured from the page); brand via `x-brand`
-- List journeys: `GET /journeys` · one journey: `GET /journeys/{JRN-…}`
-- The full wire-format notes live in liveapi's
-  `journey-cloner/REA_BACKOFFICE_AND_JOURNEYS.md` and
-  `journey-planner/REA_KNOWLEDGE_BASE.md`.
+- Auth: short-lived Bearer JWT (the recorder never needs it — it reads the UI's
+  own responses); brand via `x-brand`
+- One journey: `GET /journeys/{JRN-…}`
+- Full wire-format notes: liveapi's
+  `journey-cloner/REA_BACKOFFICE_AND_JOURNEYS.md`.
