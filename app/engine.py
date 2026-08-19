@@ -731,6 +731,15 @@ class Engine:
             expiry_ms = init.get("bonusExpirationTime")
             if isinstance(expiry_ms, (int, float)) and expiry_ms > 0:
                 expires_at = utcnow() + timedelta(milliseconds=expiry_ms)
+        elif name == "money_bonus":
+            amounts = init.get("currencyAmounts") or []
+            first = amounts[0] if amounts else {}
+            detail = {
+                "amount": first.get("amount"),
+                "currencyCode": first.get("currencyCode"),
+                "accrualType": init.get("amountAccrualType"),
+                "transactionTitle": init.get("transactionTitle"),
+            }
         else:  # freebet / sport_bonus
             detail = {"properties": init.get("properties")}
 
@@ -814,6 +823,10 @@ class Engine:
             granted = f"granted {detail.get('spins')} free spins (grant #{grant.id})"
         elif name == "casino_bonus_v2":
             granted = f"granted {detail.get('bonusPercent')}% match bonus (grant #{grant.id})"
+        elif name == "money_bonus":
+            amount = detail.get("amount")
+            money = f"{amount / 100:g} {detail.get('currencyCode') or ''}".strip() if amount else "cash"
+            granted = f"accrued {money} money bonus (grant #{grant.id})"
         else:
             granted = f"granted {name} (grant #{grant.id})"
         if activation.is_test:
@@ -1128,6 +1141,47 @@ class Engine:
                 )
             return "park", "bet"
 
+        if name == "sport_bet_insurance":
+            # refunds a losing qualifying bet; the first condition carries the
+            # per-currency minimum stake and the parlay minimum odds
+            cond = (init.get("conditions") or [{}])[0] or {}
+            min_bet = None
+            for value in (cond.get("minBetAmount") or {}).values():
+                try:
+                    min_bet = float(value)
+                    break
+                except (TypeError, ValueError):
+                    continue
+            min_odd = cond.get("minOddParlay") or cond.get("minOdd")
+            self._record(
+                activation,
+                activity_id,
+                "Activated",
+                "Boundary",
+                f"bet insurance armed (≥{(min_bet or 0) / 100:g}, odds ≥{min_odd or 'any'})",
+            )
+            self.session.add(
+                ParkedSubscription(
+                    activation_id=activation.id,
+                    activity_id=activity_id,
+                    player_id=activation.player_id,
+                    activity_name=name,
+                    event_name="bet.settled",
+                    criteria={"minBetAmount": min_bet, "minOdd": min_odd},
+                )
+            )
+            expire_days = init.get("expireInDays")
+            if expire_days:
+                self.session.add(
+                    Timer(
+                        activation_id=activation.id,
+                        activity_id=activity_id,
+                        kind="bet_window",
+                        due_at=now + timedelta(days=float(expire_days)),
+                    )
+                )
+            return "park", "bet"
+
         raise EngineError("unknown-parked-activity", name)
 
     @staticmethod
@@ -1350,6 +1404,9 @@ class Engine:
             elif subscription.activity_name == "sport_bet_condition":
                 completion = "Satisfied"
                 detail = f"bet {(amount or 0) / 100:g} {currency} qualified".strip()
+            elif subscription.activity_name == "sport_bet_insurance":
+                completion = "SingleBetSatisfied"
+                detail = f"insured bet {(amount or 0) / 100:g} {currency} settled".strip()
             else:
                 continue
             self._resume(activation, subscription.activity_id, completion, detail)
@@ -1387,7 +1444,7 @@ class Engine:
             return False
         if subscription.activity_name == "event_detector":
             return _matches_filter(criteria.get("filter"), properties)
-        if subscription.activity_name == "sport_bet_condition":
+        if subscription.activity_name in ("sport_bet_condition", "sport_bet_insurance"):
             min_bet = criteria.get("minBetAmount")
             min_odd = criteria.get("minOdd")
             if min_bet is not None and not _compare(

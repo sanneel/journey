@@ -50,6 +50,17 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": [],
         "init_keys": ["promocodeSettings", "refCodeTypes", "displayData", "placements", "version"],
     },
+    "csv_import": {
+        "category": "Input Source",
+        "label": "CSV",
+        "kind": "source",
+        "activation": ["PlayerAdded"],
+        "boundary": [],
+        "completion": [],
+        # captured: an uploaded player list, referenced by fileId, with the
+        # server's processing progress (fileStatus / playersCount)
+        "init_keys": ["fileId", "displayData", "progressData", "uploadStatus"],
+    },
     # ── Flow control ─────────────────────────────────────────────────
     "ams_decision_split": {
         "category": "Flow control",
@@ -231,6 +242,28 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "failure_path": "Unsatisfied",
         "init_keys": ["betTypes", "betsCount", "channels", "lineTypes", "minBetAmount", "minItems", "minOdd", "expireInDays", "displayData", "placements"],
     },
+    "sport_bet_insurance": {
+        "category": "Conditions",
+        "label": "Bet Insurance",
+        "kind": "parked",
+        "activation": [],
+        "boundary": ["Activated"],
+        # captured: refunds a losing qualifying bet; the satisfied event
+        # depends on the ticket shape (single vs parlay legs)
+        "completion": [
+            "SingleBetSatisfied",
+            "ParleySatisfied",
+            "Parley41Satisfied",
+            "Parley51Satisfied",
+            "Parley52Satisfied",
+            "Unsatisfied",
+            "Canceled",
+            "Terminated",
+        ],
+        "happy_path": "SingleBetSatisfied",
+        "failure_path": "Unsatisfied",
+        "init_keys": ["title", "conditions", "parlayType", "expireInDays", "pathesConfig", "displayData", "placements"],
+    },
     # ── Reward type ──────────────────────────────────────────────────
     "freespin_bonus": {
         "category": "Reward type",
@@ -323,6 +356,18 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "failure_path": "NotIssued",
         "grant_boundary": "Issued",
         "init_keys": ["properties", "displayData", "placements"],
+    },
+    "money_bonus": {
+        "category": "Reward type",
+        "label": "Money Bonus",
+        "kind": "reward",
+        "activation": [],
+        "boundary": [],
+        # captured: cash credited to the main balance — accrued or not
+        "completion": ["MoneyBonusAccrued", "MoneyBonusNotAccrued"],
+        "happy_path": "MoneyBonusAccrued",
+        "failure_path": "MoneyBonusNotAccrued",
+        "init_keys": ["currencyAmounts", "transactionTitle", "amountAccrualType", "displayData", "placements"],
     },
     # ── Terminals ────────────────────────────────────────────────────
     "end_of_path": {

@@ -29,6 +29,15 @@ INITS = {
         }
     },
     "sport_bet_condition": {"minBetAmount": 100, "minOdd": 1.1, "expireInDays": 0.0000001},
+    "csv_import": {"fileId": "file-1", "uploadStatus": "UPLOADED"},
+    "money_bonus": {
+        "currencyAmounts": [{"brand": "JBCL", "amount": 250000, "currencyCode": "CLP"}],
+        "amountAccrualType": "Fixed",
+    },
+    "sport_bet_insurance": {
+        "conditions": [{"minBetAmount": {"CLP": "0"}, "minOddParlay": 1.0}],
+        "expireInDays": 0.0000001,
+    },
     "wait_interval": {"waitPeriod": "P0Y0M0DT0H0M0S"},
     "wait_date": {"waitTo": ""},
     "event_detector": {
