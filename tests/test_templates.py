@@ -7,7 +7,7 @@ from .conftest import API
 def test_templates_listed(client):
     data = client.get(f"{API}/journey-builder/v0/journey-templates").json()
     keys = {item["key"] for item in data["items"]}
-    assert {"promotion", "welcome_freespins"} <= keys
+    assert {"promotion", "welcome_freespins", "fiestas_patrias"} <= keys
     promotion = next(i for i in data["items"] if i["key"] == "promotion")
     assert promotion["activities"] == 14
     assert "deposit gate" in promotion["description"]
@@ -84,3 +84,52 @@ def test_promotion_template_walks_both_reward_tiers(client):
     client.post(f"{API}/runtime/v0/timers/run")  # nothing due yet (1 day)
     timers = client.get(f"{API}/runtime/v0/timers").json()["items"]
     assert len(timers) == 2 and all(t["kind"] == "wait" for t in timers)
+
+
+def test_fiestas_patrias_template_grants_one_fonda_prize(client):
+    """A player opts in, deposits $15.000, spins the fonda roulette and
+    lands exactly one of the three prizes, then parks on the wait-date
+    hold for the 18th."""
+    body = client.get(
+        f"{API}/journey-builder/v0/journey-templates/fiestas_patrias"
+    ).json()["body"]
+
+    validated = client.post(f"{API}/journey-builder/v0/journey-drafts/validate", json=body)
+    assert validated.json()["valid"] is True, validated.text
+
+    draft = client.post(f"{API}/journey-builder/v0/journey-drafts", json=body).json()
+    published = client.post(
+        f"{API}/journey-builder/v0/journeys/{draft['journeyId']}/publish"
+    )
+    assert published.status_code == 200, published.text
+
+    source = next(
+        a for a in draft["body"]["activities"]
+        if a["activityName"] == "external_system_source"
+    )
+    client.post(f"{API}/platform/v0/players",
+                json={"playerId": "huaso", "attributes": {"playerValue": 500}})
+    entered = client.post(
+        f"{API}/journey-builder/v0/journeys/{draft['journeyId']}"
+        f"/activities/{source['activityId']}/enter",
+        json={"playerId": "huaso"},
+    )
+    assert entered.status_code == 201, entered.text
+
+    offers = client.get(f"{API}/runtime/v0/players/huaso/offers").json()["items"]
+    assert "12 al 19 de septiembre" in (offers[0]["terms"] or "")
+    client.post(f"{API}/runtime/v0/offers/{offers[0]['offerId']}/accept")
+    client.post(f"{API}/platform/v0/events", json={
+        "eventName": "deposit.approved", "playerId": "huaso",
+        "properties": {"amount": 15000, "currencyCode": "CLP"},
+    })
+
+    rewards = client.get(f"{API}/runtime/v0/players/huaso/rewards").json()["items"]
+    assert len(rewards) == 1
+    assert rewards[0]["rewardType"] in {"freespin_bonus", "freebet", "casino_bonus_v2"}
+
+    # the prize bell went out and the token is parked until the 18th
+    comms = client.get(f"{API}/runtime/v0/players/huaso/comms").json()["items"]
+    assert any(c["channel"] == "onsite" for c in comms)
+    timers = client.get(f"{API}/runtime/v0/timers").json()["items"]
+    assert any(t["kind"] == "wait" for t in timers)

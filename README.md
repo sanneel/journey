@@ -81,8 +81,12 @@ voice.
   (`app/journey_templates.py`): *Promotion campaign* — offer with a
   1-day accept window, $100 deposit gate, player-value reward tiers
   (100/30 freespins), reward notification, next-day follow-up email,
-  with SMS reminder and expiry pop-up on the failure paths — or the
-  small *Welcome freespins* starter. Every instantiation mints fresh
+  with SMS reminder and expiry pop-up on the failure paths — the
+  small *Welcome freespins* starter — or *Fiestas Patrias — La Gran
+  Fonda*, the mid-September flagship: opt-in offer with T&C, $10.000
+  deposit gate, a weighted prize roulette (50 freespins / $10.000
+  freebet / 100% reload), a wait-date hold until the 18th, then a VIP
+  aguinaldo split and follow-up email. Every instantiation mints fresh
   activity ids, so saved copies never collide.
 - **Insights** — the paid-product half: on a published journey the
   canvas overlays live campaign numbers (`GET /runtime/v0/journeys/
