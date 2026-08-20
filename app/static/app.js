@@ -64,6 +64,39 @@ export function fmtTime(iso) {
   return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" });
 }
 
+/* ── promotion visuals ──
+ * Every promotion carries a `visual` ({headerColor, accentColor, title,
+ * subtitle, image}) — the promo card the player sees. One renderer serves
+ * the builder's live preview and the run view's offer ledger. */
+export function promoCard(visual, { sub, termsLine, foot } = {}) {
+  const v = visual || {};
+  const header = v.headerColor || "#175a41";
+  const accent = v.accentColor || "#96752b";
+  const banner = h("div", { class: "promo-card-banner" },
+    h("div", { class: "promo-card-title" }, v.title || "Untitled promotion"));
+  banner.style.background = v.image
+    ? `url("${v.image}") center/cover no-repeat`
+    : `linear-gradient(120deg, ${header} 0%, ${header} 55%, ${accent} 130%)`;
+  const body = h("div", { class: "promo-card-body" });
+  const subtitle = sub !== undefined ? sub : v.subtitle;
+  if (subtitle) body.append(h("div", { class: "promo-card-sub" }, subtitle));
+  if (termsLine) body.append(h("div", { class: "promo-card-terms" }, termsLine));
+  if (foot) body.append(foot);
+  return h("div", { class: "promo-card" }, banner, body);
+}
+
+export function termsLineOf(terms) {
+  if (!terms || typeof terms !== "object") return null;
+  const parts = [];
+  if (terms.wageringRequirement) parts.push(`x${terms.wageringRequirement} wagering`);
+  if (terms.expiryDays) parts.push(`expires in ${terms.expiryDays} days`);
+  if (terms.maxWin) parts.push(`max win $${Math.round(terms.maxWin / 100)}`);
+  for (const [key, value] of Object.entries(terms)) {
+    if (!["wageringRequirement", "expiryDays", "maxWin"].includes(key)) parts.push(`${key}: ${value}`);
+  }
+  return parts.length ? `T&C — ${parts.join(" · ")}` : null;
+}
+
 /* In-place question anchored to the control that asked it — the ledger
  * never opens a browser prompt. Resolves the entered text, or null. */
 export function askInline(anchor, { label, placeholder = "", value = "", submitLabel = "Confirm", danger = false }) {

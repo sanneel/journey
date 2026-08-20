@@ -9,6 +9,7 @@
  */
 import {
   api, API, errText, getPalette, specFor, CATEGORY_COLORS, categoryIcon, h, toast,
+  promoCard, termsLineOf,
 } from "./app.js";
 
 /* rule 5.4 — spacing constants live here */
@@ -74,9 +75,14 @@ function nodeSummary(node) {
     case "promotion":
     case "multipurpose_promotion": {
       const window = humanizeIso(init.timeToAccept);
+      const mode = init.autoAccept ? "auto-accepted" : "manual accept";
       return {
-        headline: init.autoAccept ? "Auto-accepted offer" : "Offer — manual accept",
-        sub: !init.autoAccept && window ? `${window} to accept` : "granted on arrival",
+        // a promotion with a visual leads with its player-facing title
+        headline: init.visual?.title
+          || (init.autoAccept ? "Auto-accepted offer" : "Offer — manual accept"),
+        sub: init.visual?.title
+          ? `${mode}${!init.autoAccept && window ? ` · ${window}` : ""}`
+          : (!init.autoAccept && window ? `${window} to accept` : "granted on arrival"),
       };
     }
     case "deposit": {
@@ -741,7 +747,15 @@ function renderNodes() {
           warn ? h("span", { class: "warn-dot", title: "No outgoing transition wired — validation will fail" }) : null),
         body,
         h("div", { class: "node-meta" },
-          h("span", { class: "node-type" }, node.activityName),
+          h("span", { style: "display:inline-flex; align-items:center; gap:5px" },
+            node.init?.visual?.headerColor
+              ? h("span", {
+                  class: "visual-seal",
+                  title: "Has a promo visual",
+                  style: `background:${node.init.visual.headerColor}`,
+                })
+              : null,
+            h("span", { class: "node-type" }, node.activityName)),
           metaRight),
         h("span", { class: "node-port in", style: `left:${size.w / 2 - 5}px` }),
         ...portDots(node, color),
@@ -1144,6 +1158,12 @@ function renderInspector() {
     for (const field of fields) panel.append(formField(node, field, locked));
   }
 
+  /* every promotion carries its visual — the promo card the player sees */
+  if (spec?.kind === "offer") {
+    panel.append(h("h4", {}, "Promo visual"));
+    panel.append(visualEditor(node, locked));
+  }
+
   /* wiring */
   const wireable = node.events.filter((event) => event.eventType !== "Boundary");
   if (wireable.length) {
@@ -1197,6 +1217,105 @@ function renderInspector() {
     remove.addEventListener("click", removeSelectedNode);
     panel.append(h("div", {}, remove));
   }
+}
+
+/* ── the promo-visual editor (offer kinds) ──
+ * Edits node.init.visual {headerColor, accentColor, title, subtitle, image}
+ * with a live preview of the exact card the player will see. Images are
+ * downscaled client-side and stored inline (the draft carries its art the
+ * way GR8 carries contentId bundles — ours travels with the body). */
+function visualEditor(node, locked) {
+  const wrap = h("div");
+  const visual = () => node.init.visual || (node.init.visual = {});
+
+  const preview = h("div", { style: "margin-bottom:10px" });
+  const renderPreview = () => {
+    preview.innerHTML = "";
+    preview.append(promoCard(node.init.visual, {
+      termsLine: termsLineOf(node.init.terms || node.init.termsAndConditions),
+    }));
+  };
+  renderPreview();
+  wrap.append(preview);
+
+  const textField = (key, label, placeholder) => {
+    const input = h("input", { class: "input", placeholder, value: visual()[key] || "" });
+    input.disabled = locked;
+    input.addEventListener("input", () => {
+      if (input.value.trim()) visual()[key] = input.value;
+      else delete visual()[key];
+      renderPreview(); renderNodes();
+    });
+    input.addEventListener("change", () => commit());
+    return h("label", { class: "field" }, h("span", {}, label), input);
+  };
+  wrap.append(
+    textField("title", "Title (on the banner)", "Oferta del mes"),
+    textField("subtitle", "Subtitle", "Deposita $100+ y llévate tu recompensa"),
+  );
+
+  const colorField = (key, label, fallback) => {
+    const input = h("input", { type: "color", value: visual()[key] || fallback });
+    input.disabled = locked;
+    input.addEventListener("input", () => {
+      visual()[key] = input.value;
+      renderPreview(); renderNodes();
+    });
+    input.addEventListener("change", () => commit());
+    return h("label", { class: "field" }, h("span", {}, label), input);
+  };
+  wrap.append(h("div", { class: "visual-colors" },
+    colorField("headerColor", "Header", "#175a41"),
+    colorField("accentColor", "Accent", "#96752b")));
+
+  /* banner image: picked locally, downscaled, stored inline */
+  const file = h("input", { type: "file", accept: "image/*", style: "display:none" });
+  const pick = h("button", { class: "btn sm" }, visual().image ? "Replace image" : "Add banner image");
+  pick.disabled = locked;
+  pick.addEventListener("click", () => file.click());
+  const clear = h("button", { class: "btn sm ghost" }, "Remove");
+  clear.disabled = locked;
+  clear.style.display = visual().image ? "" : "none";
+  clear.addEventListener("click", () => {
+    delete visual().image;
+    clear.style.display = "none";
+    pick.textContent = "Add banner image";
+    renderPreview(); renderNodes(); commit();
+  });
+  file.addEventListener("change", () => {
+    const chosen = file.files && file.files[0];
+    if (!chosen) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        // downscale to <=720px wide JPEG so the draft stays light
+        const scale = Math.min(1, 720 / img.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+        const data = canvas.toDataURL("image/jpeg", 0.82);
+        if (data.length > 400_000) {
+          toast("Image is too large even after downscaling — pick a smaller one", "err");
+          return;
+        }
+        visual().image = data;
+        clear.style.display = "";
+        pick.textContent = "Replace image";
+        renderPreview(); renderNodes(); commit();
+      };
+      img.onerror = () => toast("Could not read that image", "err");
+      img.src = String(reader.result);
+    };
+    reader.readAsDataURL(chosen);
+    file.value = "";
+  });
+  wrap.append(h("div", { class: "visual-img-row" },
+    pick, clear,
+    h("span", { class: "hint" }, "3:1 banner · stored with the journey"),
+    file));
+  return wrap;
 }
 
 /* ── problems panel ── */

@@ -1,6 +1,6 @@
 /* Run view: enter players, feed platform events, tick timers, and watch
  * activations walk the graph — the whole mechanism, live. */
-import { api, errText, h, toast, fmtTime } from "./app.js";
+import { api, errText, h, toast, fmtTime, promoCard, termsLineOf } from "./app.js";
 
 let refreshTimer = null;
 
@@ -260,16 +260,11 @@ async function renderLedger(container, playerId) {
 
     container.append(h("h4", {}, `Offers (${offers.items.length})`));
     for (const offer of offers.items) {
-      const terms = offer.terms
-        ? Object.entries(offer.terms).map(([key, value]) => `${key}: ${value}`).join(" · ")
-        : null;
-      const row = h("div", { class: "event-item" },
-        h("span", { class: "ename" },
-          `#${offer.offerId}`,
-          terms ? h("div", { class: "edetail" }, `T&C — ${terms}`) : null),
-        h("span", { class: `badge ${offer.status === "Offered" ? "Active" : offer.status === "Accepted" ? "Completed" : "Terminated"}` }, offer.status));
+      const stamp = h("span", { class: `badge ${offer.status}` }, offer.status);
+      const foot = h("div", { class: "promo-card-foot" },
+        h("span", { class: "dim small mono" }, `#${offer.offerId}`), stamp);
       if (offer.status === "Offered") {
-        const accept = h("button", { class: "btn sm primary", style: "margin-left:auto" }, "Accept");
+        const accept = h("button", { class: "btn sm primary" }, "Accept");
         accept.addEventListener("click", async () => {
           try {
             await api("POST", `/runtime/v0/offers/${offer.offerId}/accept`);
@@ -277,9 +272,16 @@ async function renderLedger(container, playerId) {
             renderLedger(container, playerId);
           } catch (error) { toast(errText(error), "err"); }
         });
-        row.append(accept);
+        foot.append(accept);
       }
-      container.append(row);
+      // the offer renders as the promo card the player sees — every
+      // promotion carries its visual
+      const card = promoCard(offer.visual || { title: "Promotion offer" }, {
+        termsLine: termsLineOf(offer.terms),
+        foot,
+      });
+      card.style.marginBottom = "10px";
+      container.append(card);
     }
 
     container.append(h("h4", {}, `Comms (${comms.items.length})`));

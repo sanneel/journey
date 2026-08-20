@@ -241,6 +241,7 @@ def list_offers(player_id: str, session: Session = Depends(get_session)):
                 "activityId": o.activity_id,
                 "status": o.status,
                 "terms": o.terms,
+                "visual": o.visual,
                 "promotionDisplayId": o.promotion_display_id,
                 "createdAt": o.created_at.isoformat() if o.created_at else None,
             }

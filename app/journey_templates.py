@@ -96,6 +96,13 @@ def _build_promotion() -> dict[str, Any]:
         "timeToAccept": "P0Y0M1DT0H0M0S",
         "channelsCondition": {"values": [], "isEnabled": False},
         "languages": ["es", "en"],
+        # every promotion carries its visual — the promo card the player sees
+        "visual": {
+            "headerColor": "#175a41",
+            "accentColor": "#96752b",
+            "title": "Oferta del mes",
+            "subtitle": "Deposita $100+ y llévate tu recompensa",
+        },
     })
     expired_note = _activity("notification_center", ids["expired_note"], "Offer expired pop-up", {
         "contract": 5,  # 5 = pop-up, 1 = bell
@@ -187,8 +194,16 @@ def _build_welcome_freespins() -> dict[str, Any]:
     )}
     src = _activity("external_system_source", ids["src"], "API entry",
                     {"targetSystem": "Randomizer"})
-    offer = _activity("promotion", ids["offer"], "Welcome offer",
-                      {"autoAccept": True, "timeToAccept": "P0Y0M1DT0H0M0S"})
+    offer = _activity("promotion", ids["offer"], "Welcome offer", {
+        "autoAccept": True,
+        "timeToAccept": "P0Y0M1DT0H0M0S",
+        "visual": {
+            "headerColor": "#2d6c9e",
+            "accentColor": "#96752b",
+            "title": "Bienvenida con giros",
+            "subtitle": "30 giros gratis por tu primer depósito",
+        },
+    })
     gate = _activity("deposit", ids["gate"], "Deposit $100+", {
         "depositConditions": {
             "expirationTimeout": "P0Y0M1DT0H0M0S",

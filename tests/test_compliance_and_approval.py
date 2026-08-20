@@ -380,3 +380,43 @@ def test_test_player_walks_but_nothing_leaves(client, monkeypatch):
     assert stats["totals"]["entered"] == 0
     assert stats["testRunsExcluded"] == 1
     assert stats["rewards"]["grants"] == 0
+
+
+# ── every promotion carries its visual ──────────────────────────────
+
+def test_offer_carries_the_promotion_visual(client):
+    visual = {"headerColor": "#175a41", "accentColor": "#96752b",
+              "title": "Gran promo de agosto", "subtitle": "50 giros por tu depósito"}
+    ids = {k: uid() for k in ("src", "promo", "end")}
+    body = journey_body(
+        "JBCL | VISUAL | promo card",
+        [
+            activity("external_system_source", ids["src"],
+                     events=[activation_event(ids["promo"])]),
+            activity("promotion", ids["promo"],
+                     events=[completion("PromotionAccepted", ids["end"]),
+                             completion("PromotionExpired", ids["end"])],
+                     init={"autoAccept": False, "visual": visual}),
+            activity("end_of_journey", ids["end"]),
+        ],
+    )
+    journey = create_and_publish(client, body)
+    client.post(
+        f"{API}/journey-builder/v0/journeys/{journey['journeyId']}"
+        f"/activities/{ids['src']}/enter",
+        json={"playerId": "mira"},
+    )
+    offer = client.get(f"{API}/runtime/v0/players/mira/offers").json()["items"][0]
+    assert offer["visual"] == visual
+
+
+def test_template_promotions_ship_with_visuals(client):
+    for key in ("promotion", "welcome_freespins"):
+        tpl = client.get(f"{API}/journey-builder/v0/journey-templates/{key}").json()["body"]
+        offers = [a for a in tpl["activities"] if a["activityName"] == "promotion"]
+        assert offers, f"{key} has no promotion node"
+        for node in offers:
+            visual = node["initializationData"].get("visual")
+            assert visual and visual.get("title") and visual.get("headerColor"), (
+                f"{key}: promotion without a visual"
+            )

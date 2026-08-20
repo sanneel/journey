@@ -202,7 +202,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["PromotionAccepted", "PromotionExpired"],
         "happy_path": "PromotionAccepted",
         "failure_path": "PromotionExpired",
-        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements", "currencyMode", "showAsUpcoming"],
+        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements", "currencyMode", "showAsUpcoming", "visual"],
     },
     "multipurpose_promotion": {
         "category": "Promotion type",
@@ -213,7 +213,7 @@ ACTIVITY_TYPES: dict[str, dict[str, Any]] = {
         "completion": ["PromotionAccepted", "PromotionExpired"],
         "happy_path": "PromotionAccepted",
         "failure_path": "PromotionExpired",
-        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements"],
+        "init_keys": ["promotionId", "promotionLinkId", "promotionDisplayId", "promotionStatus", "autoAccept", "timeToAccept", "channelsCondition", "languages", "displayData", "placements", "visual"],
     },
     # ── Conditions ───────────────────────────────────────────────────
     "deposit": {

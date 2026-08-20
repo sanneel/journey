@@ -246,6 +246,9 @@ class PromotionOffer(Base):
     # bonus T&C shown with the offer (wagering, expiry, max win) — the
     # significant-terms disclosure regulators require next to any "free"
     terms: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    # the promotion's visual (banner image / colors / title), snapshotted
+    # from the activity at offer time — what the player actually sees
+    visual: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 

@@ -518,6 +518,8 @@ class Engine:
             # significant terms travel with the offer so any front end
             # can show them next to the "free" (regulators require it)
             terms=init.get("terms") or init.get("termsAndConditions"),
+            # so does the promotion's visual — the offer IS the promo card
+            visual=init.get("visual"),
         )
         self.session.add(offer)
         self.session.flush()
