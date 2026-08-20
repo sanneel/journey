@@ -7,7 +7,8 @@ from .conftest import API
 def test_templates_listed(client):
     data = client.get(f"{API}/journey-builder/v0/journey-templates").json()
     keys = {item["key"] for item in data["items"]}
-    assert {"promotion", "welcome_freespins", "fiestas_patrias"} <= keys
+    assert {"promotion", "welcome_freespins", "fiestas_patrias",
+            "big_promo_day", "big_promo_special_card", "big_promo_plan_b"} <= keys
     promotion = next(i for i in data["items"] if i["key"] == "promotion")
     assert promotion["activities"] == 14
     assert "deposit gate" in promotion["description"]
@@ -133,3 +134,63 @@ def test_fiestas_patrias_template_grants_one_fonda_prize(client):
     assert any(c["channel"] == "onsite" for c in comms)
     timers = client.get(f"{API}/runtime/v0/timers").json()["items"]
     assert any(t["kind"] == "wait" for t in timers)
+
+
+def test_big_promo_day_two_deposits_unlock_special_card(client):
+    """The Big Promo September mechanic end to end: a player picks Bonus N3,
+    deposits $30.000 (40 FS granted), then a second deposit of the day
+    trips the detector and the campaign connector drops them into the
+    published Special Card journey."""
+    scratch = client.get(
+        f"{API}/journey-builder/v0/journey-templates/big_promo_special_card"
+    ).json()["body"]
+    scratch_draft = client.post(f"{API}/journey-builder/v0/journey-drafts", json=scratch).json()
+    scratch_jrn = scratch_draft["journeyId"]
+    assert client.post(f"{API}/journey-builder/v0/journeys/{scratch_jrn}/publish").status_code == 200
+
+    body = client.get(
+        f"{API}/journey-builder/v0/journey-templates/big_promo_day"
+    ).json()["body"]
+    for activity in body["activities"]:
+        if activity["activityName"] == "campaign_connector":
+            conditions = activity["initializationData"]["campaignConnectorConditions"]
+            conditions["activityData"]["HostJourneyId"] = scratch_jrn
+
+    validated = client.post(f"{API}/journey-builder/v0/journey-drafts/validate", json=body)
+    assert validated.json()["valid"] is True, validated.text
+    draft = client.post(f"{API}/journey-builder/v0/journey-drafts", json=body).json()
+    assert client.post(
+        f"{API}/journey-builder/v0/journeys/{draft['journeyId']}/publish"
+    ).status_code == 200
+
+    source = next(
+        a for a in draft["body"]["activities"]
+        if a["activityName"] == "external_system_source"
+    )
+    client.post(f"{API}/platform/v0/players",
+                json={"playerId": "dieciochero", "attributes": {"bonusOption": 3}})
+    entered = client.post(
+        f"{API}/journey-builder/v0/journeys/{draft['journeyId']}"
+        f"/activities/{source['activityId']}/enter",
+        json={"playerId": "dieciochero"},
+    )
+    assert entered.status_code == 201, entered.text
+
+    # first deposit satisfies the N3 gate -> 40 freespins
+    client.post(f"{API}/platform/v0/events", json={
+        "eventName": "deposit.approved", "playerId": "dieciochero",
+        "properties": {"amount": 30000, "currencyCode": "CLP"},
+    })
+    rewards = client.get(f"{API}/runtime/v0/players/dieciochero/rewards").json()["items"]
+    assert [r["detail"].get("spins") for r in rewards
+            if r["rewardType"] == "freespin_bonus"] == [40]
+
+    # second deposit of the day -> detector -> Special Card journey entry
+    client.post(f"{API}/platform/v0/events", json={
+        "eventName": "deposit.approved", "playerId": "dieciochero",
+        "properties": {"amount": 12000, "currencyCode": "CLP"},
+    })
+    scratch_runs = client.get(
+        f"{API}/runtime/v0/journeys/{scratch_jrn}/activations"
+    ).json()["items"]
+    assert [run["playerId"] for run in scratch_runs] == ["dieciochero"]

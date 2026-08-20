@@ -86,8 +86,14 @@ voice.
   Fonda*, the mid-September flagship: opt-in offer with T&C, $10.000
   deposit gate, a weighted prize roulette (50 freespins / $10.000
   freebet / 100% reload), a wait-date hold until the 18th, then a VIP
-  aguinaldo split and follow-up email. Every instantiation mints fresh
-  activity ids, so saved copies never collide.
+  aguinaldo split and follow-up email. The *Big Promo* family
+  (`docs/promos/BIG_PROMO_SEPTEMBER.md`) ships as three templates: a
+  day-of-bonuses journey (bonusOption split into four deposit-gated
+  free-spin tiers, a 2nd-deposit detector feeding a Special Card
+  campaign connector, plan-B connector for non-depositors) plus the
+  Special Card and plan-B scratch-card journeys (weighted prize
+  splits). Every instantiation mints fresh activity ids, so saved
+  copies never collide.
 - **Insights** — the paid-product half: on a published journey the
   canvas overlays live campaign numbers (`GET /runtime/v0/journeys/
   {jrn}/stats`) — players entered and currently parked on every node,
