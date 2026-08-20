@@ -102,17 +102,36 @@ voice.
 ## Delivery connectors (P3)
 
 Rewards and comms don't stop at the ledger/outbox — each grant and each
-message goes through a **delivery connector** (`app/connectors.py`):
+message goes through a **delivery connector** (`app/connectors.py`), an
+**adapter per provider** chosen per channel. Each channel falls back to
+`CONNECTOR_MODE` when its provider isn't set, so nothing needs
+configuring for a demo:
 
-- `CONNECTOR_MODE=log` (default) — deliveries are acknowledged locally
-  and logged; nothing leaves the process. Right for demos and tests.
-- `CONNECTOR_MODE=webhook` — the engine POSTs a self-describing JSON
-  payload to the real platform: reward grants to
-  `CONNECTOR_REWARDS_URL` (the wallet / game-aggregator side), comms to
-  `CONNECTOR_COMMS_URL` (the gateway side), with optional
-  `CONNECTOR_TOKEN` as a bearer header, `CONNECTOR_RETRIES` attempts
-  (default 2 retries, exponential backoff) and `CONNECTOR_TIMEOUT`
-  seconds per attempt.
+| Selector | Values | Real target |
+|---|---|---|
+| `CONNECTOR_REWARDS_PROVIDER` | `gr8` · `webhook` · `log` | wallet / bonus API |
+| `CONNECTOR_SMS_PROVIDER` | `twilio` · `webhook` · `log` | SMS gateway |
+| `CONNECTOR_EMAIL_PROVIDER` | `sendgrid` · `webhook` · `log` | ESP |
+| `CONNECTOR_PUSH_PROVIDER` | `webhook` · `log` | push service |
+| `CONNECTOR_ONSITE_PROVIDER` | `webhook` · `log` | on-site inbox |
+
+- `log` (the `CONNECTOR_MODE` default) — the outbox/ledger row **is** the
+  delivery; nothing leaves the process. Right for demos and tests.
+- `webhook` (`CONNECTOR_MODE=webhook`) — POST a self-describing JSON
+  payload to the casino's own gateway: rewards to `CONNECTOR_REWARDS_URL`,
+  comms to `CONNECTOR_COMMS_URL` (the gateway resolves the player and fans
+  out), with optional `CONNECTOR_TOKEN` bearer header.
+- **`gr8`** — credits the reward to the GR8 UBO wallet
+  (`GR8_WALLET_URL`, `GR8_TOKEN`, `GR8_BRAND`).
+- **`twilio`** — Twilio Messages API (`TWILIO_ACCOUNT_SID`,
+  `TWILIO_AUTH_TOKEN`, `TWILIO_FROM`); recipient phone from the player's
+  `phone` attribute.
+- **`sendgrid`** — SendGrid v3 mail/send (`SENDGRID_API_KEY`,
+  `SENDGRID_FROM`); recipient email from the player's `email` attribute.
+
+`CONNECTOR_RETRIES` attempts (default 2 retries, exponential backoff) and
+`CONNECTOR_TIMEOUT` seconds are shared across every adapter. Adding a
+vendor is one `Adapter` subclass (build the request, judge the response).
 
 Delivery outcome is part of the graph semantics: a failed reward
 delivery marks the grant `Failed`, records the type's failed boundary

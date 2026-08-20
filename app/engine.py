@@ -657,6 +657,11 @@ class Engine:
                 "delivery skipped",
             )
 
+        # the player's contact details (phone / email / push token) live on
+        # their attributes; provider adapters (twilio / sendgrid) need them
+        player = self.session.get(Player, message.player_id)
+        contact = dict(player.attributes) if player and player.attributes else {}
+
         result = deliver_comms(
             message_id=message.id,
             channel=message.channel,
@@ -664,6 +669,7 @@ class Engine:
             journey_id=message.journey_id,
             activity_id=message.activity_id,
             body=body,
+            contact=contact,
         )
         message.delivery_attempts = result.attempts
         message.delivery_detail = result.detail
@@ -1254,6 +1260,8 @@ class Engine:
             message.delivery_detail = "released after quiet hours — test player, not delivered"
             metrics.inc("journey_comms_delivered_total")
             return
+        player = self.session.get(Player, message.player_id)
+        contact = dict(player.attributes) if player and player.attributes else {}
         result = deliver_comms(
             message_id=message.id,
             channel=message.channel,
@@ -1261,6 +1269,7 @@ class Engine:
             journey_id=message.journey_id,
             activity_id=message.activity_id,
             body=message.body or {},
+            contact=contact,
         )
         message.delivery_attempts = result.attempts
         if result.ok:
