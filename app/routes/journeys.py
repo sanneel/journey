@@ -400,19 +400,86 @@ def activities_catalog():
 
 
 @router.get("/journey-templates")
-def list_journey_templates():
+def list_journey_templates(session: Session = Depends(get_session)):
     from ..journey_templates import list_templates
 
-    return {"items": list_templates()}
+    return {"items": list_templates(session)}
+
+
+@router.post("/journey-templates", status_code=201)
+def create_journey_template(
+    payload: dict = Body(...), session: Session = Depends(get_session)
+):
+    """Save a built journey as a brand template: pass the full body (the
+    builder sends its current canvas). Identity, lineage and server-minted
+    fields are stripped; canvas positions and visuals stay — the design IS
+    the template. Instantiation later regenerates every structural id."""
+    from ..catalog import ACTIVITY_TYPES
+    from ..journey_templates import sanitize_template_body, slugify_key
+    from ..models import JourneyTemplate
+
+    name = (payload.get("name") or "").strip()
+    body = payload.get("body")
+    if not name:
+        raise HTTPException(status_code=400, detail="name is required")
+    if not isinstance(body, dict) or not body.get("activities"):
+        raise HTTPException(status_code=400, detail="body with activities is required")
+    unknown = sorted({
+        a.get("activityName") for a in body["activities"]
+        if a.get("activityName") not in ACTIVITY_TYPES
+    })
+    if unknown:
+        raise HTTPException(
+            status_code=400, detail=f"unknown activity types: {unknown}"
+        )
+
+    template = JourneyTemplate(
+        key=slugify_key(session, name),
+        name=name,
+        description=(payload.get("description") or "").strip() or None,
+        brand=body.get("brand") or settings.default_brand,
+        body=sanitize_template_body(body),
+        created_by=payload.get("actor", "operator"),
+    )
+    session.add(template)
+    session.flush()
+    record(session, payload.get("actor"), "template-created",
+           detail=f"{template.key} ({template.brand})")
+    return {
+        "key": template.key,
+        "name": template.name,
+        "brand": template.brand,
+        "activities": len(template.body.get("activities", [])),
+        "custom": True,
+    }
+
+
+@router.delete("/journey-templates/{key}")
+def delete_journey_template(
+    key: str, actor: str = "operator", session: Session = Depends(get_session)
+):
+    from ..journey_templates import TEMPLATES
+    from ..models import JourneyTemplate
+
+    if key in TEMPLATES:
+        raise HTTPException(status_code=409, detail="built-in templates cannot be deleted")
+    row = session.execute(
+        select(JourneyTemplate).where(JourneyTemplate.key == key)
+    ).scalar_one_or_none()
+    if row is None:
+        raise HTTPException(status_code=404, detail=f"template {key} not found")
+    session.delete(row)
+    record(session, actor, "template-deleted", detail=key)
+    return {"deleted": key}
 
 
 @router.get("/journey-templates/{key}")
-def instantiate_journey_template(key: str):
+def instantiate_journey_template(key: str, session: Session = Depends(get_session)):
     """Returns a complete draft body with FRESH activity ids on every
     call — load it in the builder, tweak, then save as a normal draft."""
     from ..journey_templates import instantiate
 
-    body = instantiate(key)
+    body = instantiate(key, session)
     if body is None:
         raise HTTPException(status_code=404, detail=f"template {key} not found")
     return {"key": key, "body": body}

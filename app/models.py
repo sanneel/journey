@@ -108,6 +108,23 @@ class JourneyRevision(Base):
     )
 
 
+class JourneyTemplate(Base):
+    """An admin-authored, brand-scoped campaign template: any built journey
+    saved as a reusable shape. Instantiation regenerates every structural id,
+    so drafts created from it never collide."""
+
+    __tablename__ = "journey_templates"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    key: Mapped[str] = mapped_column(String(80), unique=True, index=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    description: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    brand: Mapped[str] = mapped_column(String(16), index=True, nullable=False)
+    body: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_by: Mapped[str] = mapped_column(String(128), default="operator")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class ActivityIdRegistry(Base):
     """activityIds are unique across all journeys of a brand — reusing one on
     a fresh draft is the classic un-regenerated-clone failure."""

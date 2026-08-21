@@ -10,6 +10,7 @@ decision split, comms after the reward, and a delayed follow-up.
 """
 from __future__ import annotations
 
+import copy
 import uuid
 from typing import Any, Callable
 
@@ -250,7 +251,8 @@ TEMPLATES: dict[str, dict[str, Any]] = {
 }
 
 
-def list_templates() -> list[dict[str, Any]]:
+def list_templates(session=None) -> list[dict[str, Any]]:
+    """Built-in shapes first, then the brand's own saved templates."""
     items = []
     for key, template in TEMPLATES.items():
         body = template["build"]()
@@ -260,13 +262,93 @@ def list_templates() -> list[dict[str, Any]]:
             "description": template["description"],
             "activities": len(body["activities"]),
             "journeyName": body["journeyName"],
+            "custom": False,
         })
+    if session is not None:
+        from sqlalchemy import select
+
+        from .models import JourneyTemplate
+
+        for row in session.execute(
+            select(JourneyTemplate).order_by(JourneyTemplate.id)
+        ).scalars():
+            items.append({
+                "key": row.key,
+                "name": row.name,
+                "description": row.description or "",
+                "activities": len(row.body.get("activities", [])),
+                "journeyName": row.body.get("journeyName", row.name),
+                "custom": True,
+                "brand": row.brand,
+                "createdBy": row.created_by,
+            })
     return items
 
 
-def instantiate(key: str) -> dict[str, Any] | None:
+def instantiate(key: str, session=None) -> dict[str, Any] | None:
     template = TEMPLATES.get(key)
-    if template is None:
+    if template is not None:
+        build: Callable[[], dict[str, Any]] = template["build"]
+        return build()  # fresh uuids on every call
+    if session is None:
         return None
-    build: Callable[[], dict[str, Any]] = template["build"]
-    return build()  # fresh uuids on every call
+    from sqlalchemy import select
+
+    from .ids import regenerate_structural_ids
+    from .models import JourneyTemplate
+
+    row = session.execute(
+        select(JourneyTemplate).where(JourneyTemplate.key == key)
+    ).scalar_one_or_none()
+    if row is None:
+        return None
+    # every instantiation gets fresh structural ids — two drafts made from
+    # the same saved template never collide on the activity-id registry
+    body, _ = regenerate_structural_ids(copy.deepcopy(row.body))
+    return body
+
+
+def sanitize_template_body(body: dict) -> dict:
+    """Make a live journey body storable as a template: drop identity,
+    lineage and server-minted fields so nothing collides on reuse. The
+    canvas positions and every visual stay — the design IS the template."""
+    from .cloner import blank_campaign_ids, strip_promotion_display_ids
+
+    payload = copy.deepcopy(body)
+    for key in (
+        "journeyId", "reservedJourneyId", "duplicatedFromId",
+        "duplicatedFromVersion", "status", "version", "createdAt",
+        "changedAt", "changeHistory", "author", "allJourneyActivationsCount",
+        "overJourneyActivationsCount", "areJourneyMetricsAvailable",
+        "activityEventConversionMetrics", "terminatedAt", "isArchived",
+    ):
+        payload.pop(key, None)
+    strip_promotion_display_ids(payload)
+    blank_campaign_ids(payload)
+    # webhook ids are minted per journey at publish
+    for activity in payload.get("activities", []):
+        (activity.get("initializationData") or {}).pop("webhookId", None)
+    return payload
+
+
+def slugify_key(session, name: str) -> str:
+    from sqlalchemy import select
+
+    from .models import JourneyTemplate
+
+    base = "".join(
+        ch if ch.isalnum() else "-" for ch in name.strip().lower()
+    ).strip("-") or "template"
+    base = "-".join(part for part in base.split("-") if part)[:60]
+    candidate = base
+    suffix = 2
+    while (
+        candidate in TEMPLATES
+        or session.execute(
+            select(JourneyTemplate.id).where(JourneyTemplate.key == candidate)
+        ).first()
+        is not None
+    ):
+        candidate = f"{base}-{suffix}"
+        suffix += 1
+    return candidate

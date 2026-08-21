@@ -9,7 +9,7 @@
  */
 import {
   api, API, errText, getPalette, specFor, CATEGORY_COLORS, categoryIcon, h, toast,
-  promoCard, termsLineOf,
+  promoCard, termsLineOf, askInline,
 } from "./app.js";
 
 /* rule 5.4 — spacing constants live here */
@@ -1445,46 +1445,103 @@ export async function renderBuilder(view, journeyId) {
     renderNodes(); renderEdges();
   });
 
-  /* templates menu */
+  /* templates menu — built-ins + the brand's own saved templates */
   const templatesBtn = h("button", { class: "btn ghost" }, "Templates ▾");
   const templatesMenu = h("div", { class: "tpl-menu", style: "display:none" });
   const templatesWrap = h("span", { class: "tpl-wrap" }, templatesBtn, templatesMenu);
-  let templatesLoaded = false;
-  templatesBtn.addEventListener("click", async (event) => {
-    event.stopPropagation();
-    if (!editable()) return toast("Stop the journey to edit it", "err");
-    if (!templatesLoaded) {
-      const data = await api("GET", "/journey-builder/v0/journey-templates");
-      templatesMenu.innerHTML = "";
-      for (const template of data.items) {
-        const item = h("button", { class: "tpl-item" },
-          h("strong", {}, template.name),
-          h("span", { class: "dim small" }, ` · ${template.activities} activities`),
-          h("div", { class: "dim small" }, template.description));
-        item.addEventListener("click", () => {
-          // a non-empty canvas gets a two-press confirm on the item itself
-          if (state.nodes.size && !item.dataset.armed) {
-            item.dataset.armed = "1";
-            const name = item.querySelector("strong");
-            const original = name.textContent;
-            name.textContent = "Replace the canvas?";
+
+  async function renderTemplatesMenu() {
+    const data = await api("GET", "/journey-builder/v0/journey-templates");
+    templatesMenu.innerHTML = "";
+    for (const template of data.items) {
+      const item = h("button", { class: "tpl-item" },
+        h("strong", {}, template.name),
+        h("span", { class: "dim small" }, ` · ${template.activities} activities`),
+        template.custom
+          ? h("span", { class: "badge Draft", style: "margin-left:6px" }, template.brand)
+          : null,
+        h("div", { class: "dim small" }, template.description));
+      item.addEventListener("click", () => {
+        // a non-empty canvas gets a two-press confirm on the item itself
+        if (state.nodes.size && !item.dataset.armed) {
+          item.dataset.armed = "1";
+          const name = item.querySelector("strong");
+          const original = name.textContent;
+          name.textContent = "Replace the canvas?";
+          setTimeout(() => {
+            if (!item.isConnected || !item.dataset.armed) return;
+            delete item.dataset.armed;
+            name.textContent = original;
+          }, 2600);
+          return;
+        }
+        delete item.dataset.armed;
+        templatesMenu.style.display = "none";
+        loadTemplate(template.key, nameInput, refreshMeta);
+      });
+      if (template.custom) {
+        // admin-owned: deletable, with the same two-step confirm
+        const removeBtn = h("button", {
+          class: "btn sm danger",
+          style: "float:right; margin-top:2px",
+        }, "Delete");
+        removeBtn.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          if (!removeBtn.dataset.armed) {
+            removeBtn.dataset.armed = "1";
+            removeBtn.textContent = "Sure?";
+            removeBtn.classList.add("confirming");
             setTimeout(() => {
-              if (!item.isConnected || !item.dataset.armed) return;
-              delete item.dataset.armed;
-              name.textContent = original;
+              if (!removeBtn.isConnected) return;
+              delete removeBtn.dataset.armed;
+              removeBtn.textContent = "Delete";
+              removeBtn.classList.remove("confirming");
             }, 2600);
             return;
           }
-          delete item.dataset.armed;
-          templatesMenu.style.display = "none";
-          loadTemplate(template.key, nameInput, refreshMeta);
+          try {
+            await api("DELETE", `/journey-builder/v0/journey-templates/${template.key}`);
+            toast(`Template "${template.name}" deleted`, "");
+            renderTemplatesMenu();
+          } catch (error) { toast(errText(error), "err"); }
         });
-        templatesMenu.append(item);
+        item.prepend(removeBtn);
       }
-      templatesLoaded = true;
+      templatesMenu.append(item);
     }
+
+    /* the admin saves the current canvas as a brand template */
+    const saveTpl = h("button", { class: "tpl-item", style: "border-top:1px solid var(--line); border-radius:0 0 8px 8px" },
+      h("strong", {}, "Save canvas as template…"),
+      h("div", { class: "dim small" }, "Reusable for this brand — ids regenerate on every use"));
+    saveTpl.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      if (!state.nodes.size) return toast("The canvas is empty", "err");
+      const name = await askInline(saveTpl, {
+        label: "Save this design as a brand template — named",
+        placeholder: "Gran Promo de Agosto",
+        submitLabel: "Save",
+      });
+      if (!name) return;
+      try {
+        const saved = await api("POST", "/journey-builder/v0/journey-templates", {
+          name, body: buildBody(),
+        });
+        toast(`Template "${saved.name}" saved for ${saved.brand}`, "ok");
+        templatesMenu.style.display = "none";
+      } catch (error) { toast(errText(error), "err"); }
+    });
+    templatesMenu.append(saveTpl);
+  }
+
+  templatesBtn.addEventListener("click", async (event) => {
+    event.stopPropagation();
+    if (!editable()) return toast("Stop the journey to edit it", "err");
+    if (templatesMenu.style.display === "none") await renderTemplatesMenu();
     templatesMenu.style.display = templatesMenu.style.display === "none" ? "" : "none";
   });
+  // clicks inside the menu (armed confirms, delete) must not close it
+  templatesMenu.addEventListener("click", (event) => event.stopPropagation());
   document.addEventListener("click", () => (templatesMenu.style.display = "none"));
 
   /* rule 5.3 — zoom controls */
